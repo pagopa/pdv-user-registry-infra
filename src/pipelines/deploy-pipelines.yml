@@ -40,10 +40,10 @@ resources:
       endpoint: 'github-ro'
 
 stages:
-  # DEV
+  # UAT
   - stage: plan_UAT
     dependsOn: []
-    condition: and(succeeded(), eq(${{parameters.DEV}}, true))
+    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     jobs:
       - job: plan
         timeoutInMinutes: $[variables.TIME_OUT]
