@@ -10,6 +10,13 @@ parameters:
     values:
       - False
       - True
+  - name: 'UAT'
+    displayName: 'Run on UAT environment'
+    type: boolean
+    default: True
+    values:
+      - False
+      - True
   - name: 'PROD'
     displayName: 'Run on PROD environment'
     type: boolean
@@ -34,7 +41,7 @@ resources:
 
 stages:
   # DEV
-  - stage: plan_DEV
+  - stage: plan_UAT
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.DEV}}, true))
     jobs:
@@ -46,13 +53,13 @@ stages:
           # 2. Run terraform plan
           - template: templates/terraform-aws-plan/template.yaml@terraform
             parameters:
-              CONNECTION: "AWS Prod"
-              ENVIRONMENT: dev
+              CONNECTION: "AWS Uat"
+              ENVIRONMENT: uat
               WORKINGDIR: "src/main"
 
-  - stage: apply_DEV
-    dependsOn: [plan_DEV]
-    condition: and(succeeded(), eq(${{parameters.DEV}}, true))
+  - stage: apply_UAT
+    dependsOn: [plan_UAT]
+    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     jobs:
       # - job: init
       #   steps:
@@ -61,7 +68,7 @@ stages:
       - deployment: apply
         continueOnError: false
         # dependsOn: init
-        environment: 'DEV'
+        environment: 'UAT'
         strategy:
           runOnce:
             deploy:
@@ -70,7 +77,7 @@ stages:
                 # 3. Run terraform apply
                 - template: templates/terraform-aws-apply/template.yaml@terraform
                   parameters:
-                    CONNECTION: "AWS Prod"
+                    CONNECTION: "AWS Uat"
                     ENVIRONMENT: dev
                     WORKINGDIR: "src/main"
 

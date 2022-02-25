@@ -24,7 +24,18 @@ resource "azuredevops_serviceendpoint_github" "github_pr" {
 }
 
 # Service connection to connecto to AWS.
-resource "azuredevops_serviceendpoint_aws" "serviceendpoint" {
+resource "azuredevops_serviceendpoint_aws" "uat_serviceendpoint" {
+  project_id            = azuredevops_project.this.id
+  service_endpoint_name = "AWS Uat"
+  description           = "Managed by AzureDevOps"
+
+  access_key_id = jsondecode(
+  data.aws_secretsmanager_secret_version.devops.secret_string)["aws_iac_access_key_id"]
+  secret_access_key = jsondecode(
+  data.aws_secretsmanager_secret_version.devops.secret_string)["aws_iac_secret_access_key"]
+}
+
+resource "azuredevops_serviceendpoint_aws" "prod_serviceendpoint" {
   project_id            = azuredevops_project.this.id
   service_endpoint_name = "AWS Prod"
   description           = "Managed by AzureDevOps"

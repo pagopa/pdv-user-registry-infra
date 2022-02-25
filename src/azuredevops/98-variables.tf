@@ -16,7 +16,7 @@ variable "iac" {
       organization    = "pagopa"
       name            = "private-data-vault-infra"
       branch_name     = "refs/heads/main"
-      pipelines_path  = ".src/pipelines"
+      pipelines_path  = "src/pipelines"
       yml_prefix_name = null
     }
     pipeline = {
