@@ -3,5 +3,4 @@ module "dn_zone" {
   version = "~> 2.0"
 
   zones = var.public_dns_zones
-
 }
