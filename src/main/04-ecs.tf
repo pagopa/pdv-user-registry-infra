@@ -6,7 +6,9 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 }
 
 resource "aws_cloudwatch_log_group" "ecs_log_group" {
-  name = format("%s-logs", local.project)
+  name = format("%s-ecs-logs", local.project)
+
+  retention_in_days = var.ecs_logs_retention_days
 
   tags = merge({
     Application = var.app_name

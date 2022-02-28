@@ -48,6 +48,15 @@ variable "vpc_public_subnets_cidr" {
 }
 
 
+## ECS
+
+variable "ecs_logs_retention_days" {
+  type        = number
+  description = "Specifies the number of days you want to retain log events in the specified log group."
+  default     = 90
+}
+
+
 variable "tags" {
   type = map(any)
   default = {
