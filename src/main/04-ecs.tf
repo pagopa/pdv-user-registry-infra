@@ -1,11 +1,11 @@
 resource "aws_ecs_cluster" "ecs_cluster" {
-  name = format("%s-%s-cluster", local.project, var.aws_region)
+  name = format("%s-ecs-cluster", local.project)
   tags = merge({
     Name = format("%s-ecs", local.project)
   }, var.tags)
 }
 
-resource "aws_cloudwatch_log_group" "log_group" {
+resource "aws_cloudwatch_log_group" "ecs_log_group" {
   name = format("%s-logs", local.project)
 
   tags = merge({
@@ -24,32 +24,31 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
   family = format("%s-task", local.project)
 
   container_definitions = <<DEFINITION
-  [
-    {
-      "name": "${local.project}-container",
-      "image": "${aws_ecr_repository.ecr.repository_url}:latest",
-      "entryPoint": [],
-      "environment": "TODO",
-      "essential": true,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "${aws_cloudwatch_log_group.log_group.id}",
-          "awslogs-region": "${var.aws_region}",
-          "awslogs-stream-prefix": "${local.project}"
-        }
-      },
-      "portMappings": [
-        {
-          "containerPort": 8080,
-          "hostPort": 8080
-        }
-      ],
-      "cpu": 256,
-      "memory": 512,
-      "networkMode": "awsvpc"
-    }
-  ]
+[
+  {
+    "name": "${local.project}-container",
+    "image": "${aws_ecr_repository.ecr.repository_url}:latest",
+    "entryPoint": [],
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${aws_cloudwatch_log_group.ecs_log_group.id}",
+        "awslogs-region": "${var.aws_region}",
+        "awslogs-stream-prefix": "${local.project}"
+      }
+    },
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80
+      }
+    ],
+    "cpu": 256,
+    "memory": 512,
+    "networkMode": "awsvpc"
+  }
+]
   DEFINITION
 
   requires_compatibilities = ["FARGATE"]
@@ -94,7 +93,7 @@ resource "aws_ecs_service" "ecs_service" {
   load_balancer {
     target_group_arn = module.alb.target_group_arns[0]
     container_name   = format("%s-container", local.project)
-    container_port   = 8080
+    container_port   = 80
   }
 
   depends_on = [module.alb]
@@ -102,7 +101,6 @@ resource "aws_ecs_service" "ecs_service" {
 
 
 ## Autoscaling
-
 resource "aws_appautoscaling_target" "ecs_target" {
   max_capacity       = 2
   min_capacity       = 1

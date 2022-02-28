@@ -70,11 +70,11 @@ module "alb" {
 
   target_groups = [
     {
-      name        = format("%s-alb-tg", local.project)
-      port        = 80
-      protocol    = "HTTP"
-      target_type = "ip"
-      vpc_id      = module.vpc.vpc_id
+      name             = format("%s-alb-tg", local.project)
+      backend_port     = 3000
+      backend_protocol = "HTTP"
+      target_type      = "ip"
+      vpc_id           = module.vpc.vpc_id
 
       health_check = {
         healthy_threshold   = "3"
