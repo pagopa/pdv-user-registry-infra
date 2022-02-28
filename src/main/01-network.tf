@@ -1,6 +1,6 @@
 module "vpc" {
   source             = "terraform-aws-modules/vpc/aws"
-  name               = format("%s-%s-vpc", local.project, var.aws_region)
+  name               = format("%s-vpc", local.project)
   cidr               = var.vpc_cidr
   azs                = var.azs
   private_subnets    = var.vpc_private_subnets_cidr
