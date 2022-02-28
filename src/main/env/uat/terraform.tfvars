@@ -1,4 +1,9 @@
 env_short = "u"
+
+
+# Ecs
+ecs_enable_execute_command = true
+
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Uat"

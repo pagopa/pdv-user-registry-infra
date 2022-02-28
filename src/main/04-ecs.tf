@@ -78,10 +78,11 @@ resource "aws_ecs_service" "ecs_service" {
     aws_ecs_task_definition.aws_ecs_task.family,
     max(aws_ecs_task_definition.aws_ecs_task.revision, data.aws_ecs_task_definition.main.revision)
   )
-  launch_type          = "FARGATE"
-  scheduling_strategy  = "REPLICA"
-  desired_count        = 1
-  force_new_deployment = true
+  launch_type            = "FARGATE"
+  scheduling_strategy    = "REPLICA"
+  desired_count          = 2
+  force_new_deployment   = true
+  enable_execute_command = var.ecs_enable_execute_command
 
   network_configuration {
     subnets          = module.vpc.private_subnets
@@ -99,12 +100,14 @@ resource "aws_ecs_service" "ecs_service" {
   }
 
   depends_on = [module.alb]
+
+  tags = var.tags
 }
 
 
 ## Autoscaling
 resource "aws_appautoscaling_target" "ecs_target" {
-  max_capacity       = 2
+  max_capacity       = 3
   min_capacity       = 1
   resource_id        = join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.ecs_service.name])
   scalable_dimension = "ecs:service:DesiredCount"

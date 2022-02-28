@@ -57,6 +57,14 @@ variable "ecs_logs_retention_days" {
 }
 
 
+variable "ecs_enable_execute_command" {
+  type        = bool
+  description = "Specifies whether to enable Amazon ECS Exec for the tasks within the service."
+  default     = false
+}
+
+###
+
 variable "tags" {
   type = map(any)
   default = {
