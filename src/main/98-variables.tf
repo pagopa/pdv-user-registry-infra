@@ -47,6 +47,12 @@ variable "vpc_public_subnets_cidr" {
   default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
+## Dns zones
+
+variable "public_dns_zones" {
+  type        = map(any)
+  description = "Route53 Hosted Zone"
+}
 
 ## ECS
 
@@ -56,7 +62,7 @@ variable "ecs_logs_retention_days" {
   default     = 90
 }
 
-
+###
 variable "tags" {
   type = map(any)
   default = {
