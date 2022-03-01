@@ -16,15 +16,6 @@ output "dynamo_db_table_id" {
   value = module.dynamodb_table.dynamodb_table_id
 }
 
-
-# ALB
-
-/*
-output "alb_hostname" {
-  value = module.alb.lb_dns_name
-}
-*/
-
 # NLB
 output "nlb_hostname" {
   value = module.nlb.lb_dns_name
