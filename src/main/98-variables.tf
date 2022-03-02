@@ -47,6 +47,12 @@ variable "vpc_public_subnets_cidr" {
   default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
+variable "vpc_internal_subnets_cidr" {
+  type        = list(string)
+  description = "Internal subnets list of cidr. Mainly for private endpoints"
+  default     = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
+}
+
 
 ## ECS
 
