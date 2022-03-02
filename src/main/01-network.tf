@@ -6,7 +6,7 @@ module "vpc" {
   private_subnets    = var.vpc_private_subnets_cidr
   public_subnets     = var.vpc_public_subnets_cidr
   intra_subnets      = var.vpc_internal_subnets_cidr
-  enable_nat_gateway = true
+  enable_nat_gateway = false
 
   enable_dns_hostnames = true
   enable_dns_support   = true
