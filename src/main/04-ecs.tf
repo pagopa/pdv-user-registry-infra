@@ -29,7 +29,7 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.ecr.repository_url}:latest",
+    "image": "${aws_ecr_repository.ecr.repository_url}:2.0",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
@@ -42,8 +42,8 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
     },
     "portMappings": [
       {
-        "containerPort": 80,
-        "hostPort": 80
+        "containerPort": 8000,
+        "hostPort": 8000
       }
     ],
     "cpu": 256,
@@ -96,7 +96,7 @@ resource "aws_ecs_service" "ecs_service" {
   load_balancer {
     target_group_arn = module.alb.target_group_arns[0]
     container_name   = format("%s-container", local.project)
-    container_port   = 80
+    container_port   = 8000
   }
 
   depends_on = [module.alb]
