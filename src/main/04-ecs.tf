@@ -29,7 +29,7 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.ecr.repository_url}:2.0",
+    "image": "${aws_ecr_repository.ecr.repository_url}:latest",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
