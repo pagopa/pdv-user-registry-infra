@@ -50,3 +50,20 @@ resource "aws_iam_role_policy_attachment" "ecs_execute_command_policy" {
   role       = aws_iam_role.ecs_execution_task.name
   policy_arn = aws_iam_policy.execute_command_policy[0].arn
 }
+
+
+## IAM Groups.
+
+resource "aws_iam_group" "developers" {
+  name = "Developers"
+}
+
+data "aws_iam_policy" "power_user" {
+  name = "PowerUserAccess"
+}
+
+resource "aws_iam_group_policy_attachment" "test-attach" {
+  count      = var.env_short == "u" ? 1 : 0
+  group      = aws_iam_group.developers.name
+  policy_arn = data.aws_iam_policy.power_user.arn
+}
