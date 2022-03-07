@@ -52,6 +52,38 @@ resource "aws_iam_role_policy_attachment" "ecs_execute_command_policy" {
 }
 
 
+## policy to allow ecs to read and write in dynamodb
+resource "aws_iam_policy" "dynamodb_rw" {
+  name        = "PagoPaECSReadWriteDynamoDB"
+  description = "Policy to allow ecs tasks to read and write in dynamodb table"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "dynamodb:PutItem",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:Query",
+        "dynamodb:UpdateItem",
+        "dynamodb:GetRecords"
+      ],
+      "Effect": "Allow",
+      "Resource": "${module.dynamodb_table.dynamodb_table_arn}"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_dynamodb_rw" {
+  role       = aws_iam_role.ecs_execution_task.name
+  policy_arn = aws_iam_policy.dynamodb_rw.arn
+}
+
+
 ## IAM Groups.
 
 resource "aws_iam_group" "developers" {
@@ -62,7 +94,7 @@ data "aws_iam_policy" "power_user" {
   name = "PowerUserAccess"
 }
 
-resource "aws_iam_group_policy_attachment" "test-attach" {
+resource "aws_iam_group_policy_attachment" "power_user" {
   count      = var.env_short == "u" ? 1 : 0
   group      = aws_iam_group.developers.name
   policy_arn = data.aws_iam_policy.power_user.arn
