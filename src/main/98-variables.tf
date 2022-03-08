@@ -74,6 +74,21 @@ variable "ecs_enable_execute_command" {
   default     = false
 }
 
+variable "container_port" {
+  type        = number
+  description = "Container port"
+  default     = 8000
+
+}
+
+variable "replica_count" {
+  type        = number
+  description = "Number of task replica"
+  default     = 1
+}
+
+###
+
 variable "tags" {
   type = map(any)
   default = {
