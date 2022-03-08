@@ -82,7 +82,7 @@ module "alb" {
         protocol            = "HTTP"
         matcher             = "200"
         timeout             = "3"
-        path                = "/v1/status"
+        path                = "/"
         unhealthy_threshold = "2"
       }
     }

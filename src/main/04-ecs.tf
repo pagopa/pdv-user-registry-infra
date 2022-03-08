@@ -42,8 +42,8 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
     },
     "portMappings": [
       {
-        "containerPort": 8000,
-        "hostPort": 8000
+        "containerPort": ${var.container_port},
+        "hostPort": ${var.container_port}
       }
     ],
     "cpu": 256,
@@ -80,7 +80,7 @@ resource "aws_ecs_service" "ecs_service" {
   )
   launch_type            = "FARGATE"
   scheduling_strategy    = "REPLICA"
-  desired_count          = 2
+  desired_count          = var.replica_count
   force_new_deployment   = true
   enable_execute_command = var.ecs_enable_execute_command
 
@@ -88,18 +88,22 @@ resource "aws_ecs_service" "ecs_service" {
     subnets          = module.vpc.private_subnets
     assign_public_ip = false
     security_groups = [
-      aws_security_group.service_security_group.id,
-      aws_security_group.alb.id
+      # ALB
+      #aws_security_group.service_security_group.id,
+      #aws_security_group.alb.id,
+      # NLB
+      aws_security_group.nsg_task.id
+
     ]
   }
 
   load_balancer {
-    target_group_arn = module.alb.target_group_arns[0]
+    target_group_arn = module.nlb.target_group_arns[0]
     container_name   = format("%s-container", local.project)
-    container_port   = 8000
+    container_port   = var.container_port
   }
 
-  depends_on = [module.alb]
+  depends_on = [module.nlb]
 
   tags = var.tags
 }

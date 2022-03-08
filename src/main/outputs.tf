@@ -33,3 +33,8 @@ output "dynamo_db_table_id" {
 output "alb_hostname" {
   value = module.alb.lb_dns_name
 }
+
+# NLB
+output "nlb_hostname" {
+  value = module.nlb.lb_dns_name
+}

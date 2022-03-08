@@ -62,11 +62,23 @@ variable "ecs_logs_retention_days" {
   default     = 90
 }
 
-
 variable "ecs_enable_execute_command" {
   type        = bool
   description = "Specifies whether to enable Amazon ECS Exec for the tasks within the service."
   default     = false
+}
+
+variable "container_port" {
+  type        = number
+  description = "Container port"
+  default     = 8000
+
+}
+
+variable "replica_count" {
+  type        = number
+  description = "Number of task replica"
+  default     = 1
 }
 
 ###
