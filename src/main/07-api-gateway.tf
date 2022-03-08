@@ -96,3 +96,7 @@ output "api_gateway_endpoint" {
 }
 
 */
+
+output "invoke_url" {
+  value = aws_api_gateway_deployment.main.invoke_url
+}
