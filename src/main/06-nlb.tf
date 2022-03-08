@@ -95,6 +95,5 @@ module "nlb" {
     },
   ]
 
-
   tags = var.tags
 }
