@@ -12,7 +12,8 @@ resource "aws_api_gateway_vpc_link" "apigw" {
 }
 
 resource "aws_api_gateway_rest_api" "main" {
-  name = format("%s-apigw", local.project)
+  name           = format("%s-apigw", local.project)
+  api_key_source = "HEADER"
 
   body = jsonencode({
     openapi = "3.0.1"
@@ -30,21 +31,6 @@ resource "aws_api_gateway_rest_api" "main" {
             uri                  = format("http://%s/", module.nlb.lb_dns_name)
             connectionType       = "VPC_LINK"
             connectionId         = aws_api_gateway_vpc_link.apigw.id
-            responses = {
-              "200" = {
-                statusCode = "200"
-                responseTemplates = {
-                  "application/json" = "#set ($root=$input.path('$')) { \"stage\": \"$root.name\", \"user-id\": \"$root.key\" }"
-                  "application/xml"  = "#set ($root=$input.path('$')) <stage>$root.name</stage> "
-                }
-              }
-              "302" = {
-                statusCode = "302"
-                responseParameters = {
-                  "method.response.header.Location" = "integration.response.body.redirect.url"
-                }
-              }
-            }
           }
         }
       }
@@ -60,10 +46,49 @@ resource "aws_api_gateway_rest_api" "main" {
 
 resource "aws_api_gateway_deployment" "main" {
   rest_api_id = aws_api_gateway_rest_api.main.id
-  stage_name  = "v1"
+  #stage_name  = "prod"
+}
+
+resource "aws_api_gateway_stage" "main" {
+  deployment_id = aws_api_gateway_deployment.main.id
+  rest_api_id   = aws_api_gateway_rest_api.main.id
+  stage_name    = "v1"
 }
 
 
+resource "aws_api_gateway_usage_plan" "prod_io" {
+  name        = format("%s-api-plan", local.project)
+  description = "Usage plan for main api"
+
+  api_stages {
+    api_id = aws_api_gateway_rest_api.main.id
+    stage  = aws_api_gateway_stage.main.stage_name
+  }
+
+  /*
+  quota_settings {
+    limit  = 20
+    offset = 2
+    period = "WEEK"
+  }
+  */
+
+  #TODO: tune this settings
+  throttle_settings {
+    burst_limit = 5
+    rate_limit  = 10
+  }
+}
+
+resource "aws_api_gateway_api_key" "prod_io" {
+  name = "prod-io"
+}
+
+resource "aws_api_gateway_usage_plan_key" "prod_io" {
+  key_id        = aws_api_gateway_api_key.prod_io.id
+  key_type      = "API_KEY"
+  usage_plan_id = aws_api_gateway_usage_plan.prod_io.id
+}
 
 /*
 //The API Gateway endpoint
