@@ -30,5 +30,5 @@ module "dynamodb_table" {
 
   server_side_encryption_enabled = true
 
-  tags = var.tags
+  tags = merge({ Name = format("%s-table", local.project) }, var.tags)
 }

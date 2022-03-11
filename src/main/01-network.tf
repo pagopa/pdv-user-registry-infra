@@ -11,7 +11,9 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = var.tags
+  tags = merge({
+    Name = format("%s-vpc", local.project) },
+  var.tags)
 }
 
 data "aws_iam_policy_document" "generic_endpoint_policy" {
@@ -52,7 +54,7 @@ resource "aws_security_group" "vpc_tls" {
     cidr_blocks = [module.vpc.vpc_cidr_block]
   }
 
-  tags = var.tags
+  tags = merge({ Name = format("%s_vpc_tls_sg", local.project) }, var.tags)
 }
 
 module "vpc_endpoints" {
