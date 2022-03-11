@@ -3,7 +3,7 @@ resource "aws_security_group" "nsg_task" {
   description = "Limit connections from internal resources while allowing ${local.project}-task to connect to all external resources"
   vpc_id      = module.vpc.vpc_id
 
-  tags = var.tags
+  tags = merge({ Name = format("%s-task-nlb", local.project) }, var.tags)
 }
 
 # Rules for the TASK (Targets the LB's IPs)
@@ -95,5 +95,5 @@ module "nlb" {
     },
   ]
 
-  tags = var.tags
+  tags = merge({ Name : format("%s-nlb", local.project) }, var.tags)
 }

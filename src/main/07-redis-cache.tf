@@ -5,7 +5,7 @@ module "redis_sg" {
 
   vpc_id = module.vpc.vpc_id
 
-  tags = var.tags
+  tags = merge({ Name = format("%s-redis-sg", local.project) }, var.tags)
 
 }
 
@@ -39,5 +39,5 @@ module "redis" {
     value = "3"
   }]
 
-  tags = var.tags
+  tags = merge({ Name = format("%s-redis", local.project) }, var.tags)
 }

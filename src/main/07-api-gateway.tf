@@ -7,7 +7,7 @@ resource "aws_api_gateway_vpc_link" "apigw" {
   description = "allows public API Gateway for ${local.apigw_name} to talk to private NLB"
   target_arns = [module.nlb.lb_arn]
 
-  tags = var.tags
+  tags = merge({ Name = local.apigw_name }, var.tags)
 
 }
 
@@ -41,7 +41,7 @@ resource "aws_api_gateway_rest_api" "main" {
     types = ["REGIONAL"]
   }
 
-  tags = var.tags
+  tags = merge({ Name = format("%s-apigw", local.project) }, var.tags)
 }
 
 resource "aws_api_gateway_deployment" "main" {
