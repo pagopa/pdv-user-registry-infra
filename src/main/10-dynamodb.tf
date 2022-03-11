@@ -21,12 +21,14 @@ module "dynamodb_table" {
     {
       name               = "TitleIndex"
       hash_key           = "title"
-      range_key          = "age"
+      range_key          = "fiscalcode"
       projection_type    = "INCLUDE"
       non_key_attributes = ["id"]
     }
   ]
   */
+
+  server_side_encryption_enabled = true
 
   tags = var.tags
 }
