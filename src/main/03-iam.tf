@@ -122,9 +122,18 @@ resource "aws_iam_policy" "deploy_ecs" {
 
 }
 
-resource "aws_iam_group_policy_attachment" "deploy_ecs" {
-  group      = aws_iam_group.developers.name
+data "aws_iam_policy" "ec2_ecr_full_access" {
+  name = "AmazonEC2ContainerRegistryFullAccess"
+}
+
+resource "aws_iam_user_policy_attachment" "deploy_ecs" {
+  user       = aws_iam_user.deploy_ecs.name
   policy_arn = aws_iam_policy.deploy_ecs.arn
+}
+
+resource "aws_iam_user_policy_attachment" "deploy_ec2_ecr_full_access" {
+  user       = aws_iam_user.deploy_ecs.name
+  policy_arn = data.aws_iam_policy.ec2_ecr_full_access.arn
 }
 
 output "deploy_access_key" {

@@ -9,6 +9,7 @@
                 "ecr:DescribeImages",
                 "ecr:TagResource",
                 "ecr:ListImages",
+                "ecr:GetAuthorizationToken",
                 "ecr:PutImage"
             ],
             "Resource": [
