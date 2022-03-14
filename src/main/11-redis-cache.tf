@@ -39,5 +39,5 @@ module "redis" {
     value = "3"
   }]
 
-  tags = merge({ Name = format("%s-redis", local.project) }, var.tags)
+  tags = { Name = format("%s-redis", local.project) }
 }
