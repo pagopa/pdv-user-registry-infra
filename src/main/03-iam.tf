@@ -99,3 +99,39 @@ resource "aws_iam_group_policy_attachment" "power_user" {
   group      = aws_iam_group.developers.name
   policy_arn = data.aws_iam_policy.power_user.arn
 }
+
+# Iam user to deploy
+resource "aws_iam_user" "deploy_ecs" {
+  name = "Deploy"
+}
+
+resource "aws_iam_access_key" "deploy_ecs" {
+  user = aws_iam_user.deploy_ecs.name
+}
+
+resource "aws_iam_policy" "deploy_ecs" {
+  name        = "PagoPaECSDeploy"
+  description = "Policy to allow deploy on ECS."
+
+  policy = templatefile(
+    "./iam_policies/deploy-ecs.json.tpl",
+    {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  )
+
+}
+
+resource "aws_iam_group_policy_attachment" "deploy_ecs" {
+  group      = aws_iam_group.developers.name
+  policy_arn = aws_iam_policy.deploy_ecs.arn
+}
+
+output "deploy_access_key" {
+  value = aws_iam_access_key.deploy_ecs.id
+}
+
+output "deploy_access_key_secret" {
+  value     = aws_iam_access_key.deploy_ecs.secret
+  sensitive = true
+}
