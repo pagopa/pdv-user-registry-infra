@@ -1,8 +1,6 @@
 resource "aws_ecs_cluster" "ecs_cluster" {
   name = format("%s-ecs-cluster", local.project)
-  tags = merge({
-    Name = format("%s-ecs", local.project)
-  }, var.tags)
+  tags = { Name = format("%s-ecs", local.project) }
 }
 
 resource "aws_cloudwatch_log_group" "ecs_log_group" {
@@ -10,9 +8,9 @@ resource "aws_cloudwatch_log_group" "ecs_log_group" {
 
   retention_in_days = var.ecs_logs_retention_days
 
-  tags = merge({
+  tags = {
     Application = var.app_name
-  }, var.tags)
+  }
 }
 
 ## Task definitions
@@ -60,9 +58,7 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
   execution_role_arn       = aws_iam_role.ecs_execution_task.arn
   task_role_arn            = aws_iam_role.ecs_execution_task.arn
 
-  tags = merge({
-    Name = format("%s-ecs-td", local.project)
-  }, var.tags)
+  tags = { Name = format("%s-ecs-td", local.project) }
 }
 
 data "aws_ecs_task_definition" "main" {

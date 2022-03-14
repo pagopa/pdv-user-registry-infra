@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "ecs_tasks_assume_role_policy" {
 resource "aws_iam_role" "ecs_execution_task" {
   name               = format("%s-execution-task-role", local.project)
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role_policy.json
-  tags               = merge({ Name = format("%s-execution-task-role", local.project) }, var.tags)
+  tags               = { Name = format("%s-execution-task-role", local.project) }
 }
 
 resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {

@@ -11,9 +11,9 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = merge({
-    Name = format("%s-vpc", local.project) },
-  var.tags)
+  tags = {
+  Name = format("%s-vpc", local.project) }
+
 }
 
 data "aws_iam_policy_document" "generic_endpoint_policy" {
@@ -54,7 +54,7 @@ resource "aws_security_group" "vpc_tls" {
     cidr_blocks = [module.vpc.vpc_cidr_block]
   }
 
-  tags = merge({ Name = format("%s_vpc_tls_sg", local.project) }, var.tags)
+  tags = { Name = format("%s_vpc_tls_sg", local.project) }
 }
 
 module "vpc_endpoints" {
@@ -68,7 +68,7 @@ module "vpc_endpoints" {
       service         = "s3"
       service_type    = "Gateway"
       route_table_ids = flatten([module.vpc.intra_route_table_ids, module.vpc.private_route_table_ids, module.vpc.public_route_table_ids])
-      tags            = merge({ Name = "s3-vpc-endpoint" }, var.tags)
+      tags            = { Name = "s3-vpc-endpoint" }
     },
     logs = {
       service             = "logs"
@@ -76,7 +76,7 @@ module "vpc_endpoints" {
       subnet_ids          = module.vpc.private_subnets
       #policy              = data.aws_iam_policy_document.generic_endpoint_policy.json
       security_group_ids = [aws_security_group.vpc_tls.id]
-      tags               = merge({ Name = "logs-endpoint" }, var.tags)
+      tags               = { Name = "logs-endpoint" }
     },
     ecr_api = {
       service             = "ecr.api"
@@ -85,7 +85,7 @@ module "vpc_endpoints" {
       #policy              = data.aws_iam_policy_document.generic_endpoint_policy.json
       security_group_ids = [aws_security_group.vpc_tls.id]
 
-      tags = merge({ Name = "ecr.api-endpoint" }, var.tags)
+      tags = { Name = "ecr.api-endpoint" }
     },
     ecr_dkr = {
       service             = "ecr.dkr"
