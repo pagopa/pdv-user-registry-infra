@@ -143,4 +143,4 @@ resource "aws_appautoscaling_policy" "ecs_policy_cpu" {
 
     target_value = 80
   }
-}
+} 
