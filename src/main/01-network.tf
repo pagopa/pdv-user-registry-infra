@@ -36,6 +36,26 @@ data "aws_iam_policy_document" "generic_endpoint_policy" {
   }
 }
 
+data "aws_iam_policy_document" "dynamodb_endpoint_policy" {
+  statement {
+    effect    = "Deny"
+    actions   = ["dynamodb:*"]
+    resources = ["*"]
+
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+
+    condition {
+      test     = "StringNotEquals"
+      variable = "aws:sourceVpce"
+
+      values = [module.vpc.vpc_id]
+    }
+  }
+}
+
 data "aws_security_group" "default" {
   name   = "default"
   vpc_id = module.vpc.vpc_id
@@ -95,15 +115,15 @@ module "vpc_endpoints" {
       security_group_ids = [aws_security_group.vpc_tls.id]
       tags               = { Name = "ecr.dkr-endpoint" }
     },
-    /*
+
     dynamodb = {
       service         = "dynamodb"
       service_type    = "Gateway"
       route_table_ids = flatten([module.vpc.intra_route_table_ids, module.vpc.private_route_table_ids, module.vpc.public_route_table_ids])
-      policy          = data.aws_iam_policy_document.dynamodb_endpoint_policy.json
-      tags            = { Name = "dynamodb-vpc-endpoint" }
+      # policy          = data.aws_iam_policy_document.dynamodb_endpoint_policy.json
+      tags = { Name = "dynamodb-vpc-endpoint" }
     },
-    
+    /*
     ecs = {
       service             = "ecs"
       private_dns_enabled = true
