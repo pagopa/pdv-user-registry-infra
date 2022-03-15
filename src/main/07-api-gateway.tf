@@ -41,7 +41,7 @@ resource "aws_api_gateway_rest_api" "main" {
     types = ["REGIONAL"]
   }
 
-  tags = merge({ Name = format("%s-apigw", local.project) }, var.tags)
+  tags = { Name = format("%s-apigw", local.project) }
 }
 
 resource "aws_api_gateway_deployment" "main" {

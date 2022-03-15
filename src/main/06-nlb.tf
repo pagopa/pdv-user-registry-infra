@@ -95,5 +95,5 @@ module "nlb" {
     },
   ]
 
-  tags = merge({ Name : format("%s-nlb", local.project) }, var.tags)
+  tags = { Name : format("%s-nlb", local.project) }
 }

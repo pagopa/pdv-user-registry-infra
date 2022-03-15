@@ -94,6 +94,11 @@ data "aws_iam_policy" "power_user" {
 }
 
 ### Deny access to secret devops
+
+data "aws_secretsmanager_secret" "devops" {
+  name = "devops"
+}
+
 resource "aws_iam_policy" "deny_secrets_devops" {
   name        = "PagoPaDenyAccessSecretsDevops"
   description = "Deny access to devops secrets."
@@ -101,7 +106,7 @@ resource "aws_iam_policy" "deny_secrets_devops" {
   policy = templatefile(
     "./iam_policies/deny-access-secret-devops.json.tpl",
     {
-      account_id = data.aws_caller_identity.current.account_id
+      secret_arn = data.aws_secretsmanager_secret.devops.arn
     }
   )
 }
