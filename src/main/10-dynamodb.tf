@@ -3,17 +3,17 @@ module "dynamodb_table" {
 
   name      = format("%s-table", local.project)
   hash_key  = "id"
-  range_key = "fiscalcode"
+  range_key = "CF"
 
   attributes = [
     {
       name = "id"
-      type = "N"
+      type = "S"
     },
     {
-      name = "fiscalcode"
+      name = "CF"
       type = "S"
-    }
+    },
   ]
 
   /*
