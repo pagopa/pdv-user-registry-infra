@@ -49,7 +49,6 @@ resource "aws_iam_role_policy_attachment" "ecs_execute_command_policy" {
   count      = var.ecs_enable_execute_command ? 1 : 0
   role       = aws_iam_role.ecs_execution_task.name
   policy_arn = aws_iam_policy.execute_command_policy[0].arn
-
 }
 
 
