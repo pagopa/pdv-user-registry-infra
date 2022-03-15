@@ -101,7 +101,7 @@ resource "aws_ecs_service" "ecs_service" {
 
   depends_on = [module.nlb]
 
-  tags = merge({ Name : format("%s-ecs-service", local.project) }, var.tags)
+  tags = { Name : format("%s-ecs-service", local.project) }
 }
 
 
