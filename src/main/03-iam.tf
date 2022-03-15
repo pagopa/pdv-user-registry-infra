@@ -84,8 +84,7 @@ resource "aws_iam_role_policy_attachment" "ecs_dynamodb_rw" {
 }
 
 
-## IAM Groups.
-
+## IAM Group Developer
 resource "aws_iam_group" "developers" {
   name = "Developers"
 }
@@ -94,10 +93,34 @@ data "aws_iam_policy" "power_user" {
   name = "PowerUserAccess"
 }
 
+### Deny access to secret devops
+
+data "aws_secretsmanager_secret" "devops" {
+  name = "devops"
+}
+
+resource "aws_iam_policy" "deny_secrets_devops" {
+  name        = "PagoPaDenyAccessSecretsDevops"
+  description = "Deny access to devops secrets."
+
+  policy = templatefile(
+    "./iam_policies/deny-access-secret-devops.json.tpl",
+    {
+      secret_arn = data.aws_secretsmanager_secret.devops.arn
+    }
+  )
+}
+
 resource "aws_iam_group_policy_attachment" "power_user" {
   count      = var.env_short == "u" ? 1 : 0
   group      = aws_iam_group.developers.name
   policy_arn = data.aws_iam_policy.power_user.arn
+}
+
+resource "aws_iam_group_policy_attachment" "deny_secrets_devops" {
+  count      = var.env_short == "u" ? 1 : 0
+  group      = aws_iam_group.developers.name
+  policy_arn = aws_iam_policy.deny_secrets_devops.arn
 }
 
 # Iam user to deploy
@@ -119,7 +142,6 @@ resource "aws_iam_policy" "deploy_ecs" {
       account_id = data.aws_caller_identity.current.account_id
     }
   )
-
 }
 
 data "aws_iam_policy" "ec2_ecr_full_access" {

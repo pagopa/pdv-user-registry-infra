@@ -93,7 +93,7 @@ module "vpc_endpoints" {
       subnet_ids          = module.vpc.private_subnets
       #policy              = data.aws_iam_policy_document.generic_endpoint_policy.json
       security_group_ids = [aws_security_group.vpc_tls.id]
-      tags               = merge({ Name = "ecr.dkr-endpoint" }, var.tags)
+      tags               = { Name = "ecr.dkr-endpoint" }
     },
     /*
     dynamodb = {
@@ -126,5 +126,4 @@ module "vpc_endpoints" {
     */
   }
 
-  tags = var.tags
 }
