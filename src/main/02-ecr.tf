@@ -7,3 +7,22 @@ resource "aws_ecr_repository" "ecr" {
   tags = { "Name" : format("%s-ecr", local.project) }
 
 }
+
+resource "aws_ecr_lifecycle_policy" "ecr" {
+  repository = aws_ecr_repository.ecr.name
+
+  policy = jsonencode({
+    rules = [{
+      rulePriority = 1
+      description  = format("Keeps last %s images", var.ecr_keep_nr_images)
+      action = {
+        type = "expire"
+      }
+      selection = {
+        tagStatus   = "any"
+        countType   = "imageCountMoreThan"
+        countNumber = var.ecr_keep_nr_images
+      }
+    }]
+  })
+}

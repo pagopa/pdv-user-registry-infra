@@ -60,6 +60,15 @@ variable "vpc_internal_subnets_cidr" {
   default     = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
 }
 
+## ECR
+
+variable "ecr_keep_nr_images" {
+  type        = number
+  description = "Number of images to keep."
+  default     = 10
+}
+
+
 ## ECS
 
 variable "ecs_logs_retention_days" {
