@@ -83,6 +83,23 @@ resource "aws_iam_role_policy_attachment" "ecs_dynamodb_rw" {
   policy_arn = aws_iam_policy.dynamodb_rw.arn
 }
 
+## Allow ecs tasks to encrypt and decrypt KMS key
+resource "aws_iam_policy" "ecs_allow_kms" {
+  name        = "PagoPaAllowECSKMS"
+  description = "Policy to allow ECS tasks to encrypt and decrypt data at rest in DynamoDB."
+
+  policy = templatefile(
+    "./iam_policies/allow-kms-encrypt-decrypt.json.tpl",
+    {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_allow_kms" {
+  role       = aws_iam_role.ecs_execution_task.name
+  policy_arn = aws_iam_policy.ecs_allow_kms.arn
+}
 
 ## IAM Group Developer
 resource "aws_iam_group" "developers" {
