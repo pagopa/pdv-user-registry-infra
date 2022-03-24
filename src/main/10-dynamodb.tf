@@ -12,10 +12,13 @@ resource "aws_kms_alias" "dynamo_db" {
 
 # TODO: set a replication region at least for production.
 #       set the provisioned capacity.
+locals {
+  dynamodb_table_name = format("%s-table", local.project)
+}
 module "dynamodb_table" {
   source = "terraform-aws-modules/dynamodb-table/aws"
 
-  name      = format("%s-table", local.project)
+  name      = local.dynamodb_table_name
   hash_key  = "id"
   range_key = "CF"
 
@@ -43,7 +46,7 @@ module "dynamodb_table" {
   */
 
   server_side_encryption_enabled     = true
-  server_side_encryption_kms_key_arn = aws_kms_alias.dynamo_db.arn
+  server_side_encryption_kms_key_arn = aws_kms_alias.dynamo_db.target_key_arn
 
-  tags = { Name = format("%s-table", local.project) }
+  tags = { Name = local.dynamodb_table_name }
 }
