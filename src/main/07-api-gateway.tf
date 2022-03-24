@@ -99,3 +99,26 @@ output "api_gateway_endpoint" {
 output "invoke_url" {
   value = aws_api_gateway_deployment.main.invoke_url
 }
+
+## Firewall regional web acl  
+resource "aws_wafv2_web_acl" "main" {
+  name        = format("%s-webacl", local.project)
+  description = "Api gateway WAF."
+  scope       = "REGIONAL"
+
+  visibility_config {
+    cloudwatch_metrics_enabled = true
+    metric_name                = "apiWebACL"
+    sampled_requests_enabled   = true
+  }
+  default_action {
+    allow {}
+  }
+
+  tags = { Name = format("%s-webacl", local.project) }
+}
+
+resource "aws_wafv2_web_acl_association" "main" {
+  web_acl_arn  = aws_wafv2_web_acl.main.arn
+  resource_arn = "arn:aws:apigateway:${var.aws_region}::/restapis/${aws_api_gateway_rest_api.main.id}/stages/${aws_api_gateway_stage.main.stage_name}"
+}
