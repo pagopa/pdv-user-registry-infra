@@ -51,7 +51,7 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
       },
       {
         "name": "DYNAMODB_TABLE",
-        "value": "${local.dynamo}"
+        "value": "${local.dynamodb_table_name}"
       }
     ],
     "cpu": 256,
