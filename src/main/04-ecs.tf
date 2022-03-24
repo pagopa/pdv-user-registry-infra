@@ -44,6 +44,16 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
         "hostPort": ${var.container_port}
       }
     ],
+    "environment": [
+      {
+        "name": "AWS_REGION",
+        "value": "${var.aws_region}"
+      },
+      {
+        "name": "DYNAMODB_TABLE",
+        "value": "${var.aws_region}"
+      }
+    ],
     "cpu": 256,
     "memory": 512,
     "networkMode": "awsvpc"
