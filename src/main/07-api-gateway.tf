@@ -71,20 +71,22 @@ resource "aws_api_gateway_stage" "main" {
   */
 }
 
-/*
-resource "aws_api_gateway_method" "any" {
+resource "aws_api_gateway_method_settings" "general_settings" {
   rest_api_id = aws_api_gateway_rest_api.main.id
-  resource_id = aws_api_gateway_rest_api.main.root_resource_id
-  http_method = "ANY"
-  authorization = "NONE"
+  stage_name  = local.stage_name
+  method_path = "*/*"
 
-  
-  request_parameters = {
-    "method.request.path.proxy" = true
+  settings {
+    # Enable CloudWatch logging and metrics
+    metrics_enabled    = true
+    data_trace_enabled = true
+    logging_level      = "ERROR"
+    #todo.
+    # Limit the rate of calls to prevent abuse and unwanted charges
+    #throttling_rate_limit  = 100
+    #throttling_burst_limit = 50
   }
-  
 }
-*/
 
 resource "aws_api_gateway_usage_plan" "prod_io" {
   name        = format("%s-api-plan", local.project)
