@@ -62,13 +62,29 @@ resource "aws_api_gateway_stage" "main" {
   rest_api_id   = aws_api_gateway_rest_api.main.id
   stage_name    = local.stage_name
 
+  /*
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.apigw.arn
     #todo: find a better way to represent this log format.
     format = "{ \"requestId\":\"$context.requestId\", \"extendedRequestId\":\"$context.extendedRequestId\", \"ip\": \"$context.identity.sourceIp\", \"caller\":\"$context.identity.caller\", \"user\":\"$context.identity.user\", \"requestTime\":\"$context.requestTime\", \"httpMethod\":\"$context.httpMethod\", \"resourcePath\":\"$context.resourcePath\", \"status\":\"$context.status\", \"protocol\":\"$context.protocol\", \"responseLength\":\"$context.responseLength\"}"
   }
+  */
 }
 
+/*
+resource "aws_api_gateway_method" "any" {
+  rest_api_id = aws_api_gateway_rest_api.main.id
+  resource_id = aws_api_gateway_rest_api.main.root_resource_id
+  http_method = "ANY"
+  authorization = "NONE"
+
+  
+  request_parameters = {
+    "method.request.path.proxy" = true
+  }
+  
+}
+*/
 
 resource "aws_api_gateway_usage_plan" "prod_io" {
   name        = format("%s-api-plan", local.project)
