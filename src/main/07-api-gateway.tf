@@ -122,6 +122,11 @@ resource "aws_api_gateway_usage_plan_key" "prod_io" {
   usage_plan_id = aws_api_gateway_usage_plan.prod_io.id
 }
 
+output "prod_io_key" {
+  value     = aws_api_gateway_usage_plan_key.prod_io.value
+  sensitive = true
+}
+
 /*
 //The API Gateway endpoint
 output "api_gateway_endpoint" {

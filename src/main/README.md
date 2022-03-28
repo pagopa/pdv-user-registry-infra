@@ -115,5 +115,6 @@
 | <a name="output_ecs_definition_task_revision"></a> [ecs\_definition\_task\_revision](#output\_ecs\_definition\_task\_revision) | n/a |
 | <a name="output_invoke_url"></a> [invoke\_url](#output\_invoke\_url) | n/a |
 | <a name="output_nlb_hostname"></a> [nlb\_hostname](#output\_nlb\_hostname) | NLB |
+| <a name="output_prod_io_key"></a> [prod\_io\_key](#output\_prod\_io\_key) | n/a |
 | <a name="output_redis_endpoint"></a> [redis\_endpoint](#output\_redis\_endpoint) | redis |
 | <a name="output_redis_port"></a> [redis\_port](#output\_redis\_port) | n/a |
