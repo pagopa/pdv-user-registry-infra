@@ -15,27 +15,12 @@ resource "aws_api_gateway_rest_api" "main" {
   name           = format("%s-apigw", local.project)
   api_key_source = "HEADER"
 
-  body = jsonencode({
-    openapi = "3.0.1"
-    info = {
-      title   = "example"
-      version = "1.0"
+  body = templatefile("./api/ms_tokenizer/api-docs.tpl.json",
+    {
+      uri           = format("http://%s/", module.nlb.lb_dns_name),
+      connection_id = aws_api_gateway_vpc_link.apigw.id
     }
-    paths = {
-      "/" = {
-        get = {
-          x-amazon-apigateway-integration = {
-            httpMethod           = "GET"
-            payloadFormatVersion = "1.0"
-            type                 = "HTTP_PROXY"
-            uri                  = format("http://%s/", module.nlb.lb_dns_name)
-            connectionType       = "VPC_LINK"
-            connectionId         = aws_api_gateway_vpc_link.apigw.id
-          }
-        }
-      }
-    }
-  })
+  )
 
   endpoint_configuration {
     types = ["REGIONAL"]
