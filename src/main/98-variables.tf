@@ -86,7 +86,7 @@ variable "ecs_enable_execute_command" {
 variable "container_port" {
   type        = number
   description = "Container port"
-  default     = 8000
+  default     = 8080
 
 }
 
