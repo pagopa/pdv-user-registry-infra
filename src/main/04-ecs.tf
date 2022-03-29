@@ -48,10 +48,6 @@ resource "aws_ecs_task_definition" "aws_ecs_task" {
       {
         "name": "AWS_REGION",
         "value": "${var.aws_region}"
-      },
-      {
-        "name": "DYNAMODB_TABLE",
-        "value": "${local.dynamodb_table_name}"
       }
     ],
     "cpu": 256,
