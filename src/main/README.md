@@ -17,8 +17,6 @@
 |------|--------|---------|
 | <a name="module_dynamodb_table"></a> [dynamodb\_table](#module\_dynamodb\_table) | terraform-aws-modules/dynamodb-table/aws |  |
 | <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws |  |
-| <a name="module_redis"></a> [redis](#module\_redis) | git::https://github.com/pagopa/terraform-aws-modules.git//elastic-cache-redis?ref=v1.3.3 |  |
-| <a name="module_redis_sg"></a> [redis\_sg](#module\_redis\_sg) | git::https://github.com/pagopa/terraform-aws-modules.git//security-group?ref=v1.3.4 |  |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws |  |
 | <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints |  |
 
@@ -114,7 +112,5 @@
 | <a name="output_ecs_definition_task_arn"></a> [ecs\_definition\_task\_arn](#output\_ecs\_definition\_task\_arn) | # ecs |
 | <a name="output_ecs_definition_task_revision"></a> [ecs\_definition\_task\_revision](#output\_ecs\_definition\_task\_revision) | n/a |
 | <a name="output_nlb_hostname"></a> [nlb\_hostname](#output\_nlb\_hostname) | NLB |
-| <a name="output_redis_endpoint"></a> [redis\_endpoint](#output\_redis\_endpoint) | redis |
-| <a name="output_redis_port"></a> [redis\_port](#output\_redis\_port) | n/a |
 | <a name="output_tokenizer_api_key"></a> [tokenizer\_api\_key](#output\_tokenizer\_api\_key) | n/a |
 | <a name="output_tokenizerinvoke_url"></a> [tokenizerinvoke\_url](#output\_tokenizerinvoke\_url) | n/a |

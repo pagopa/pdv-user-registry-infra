@@ -9,7 +9,7 @@ resource "aws_api_gateway_rest_api" "tokenizer" {
 
   body = templatefile("./api/ms_tokenizer/api-docs.tpl.json",
     {
-      uri           = format("http://%s/", module.nlb.lb_dns_name),
+      uri           = format("http://%s", module.nlb.lb_dns_name),
       connection_id = aws_api_gateway_vpc_link.apigw.id
     }
   )
