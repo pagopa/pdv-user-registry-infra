@@ -21,7 +21,7 @@
 				"isDefaultRoute": true,
 				"x-amazon-apigateway-integration": {
 					"type": "HTTP_PROXY",
-					"httpMethod": "ANY",
+					"httpMethod": "GET",
 					"uri": "${uri}",
 					"connectionType": "VPC_LINK",
           "connectionId": "${connection_id}"
