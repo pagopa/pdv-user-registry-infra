@@ -24,12 +24,19 @@
 					"httpMethod": "GET",
 					"uri": "${uri}",
 					"connectionType": "VPC_LINK",
-          "connectionId": "${connection_id}"
+					"connectionId": "${connection_id}"
 				}
 			}
 		},
 		"/tokens": {
 			"put": {
+				"x-amazon-apigateway-integration": {
+					"type": "HTTP_PROXY",
+					"httpMethod": "GET",
+					"uri": "${uri}",
+					"connectionType": "VPC_LINK",
+					"connectionId": "${connection_id}"
+				},
 				"tags": ["tokens"],
 				"summary": "$${swagger.ms-tokenizer.tokens.api.save.summary}",
 				"description": "$${swagger.ms-tokenizer.tokens.api.save.notes}",
@@ -81,6 +88,13 @@
 		},
 		"/tokens/search": {
 			"post": {
+				"x-amazon-apigateway-integration": {
+					"type": "HTTP_PROXY",
+					"httpMethod": "GET",
+					"uri": "${uri}",
+					"connectionType": "VPC_LINK",
+					"connectionId": "${connection_id}"
+				},
 				"tags": ["tokens"],
 				"summary": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.summary}",
 				"description": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.notes}",
@@ -132,6 +146,13 @@
 		},
 		"/tokens/{token}/pii": {
 			"get": {
+				"x-amazon-apigateway-integration": {
+					"type": "HTTP_PROXY",
+					"httpMethod": "GET",
+					"uri": "${uri}",
+					"connectionType": "VPC_LINK",
+					"connectionId": "${connection_id}"
+				},
 				"tags": ["tokens"],
 				"summary": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.summary}",
 				"description": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.notes}",
@@ -172,6 +193,17 @@
 		}
 	},
 	"components": {
+		"x-amazon-apigateway-integrations": 
+		{
+			"integration": 
+				{
+					"type": "HTTP_PROXY",
+					"httpMethod": "GET",
+					"uri": "${uri}",
+					"connectionType": "VPC_LINK",
+					"connectionId": "${connection_id}"
+				}
+		},
 		"schemas": {
 			"CreateTokenDto": {
 				"title": "CreateTokenDto",
