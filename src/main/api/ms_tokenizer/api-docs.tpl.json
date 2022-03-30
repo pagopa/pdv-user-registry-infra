@@ -11,29 +11,25 @@
 		},
 		"version": "1.0"
 	},
+	"servers" : [ {
+		"url" : "${uri}/{basePath}",
+		"variables" : {
+		  "basePath" : {
+			"default" : "/v1"
+		  }
+		}
+	  } ],
 	"tags": [{
 		"name": "tokens",
 		"description": "Tokenizer Controller"
 	}],
 	"paths": {
-		"/$default": {
-			"x-amazon-apigateway-any-method": {
-				"isDefaultRoute": true,
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "GET",
-					"uri": "${uri}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}"
-				}
-			}
-		},
 		"/tokens": {
 			"put": {
 				"x-amazon-apigateway-integration": {
 					"type": "HTTP_PROXY",
-					"httpMethod": "GET",
-					"uri": "${uri}",
+					"httpMethod": "PUT",
+					"uri": "${uri}/tokens",
 					"connectionType": "VPC_LINK",
 					"connectionId": "${connection_id}"
 				},
@@ -83,15 +79,18 @@
 					"404": {
 						"description": "Not Found"
 					}
-				}
+				},
+				"security" : [ {
+					"api_key" : [ ]
+				} ]
 			}
 		},
 		"/tokens/search": {
 			"post": {
 				"x-amazon-apigateway-integration": {
 					"type": "HTTP_PROXY",
-					"httpMethod": "GET",
-					"uri": "${uri}",
+					"httpMethod": "POST",
+					"uri": "${uri}/tokens/search",
 					"connectionType": "VPC_LINK",
 					"connectionId": "${connection_id}"
 				},
@@ -141,7 +140,10 @@
 					"404": {
 						"description": "Not Found"
 					}
-				}
+				},
+				"security" : [ {
+					"api_key" : [ ]
+				}]
 			}
 		},
 		"/tokens/{token}/pii": {
@@ -149,9 +151,12 @@
 				"x-amazon-apigateway-integration": {
 					"type": "HTTP_PROXY",
 					"httpMethod": "GET",
-					"uri": "${uri}",
+					"uri": "${uri}/tokens/{token}/pii",
 					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}"
+					"connectionId": "${connection_id}",
+					"requestParameters" : {
+						"integration.request.path.token" : "method.request.path.token"
+					}
 				},
 				"tags": ["tokens"],
 				"summary": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.summary}",
@@ -188,22 +193,14 @@
 					"404": {
 						"description": "Not Found"
 					}
-				}
+				},
+				"security" : [ {
+					"api_key" : [ ]
+				}]
 			}
 		}
 	},
 	"components": {
-		"x-amazon-apigateway-integrations": 
-		{
-			"integration": 
-				{
-					"type": "HTTP_PROXY",
-					"httpMethod": "GET",
-					"uri": "${uri}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}"
-				}
-		},
 		"schemas": {
 			"CreateTokenDto": {
 				"title": "CreateTokenDto",
@@ -255,6 +252,13 @@
 					}
 				}
 			}
-		}
+		},
+		"securitySchemes" : {
+			"api_key" : {
+			  "type" : "apiKey",
+			  "name" : "x-api-key",
+			  "in" : "header"
+			}
+		  }
 	}
 }
