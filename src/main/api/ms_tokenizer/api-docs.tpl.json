@@ -11,6 +11,14 @@
 		},
 		"version": "1.0"
 	},
+	"servers" : [ {
+		"url" : "${uri}/{basePath}",
+		"variables" : {
+		  "basePath" : {
+			"default" : "/v1"
+		  }
+		}
+	  } ],
 	"tags": [{
 		"name": "tokens",
 		"description": "Tokenizer Controller"
@@ -71,7 +79,10 @@
 					"404": {
 						"description": "Not Found"
 					}
-				}
+				},
+				"security" : [ {
+					"api_key" : [ ]
+				} ]
 			}
 		},
 		"/tokens/search": {
@@ -129,7 +140,10 @@
 					"404": {
 						"description": "Not Found"
 					}
-				}
+				},
+				"security" : [ {
+					"api_key" : [ ]
+				}]
 			}
 		},
 		"/tokens/{token}/pii": {
@@ -179,7 +193,10 @@
 					"404": {
 						"description": "Not Found"
 					}
-				}
+				},
+				"security" : [ {
+					"api_key" : [ ]
+				}]
 			}
 		}
 	},
@@ -235,6 +252,13 @@
 					}
 				}
 			}
-		}
+		},
+		"securitySchemes" : {
+			"api_key" : {
+			  "type" : "apiKey",
+			  "name" : "x-api-key",
+			  "in" : "header"
+			}
+		  }
 	}
 }
