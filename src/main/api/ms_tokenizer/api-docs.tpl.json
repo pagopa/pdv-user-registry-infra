@@ -16,18 +16,6 @@
 		"description": "Tokenizer Controller"
 	}],
 	"paths": {
-		"/$default": {
-			"x-amazon-apigateway-any-method": {
-				"isDefaultRoute": true,
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "GET",
-					"uri": "${uri}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}"
-				}
-			}
-		},
 		"/tokens": {
 			"put": {
 				"x-amazon-apigateway-integration": {
