@@ -71,7 +71,10 @@ resource "aws_iam_policy" "dynamodb_rw" {
         "dynamodb:GetRecords"
       ],
       "Effect": "Allow",
-      "Resource": "${module.dynamodb_table.dynamodb_table_arn}"
+      "Resource": [
+        "${module.dynamodb_table.dynamodb_table_arn}",
+        "${module.dynamodb_table.dynamodb_table_arn}/index/${local.dynamo_gsi_tokenizer_name}"
+      ]
     }
   ]
 }
