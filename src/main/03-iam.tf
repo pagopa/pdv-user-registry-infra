@@ -65,7 +65,6 @@ resource "aws_iam_policy" "dynamodb_rw" {
       "Action": [
         "dynamodb:PutItem",
         "dynamodb:GetItem",
-        "dynamodb:Scan",
         "dynamodb:Query",
         "dynamodb:UpdateItem",
         "dynamodb:GetRecords"
