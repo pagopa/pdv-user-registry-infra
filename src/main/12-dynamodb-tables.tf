@@ -6,9 +6,10 @@ locals {
 module "dynamodb_table" {
   source = "terraform-aws-modules/dynamodb-table/aws"
 
-  name      = local.dynamodb_table_tokenizer
-  hash_key  = "PK"
-  range_key = "SK"
+  name           = local.dynamodb_table_tokenizer
+  hash_key       = "PK"
+  range_key      = "SK"
+  stream_enabled = var.env_short == "p" ? true : false
 
   attributes = [
     {
