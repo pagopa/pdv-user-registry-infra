@@ -18,6 +18,16 @@ provider "aws" {
   }
 }
 
+provider "aws" {
+  alias  = "eu-central-1"
+  region = "eu-central-1"
+
+  default_tags {
+    tags = var.tags
+  }
+
+}
+
 locals {
   project = format("%s-%s", var.app_name, var.env_short)
 }
