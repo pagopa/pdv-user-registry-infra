@@ -9,7 +9,7 @@ module "dynamodb_table" {
   name           = local.dynamodb_table_tokenizer
   hash_key       = "PK"
   range_key      = "SK"
-  stream_enabled = var.env_short == "p" ? true : false
+  stream_enabled = var.env_short == "p" ? false : true
 
   attributes = [
     {

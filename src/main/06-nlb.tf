@@ -88,7 +88,7 @@ module "nlb" {
         timeout             = 6
         unhealthy_threshold = 3
         matcher             = "200-399"
-        path                = "/"
+        path                = "/actuator/health"
       }
 
 
