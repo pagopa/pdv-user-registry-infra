@@ -68,6 +68,13 @@ variable "ecr_keep_nr_images" {
   default     = 10
 }
 
+## Dns zones
+
+variable "public_dns_zones" {
+  type        = map(any)
+  description = "Route53 Hosted Zone"
+}
+
 
 ## ECS
 
@@ -76,6 +83,7 @@ variable "ecs_logs_retention_days" {
   description = "Specifies the number of days you want to retain log events in the specified log group."
   default     = 90
 }
+
 
 variable "ecs_enable_execute_command" {
   type        = bool
@@ -95,8 +103,6 @@ variable "replica_count" {
   description = "Number of task replica"
   default     = 1
 }
-
-###
 
 variable "tags" {
   type = map(any)

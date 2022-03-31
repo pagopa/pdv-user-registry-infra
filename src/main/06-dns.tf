@@ -4,5 +4,4 @@ module "dn_zone" {
 
   zones = var.public_dns_zones
 
-  tags = var.tags
 }
