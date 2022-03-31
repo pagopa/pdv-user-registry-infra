@@ -13,13 +13,6 @@ resource "aws_cloudwatch_log_group" "ecs_log_group" {
   }
 }
 
-## Task definitions
-/*
-data "template_file" "env_vars" {
-  template = file("env_vars.json")
-}
-*/
-
 resource "aws_ecs_task_definition" "aws_ecs_task" {
   family = format("%s-task", local.project)
 
