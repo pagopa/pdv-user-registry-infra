@@ -4,6 +4,13 @@ env_short = "u"
 # Ecs
 ecs_enable_execute_command = true
 
+public_dns_zones = {
+  "uat.pdv.pagopa.it" = {
+    comment = "Personal data vault (Uat)"
+
+  }
+}
+
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Uat"
