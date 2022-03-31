@@ -1,13 +1,19 @@
 env_short = "u"
 
+
 public_dns_zones = {
-  "uat.ur.pagopa.it" = {
-    comment = "User registry (Uat)"
+  "uat.pdv.pagopa.it" = {
+    comment = "Personal data vault (Uat)"
     tags = {
       Environment = "Uat"
     }
   }
 }
+
+
+# Ecs
+ecs_enable_execute_command = true
+
 
 tags = {
   CreatedBy   = "Terraform"
