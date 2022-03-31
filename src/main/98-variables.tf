@@ -60,6 +60,12 @@ variable "vpc_internal_subnets_cidr" {
   default     = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
 }
 
+## Public Dns zones
+variable "public_dns_zones" {
+  type        = map(any)
+  description = "Route53 Hosted Zone"
+}
+
 ## ECR
 
 variable "ecr_keep_nr_images" {
