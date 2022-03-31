@@ -4,9 +4,7 @@ env_short = "u"
 public_dns_zones = {
   "uat.pdv.pagopa.it" = {
     comment = "Personal data vault (Uat)"
-    tags = {
-      Environment = "Uat"
-    }
+ 
   }
 }
 

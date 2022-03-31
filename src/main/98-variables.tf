@@ -47,7 +47,7 @@ variable "vpc_public_subnets_cidr" {
   default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
-## Dns zones
+## Public Dns zones
 
 variable "public_dns_zones" {
   type        = map(any)
@@ -67,14 +67,6 @@ variable "ecr_keep_nr_images" {
   description = "Number of images to keep."
   default     = 10
 }
-
-## Dns zones
-
-variable "public_dns_zones" {
-  type        = map(any)
-  description = "Route53 Hosted Zone"
-}
-
 
 ## ECS
 
