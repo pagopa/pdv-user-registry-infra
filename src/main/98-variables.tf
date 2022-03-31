@@ -96,8 +96,6 @@ variable "replica_count" {
   default     = 1
 }
 
-###
-
 variable "tags" {
   type = map(any)
   default = {
