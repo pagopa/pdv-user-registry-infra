@@ -54,6 +54,12 @@ variable "public_dns_zones" {
   description = "Route53 Hosted Zone"
 }
 
+variable "vpc_internal_subnets_cidr" {
+  type        = list(string)
+  description = "Internal subnets list of cidr. Mainly for private endpoints"
+  default     = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
+}
+
 ## ECS
 
 variable "ecs_logs_retention_days" {
