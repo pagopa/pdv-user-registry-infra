@@ -47,13 +47,6 @@ variable "vpc_public_subnets_cidr" {
   default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
-## Public Dns zones
-
-variable "public_dns_zones" {
-  type        = map(any)
-  description = "Route53 Hosted Zone"
-}
-
 variable "vpc_internal_subnets_cidr" {
   type        = list(string)
   description = "Internal subnets list of cidr. Mainly for private endpoints"
