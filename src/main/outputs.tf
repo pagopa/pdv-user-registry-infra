@@ -9,21 +9,21 @@ output "ecs_definition_task_revision" {
 
 ## dynamodb
 
-output "dynamo_db_table_arn" {
-  value = module.dynamodb_table.dynamodb_table_arn
+output "dynamodb_table_tokenizer_arn" {
+  value = module.dynamodb_table_tokenizer.dynamodb_table_arn
 }
-output "dynamo_db_table_id" {
-  value = module.dynamodb_table.dynamodb_table_id
+output "dynamodb_table_tokenizer_id" {
+  value = module.dynamodb_table_tokenizer.dynamodb_table_id
 }
 
-
-# ALB
-
-/*
-output "alb_hostname" {
-  value = module.alb.lb_dns_name
+# Dns
+output "public_dns_zone_name" {
+  value = module.dn_zone.route53_zone_name
 }
-*/
+
+output "public_dns_servers" {
+  value = module.dn_zone.route53_zone_name_servers
+}
 
 # NLB
 output "nlb_hostname" {

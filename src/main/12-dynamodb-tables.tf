@@ -3,13 +3,13 @@ locals {
   # global secondary index
   dynamo_gsi_tokenizer_name = "gsi_token"
 }
-module "dynamodb_table" {
+module "dynamodb_table_tokenizer" {
   source = "terraform-aws-modules/dynamodb-table/aws"
 
   name           = local.dynamodb_table_tokenizer
   hash_key       = "PK"
   range_key      = "SK"
-  stream_enabled = var.env_short == "p" ? false : true
+  stream_enabled = var.env_short == "p" ? true : false
 
   attributes = [
     {
