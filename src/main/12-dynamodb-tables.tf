@@ -3,7 +3,7 @@ locals {
   # global secondary index
   dynamo_gsi_tokenizer_name = "gsi_token"
 }
-module "dynamodb_table" {
+module "dynamodb_table_tokenizer" {
   source = "terraform-aws-modules/dynamodb-table/aws"
 
   name           = local.dynamodb_table_tokenizer
