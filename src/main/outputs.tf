@@ -12,9 +12,11 @@ output "ecs_definition_task_revision" {
 output "dynamo_db_table_arn" {
   value = module.dynamodb_table.dynamodb_table_arn
 }
+
 output "dynamo_db_table_id" {
   value = module.dynamodb_table.dynamodb_table_id
 }
+
 
 # NLB
 output "nlb_hostname" {
