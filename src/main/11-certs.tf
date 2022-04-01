@@ -1,5 +1,10 @@
+locals {
+  apigw_custom_domain = join(".", ["api", keys(var.public_dns_zones)[0]])
+}
+
 resource "aws_acm_certificate" "main" {
-  domain_name       = join(".", ["api", keys(var.public_dns_zones)[0]])
+  count             = var.apigw_custom_domain_create ? 1 : 0
+  domain_name       = local.apigw_custom_domain
   validation_method = "DNS"
 
   lifecycle {
@@ -8,9 +13,8 @@ resource "aws_acm_certificate" "main" {
 }
 
 resource "aws_route53_record" "cert_validation" {
-
   for_each = {
-    for dvo in aws_acm_certificate.main.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.main[0].domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type

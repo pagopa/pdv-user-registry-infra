@@ -59,6 +59,12 @@ variable "public_dns_zones" {
   description = "Route53 Hosted Zone"
 }
 
+variable "apigw_custom_domain_create" {
+  type        = bool
+  description = "Create apigw Custom Domain with its tls certificate"
+  default     = false
+}
+
 
 ## ECR
 

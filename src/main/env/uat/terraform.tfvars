@@ -11,6 +11,8 @@ public_dns_zones = {
   }
 }
 
+apigw_custom_domain_create = true
+
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Uat"

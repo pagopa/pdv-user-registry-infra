@@ -39,9 +39,10 @@ resource "aws_cloudwatch_log_group" "tokenizer" {
   retention_in_days = 7
 }
 resource "aws_api_gateway_stage" "tokenizer" {
-  deployment_id = aws_api_gateway_deployment.tokenizer.id
-  rest_api_id   = aws_api_gateway_rest_api.tokenizer.id
-  stage_name    = local.tokenizer_stage_name
+  deployment_id      = aws_api_gateway_deployment.tokenizer.id
+  rest_api_id        = aws_api_gateway_rest_api.tokenizer.id
+  stage_name         = local.tokenizer_stage_name
+  cache_cluster_size = 0.5 #why is this needed ?
 
 
   access_log_settings {
