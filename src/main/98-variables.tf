@@ -67,16 +67,13 @@ variable "apigw_custom_domain_create" {
 
 
 ## ECR
-
 variable "ecr_keep_nr_images" {
   type        = number
   description = "Number of images to keep."
   default     = 10
 }
 
-
 ## ECS
-
 variable "ecs_logs_retention_days" {
   type        = number
   description = "Specifies the number of days you want to retain log events in the specified log group."
@@ -100,6 +97,13 @@ variable "replica_count" {
   type        = number
   description = "Number of task replica"
   default     = 1
+}
+
+variable "dynamodb_region_replication_enable" {
+  type        = bool
+  description = "Enable dyamodb deplicaton in a secondary region."
+  default     = false
+
 }
 
 variable "tags" {
