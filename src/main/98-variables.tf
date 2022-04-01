@@ -59,10 +59,18 @@ variable "public_dns_zones" {
   description = "Route53 Hosted Zone"
 }
 
+## Api Gateway
 variable "apigw_custom_domain_create" {
   type        = bool
   description = "Create apigw Custom Domain with its tls certificate"
   default     = false
+}
+
+variable "apigw_access_logs_enable" {
+  type        = bool
+  description = "Enable api gateway access logs"
+  default     = false
+
 }
 
 

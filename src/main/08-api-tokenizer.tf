@@ -44,11 +44,13 @@ resource "aws_api_gateway_stage" "tokenizer" {
   stage_name         = local.tokenizer_stage_name
   cache_cluster_size = 0.5 #why is this needed ?
 
-
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.tokenizer.arn
-    #todo: find a better way to represent this log format.
-    format = "{ \"requestId\":\"$context.requestId\", \"extendedRequestId\":\"$context.extendedRequestId\", \"ip\": \"$context.identity.sourceIp\", \"caller\":\"$context.identity.caller\", \"user\":\"$context.identity.user\", \"requestTime\":\"$context.requestTime\", \"httpMethod\":\"$context.httpMethod\", \"resourcePath\":\"$context.resourcePath\", \"status\":\"$context.status\", \"protocol\":\"$context.protocol\", \"responseLength\":\"$context.responseLength\"}"
+  dynamic "access_log_settings" {
+    for_each = var.apigw_access_logs_enable ? ["dymmy"] : []
+    content {
+      destination_arn = aws_cloudwatch_log_group.tokenizer.arn
+      #todo: find a better way to represent this log format.
+      format = "{ \"requestId\":\"$context.requestId\", \"extendedRequestId\":\"$context.extendedRequestId\", \"ip\": \"$context.identity.sourceIp\", \"caller\":\"$context.identity.caller\", \"user\":\"$context.identity.user\", \"requestTime\":\"$context.requestTime\", \"httpMethod\":\"$context.httpMethod\", \"resourcePath\":\"$context.resourcePath\", \"status\":\"$context.status\", \"protocol\":\"$context.protocol\", \"responseLength\":\"$context.responseLength\"}"
+    }
   }
 }
 
