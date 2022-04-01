@@ -11,10 +11,12 @@ public_dns_zones = {
   }
 }
 
+apigw_custom_domain_create = true
+
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Uat"
-  Owner       = "Private Data Vault"
+  Owner       = "Personal Data Vault"
   Source      = "https://github.com/pagopa/private-data-vault-infra.git"
   CostCenter  = "TS310 - PAGAMENTI e SERVIZI"
 }
