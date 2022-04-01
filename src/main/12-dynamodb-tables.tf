@@ -38,7 +38,7 @@ module "dynamodb_table_tokenizer" {
   server_side_encryption_enabled     = true
   server_side_encryption_kms_key_arn = aws_kms_alias.dynamo_db.target_key_arn
 
-  replica_regions = var.env_short == "p" ? [{
+  replica_regions = var.dynamodb_region_replication_enable ? [{
     region_name = "eu-central-1"
     kms_key_arn = aws_kms_alias.dynamo_db_replica[0].target_key_arn
   }] : []
