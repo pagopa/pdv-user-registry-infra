@@ -17,7 +17,8 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | terraform-aws-modules/route53/aws//modules/zones | ~> 2.0 |
-| <a name="module_dynamodb_table_tokenizer"></a> [dynamodb\_table\_tokenizer](#module\_dynamodb\_table\_tokenizer) | terraform-aws-modules/dynamodb-table/aws |  |
+| <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | terraform-aws-modules/dynamodb-table/aws |  |
+| <a name="module_dynamodb_table_token"></a> [dynamodb\_table\_token](#module\_dynamodb\_table\_token) | terraform-aws-modules/dynamodb-table/aws |  |
 | <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws |  |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws |  |
 | <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints |  |
@@ -120,8 +121,8 @@
 |------|-------------|
 | <a name="output_deploy_access_key"></a> [deploy\_access\_key](#output\_deploy\_access\_key) | n/a |
 | <a name="output_deploy_access_key_secret"></a> [deploy\_access\_key\_secret](#output\_deploy\_access\_key\_secret) | n/a |
-| <a name="output_dynamodb_table_tokenizer_arn"></a> [dynamodb\_table\_tokenizer\_arn](#output\_dynamodb\_table\_tokenizer\_arn) | n/a |
-| <a name="output_dynamodb_table_tokenizer_id"></a> [dynamodb\_table\_tokenizer\_id](#output\_dynamodb\_table\_tokenizer\_id) | n/a |
+| <a name="output_dynamodb_table_token_arn"></a> [dynamodb\_table\_token\_arn](#output\_dynamodb\_table\_token\_arn) | n/a |
+| <a name="output_dynamodb_table_token_id"></a> [dynamodb\_table\_token\_id](#output\_dynamodb\_table\_token\_id) | n/a |
 | <a name="output_ecs_definition_task_arn"></a> [ecs\_definition\_task\_arn](#output\_ecs\_definition\_task\_arn) | # ecs |
 | <a name="output_ecs_definition_task_revision"></a> [ecs\_definition\_task\_revision](#output\_ecs\_definition\_task\_revision) | n/a |
 | <a name="output_nlb_hostname"></a> [nlb\_hostname](#output\_nlb\_hostname) | NLB |
