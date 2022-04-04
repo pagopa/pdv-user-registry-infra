@@ -66,12 +66,18 @@ module "nlb" {
       protocol           = "TCP"
       target_group_index = 0
     },
+    {
+      port               = 8000
+      protocol           = "TCP"
+      target_group_index = 1
+    },
   ]
 
 
   target_groups = [
     {
-      name             = format("%s-nlb-tg", local.project)
+      # service tokenizer
+      name             = format("%s-tokenizer", local.project)
       backend_protocol = "TCP"
       backend_port     = 80
       #port        = 80
@@ -90,8 +96,28 @@ module "nlb" {
         matcher             = "200-399"
         path                = "/actuator/health"
       }
+    },
+    # service person
+    {
+      name             = format("%s-person", local.project)
+      backend_protocol = "TCP"
+      backend_port     = 80
+      #port        = 80
+      target_type = "ip"
+      #preserve_client_ip = true
+      deregistration_delay = 30
+      vpc_id               = module.vpc.vpc_id
 
+      health_check = {
+        enabled = true
 
+        healthy_threshold   = 3
+        interval            = 30
+        timeout             = 6
+        unhealthy_threshold = 3
+        matcher             = "200-399"
+        path                = "/actuator/health"
+      }
     },
   ]
 

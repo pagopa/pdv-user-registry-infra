@@ -101,4 +101,3 @@ resource "aws_ecs_service" "person" {
 
   tags = { Name : local.service_person_name }
 }
-
