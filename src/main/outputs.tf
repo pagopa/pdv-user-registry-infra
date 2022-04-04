@@ -9,11 +9,11 @@ output "ecs_definition_task_revision" {
 
 ## dynamodb
 
-output "dynamodb_table_tokenizer_arn" {
-  value = module.dynamodb_table_tokenizer.dynamodb_table_arn
+output "dynamodb_table_token_arn" {
+  value = module.dynamodb_table_token.dynamodb_table_arn
 }
-output "dynamodb_table_tokenizer_id" {
-  value = module.dynamodb_table_tokenizer.dynamodb_table_id
+output "dynamodb_table_token_id" {
+  value = module.dynamodb_table_token.dynamodb_table_id
 }
 
 # Dns

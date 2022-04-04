@@ -71,8 +71,8 @@ resource "aws_iam_policy" "dynamodb_rw" {
       ],
       "Effect": "Allow",
       "Resource": [
-        "${module.dynamodb_table_tokenizer.dynamodb_table_arn}",
-        "${module.dynamodb_table_tokenizer.dynamodb_table_arn}/index/${local.dynamo_gsi_tokenizer_name}"
+        "${module.dynamodb_table_token.dynamodb_table_arn}",
+        "${module.dynamodb_table_token.dynamodb_table_arn}/index/${local.dynamo_gsi_token_name}"
       ]
     }
   ]
