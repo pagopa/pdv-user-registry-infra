@@ -126,10 +126,16 @@
 |------|-------------|
 | <a name="output_deploy_access_key"></a> [deploy\_access\_key](#output\_deploy\_access\_key) | n/a |
 | <a name="output_deploy_access_key_secret"></a> [deploy\_access\_key\_secret](#output\_deploy\_access\_key\_secret) | n/a |
+| <a name="output_dynamodb_table_person_arn"></a> [dynamodb\_table\_person\_arn](#output\_dynamodb\_table\_person\_arn) | n/a |
+| <a name="output_dynamodb_table_person_id"></a> [dynamodb\_table\_person\_id](#output\_dynamodb\_table\_person\_id) | n/a |
 | <a name="output_dynamodb_table_token_arn"></a> [dynamodb\_table\_token\_arn](#output\_dynamodb\_table\_token\_arn) | n/a |
 | <a name="output_dynamodb_table_token_id"></a> [dynamodb\_table\_token\_id](#output\_dynamodb\_table\_token\_id) | n/a |
 | <a name="output_ecs_definition_task_arn"></a> [ecs\_definition\_task\_arn](#output\_ecs\_definition\_task\_arn) | # ecs |
 | <a name="output_ecs_definition_task_revision"></a> [ecs\_definition\_task\_revision](#output\_ecs\_definition\_task\_revision) | n/a |
+| <a name="output_ecs_task_definition_person_arn"></a> [ecs\_task\_definition\_person\_arn](#output\_ecs\_task\_definition\_person\_arn) | n/a |
+| <a name="output_ecs_task_definition_person_revision"></a> [ecs\_task\_definition\_person\_revision](#output\_ecs\_task\_definition\_person\_revision) | n/a |
+| <a name="output_ecs_task_definition_tokenizer_arn"></a> [ecs\_task\_definition\_tokenizer\_arn](#output\_ecs\_task\_definition\_tokenizer\_arn) | n/a |
+| <a name="output_ecs_task_definition_tokenizer_revision"></a> [ecs\_task\_definition\_tokenizer\_revision](#output\_ecs\_task\_definition\_tokenizer\_revision) | n/a |
 | <a name="output_nlb_hostname"></a> [nlb\_hostname](#output\_nlb\_hostname) | NLB |
 | <a name="output_public_dns_servers"></a> [public\_dns\_servers](#output\_public\_dns\_servers) | n/a |
 | <a name="output_public_dns_zone_name"></a> [public\_dns\_zone\_name](#output\_public\_dns\_zone\_name) | Dns |
