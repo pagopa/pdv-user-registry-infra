@@ -1,10 +1,10 @@
 ## ecs
 output "ecs_definition_task_arn" {
-  value = data.aws_ecs_task_definition.main.arn
+  value = data.aws_ecs_task_definition.tokenizer.arn
 }
 
 output "ecs_definition_task_revision" {
-  value = data.aws_ecs_task_definition.main.revision
+  value = data.aws_ecs_task_definition.tokenizer.revision
 }
 
 ## dynamodb
