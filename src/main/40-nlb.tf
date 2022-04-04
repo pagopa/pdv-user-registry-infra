@@ -8,10 +8,10 @@ resource "aws_security_group" "nsg_task" {
 
 # Rules for the TASK (Targets the LB's IPs)
 resource "aws_security_group_rule" "nsg_task_ingress_rule" {
-  description = "Only allow connections from the NLB on port ${var.container_port}"
+  description = "Only allow connections from the NLB"
   type        = "ingress"
-  from_port   = var.container_port
-  to_port     = var.container_port
+  from_port   = 8000
+  to_port     = 9000
   protocol    = "tcp"
   cidr_blocks = formatlist(
     "%s/32",
@@ -67,7 +67,7 @@ module "nlb" {
       target_group_index = 0
     },
     {
-      port               = 8000
+      port               = var.container_port_person
       protocol           = "TCP"
       target_group_index = 1
     },
@@ -101,7 +101,7 @@ module "nlb" {
     {
       name             = format("%s-person", local.project)
       backend_protocol = "TCP"
-      backend_port     = 80
+      backend_port     = 8000
       #port        = 80
       target_type = "ip"
       #preserve_client_ip = true

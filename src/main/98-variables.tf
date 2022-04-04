@@ -94,11 +94,16 @@ variable "ecs_enable_execute_command" {
   default     = false
 }
 
-variable "container_port" {
+variable "container_port_tokenizer" {
   type        = number
-  description = "Container port"
+  description = "Container port tokenizer"
   default     = 8080
+}
 
+variable "container_port_person" {
+  type        = number
+  description = "Container port person"
+  default     = 8000
 }
 
 variable "replica_count" {

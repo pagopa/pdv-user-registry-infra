@@ -33,8 +33,8 @@ resource "aws_ecs_task_definition" "tokenizer" {
     },
     "portMappings": [
       {
-        "containerPort": ${var.container_port},
-        "hostPort": ${var.container_port}
+        "containerPort": ${var.container_port_tokenizer},
+        "hostPort": ${var.container_port_tokenizer}
       }
     ],
     "environment": [
@@ -94,7 +94,7 @@ resource "aws_ecs_service" "tokenizer" {
   load_balancer {
     target_group_arn = module.nlb.target_group_arns[0]
     container_name   = format("%s-container", local.project)
-    container_port   = var.container_port
+    container_port   = var.container_port_tokenizer
   }
 
   depends_on = [module.nlb]

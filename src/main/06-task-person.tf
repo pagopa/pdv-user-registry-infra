@@ -33,14 +33,18 @@ resource "aws_ecs_task_definition" "person" {
     },
     "portMappings": [
       {
-        "containerPort": ${var.container_port},
-        "hostPort": ${var.container_port}
+        "containerPort": ${var.container_port_person},
+        "hostPort": ${var.container_port_person}
       }
     ],
     "environment": [
       {
         "name": "AWS_REGION",
         "value": "${var.aws_region}"
+      },
+      {
+        "name": "MS_PERSON_SERVER_PORT",
+        "value": "${var.container_port_person}"
       }
     ],
     "cpu": 256,
@@ -92,9 +96,9 @@ resource "aws_ecs_service" "person" {
   }
 
   load_balancer {
-    target_group_arn = module.nlb.target_group_arns[0]
+    target_group_arn = module.nlb.target_group_arns[1]
     container_name   = format("%s-container", local.project)
-    container_port   = var.container_port
+    container_port   = 8000
   }
 
   depends_on = [module.nlb]
