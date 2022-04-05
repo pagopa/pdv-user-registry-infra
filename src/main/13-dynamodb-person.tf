@@ -22,11 +22,12 @@ module "dynamodb_table_person" {
       name = "SK"
       type = "S"
     },
-    /* * all attributes must be indexed. Unused attributes: ["familyName" "email" "givenName" "birthDate" "workContacts"] 
+
     {
-      name = "givenName"
+      name = "namespacedId"
       type = "S"
     },
+    /*
     {
       name = "familyName"
       type = "S"
@@ -46,16 +47,14 @@ module "dynamodb_table_person" {
     */
   ]
 
-  /*
-
   global_secondary_indexes = [
     {
-      name            = local.dynamo_gsi_person_name
-      hash_key        = "token"
+      name            = local.dynamodb_gsi_person_name
+      hash_key        = "namespacedId"
       projection_type = "ALL"
     }
   ]
-  */
+
 
   server_side_encryption_enabled     = true
   server_side_encryption_kms_key_arn = aws_kms_alias.dynamo_db.target_key_arn
