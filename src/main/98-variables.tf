@@ -73,6 +73,12 @@ variable "apigw_access_logs_enable" {
 
 }
 
+variable "apigw_api_person_enable" {
+  type        = bool
+  description = "Create api person. This is supposed to be internal and should not be shown."
+  default     = false
+}
+
 
 ## ECR
 variable "ecr_keep_nr_images" {
@@ -94,11 +100,16 @@ variable "ecs_enable_execute_command" {
   default     = false
 }
 
-variable "container_port" {
+variable "container_port_tokenizer" {
   type        = number
-  description = "Container port"
+  description = "Container port tokenizer"
   default     = 8080
+}
 
+variable "container_port_person" {
+  type        = number
+  description = "Container port person"
+  default     = 8000
 }
 
 variable "replica_count" {

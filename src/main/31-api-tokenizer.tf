@@ -106,7 +106,7 @@ resource "aws_api_gateway_usage_plan_key" "tokenizer" {
 }
 
 ## WAF association
-resource "aws_wafv2_web_acl_association" "main" {
+resource "aws_wafv2_web_acl_association" "tokenizer" {
   web_acl_arn  = aws_wafv2_web_acl.main.arn
   resource_arn = "arn:aws:apigateway:${var.aws_region}::/restapis/${aws_api_gateway_rest_api.tokenizer.id}/stages/${aws_api_gateway_stage.tokenizer.stage_name}"
 }

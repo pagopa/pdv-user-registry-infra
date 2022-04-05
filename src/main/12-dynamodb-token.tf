@@ -1,12 +1,14 @@
 locals {
-  dynamodb_table_tokenizer = "Token"
-  # global secondary index
-  dynamo_gsi_tokenizer_name = "gsi_token"
+  # Token
+  dynamodb_table_token  = "Token"
+  dynamo_gsi_token_name = "gsi_token"
 }
-module "dynamodb_table_tokenizer" {
+
+# Table Token
+module "dynamodb_table_token" {
   source = "terraform-aws-modules/dynamodb-table/aws"
 
-  name           = local.dynamodb_table_tokenizer
+  name           = local.dynamodb_table_token
   hash_key       = "PK"
   range_key      = "SK"
   stream_enabled = var.env_short == "p" ? true : false
@@ -28,7 +30,7 @@ module "dynamodb_table_tokenizer" {
 
   global_secondary_indexes = [
     {
-      name            = local.dynamo_gsi_tokenizer_name
+      name            = local.dynamo_gsi_token_name
       hash_key        = "token"
       projection_type = "ALL"
     }
@@ -44,5 +46,5 @@ module "dynamodb_table_tokenizer" {
   }] : []
 
 
-  tags = { Name = local.dynamodb_table_tokenizer }
+  tags = { Name = local.dynamodb_table_token }
 }

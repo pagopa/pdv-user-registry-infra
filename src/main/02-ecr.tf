@@ -1,15 +1,25 @@
-resource "aws_ecr_repository" "ecr" {
-  name = format("%s-ecr", local.project, )
+locals {
+  repository_tokenizer = format("%s-tokenizer", local.project, )
+  repositories = [
+    format("%s-ecr", local.project, ), # todo rename into tokenizer
+    format("%s-person", local.project, ),
+  ]
+}
+
+resource "aws_ecr_repository" "main" {
+  count = length(local.repositories)
+  name  = local.repositories[count.index]
 
   image_scanning_configuration {
     scan_on_push = false
   }
-  tags = { "Name" : format("%s-ecr", local.project) }
+  tags = { "Name" : local.repositories[count.index] }
 
 }
 
-resource "aws_ecr_lifecycle_policy" "ecr" {
-  repository = aws_ecr_repository.ecr.name
+resource "aws_ecr_lifecycle_policy" "main" {
+  count      = length(local.repositories)
+  repository = aws_ecr_repository.main[count.index].name
 
   policy = jsonencode({
     rules = [{
