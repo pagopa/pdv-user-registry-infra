@@ -8,10 +8,10 @@ resource "aws_security_group" "nsg_task" {
 
 # Rules for the TASK (Targets the LB's IPs)
 resource "aws_security_group_rule" "nsg_task_ingress_rule" {
-  description = "Only allow connections from the NLB on port ${var.container_port}"
+  description = "Only allow connections from the NLB"
   type        = "ingress"
-  from_port   = var.container_port
-  to_port     = var.container_port
+  from_port   = 8000
+  to_port     = 9000
   protocol    = "tcp"
   cidr_blocks = formatlist(
     "%s/32",
@@ -66,12 +66,18 @@ module "nlb" {
       protocol           = "TCP"
       target_group_index = 0
     },
+    {
+      port               = var.container_port_person
+      protocol           = "TCP"
+      target_group_index = 1
+    },
   ]
 
 
   target_groups = [
     {
-      name             = format("%s-nlb-tg", local.project)
+      # service tokenizer
+      name             = format("%s-tokenizer", local.project)
       backend_protocol = "TCP"
       backend_port     = 80
       #port        = 80
@@ -90,8 +96,28 @@ module "nlb" {
         matcher             = "200-399"
         path                = "/actuator/health"
       }
+    },
+    # service person
+    {
+      name             = format("%s-person", local.project)
+      backend_protocol = "TCP"
+      backend_port     = 8000
+      #port        = 80
+      target_type = "ip"
+      #preserve_client_ip = true
+      deregistration_delay = 30
+      vpc_id               = module.vpc.vpc_id
 
+      health_check = {
+        enabled = true
 
+        healthy_threshold   = 3
+        interval            = 30
+        timeout             = 6
+        unhealthy_threshold = 3
+        matcher             = "200-399"
+        path                = "/actuator/health"
+      }
     },
   ]
 

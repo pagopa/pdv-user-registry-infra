@@ -1,7 +1,7 @@
 locals {
   # Person
-  dynamodb_table_person  = "Person"
-  dynamo_gsi_person_name = "gsi_namespaced_id"
+  dynamodb_table_person    = "Person"
+  dynamodb_gsi_person_name = "gsi_namespaced_id"
 }
 
 # Table Person
