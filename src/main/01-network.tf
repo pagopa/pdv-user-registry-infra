@@ -14,9 +14,6 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = {
-  Name = format("%s-vpc", local.project) }
-
 }
 
 data "aws_iam_policy_document" "generic_endpoint_policy" {
