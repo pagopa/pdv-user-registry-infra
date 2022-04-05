@@ -12,6 +12,7 @@ public_dns_zones = {
 }
 
 apigw_custom_domain_create = true
+apigw_api_person_enable    = true
 
 tags = {
   CreatedBy   = "Terraform"

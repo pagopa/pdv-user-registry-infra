@@ -73,6 +73,12 @@ variable "apigw_access_logs_enable" {
 
 }
 
+variable "apigw_api_person_enable" {
+  type        = bool
+  description = "Create api person. This is supposed to be internal and should not be shown."
+  default     = false
+}
+
 
 ## ECR
 variable "ecr_keep_nr_images" {

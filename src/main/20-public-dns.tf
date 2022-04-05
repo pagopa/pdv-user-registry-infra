@@ -23,6 +23,13 @@ resource "aws_api_gateway_base_path_mapping" "tokenizer" {
   domain_name = aws_api_gateway_domain_name.main[0].domain_name
 }
 
+resource "aws_api_gateway_base_path_mapping" "person" {
+  count       = var.apigw_api_person_enable && var.apigw_custom_domain_create ? 1 : 0
+  api_id      = aws_api_gateway_rest_api.person[0].id
+  stage_name  = local.person_stage_name
+  domain_name = aws_api_gateway_domain_name.main[0].domain_name
+}
+
 resource "aws_route53_record" "main" {
   zone_id = module.dn_zone.route53_zone_zone_id[keys(var.public_dns_zones)[0]]
   name    = aws_api_gateway_domain_name.main[0].domain_name
