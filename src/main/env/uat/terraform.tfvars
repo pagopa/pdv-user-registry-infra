@@ -1,4 +1,5 @@
-env_short = "u"
+env_short   = "u"
+environment = "uat"
 
 
 # Ecs
