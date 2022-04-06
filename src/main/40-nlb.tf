@@ -7,11 +7,16 @@ resource "aws_security_group" "nsg_task" {
 }
 
 # Rules for the TASK (Targets the LB's IPs)
+locals {
+  # list of container port in use.
+  container_ports = [var.container_port_tokenizer, var.container_port_person]
+}
 resource "aws_security_group_rule" "nsg_task_ingress_rule" {
-  description = "Only allow connections from the NLB"
+  count       = length(local.container_ports)
+  description = "Only allow connections from the NLB ${count.index}"
   type        = "ingress"
-  from_port   = 8000
-  to_port     = 9000
+  from_port   = local.container_ports[count.index]
+  to_port     = local.container_ports[count.index]
   protocol    = "tcp"
   cidr_blocks = formatlist(
     "%s/32",
