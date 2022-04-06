@@ -78,8 +78,8 @@ resource "aws_api_gateway_method_settings" "person" {
 
 resource "aws_api_gateway_usage_plan" "person" {
   count       = var.apigw_api_person_enable ? 1 : 0
-  name        = format("%s-api-plan", local.project)
-  description = "Usage plan for main api"
+  name        = format("%s-api-person", local.project)
+  description = "Usage plan for main person apis"
 
   api_stages {
     api_id = aws_api_gateway_rest_api.person[0].id
