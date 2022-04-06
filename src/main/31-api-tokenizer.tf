@@ -72,8 +72,8 @@ resource "aws_api_gateway_method_settings" "tokenizer" {
 }
 
 resource "aws_api_gateway_usage_plan" "tokenizer" {
-  name        = format("%s-api-plan", local.project)
-  description = "Usage plan for main api"
+  name        = format("%s-api-tokenizer", local.project)
+  description = "Usage plan for tokenizer apis"
 
   api_stages {
     api_id = aws_api_gateway_rest_api.tokenizer.id
