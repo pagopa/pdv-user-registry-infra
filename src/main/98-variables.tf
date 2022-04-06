@@ -13,7 +13,7 @@ variable "app_name" {
 
 variable "environment" {
   type        = string
-  default     = "Dev"
+  default     = "dev"
   description = "Environment"
 }
 
