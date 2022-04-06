@@ -1,9 +1,9 @@
-data "aws_secretsmanager_secret" "io_operation" {
+data "aws_secretsmanager_secret" "email_operation" {
   name = "operation/alerts"
 }
 
-data "aws_secretsmanager_secret_version" "io_operation_lt" {
-  secret_id = data.aws_secretsmanager_secret.io_operation.id
+data "aws_secretsmanager_secret_version" "email_operation_lt" {
+  secret_id = data.aws_secretsmanager_secret.email_operation.id
 }
 
 resource "aws_sns_topic" "alarms" {
@@ -12,7 +12,7 @@ resource "aws_sns_topic" "alarms" {
 }
 
 resource "aws_sns_topic_subscription" "alarms_email" {
-  endpoint = jsondecode(data.aws_secretsmanager_secret_version.io_operation_lt.secret_string)["email"]
+  endpoint = jsondecode(data.aws_secretsmanager_secret_version.email_operation_lt.secret_string)["email"]
 
   endpoint_auto_confirms = true
   protocol               = "email"
