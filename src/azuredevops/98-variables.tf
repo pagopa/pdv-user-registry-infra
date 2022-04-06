@@ -7,14 +7,14 @@ variable "aws_region" {
 variable "project_name" {
   type        = string
   description = "Azure devops project name."
-  default     = "private-data-vault-iac"
+  default     = "personal-data-vault-iac"
 }
 
 variable "iac" {
   default = {
     repository = {
       organization    = "pagopa"
-      name            = "private-data-vault-infra"
+      name            = "personal-data-vault-infra"
       branch_name     = "refs/heads/main"
       pipelines_path  = "src/pipelines"
       yml_prefix_name = null
