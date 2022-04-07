@@ -1,3 +1,5 @@
+# https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
+
 module "metric_alarms" {
   count   = length(var.dynamodb_alarms)
   source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarm"
