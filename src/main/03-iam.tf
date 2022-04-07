@@ -64,6 +64,7 @@ resource "aws_iam_policy" "dynamodb_rw" {
     {
       "Action": [
         "dynamodb:PutItem",
+        "dynamodb:DeleteItem",
         "dynamodb:GetItem",
         "dynamodb:Query",
         "dynamodb:UpdateItem",
