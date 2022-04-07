@@ -8,10 +8,11 @@ locals {
 module "dynamodb_table_person" {
   source = "terraform-aws-modules/dynamodb-table/aws"
 
-  name           = local.dynamodb_table_person
-  hash_key       = "PK"
-  range_key      = "SK"
-  stream_enabled = var.dynamodb_region_replication_enable ? true : false
+  name                           = local.dynamodb_table_person
+  hash_key                       = "PK"
+  range_key                      = "SK"
+  stream_enabled                 = var.dynamodb_region_replication_enable ? true : false
+  point_in_time_recovery_enabled = var.dynamodb_point_in_time_recovery_enabled
 
   attributes = [
     {
