@@ -8,10 +8,11 @@ locals {
 module "dynamodb_table_token" {
   source = "terraform-aws-modules/dynamodb-table/aws"
 
-  name           = local.dynamodb_table_token
-  hash_key       = "PK"
-  range_key      = "SK"
-  stream_enabled = var.env_short == "p" ? true : false
+  name                           = local.dynamodb_table_token
+  hash_key                       = "PK"
+  range_key                      = "SK"
+  stream_enabled                 = var.env_short == "p" ? true : false
+  point_in_time_recovery_enabled = var.dynamodb_point_in_time_recovery_enabled
 
   attributes = [
     {

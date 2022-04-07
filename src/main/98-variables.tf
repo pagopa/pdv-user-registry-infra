@@ -118,13 +118,18 @@ variable "replica_count" {
   default     = 1
 }
 
+# Dynamodb 
 variable "dynamodb_region_replication_enable" {
   type        = bool
   description = "Enable dyamodb deplicaton in a secondary region."
   default     = false
-
 }
 
+variable "dynamodb_point_in_time_recovery_enabled" {
+  type        = bool
+  description = "Enable dynamodb point in time recovery"
+  default     = false
+}
 variable "tags" {
   type = map(any)
   default = {

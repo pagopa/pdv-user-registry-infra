@@ -16,6 +16,9 @@ apigw_custom_domain_create = true
 apigw_api_person_enable    = true
 apigw_access_logs_enable   = false
 
+# dynamodb
+dynamodb_point_in_time_recovery_enabled = false
+
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Uat"
