@@ -130,6 +130,27 @@ variable "dynamodb_point_in_time_recovery_enabled" {
   description = "Enable dynamodb point in time recovery"
   default     = false
 }
+
+
+variable "dynamodb_alarms" {
+  type = list(
+    object({
+      actions_enabled     = bool
+      alarm_name          = string
+      alarm_description   = string
+      comparison_operator = string
+      evaluation_periods  = number
+      threshold           = number
+      period              = number
+      unit                = string
+      metric_name         = string
+      statistic           = string
+  }))
+
+
+}
+
+
 variable "tags" {
   type = map(any)
   default = {

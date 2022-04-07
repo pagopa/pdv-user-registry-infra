@@ -19,6 +19,34 @@ apigw_access_logs_enable   = false
 # dynamodb
 dynamodb_point_in_time_recovery_enabled = false
 
+dynamodb_alarms = [{
+  actions_enabled     = true
+  alarm_name          = "dynamodb-account-provisioned-read-capacity"
+  alarm_description   = "Account provisioned read capacity greater than 80%"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  threshold           = 80
+  period              = 60
+  unit                = "Percent"
+
+  namespace   = "AWS/DynamoDB"
+  metric_name = "AccountProvisionedReadCapacityUtilization"
+  statistic   = "Maximum"
+  }, {
+  actions_enabled     = true
+  alarm_name          = "dynamodb-account-provisioned-write-capacity"
+  alarm_description   = "Account provisioned read capacity greater than 80%"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  threshold           = 80
+  period              = 60
+  unit                = "Percent"
+
+  namespace   = "AWS/DynamoDB"
+  metric_name = "AccountProvisionedWriteCapacityUtilization"
+  statistic   = "Maximum"
+}, ]
+
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Uat"
