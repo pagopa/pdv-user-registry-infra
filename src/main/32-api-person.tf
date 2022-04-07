@@ -113,6 +113,14 @@ resource "aws_api_gateway_usage_plan_key" "person" {
   usage_plan_id = aws_api_gateway_usage_plan.person[0].id
 }
 
+resource "aws_api_gateway_base_path_mapping" "person" {
+  count       = var.apigw_api_person_enable && var.apigw_custom_domain_create ? 1 : 0
+  api_id      = aws_api_gateway_rest_api.person[0].id
+  stage_name  = local.person_stage_name
+  domain_name = aws_api_gateway_domain_name.main[0].domain_name
+  base_path   = "person"
+}
+
 ## WAF association
 resource "aws_wafv2_web_acl_association" "person" {
   count        = var.apigw_api_person_enable ? 1 : 0
