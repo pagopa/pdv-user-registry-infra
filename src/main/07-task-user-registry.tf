@@ -1,6 +1,6 @@
 locals {
-  task_user_registry_name    = format("%s-task-user_registry", local.project)
-  service_user_registry_name = format("%s-service-user_registry", local.project)
+  task_user_registry_name    = format("%s-task-user-registry", local.project)
+  service_user_registry_name = format("%s-service-user-registry", local.project)
 }
 
 resource "aws_cloudwatch_log_group" "ecs_user_registry" {
