@@ -112,6 +112,13 @@ variable "container_port_person" {
   default     = 8000
 }
 
+variable "container_port_user_registry" {
+  type        = number
+  description = "Container port service user registry."
+  default     = 8090
+
+}
+
 variable "replica_count" {
   type        = number
   description = "Number of task replica"

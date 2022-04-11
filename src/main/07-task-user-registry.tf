@@ -1,40 +1,40 @@
 locals {
-  task_person_name    = format("%s-task-person", local.project)
-  service_person_name = format("%s-service-person", local.project)
+  task_user_registry_name    = format("%s-task-user-registry", local.project)
+  service_user_registry_name = format("%s-service-user-registry", local.project)
 }
 
-resource "aws_cloudwatch_log_group" "ecs_person" {
-  name = format("ecs/%s", local.task_person_name)
+resource "aws_cloudwatch_log_group" "ecs_user_registry" {
+  name = format("ecs/%s", local.task_user_registry_name)
 
   retention_in_days = var.ecs_logs_retention_days
 
   tags = {
-    Name = local.task_person_name
+    Name = local.task_user_registry_name
   }
 }
 
-resource "aws_ecs_task_definition" "person" {
-  family = local.task_person_name
+resource "aws_ecs_task_definition" "user_registry" {
+  family = local.task_user_registry_name
 
   container_definitions = <<DEFINITION
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.main[1].repository_url}:latest",
+    "image": "${aws_ecr_repository.main[2].repository_url}:latest",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "${aws_cloudwatch_log_group.ecs_person.id}",
+        "awslogs-group": "${aws_cloudwatch_log_group.ecs_user_registry.id}",
         "awslogs-region": "${var.aws_region}",
         "awslogs-stream-prefix": "${local.project}"
       }
     },
     "portMappings": [
       {
-        "containerPort": ${var.container_port_person},
-        "hostPort": ${var.container_port_person}
+        "containerPort": ${var.container_port_user_registry},
+        "hostPort": ${var.container_port_user_registry}
       }
     ],
     "environment": [
@@ -43,8 +43,16 @@ resource "aws_ecs_task_definition" "person" {
         "value": "${var.aws_region}"
       },
       {
-        "name": "MS_PERSON_SERVER_PORT",
-        "value": "${var.container_port_person}"
+        "name": "MS_USER_REGISTRY_SERVER_PORT",
+        "value": "${var.container_port_user_registry}"
+      },
+      {
+        "name": "MS_TOKENIZER_URL",
+        "value": "http://${module.nlb.lb_dns_name}:${var.container_port_tokenizer}"
+      },
+      {
+        "name": "MS_PERSON_URL",
+        "value": "http://${module.nlb.lb_dns_name}:${var.container_port_person}"
       }
     ],
     "cpu": 256,
@@ -64,17 +72,17 @@ resource "aws_ecs_task_definition" "person" {
   tags = { Name = format("%s-ecs-td", local.project) }
 }
 
-data "aws_ecs_task_definition" "person" {
-  task_definition = aws_ecs_task_definition.person.family
+data "aws_ecs_task_definition" "user_registry" {
+  task_definition = aws_ecs_task_definition.user_registry.family
 }
 
 # Service
-resource "aws_ecs_service" "person" {
-  name    = local.service_person_name
+resource "aws_ecs_service" "user_registry" {
+  name    = local.service_user_registry_name
   cluster = aws_ecs_cluster.ecs_cluster.id
   task_definition = format("%s:%s",
-    aws_ecs_task_definition.person.family,
-    max(aws_ecs_task_definition.person.revision, data.aws_ecs_task_definition.person.revision)
+    aws_ecs_task_definition.user_registry.family,
+    max(aws_ecs_task_definition.user_registry.revision, data.aws_ecs_task_definition.user_registry.revision)
   )
   launch_type            = "FARGATE"
   scheduling_strategy    = "REPLICA"
@@ -96,12 +104,12 @@ resource "aws_ecs_service" "person" {
   }
 
   load_balancer {
-    target_group_arn = module.nlb.target_group_arns[1]
+    target_group_arn = module.nlb.target_group_arns[2]
     container_name   = format("%s-container", local.project)
-    container_port   = var.container_port_person
+    container_port   = var.container_port_user_registry
   }
 
   depends_on = [module.nlb]
 
-  tags = { Name : local.service_person_name }
+  tags = { Name : local.service_user_registry_name }
 }
