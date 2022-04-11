@@ -52,3 +52,9 @@ output "public_dns_servers" {
 output "nlb_hostname" {
   value = module.nlb.lb_dns_name
 }
+
+# API Gateway
+
+output "api_gateway_endpoint" {
+  value = var.apigw_custom_domain_create ? format("https://%s", aws_api_gateway_domain_name.main[0].domain_name) : ""
+}
