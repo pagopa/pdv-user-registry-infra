@@ -1,441 +1,493 @@
 {
-	"openapi": "3.0.3",
-	"info": {
-		"title": "pdv-ms-person",
-		"description": "People API documentation",
-		"version": "1.0-SNAPSHOT"
-	},
-	"servers": [{
-		"url": "${uri}/{basePath}",
-		"variables": {
-			"basePath": {
-				"default": "/v1"
-			}
-		}
-	}],
-	"tags": [{
-		"name": "people",
-		"description": "Person operations"
-	}],
-	"paths": {
-		"/people/{id}": {
-			"get": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "GET",
-					"uri": "${uri}/people/{id}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}",
-					"requestParameters": {
-						"integration.request.path.id": "method.request.path.id",
-						"integration.request.querystring.isNamespaced": "method.request.querystring.isNamespaced"
-					}
-				},
-				"tags": [
-					"people"
-				],
-				"summary": "Get user details by internal UUID",
-				"description": "notes",
-				"operationId": "getUserByIdUsingGET",
-				"parameters": [{
-						"name": "id",
-						"in": "path",
-						"description": "$${swagger.model.person.id}",
-						"required": true,
-						"style": "simple",
-						"schema": {
-							"type": "string",
-							"format": "uuid"
-						}
-					},
-					{
-						"name": "isNamespaced",
-						"in": "query",
-						"description": "$${swagger.model.person.isNamespaced}",
-						"required": true,
-						"style": "form",
-						"schema": {
-							"type": "boolean"
-						}
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/PersonResource"
-								}
-							}
-						}
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					},
-					"404": {
-						"description": "Not Found"
-					}
-				},
-				"security": [{
-					"api_key": []
-				}]
-			},
-			"put": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "PUT",
-					"uri": "${uri}/people/{id}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}",
-					"requestParameters": {
-						"integration.request.path.id": "method.request.path.id"
-					}
-				},
-				"tags": [
-					"people"
-				],
-				"summary": "Update user details by internal (global) UUID",
-				"description": "notes",
-				"operationId": "saveDetailsUsingPUT",
-				"parameters": [{
-					"name": "id",
-					"in": "path",
-					"description": "$${swagger.model.person.id}",
-					"required": true,
-					"style": "simple",
-					"schema": {
-						"type": "string",
-						"format": "uuid"
-					}
-				}],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/SavePersonDto"
-							}
-						}
-					}
-				},
-				"responses": {
-					"200": {
-						"description": "OK"
-					},
-					"201": {
-						"description": "Created"
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					},
-					"404": {
-						"description": "Not Found"
-					}
-				},
-				"security": [{
-					"api_key": []
-				}]
-			},
-			"delete": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "DELETE",
-					"uri": "${uri}/people/{id}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}",
-					"requestParameters": {
-						"integration.request.path.id": "method.request.path.id"
-					}
-				},
-				"tags": [
-					"people"
-				],
-				"summary": "Delete user details by internal (global) UUID",
-				"description": "notes",
-				"operationId": "deletePersonUsingDELETE",
-				"parameters": [{
-					"name": "id",
-					"in": "path",
-					"description": "$${swagger.model.person.id}",
-					"required": true,
-					"style": "simple",
-					"schema": {
-						"type": "string",
-						"format": "uuid"
-					}
-				}],
-				"responses": {
-					"204": {
-						"description": "No Content"
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					}
-				},
-				"security": [{
-					"api_key": []
-				}]
-			},
-			"patch": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "PATCH",
-					"uri": "${uri}/people/{id}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}",
-					"requestParameters": {
-						"integration.request.path.id": "method.request.path.id"
-					}
-				},
-				"tags": [
-					"people"
-				],
-				"summary": "Upsert user details by internal (global) UUID",
-				"description": "notes",
-				"operationId": "patchSaveUsingPATCH",
-				"parameters": [{
-					"name": "id",
-					"in": "path",
-					"description": "$${swagger.model.person.id}",
-					"required": true,
-					"style": "simple",
-					"schema": {
-						"type": "string",
-						"format": "uuid"
-					}
-				}],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/SavePersonDto"
-							}
-						}
-					}
-				},
-				"responses": {
-					"200": {
-						"description": "OK"
-					},
-					"204": {
-						"description": "No Content"
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					}
-				},
-				"security": [{
-					"api_key": []
-				}]
-			}
-		},
-		"/people/{id}/namespace/{namespace}": {
-			"put": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "put",
-					"uri": "${uri}/people/{id}/namespace/{namespace}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}",
-					"requestParameters": {
-						"integration.request.path.id": "method.request.path.id",
-						"integration.request.path.namespace": "method.request.path.namespace"
-					}
-				},
-				"tags": [
-					"people"
-				],
-				"summary": "Upsert user namespace by internal (global) UUID",
-				"description": "notes",
-				"operationId": "saveNamespacedIdUsingPUT",
-				"parameters": [{
-						"name": "id",
-						"in": "path",
-						"description": "$${swagger.model.person.id}",
-						"required": true,
-						"style": "simple",
-						"schema": {
-							"type": "string",
-							"format": "uuid"
-						}
-					},
-					{
-						"name": "namespace",
-						"in": "path",
-						"description": "$${swagger.model.person.namespace}",
-						"required": true,
-						"style": "simple",
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/SavePersonNamespaceDto"
-							}
-						}
-					}
-				},
-				"responses": {
-					"200": {
-						"description": "OK"
-					},
-					"201": {
-						"description": "Created"
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					},
-					"404": {
-						"description": "Not Found"
-					}
-				},
-				"security": [{
-					"api_key": []
-				}]
-			},
-			"delete": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "delete",
-					"uri": "${uri}/people/{id}/namespace/{namespace}",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}",
-					"requestParameters": {
-						"integration.request.path.id": "method.request.path.id",
-						"integration.request.path.namespace": "method.request.path.namespace"
-					}
-				},
-				"tags": [
-					"people"
-				],
-				"summary": "Delete user namespace by internal (global) UUID",
-				"description": "notes",
-				"operationId": "deletePersonNamespaceUsingDELETE",
-				"parameters": [{
-						"name": "id",
-						"in": "path",
-						"description": "$${swagger.model.person.id}",
-						"required": true,
-						"style": "simple",
-						"schema": {
-							"type": "string",
-							"format": "uuid"
-						}
-					},
-					{
-						"name": "namespace",
-						"in": "path",
-						"description": "$${swagger.model.person.namespace}",
-						"required": true,
-						"style": "simple",
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"204": {
-						"description": "No Content"
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					}
-				},
-				"security": [{
-					"api_key": []
-				}]
-			}
-		}
-	},
-	"components": {
-		"schemas": {
-			"PersonResource": {
-				"title": "PersonResource",
-				"type": "object",
-				"properties": {
-					"familyName": {
-						"type": "string"
-					},
-					"givenName": {
-						"type": "string"
-					},
-					"id": {
-						"type": "string"
-					},
-					"workContacts": {
-						"type": "object",
-						"additionalProperties": {
-							"$ref": "#/components/schemas/WorkContactResource"
-						}
-					}
-				}
-			},
-			"SavePersonDto": {
-				"title": "SavePersonDto",
-				"type": "object",
-				"properties": {
-					"familyName": {
-						"type": "string"
-					},
-					"givenName": {
-						"type": "string"
-					},
-					"workContacts": {
-						"type": "object",
-						"additionalProperties": {
-							"$ref": "#/components/schemas/WorkContactResource"
-						}
-					}
-				}
-			},
-			"SavePersonNamespaceDto": {
-				"title": "SavePersonNamespaceDto",
-				"type": "object",
-				"properties": {
-					"namespacedId": {
-						"type": "string",
-						"format": "uuid"
-					}
-				}
-			},
-			"WorkContactResource": {
-				"title": "WorkContactResource",
-				"type": "object",
-				"properties": {
-					"email": {
-						"type": "string"
-					}
-				}
-			}
-		},
-		"securitySchemes": {
-			"api_key": {
-				"type": "apiKey",
-				"name": "x-api-key",
-				"in": "header"
-			}
-		}
-	}
+  "openapi": "3.0.3",
+  "info": {
+    "title": "pdv-ms-person",
+    "description": "People API documentation",
+    "version": "1.0-SNAPSHOT"
+  },
+  "servers": [
+    {
+      "url": "${uri}/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "/v1"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "person",
+      "description": "Person operations"
+    }
+  ],
+  "paths": {
+    "/people/id": {
+      "get": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "GET",
+          "uri": "${uri}/people/{id}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.querystring.namespacedId": "method.request.querystring.namespacedId"
+          }
+        },
+        "tags": [
+          "person"
+        ],
+        "summary": "Find person id",
+        "description": "Find an existing person id given its namespaced id",
+        "operationId": "findIdByNamespacedIdUsingGET",
+        "parameters": [
+          {
+            "name": "namespacedId",
+            "in": "query",
+            "description": "Person namespaced id",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonId"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/people/{id}": {
+      "get": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "GET",
+          "uri": "${uri}/people/{id}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id",
+            "integration.request.querystring.isNamespaced": "method.request.querystring.isNamespaced"
+          }
+        },
+        "tags": [
+          "person"
+        ],
+        "summary": "Find person",
+        "description": "Retrieve the person by its internal id",
+        "operationId": "findByIdUsingGET",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Person internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "isNamespaced",
+            "in": "query",
+            "description": "Indicates if the Person is namespaced or not",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonResource"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "DELETE",
+          "uri": "${uri}/people/{id}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id"
+          }
+        },
+        "tags": [
+          "person"
+        ],
+        "summary": "Delete person",
+        "description": "Delete person by its internal id",
+        "operationId": "deletePersonUsingDELETE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Person internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "patch": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "PATCH",
+          "uri": "${uri}/people/{id}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id"
+          }
+        },
+        "tags": [
+          "person"
+        ],
+        "summary": "Upsert person details",
+        "description": "Update the given subset fields of an existing person by its internal (global) id, if not present create a new one",
+        "operationId": "saveUsingPATCH",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Person internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavePersonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/people/{id}/namespace/{namespace}": {
+      "put": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "put",
+          "uri": "${uri}/people/{id}/namespace/{namespace}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id",
+            "integration.request.path.namespace": "method.request.path.namespace"
+          }
+        },
+        "tags": [
+          "person"
+        ],
+        "summary": "Upsert person namespace",
+        "description": "Create a new person namespace given its internal (global) id, if already exists do nothing",
+        "operationId": "saveNamespacedIdUsingPUT",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Person internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "namespace",
+            "in": "path",
+            "description": "Caller visibility context",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavePersonNamespaceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "delete",
+          "uri": "${uri}/people/{id}/namespace/{namespace}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id",
+            "integration.request.path.namespace": "method.request.path.namespace"
+          }
+        },
+        "tags": [
+          "person"
+        ],
+        "summary": "Delete person namespace",
+        "description": "Delete person namespace by internal (global) id",
+        "operationId": "deletePersonNamespaceUsingDELETE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Person internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "namespace",
+            "in": "path",
+            "description": "Caller visibility context",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PersonId": {
+        "title": "PersonId",
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Person internal id",
+            "format": "uuid"
+          }
+        }
+      },
+      "PersonResource": {
+        "title": "PersonResource",
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "familyName": {
+            "type": "string",
+            "description": "Person family name"
+          },
+          "givenName": {
+            "type": "string",
+            "description": "Person given name"
+          },
+          "id": {
+            "type": "string",
+            "description": "Person internal id",
+            "format": "uuid"
+          },
+          "workContacts": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkContactResource"
+            },
+            "description": "Person work contacts"
+          }
+        }
+      },
+      "SavePersonDto": {
+        "title": "SavePersonDto",
+        "type": "object",
+        "properties": {
+          "familyName": {
+            "type": "string",
+            "description": "Person family name"
+          },
+          "givenName": {
+            "type": "string",
+            "description": "Person given name"
+          },
+          "workContacts": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkContactResource"
+            },
+            "description": "Person work contacts"
+          }
+        }
+      },
+      "SavePersonNamespaceDto": {
+        "title": "SavePersonNamespaceDto",
+        "required": [
+          "namespacedId"
+        ],
+        "type": "object",
+        "properties": {
+          "namespacedId": {
+            "type": "string",
+            "description": "Person namespaced id",
+            "format": "uuid"
+          }
+        }
+      },
+      "WorkContactResource": {
+        "title": "WorkContactResource",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Person work email"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
+  }
 }
