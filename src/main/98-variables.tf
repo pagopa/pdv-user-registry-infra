@@ -53,6 +53,12 @@ variable "vpc_internal_subnets_cidr" {
   default     = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
 }
 
+variable "enable_nat_gateway" {
+  type        = bool
+  description = "Enable/Create nat gateway"
+  default     = false
+}
+
 ## Public Dns zones
 variable "public_dns_zones" {
   type        = map(any)
