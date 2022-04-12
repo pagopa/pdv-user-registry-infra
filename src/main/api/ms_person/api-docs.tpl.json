@@ -27,7 +27,7 @@
         "x-amazon-apigateway-integration": {
           "type": "HTTP_PROXY",
           "httpMethod": "GET",
-          "uri": "${uri}/people/{id}",
+          "uri": "${uri}/people/id",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
