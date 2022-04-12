@@ -2,7 +2,7 @@ env_short   = "u"
 environment = "uat"
 
 # Network
-enable_nat_gateway = true
+enable_nat_gateway = false
 
 # Ecs
 ecs_enable_execute_command = true
@@ -29,14 +29,14 @@ dynamodb_alarms = [{
   evaluation_periods  = 1
   datapoints_to_alarm = null
   threshold           = 80
-  threshold_metric_id = null
-  period              = 300
-  unit                = "Percent"
 
-  namespace    = "AWS/DynamoDB"
-  metric_name  = "AccountProvisionedReadCapacityUtilization"
-  statistic    = "Maximum"
-  metric_query = []
+  period = 300
+  unit   = "Percent"
+
+  namespace   = "AWS/DynamoDB"
+  metric_name = "AccountProvisionedReadCapacityUtilization"
+  statistic   = "Maximum"
+
   },
   {
     actions_enabled     = true
@@ -46,14 +46,11 @@ dynamodb_alarms = [{
     evaluation_periods  = 1
     datapoints_to_alarm = null
     threshold           = 80
-    threshold_metric_id = null
     period              = 300
     unit                = "Percent"
-
-    namespace    = "AWS/DynamoDB"
-    metric_name  = "AccountProvisionedWriteCapacityUtilization"
-    statistic    = "Maximum"
-    metric_query = []
+    namespace           = "AWS/DynamoDB"
+    metric_name         = "AccountProvisionedWriteCapacityUtilization"
+    statistic           = "Maximum"
   },
   {
     actions_enabled     = true
@@ -63,48 +60,42 @@ dynamodb_alarms = [{
     evaluation_periods  = 1
     datapoints_to_alarm = null
     threshold           = 80
-    threshold_metric_id = null
     period              = 300
     unit                = "Percent"
 
-    namespace    = "AWS/DynamoDB"
-    metric_name  = "MaxProvisionedTableReadCapacityUtilization"
-    statistic    = "Maximum"
-    metric_query = []
+    namespace   = "AWS/DynamoDB"
+    metric_name = "MaxProvisionedTableReadCapacityUtilization"
+    statistic   = "Maximum"
   },
   {
     actions_enabled     = true
     alarm_name          = "dynamodb-max-provisioned-table-write-capacity-utilization"
     alarm_description   = "Account provisioned write capacity greater than 80%"
     comparison_operator = "GreaterThanOrEqualToThreshold"
-    evaluation_periods  = 1
+    evaluation_periods  = 2
     datapoints_to_alarm = null
     threshold           = 80
-    threshold_metric_id = null
     period              = 300
     unit                = "Percent"
 
-    namespace    = "AWS/DynamoDB"
-    metric_name  = "MaxProvisionedTableWriteCapacityUtilization"
-    statistic    = "Maximum"
-    metric_query = []
+    namespace   = "AWS/DynamoDB"
+    metric_name = "MaxProvisionedTableWriteCapacityUtilization"
+    statistic   = "Maximum"
   },
   {
     actions_enabled     = true
-    alarm_name          = "dynamodb-successful request latency"
-    alarm_description   = "Account provisioned write capacity greater than 80%"
+    alarm_name          = "dynamodb-consumed-Rrad-capacity-units"
+    alarm_description   = "Consumed Read Capacity Units"
     comparison_operator = "GreaterThanOrEqualToThreshold"
-    evaluation_periods  = 1
+    evaluation_periods  = 2
     datapoints_to_alarm = null
-    threshold           = 80
-    threshold_metric_id = null
+    threshold           = 10 #TODO this threashold should be equal to the Read Capacy Unit.
     period              = 300
-    unit                = "Percent"
+    unit                = "Count"
 
-    namespace    = "AWS/DynamoDB"
-    metric_name  = "SuccessfulRequestLatency"
-    statistic    = "Maximum"
-    metric_query = []
+    namespace   = "AWS/DynamoDB"
+    metric_name = "ConsumedReadCapacityUnits"
+    statistic   = "Maximum"
   },
 ]
 
