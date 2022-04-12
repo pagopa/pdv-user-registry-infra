@@ -11,12 +11,15 @@ module "metric_alarms" {
   comparison_operator = var.dynamodb_alarms[count.index].comparison_operator
   evaluation_periods  = var.dynamodb_alarms[count.index].evaluation_periods
   threshold           = var.dynamodb_alarms[count.index].threshold
+  threshold_metric_id = var.dynamodb_alarms[count.index].threshold_metric_id
   period              = var.dynamodb_alarms[count.index].period
   unit                = var.dynamodb_alarms[count.index].unit
+  datapoints_to_alarm = var.dynamodb_alarms[count.index].datapoints_to_alarm
 
-  namespace   = "AWS/DynamoDB"
-  metric_name = var.dynamodb_alarms[count.index].metric_name
-  statistic   = var.dynamodb_alarms[count.index].statistic
+  namespace    = var.dynamodb_alarms[count.index].namespace
+  metric_name  = var.dynamodb_alarms[count.index].metric_name
+  statistic    = var.dynamodb_alarms[count.index].statistic
+  metric_query = var.dynamodb_alarms[count.index].metric_query
 
   alarm_actions = [aws_sns_topic.alarms.arn]
 }

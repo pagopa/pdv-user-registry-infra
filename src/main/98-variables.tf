@@ -153,11 +153,15 @@ variable "dynamodb_alarms" {
       alarm_description   = string
       comparison_operator = string
       evaluation_periods  = number
+      datapoints_to_alarm = number
       threshold           = number
+      threshold_metric_id = string
       period              = number
       unit                = string
+      namespace           = string
       metric_name         = string
       statistic           = string
+      metric_query        = any
   }))
 
 

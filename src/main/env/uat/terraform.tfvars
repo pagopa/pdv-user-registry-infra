@@ -27,13 +27,16 @@ dynamodb_alarms = [{
   alarm_description   = "Account provisioned read capacity greater than 80%"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
+  datapoints_to_alarm = null
   threshold           = 80
-  period              = 60
+  threshold_metric_id = null
+  period              = 300
   unit                = "Percent"
 
-  namespace   = "AWS/DynamoDB"
-  metric_name = "AccountProvisionedReadCapacityUtilization"
-  statistic   = "Maximum"
+  namespace    = "AWS/DynamoDB"
+  metric_name  = "AccountProvisionedReadCapacityUtilization"
+  statistic    = "Maximum"
+  metric_query = []
   },
   {
     actions_enabled     = true
@@ -41,13 +44,16 @@ dynamodb_alarms = [{
     alarm_description   = "Account provisioned write capacity greater than 80%"
     comparison_operator = "GreaterThanOrEqualToThreshold"
     evaluation_periods  = 1
+    datapoints_to_alarm = null
     threshold           = 80
-    period              = 60
+    threshold_metric_id = null
+    period              = 300
     unit                = "Percent"
 
-    namespace   = "AWS/DynamoDB"
-    metric_name = "AccountProvisionedWriteCapacityUtilization"
-    statistic   = "Maximum"
+    namespace    = "AWS/DynamoDB"
+    metric_name  = "AccountProvisionedWriteCapacityUtilization"
+    statistic    = "Maximum"
+    metric_query = []
   },
   {
     actions_enabled     = true
@@ -55,13 +61,16 @@ dynamodb_alarms = [{
     alarm_description   = "Account provisioned write capacity greater than 80%"
     comparison_operator = "GreaterThanOrEqualToThreshold"
     evaluation_periods  = 1
+    datapoints_to_alarm = null
     threshold           = 80
-    period              = 60
+    threshold_metric_id = null
+    period              = 300
     unit                = "Percent"
 
-    namespace   = "AWS/DynamoDB"
-    metric_name = "MaxProvisionedTableReadCapacityUtilization"
-    statistic   = "Maximum"
+    namespace    = "AWS/DynamoDB"
+    metric_name  = "MaxProvisionedTableReadCapacityUtilization"
+    statistic    = "Maximum"
+    metric_query = []
   },
   {
     actions_enabled     = true
@@ -69,15 +78,34 @@ dynamodb_alarms = [{
     alarm_description   = "Account provisioned write capacity greater than 80%"
     comparison_operator = "GreaterThanOrEqualToThreshold"
     evaluation_periods  = 1
+    datapoints_to_alarm = null
     threshold           = 80
-    period              = 60
+    threshold_metric_id = null
+    period              = 300
     unit                = "Percent"
 
-    namespace   = "AWS/DynamoDB"
-    metric_name = "MaxProvisionedTableWriteCapacityUtilization"
-    statistic   = "Maximum"
+    namespace    = "AWS/DynamoDB"
+    metric_name  = "MaxProvisionedTableWriteCapacityUtilization"
+    statistic    = "Maximum"
+    metric_query = []
   },
+  {
+    actions_enabled     = true
+    alarm_name          = "dynamodb-successful request latency"
+    alarm_description   = "Account provisioned write capacity greater than 80%"
+    comparison_operator = "GreaterThanOrEqualToThreshold"
+    evaluation_periods  = 1
+    datapoints_to_alarm = null
+    threshold           = 80
+    threshold_metric_id = null
+    period              = 300
+    unit                = "Percent"
 
+    namespace    = "AWS/DynamoDB"
+    metric_name  = "SuccessfulRequestLatency"
+    statistic    = "Maximum"
+    metric_query = []
+  },
 ]
 
 tags = {
