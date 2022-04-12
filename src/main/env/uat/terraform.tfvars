@@ -1,6 +1,8 @@
 env_short   = "u"
 environment = "uat"
 
+# Network
+enable_nat_gateway = true
 
 # Ecs
 ecs_enable_execute_command = true

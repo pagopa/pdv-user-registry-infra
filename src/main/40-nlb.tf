@@ -9,7 +9,10 @@ resource "aws_security_group" "nsg_task" {
 # Rules for the TASK (Targets the LB's IPs)
 locals {
   # list of container port in use.
-  container_ports = [var.container_port_tokenizer, var.container_port_person]
+  container_ports = [
+    var.container_port_tokenizer,
+    var.container_port_person,
+  var.container_port_user_registry]
 }
 resource "aws_security_group_rule" "nsg_task_ingress_rule" {
   count       = length(local.container_ports)
@@ -76,6 +79,11 @@ module "nlb" {
       protocol           = "TCP"
       target_group_index = 1
     },
+    {
+      port               = var.container_port_user_registry
+      protocol           = "TCP"
+      target_group_index = 2
+    },
   ]
 
 
@@ -106,7 +114,29 @@ module "nlb" {
     {
       name             = format("%s-person", local.project)
       backend_protocol = "TCP"
-      backend_port     = 8000
+      backend_port     = var.container_port_person
+      #port        = 80
+      target_type = "ip"
+      #preserve_client_ip = true
+      deregistration_delay = 30
+      vpc_id               = module.vpc.vpc_id
+
+      health_check = {
+        enabled = true
+
+        healthy_threshold   = 3
+        interval            = 30
+        timeout             = 6
+        unhealthy_threshold = 3
+        matcher             = "200-399"
+        path                = "/actuator/health"
+      }
+    },
+    # Service user registry.
+    {
+      name             = format("%s-user-registry", local.project)
+      backend_protocol = "TCP"
+      backend_port     = var.container_port_user_registry
       #port        = 80
       target_type = "ip"
       #preserve_client_ip = true

@@ -1,264 +1,286 @@
 {
-	"openapi": "3.0.3",
-	"info": {
-		"title": "Api Documentation",
-		"description": "Api Documentation",
-		"termsOfService": "urn:tos",
-		"contact": {},
-		"license": {
-			"name": "Apache 2.0",
-			"url": "http://www.apache.org/licenses/LICENSE-2.0"
-		},
-		"version": "1.0"
-	},
-	"servers" : [ {
-		"url" : "${uri}/{basePath}",
-		"variables" : {
-		  "basePath" : {
-			"default" : "/v1"
-		  }
-		}
-	  } ],
-	"tags": [{
-		"name": "tokens",
-		"description": "Tokenizer Controller"
-	}],
-	"paths": {
-		"/tokens": {
-			"put": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "PUT",
-					"uri": "${uri}/tokens",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}"
-				},
-				"tags": ["tokens"],
-				"summary": "$${swagger.ms-tokenizer.tokens.api.save.summary}",
-				"description": "$${swagger.ms-tokenizer.tokens.api.save.notes}",
-				"operationId": "saveUsingPUT",
-				"parameters": [{
-					"name": "namespace",
-					"in": "header",
-					"description": "$${swagger.ms-tokenizer.token.model.namespace}",
-					"required": true,
-					"schema": {
-						"type": "string",
-						"enum": ["GLOBAL", "IO", "PN", "SELFCARE"]
-					}
-				}],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/CreateTokenDto"
-							}
-						}
-					}
-				},
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/TokenResource"
-								}
-							}
-						}
-					},
-					"201": {
-						"description": "Created"
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					},
-					"404": {
-						"description": "Not Found"
-					}
-				},
-				"security" : [ {
-					"api_key" : [ ]
-				} ]
-			}
-		},
-		"/tokens/search": {
-			"post": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "POST",
-					"uri": "${uri}/tokens/search",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}"
-				},
-				"tags": ["tokens"],
-				"summary": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.summary}",
-				"description": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.notes}",
-				"operationId": "searchTokenUsingPOST",
-				"parameters": [{
-					"name": "namespace",
-					"in": "header",
-					"description": "$${swagger.ms-tokenizer.token.model.namespace}",
-					"required": true,
-					"schema": {
-						"type": "string",
-						"enum": ["GLOBAL", "IO", "PN", "SELFCARE"]
-					}
-				}],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/FilterCriteria"
-							}
-						}
-					}
-				},
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/TokenResource"
-								}
-							}
-						}
-					},
-					"201": {
-						"description": "Created"
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					},
-					"404": {
-						"description": "Not Found"
-					}
-				},
-				"security" : [ {
-					"api_key" : [ ]
-				}]
-			}
-		},
-		"/tokens/{token}/pii": {
-			"get": {
-				"x-amazon-apigateway-integration": {
-					"type": "HTTP_PROXY",
-					"httpMethod": "GET",
-					"uri": "${uri}/tokens/{token}/pii",
-					"connectionType": "VPC_LINK",
-					"connectionId": "${connection_id}",
-					"requestParameters" : {
-						"integration.request.path.token" : "method.request.path.token"
-					}
-				},
-				"tags": ["tokens"],
-				"summary": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.summary}",
-				"description": "$${swagger.ms-tokenizer.tokens.api.getUserByInternalId.notes}",
-				"operationId": "findPiiUsingGET",
-				"parameters": [{
-					"name": "token",
-					"in": "path",
-					"description": "$${swagger.tokenizer.token.model.token}",
-					"required": true,
-					"style": "simple",
-					"schema": {
-						"type": "string",
-						"format": "uuid"
-					}
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/PiiResource"
-								}
-							}
-						}
-					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					},
-					"404": {
-						"description": "Not Found"
-					}
-				},
-				"security" : [ {
-					"api_key" : [ ]
-				}]
-			}
-		}
-	},
-	"components": {
-		"schemas": {
-			"CreateTokenDto": {
-				"title": "CreateTokenDto",
-				"required": ["pii"],
-				"type": "object",
-				"properties": {
-					"pii": {
-						"type": "string",
-						"description": "$${swagger.tokenizer.token.model.pii}"
-					}
-				}
-			},
-			"FilterCriteria": {
-				"title": "FilterCriteria",
-				"required": ["pii"],
-				"type": "object",
-				"properties": {
-					"pii": {
-						"type": "string",
-						"description": "$${swagger.tokenizer.token.model.pii}"
-					}
-				}
-			},
-			"PiiResource": {
-				"title": "PiiResource",
-				"required": ["pii"],
-				"type": "object",
-				"properties": {
-					"pii": {
-						"type": "string",
-						"description": "$${swagger.tokenizer.token.model.pii}"
-					}
-				}
-			},
-			"TokenResource": {
-				"title": "TokenResource",
-				"required": ["token"],
-				"type": "object",
-				"properties": {
-					"rootToken": {
-						"type": "string",
-						"description": "$${swagger.tokenizer.token.model.rootToken}",
-						"format": "uuid"
-					},
-					"token": {
-						"type": "string",
-						"description": "$${swagger.tokenizer.token.model.token}",
-						"format": "uuid"
-					}
-				}
-			}
-		},
-		"securitySchemes" : {
-			"api_key" : {
-			  "type" : "apiKey",
-			  "name" : "x-api-key",
-			  "in" : "header"
-			}
-		  }
-	}
+  "openapi": "3.0.3",
+  "info": {
+    "title": "pdv-ms-tokenizer",
+    "description": "Tokenizer API documentation",
+    "version": "1.0-SNAPSHOT"
+  },
+  "servers": [
+    {
+      "url": "${uri}/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "/v1"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "token",
+      "description": "Token operations"
+    }
+  ],
+  "paths": {
+    "/tokens": {
+      "put": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "PUT",
+          "uri": "${uri}/tokens",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}"
+        },
+        "tags": [
+          "token"
+        ],
+        "summary": "Upsert token",
+        "description": "Create a new token given a PII and Namespace, if already exists do nothing",
+        "operationId": "saveUsingPUT",
+        "parameters": [
+          {
+            "name": "x-pagopa-namespace",
+            "in": "header",
+            "description": "Caller visibility context",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResource"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/tokens/search": {
+      "post": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "POST",
+          "uri": "${uri}/tokens/search",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}"
+        },
+        "tags": [
+          "token"
+        ],
+        "summary": "Search token",
+        "description": "Search a token given a PII and Namespace",
+        "operationId": "searchUsingPOST",
+        "parameters": [
+          {
+            "name": "x-pagopa-namespace",
+            "in": "header",
+            "description": "Caller visibility context",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FilterCriteria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResource"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/tokens/{token}/pii": {
+      "get": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "GET",
+          "uri": "${uri}/tokens/{token}/pii",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.token": "method.request.path.token"
+          }
+        },
+        "tags": [
+          "token"
+        ],
+        "summary": "Find PII",
+        "description": "Find a PII given a token",
+        "operationId": "findPiiUsingGET",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "Token related to the PII",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PiiResource"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateTokenDto": {
+        "title": "CreateTokenDto",
+        "required": [
+          "pii"
+        ],
+        "type": "object",
+        "properties": {
+          "pii": {
+            "type": "string",
+            "description": "Personal Identifiable Information"
+          }
+        }
+      },
+      "FilterCriteria": {
+        "title": "FilterCriteria",
+        "required": [
+          "pii"
+        ],
+        "type": "object",
+        "properties": {
+          "pii": {
+            "type": "string",
+            "description": "Personal Identifiable Information"
+          }
+        }
+      },
+      "PiiResource": {
+        "title": "PiiResource",
+        "required": [
+          "pii"
+        ],
+        "type": "object",
+        "properties": {
+          "pii": {
+            "type": "string",
+            "description": "Personal Identifiable Information"
+          }
+        }
+      },
+      "TokenResource": {
+        "title": "TokenResource",
+        "required": [
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "rootToken": {
+            "type": "string",
+            "description": "Root token related to the PII",
+            "format": "uuid"
+          },
+          "token": {
+            "type": "string",
+            "description": "Namespaced token related to the PII",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
+  }
 }

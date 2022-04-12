@@ -9,7 +9,7 @@ module "vpc" {
   public_subnets        = var.vpc_public_subnets_cidr
   public_subnet_suffix  = "public"
   intra_subnets         = var.vpc_internal_subnets_cidr
-  enable_nat_gateway    = false
+  enable_nat_gateway    = var.enable_nat_gateway
 
   enable_dns_hostnames = true
   enable_dns_support   = true

@@ -53,6 +53,12 @@ variable "vpc_internal_subnets_cidr" {
   default     = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
 }
 
+variable "enable_nat_gateway" {
+  type        = bool
+  description = "Enable/Create nat gateway"
+  default     = false
+}
+
 ## Public Dns zones
 variable "public_dns_zones" {
   type        = map(any)
@@ -110,6 +116,13 @@ variable "container_port_person" {
   type        = number
   description = "Container port person"
   default     = 8000
+}
+
+variable "container_port_user_registry" {
+  type        = number
+  description = "Container port service user registry."
+  default     = 8090
+
 }
 
 variable "replica_count" {

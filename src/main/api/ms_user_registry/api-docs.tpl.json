@@ -1,0 +1,477 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "pdv-ms-user-registry",
+    "description": "User Registry API documentation",
+    "version": "1.0-SNAPSHOT"
+  },
+  "servers": [
+    {
+      "url": "${uri}/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "/v1"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "User operations"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "patch": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "PATCH",
+          "uri": "${uri}/users",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.header.x-pagopa-namespace": "method.request.header.x-pagopa-namespace"
+          }
+        },
+        "tags": [
+          "user"
+        ],
+        "summary": "Upsert user",
+        "description": "Update the given subset fields of an existing user by external id, if not present create a new one",
+        "operationId": "upsertUsingPATCH",
+        "parameters": [
+          {
+            "name": "x-pagopa-namespace",
+            "in": "header",
+            "description": "Caller visibility context",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserId"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/users/search": {
+      "post": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "POST",
+          "uri": "${uri}/users/search",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.header.x-pagopa-namespace": "method.request.header.x-pagopa-namespace",
+            "integration.request.querystring.fl": "method.request.querystring.fl"
+          }
+        },
+        "tags": [
+          "user"
+        ],
+        "summary": "Search user",
+        "description": "Search a user given its fiscal code",
+        "operationId": "searchUsingPOST",
+        "parameters": [
+          {
+            "name": "x-pagopa-namespace",
+            "in": "header",
+            "description": "Caller visibility context",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fl",
+            "in": "query",
+            "description": "Field list. Subset of fields to be retrieved for the requested resource",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSearchDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResource"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "GET",
+          "uri": "${uri}/users/{id}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id",
+            "integration.request.querystring.fl": "method.request.querystring.fl"
+          }
+        },
+        "tags": [
+          "user"
+        ],
+        "summary": "Find user",
+        "description": "Retrieve the user by its internal id",
+        "operationId": "findByIdUsingGET",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "fl",
+            "in": "query",
+            "description": "Field list. Subset of fields to be retrieved for the requested resource",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResource"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "DELETE",
+          "uri": "${uri}/users/{id}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id"
+          }
+        },
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user",
+        "description": "Delete the user by its internal id",
+        "operationId": "deleteByIdUsingDELETE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "patch": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP_PROXY",
+          "httpMethod": "PATCH",
+          "uri": "${uri}/users/{id}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id"
+          }
+        },
+        "tags": [
+          "user"
+        ],
+        "summary": "Update user",
+        "description": "Update the given subset fields of an existing user by its internal id, if not present an error is returned",
+        "operationId": "updateUsingPATCH",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MutableUserFieldsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MutableUserFieldsDto": {
+        "title": "MutableUserFieldsDto",
+        "type": "object",
+        "properties": {
+          "familyName": {
+            "type": "string",
+            "description": "User family name"
+          },
+          "givenName": {
+            "type": "string",
+            "description": "User given name"
+          },
+          "workContacts": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkContactResource"
+            },
+            "description": "User work contacts"
+          }
+        }
+      },
+      "SaveUserDto": {
+        "title": "SaveUserDto",
+        "required": [
+          "fiscalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "familyName": {
+            "type": "string",
+            "description": "User family name"
+          },
+          "fiscalCode": {
+            "type": "string",
+            "description": "User fiscal code"
+          },
+          "givenName": {
+            "type": "string",
+            "description": "User given name"
+          },
+          "workContacts": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkContactResource"
+            },
+            "description": "User work contacts"
+          }
+        }
+      },
+      "UserId": {
+        "title": "UserId",
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User internal id",
+            "format": "uuid"
+          }
+        }
+      },
+      "UserResource": {
+        "title": "UserResource",
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "familyName": {
+            "type": "string",
+            "description": "User family name"
+          },
+          "fiscalCode": {
+            "type": "string",
+            "description": "User fiscal code"
+          },
+          "givenName": {
+            "type": "string",
+            "description": "User given name"
+          },
+          "id": {
+            "type": "string",
+            "description": "User internal id",
+            "format": "uuid"
+          },
+          "workContacts": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/WorkContactResource"
+            },
+            "description": "User work contacts"
+          }
+        }
+      },
+      "UserSearchDto": {
+        "title": "UserSearchDto",
+        "required": [
+          "fiscalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "fiscalCode": {
+            "type": "string",
+            "description": "User fiscal code"
+          }
+        }
+      },
+      "WorkContactResource": {
+        "title": "WorkContactResource",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User work email"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
+  }
+}
