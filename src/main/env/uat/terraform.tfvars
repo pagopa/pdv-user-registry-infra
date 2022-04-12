@@ -84,7 +84,7 @@ dynamodb_alarms = [{
   },
   {
     actions_enabled     = true
-    alarm_name          = "dynamodb-consumed-Rrad-capacity-units"
+    alarm_name          = "dynamodb-consumed-read-capacity-units"
     alarm_description   = "Consumed Read Capacity Units"
     comparison_operator = "GreaterThanOrEqualToThreshold"
     evaluation_periods  = 2
@@ -95,6 +95,51 @@ dynamodb_alarms = [{
 
     namespace   = "AWS/DynamoDB"
     metric_name = "ConsumedReadCapacityUnits"
+    statistic   = "Maximum"
+  },
+  {
+    actions_enabled     = true
+    alarm_name          = "dynamodb-consumed-write-capacity-units"
+    alarm_description   = "Consumed Write Capacity Units"
+    comparison_operator = "GreaterThanOrEqualToThreshold"
+    evaluation_periods  = 2
+    datapoints_to_alarm = null
+    threshold           = 10 #TODO this threashold should be equal to the Write Capacy Unit.
+    period              = 300
+    unit                = "Count"
+
+    namespace   = "AWS/DynamoDB"
+    metric_name = "ConsumedWriteCapacityUnits"
+    statistic   = "Maximum"
+  },
+  {
+    actions_enabled     = true
+    alarm_name          = "dynamodb-read-throttle-events"
+    alarm_description   = "Consumed Read Throttle Events"
+    comparison_operator = "GreaterThanOrEqualToThreshold"
+    evaluation_periods  = 2
+    datapoints_to_alarm = null
+    threshold           = 10 #TODO this threashold should be equal to the Write Capacy Unit.
+    period              = 300
+    unit                = "Count"
+
+    namespace   = "AWS/DynamoDB"
+    metric_name = "ReadThrottleEvents"
+    statistic   = "Maximum"
+  },
+  {
+    actions_enabled     = true
+    alarm_name          = "dynamodb-write-throttle-events"
+    alarm_description   = "Consumed Write Throttle Events"
+    comparison_operator = "GreaterThanOrEqualToThreshold"
+    evaluation_periods  = 2
+    datapoints_to_alarm = null
+    threshold           = 10 #TODO this threashold should be equal to the Write Capacy Unit.
+    period              = 300
+    unit                = "Count"
+
+    namespace   = "AWS/DynamoDB"
+    metric_name = "WriteThrottleEvents"
     statistic   = "Maximum"
   },
 ]
