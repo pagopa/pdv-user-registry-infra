@@ -31,7 +31,7 @@
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
-            "integration.request.header.x-pagopa-namespace": "method.request.header.x-pagopa-namespace"
+            "integration.request.header.x-pagopa-namespace": "context.identity.apiKeyId"
           }
         },
         "tags": [
@@ -97,7 +97,7 @@
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
-            "integration.request.header.x-pagopa-namespace": "method.request.header.x-pagopa-namespace",
+            "integration.request.header.x-pagopa-namespace": "context.identity.apiKeyId",
             "integration.request.querystring.fl": "method.request.querystring.fl"
           }
         },
