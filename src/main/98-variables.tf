@@ -144,7 +144,43 @@ variable "dynamodb_point_in_time_recovery_enabled" {
   default     = false
 }
 
+variable "table_token_read_capacity" {
+  type        = number
+  description = "Table token read capacity."
+}
 
+variable "table_token_write_capacity" {
+  type        = number
+  description = "Table token read capacity."
+}
+
+variable "table_token_autoscaling_read" {
+  type = object({
+    scale_in_cooldown  = number
+    scale_out_cooldown = number
+    target_value       = number
+    max_capacity       = number
+  })
+  description = "Read autoscaling settings table token."
+}
+
+variable "table_token_autoscaling_write" {
+  type = object({
+    scale_in_cooldown  = number
+    scale_out_cooldown = number
+    target_value       = number
+    max_capacity       = number
+  })
+  description = "Write autoscaling settings table token."
+}
+
+variable "table_token_autoscling_indexes" {
+  type        = any
+  description = "Autoscaling gsi configurations"
+}
+
+
+## Alarms
 variable "dynamodb_alarms" {
   type = list(
     object({
