@@ -29,7 +29,10 @@
           "httpMethod": "PUT",
           "uri": "${uri}/tokens",
           "connectionType": "VPC_LINK",
-          "connectionId": "${connection_id}"
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.header.x-pagopa-namespace": "context.identity.apiKey"
+          }
         },
         "tags": [
           "token"
@@ -95,7 +98,10 @@
           "httpMethod": "POST",
           "uri": "${uri}/tokens/search",
           "connectionType": "VPC_LINK",
-          "connectionId": "${connection_id}"
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.header.x-pagopa-namespace": "context.identity.apiKey"
+          }
         },
         "tags": [
           "token"
@@ -163,7 +169,8 @@
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
-            "integration.request.path.token": "method.request.path.token"
+            "integration.request.path.token": "method.request.path.token",
+            "integration.request.header.x-pagopa-namespace": "context.identity.apiKey"
           }
         },
         "tags": [
