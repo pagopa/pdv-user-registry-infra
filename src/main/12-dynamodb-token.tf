@@ -47,10 +47,8 @@ module "dynamodb_table_token" {
   server_side_encryption_enabled     = true
   server_side_encryption_kms_key_arn = aws_kms_alias.dynamo_db.target_key_arn
 
-  autoscaling_read = var.table_token_autoscaling_read
-
-  autoscaling_write = var.table_token_autoscaling_write
-
+  autoscaling_read    = var.table_token_autoscaling_read
+  autoscaling_write   = var.table_token_autoscaling_write
   autoscaling_indexes = var.table_token_autoscling_indexes
 
   replica_regions = var.dynamodb_region_replication_enable ? [{

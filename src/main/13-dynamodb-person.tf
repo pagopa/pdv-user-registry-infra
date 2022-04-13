@@ -1,7 +1,7 @@
 locals {
   # Person
   dynamodb_table_person    = "Person"
-  dynamodb_gsi_person_name = "gsi_namespaced_id"
+  dynamodb_gsi_person_name = keys(var.table_person_autoscling_indexes)[0]
 }
 
 # Table Person
@@ -13,6 +13,10 @@ module "dynamodb_table_person" {
   range_key                      = "SK"
   stream_enabled                 = var.dynamodb_region_replication_enable ? true : false
   point_in_time_recovery_enabled = var.dynamodb_point_in_time_recovery_enabled
+  billing_mode                   = "PROVISIONED"
+  autoscaling_enabled            = true
+  read_capacity                  = var.table_person_read_capacity
+  write_capacity                 = var.table_person_write_capacity
 
   attributes = [
     {
@@ -53,12 +57,18 @@ module "dynamodb_table_person" {
       name            = local.dynamodb_gsi_person_name
       hash_key        = "namespacedId"
       projection_type = "ALL"
+      write_capacity  = var.table_person_autoscling_indexes[local.dynamodb_gsi_person_name]["write_min_capacity"]
+      read_capacity   = var.table_person_autoscling_indexes[local.dynamodb_gsi_person_name]["read_min_capacity"]
     }
   ]
 
 
   server_side_encryption_enabled     = true
   server_side_encryption_kms_key_arn = aws_kms_alias.dynamo_db.target_key_arn
+
+  autoscaling_read    = var.table_person_autoscaling_read
+  autoscaling_write   = var.table_person_autoscaling_write
+  autoscaling_indexes = var.table_person_autoscling_indexes
 
   replica_regions = var.dynamodb_region_replication_enable ? [{
     region_name = "eu-central-1"
