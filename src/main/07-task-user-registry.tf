@@ -43,7 +43,7 @@ resource "aws_ecs_task_definition" "user_registry" {
         "value": "${var.aws_region}"
       },
       {
-        "name": "MS_USER_REGISTRY_SERVER_PORT",
+        "name": "APP_SERVER_PORT",
         "value": "${var.container_port_user_registry}"
       },
       {
@@ -53,6 +53,18 @@ resource "aws_ecs_task_definition" "user_registry" {
       {
         "name": "MS_PERSON_URL",
         "value": "http://${module.nlb.lb_dns_name}:${var.container_port_person}"
+      },
+      {
+        "name": "APP_LOG_LEVEL",
+        "value": "DEBUG"
+      },
+      {
+        "name": "REST_CLIENT_LOGGER_LEVEL",
+        "value": "FULL"
+      },
+      {
+        "name": "LOG_DATEFORMAT_PATTERN",
+        "value": "yyyy-MM-dd HH:mm:ss.SSSZZ"
       }
     ],
     "cpu": 256,
