@@ -391,8 +391,45 @@
       }
     }
   },
-  "components": {
-    "schemas": {
+  "components" : {
+    "schemas" : {
+      "CertifiableFieldResourceOfLocalDate": {
+        "title": "CertifiableFieldResourceOfLocalDate",
+        "required": [
+          "certification",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "certification": {
+            "type": "string",
+            "description": "Certified source of information"
+          },
+          "value": {
+            "type": "string",
+            "description": "Field value",
+            "format": "date"
+          }
+        }
+      },
+      "CertifiableFieldResourceOfstring": {
+        "title": "CertifiableFieldResourceOfstring",
+        "required": [
+          "certification",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "certification": {
+            "type": "string",
+            "description": "Certified source of information"
+          },
+          "value": {
+            "type": "string",
+            "description": "Field value"
+          }
+        }
+      },
       "PersonId": {
         "title": "PersonId",
         "required": [
@@ -414,18 +451,26 @@
         ],
         "type": "object",
         "properties": {
-          "familyName": {
-            "type": "string",
-            "description": "Person family name"
+          "birthDate": {
+            "description": "Person date of birth",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
-          "givenName": {
-            "type": "string",
-            "description": "Person given name"
+          "email": {
+            "description": "Person email",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+          },
+          "familyName": {
+            "description": "Person family name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "id": {
             "type": "string",
             "description": "Person internal id",
             "format": "uuid"
+          },
+          "name": {
+            "description": "Person name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "workContacts": {
             "type": "object",
@@ -440,13 +485,21 @@
         "title": "SavePersonDto",
         "type": "object",
         "properties": {
-          "familyName": {
-            "type": "string",
-            "description": "Person family name"
+          "birthDate": {
+            "description": "Person date of birth",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
-          "givenName": {
-            "type": "string",
-            "description": "Person given name"
+          "email": {
+            "description": "Person email",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+          },
+          "familyName": {
+            "description": "Person family name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+          },
+          "name": {
+            "description": "Person name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "workContacts": {
             "type": "object",
@@ -476,8 +529,8 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "description": "Person work email"
+            "description": "Person work email",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           }
         }
       }
