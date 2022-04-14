@@ -39,7 +39,7 @@
         ],
         "summary": "Upsert user",
         "description": "Update the given subset fields of an existing user by external id, if not present create a new one",
-        "operationId": "upsertUsingPATCH",
+        "operationId": "saveUsingPATCH",
         "parameters": [
           {
             "name": "x-pagopa-namespace",
@@ -125,7 +125,15 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "birthDate",
+                "email",
+                "familyName",
+                "fiscalCode",
+                "name",
+                "workContacts"
+              ]
             }
           }
         ],
@@ -208,7 +216,15 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "birthDate",
+                "email",
+                "familyName",
+                "fiscalCode",
+                "name",
+                "workContacts"
+              ]
             }
           }
         ],
@@ -346,17 +362,70 @@
   },
   "components": {
     "schemas": {
+      "CertifiableFieldResourceOfLocalDate": {
+        "title": "CertifiableFieldResourceOfLocalDate",
+        "required": [
+          "certification",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "certification": {
+            "type": "string",
+            "description": "Certified source of information",
+            "enum": [
+              "NONE",
+              "SPID"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Field value",
+            "format": "date"
+          }
+        }
+      },
+      "CertifiableFieldResourceOfstring": {
+        "title": "CertifiableFieldResourceOfstring",
+        "required": [
+          "certification",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "certification": {
+            "type": "string",
+            "description": "Certified source of information",
+            "enum": [
+              "NONE",
+              "SPID"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Field value"
+          }
+        }
+      },
       "MutableUserFieldsDto": {
         "title": "MutableUserFieldsDto",
         "type": "object",
         "properties": {
-          "familyName": {
-            "type": "string",
-            "description": "User family name"
+          "birthDate": {
+            "description": "${swagger.model.user.birthDate}",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
-          "givenName": {
-            "type": "string",
-            "description": "User given name"
+          "email": {
+            "description": "${swagger.model.user.email}",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+          },
+          "familyName": {
+            "description": "User family name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+          },
+          "name": {
+            "description": "User name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "workContacts": {
             "type": "object",
@@ -374,17 +443,25 @@
         ],
         "type": "object",
         "properties": {
+          "birthDate": {
+            "description": "${swagger.model.user.birthDate}",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
+          },
+          "email": {
+            "description": "${swagger.model.user.email}",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+          },
           "familyName": {
-            "type": "string",
-            "description": "User family name"
+            "description": "User family name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "fiscalCode": {
             "type": "string",
             "description": "User fiscal code"
           },
-          "givenName": {
-            "type": "string",
-            "description": "User given name"
+          "name": {
+            "description": "User name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "workContacts": {
             "type": "object",
@@ -416,22 +493,30 @@
         ],
         "type": "object",
         "properties": {
+          "birthDate": {
+            "description": "${swagger.model.user.birthDate}",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
+          },
+          "email": {
+            "description": "${swagger.model.user.email}",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+          },
           "familyName": {
-            "type": "string",
-            "description": "User family name"
+            "description": "User family name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "fiscalCode": {
             "type": "string",
             "description": "User fiscal code"
           },
-          "givenName": {
-            "type": "string",
-            "description": "User given name"
-          },
           "id": {
             "type": "string",
             "description": "User internal id",
             "format": "uuid"
+          },
+          "name": {
+            "description": "User name",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "workContacts": {
             "type": "object",
@@ -460,8 +545,8 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "description": "User work email"
+            "description": "User work email",
+            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           }
         }
       }
