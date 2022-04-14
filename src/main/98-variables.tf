@@ -122,6 +122,11 @@ variable "container_port_user_registry" {
   type        = number
   description = "Container port service user registry."
   default     = 8090
+}
+
+variable "container_port_poc" {
+  type    = number
+  default = 8060
 
 }
 
