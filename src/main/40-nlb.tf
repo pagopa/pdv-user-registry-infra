@@ -86,6 +86,11 @@ module "nlb" {
       protocol           = "TCP"
       target_group_index = 2
     },
+    {
+      port               = var.container_port_poc
+      protocol           = "TCP"
+      target_group_index = 3
+    },
   ]
 
 
@@ -176,7 +181,7 @@ module "nlb" {
         timeout             = 6
         unhealthy_threshold = 3
         matcher             = "200-399"
-        path                = "/"
+        path                = "/person/read"
       }
     },
   ]

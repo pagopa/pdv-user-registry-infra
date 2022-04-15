@@ -104,7 +104,7 @@ resource "aws_ecs_service" "poc" {
   }
 
   load_balancer {
-    target_group_arn = module.nlb.target_group_arns[2]
+    target_group_arn = module.nlb.target_group_arns[3]
     container_name   = format("%s-container", local.project)
     container_port   = var.container_port_poc
   }
