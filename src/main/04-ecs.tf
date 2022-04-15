@@ -9,6 +9,7 @@ locals {
     join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.tokenizer.name, ]),
     join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.person.name, ]),
     join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.user_registry.name, ]),
+    join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.poc.name, ]),
   ]
 }
 
