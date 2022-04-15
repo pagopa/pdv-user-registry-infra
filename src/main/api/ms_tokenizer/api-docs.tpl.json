@@ -33,6 +33,11 @@
           "passthroughBehavior": "WHEN_NO_TEMPLATES",
           "requestTemplates" : {
             "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -103,6 +108,11 @@
           "passthroughBehavior": "WHEN_NO_TEMPLATES",
           "requestTemplates" : {
             "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
