@@ -42,18 +42,6 @@ resource "aws_ecs_task_definition" "poc" {
         "name": "AWS_REGION",
         "value": "${var.aws_region}"
       },
-      {
-        "name": "MS_poc_SERVER_PORT",
-        "value": "${var.container_port_poc}"
-      },
-      {
-        "name": "MS_TOKENIZER_URL",
-        "value": "http://${module.nlb.lb_dns_name}"
-      },
-      {
-        "name": "MS_PERSON_URL",
-        "value": "http://${module.nlb.lb_dns_name}:${var.container_port_person}"
-      }
     ],
     "cpu": 256,
     "memory": 512,
