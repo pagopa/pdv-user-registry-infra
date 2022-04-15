@@ -11,6 +11,10 @@ resource "aws_api_gateway_rest_api" "tokenizer" {
     {
       uri           = format("http://%s", module.nlb.lb_dns_name),
       connection_id = aws_api_gateway_vpc_link.apigw.id
+      write_request_template = chomp(templatefile("./api/velocity_request_template_write.tpl",
+        {
+          list_key_to_name = "'${aws_api_gateway_api_key.tokenizer.id}':'${aws_api_gateway_api_key.tokenizer.name}'"
+      }))
     }
   )
 

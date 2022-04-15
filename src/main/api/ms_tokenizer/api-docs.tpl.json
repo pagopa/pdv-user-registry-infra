@@ -25,11 +25,15 @@
     "/tokens": {
       "put": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "PUT",
           "uri": "${uri}/tokens",
           "connectionType": "VPC_LINK",
-          "connectionId": "${connection_id}"
+          "connectionId": "${connection_id}",
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          }
         },
         "tags": [
           "token"
@@ -91,11 +95,15 @@
     "/tokens/search" : {
       "post" : {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "POST",
           "uri": "${uri}/tokens/search",
           "connectionType": "VPC_LINK",
-          "connectionId": "${connection_id}"
+          "connectionId": "${connection_id}",
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          }
         },
         "tags": [
           "token"
