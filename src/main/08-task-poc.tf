@@ -41,7 +41,7 @@ resource "aws_ecs_task_definition" "poc" {
       {
         "name": "AWS_REGION",
         "value": "${var.aws_region}"
-      },
+      }
     ],
     "cpu": 256,
     "memory": 512,
