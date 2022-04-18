@@ -25,13 +25,20 @@
     "/users": {
       "patch": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "PATCH",
           "uri": "${uri}/users",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
-          "requestParameters": {
-            "integration.request.header.x-pagopa-namespace": "method.request.header.x-pagopa-namespace"
+          "requestParameters": {},
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -91,14 +98,22 @@
     "/users/search": {
       "post": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "POST",
           "uri": "${uri}/users/search",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
           "requestParameters": {
-            "integration.request.header.x-pagopa-namespace": "method.request.header.x-pagopa-namespace",
             "integration.request.querystring.fl": "method.request.querystring.fl"
+          },
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -188,6 +203,11 @@
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id",
             "integration.request.querystring.fl": "method.request.querystring.fl"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -264,6 +284,11 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -311,6 +336,11 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
