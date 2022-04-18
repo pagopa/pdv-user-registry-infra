@@ -182,6 +182,11 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.token": "method.request.path.token"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
