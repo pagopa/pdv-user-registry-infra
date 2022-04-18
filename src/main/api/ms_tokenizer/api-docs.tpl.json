@@ -25,11 +25,20 @@
     "/tokens": {
       "put": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "PUT",
           "uri": "${uri}/tokens",
           "connectionType": "VPC_LINK",
-          "connectionId": "${connection_id}"
+          "connectionId": "${connection_id}",
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
+          }
         },
         "tags": [
           "token"
@@ -91,11 +100,20 @@
     "/tokens/search" : {
       "post" : {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "POST",
           "uri": "${uri}/tokens/search",
           "connectionType": "VPC_LINK",
-          "connectionId": "${connection_id}"
+          "connectionId": "${connection_id}",
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
+          }
         },
         "tags": [
           "token"
@@ -164,6 +182,11 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.token": "method.request.path.token"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
