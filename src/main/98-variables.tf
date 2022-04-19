@@ -85,6 +85,18 @@ variable "apigw_api_person_enable" {
   default     = false
 }
 
+variable "api_keys_tokenizer" {
+  type        = list(string)
+  description = "Api keys allowed to call the tokenizer ms."
+  default     = ["SELFCARE", "USERREGISTRY", ]
+}
+
+variable "api_keys_user_registry" {
+  type        = list(string)
+  description = "Api keys allowed to call the tokenizer ms."
+  default     = ["SELFCARE", ]
+}
+
 
 ## ECR
 variable "ecr_keep_nr_images" {
