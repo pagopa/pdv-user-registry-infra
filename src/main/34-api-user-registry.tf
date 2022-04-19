@@ -1,7 +1,7 @@
 locals {
   user_registry_api_name         = format("%s-user-registry-api", local.project)
   user_registry_stage_name       = "v1"
-  list_user_registry_key_to_name = [for n in var.api_keys_user_registry : "'${aws_api_gateway_api_key.user_registry[n].id}':'${aws_api_gateway_api_key.user_registry[n].name}'"]
+  list_user_registry_key_to_name = [for n in var.api_keys_user_registry : "'${aws_api_gateway_api_key.main[n].id}':'${aws_api_gateway_api_key.main[n].name}'"]
 }
 
 resource "aws_api_gateway_rest_api" "user_registry" {
@@ -102,7 +102,7 @@ resource "aws_api_gateway_usage_plan" "user_registry" {
 
 resource "aws_api_gateway_usage_plan_key" "user_registry" {
   for_each      = toset(var.api_keys_user_registry)
-  key_id        = aws_api_gateway_api_key.user_registry[each.value].id
+  key_id        = aws_api_gateway_api_key.main[each.value].id
   key_type      = "API_KEY"
   usage_plan_id = aws_api_gateway_usage_plan.user_registry.id
 }
@@ -127,8 +127,7 @@ output "user_registry_api_keys" {
 }
 
 output "user_registry_api_ids" {
-  value     = { for k in var.api_keys_user_registry : k => aws_api_gateway_usage_plan_key.user_registry[k].id }
-  sensitive = true
+  value = { for k in var.api_keys_user_registry : k => aws_api_gateway_usage_plan_key.user_registry[k].id }
 }
 
 output "user_registryinvoke_url" {

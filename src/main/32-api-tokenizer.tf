@@ -1,7 +1,7 @@
 locals {
   tokenizer_api_name         = format("%s-tokenizer-api", local.project)
   tokenizer_stage_name       = "v1"
-  list_tokenizer_key_to_name = [for n in var.api_keys_tokenizer : "'${aws_api_gateway_api_key.tokenizer[n].id}':'${aws_api_gateway_api_key.tokenizer[n].name}'"]
+  list_tokenizer_key_to_name = [for n in var.api_keys_tokenizer : "'${aws_api_gateway_api_key.main[n].id}':'${aws_api_gateway_api_key.main[n].name}'"]
 }
 
 resource "aws_api_gateway_rest_api" "tokenizer" {
@@ -102,7 +102,7 @@ resource "aws_api_gateway_usage_plan" "tokenizer" {
 
 resource "aws_api_gateway_usage_plan_key" "tokenizer" {
   for_each      = toset(var.api_keys_tokenizer)
-  key_id        = aws_api_gateway_api_key.tokenizer[each.value].id
+  key_id        = aws_api_gateway_api_key.main[each.value].id
   key_type      = "API_KEY"
   usage_plan_id = aws_api_gateway_usage_plan.tokenizer.id
 }
