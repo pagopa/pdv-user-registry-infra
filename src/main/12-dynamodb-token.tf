@@ -11,7 +11,8 @@ module "dynamodb_table_token" {
   name                           = local.dynamodb_table_token
   hash_key                       = "PK"
   range_key                      = "SK"
-  stream_enabled                 = var.env_short == "p" ? true : false
+  stream_enabled                 = var.dynamodb_region_replication_enable
+  stream_view_type               = var.dynamodb_region_replication_enable ? "NEW_AND_OLD_IMAGES" : null
   point_in_time_recovery_enabled = var.dynamodb_point_in_time_recovery_enabled
   billing_mode                   = "PROVISIONED"
   autoscaling_enabled            = true
