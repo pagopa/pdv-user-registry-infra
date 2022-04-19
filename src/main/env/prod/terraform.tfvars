@@ -9,11 +9,11 @@ ecs_enable_execute_command = true
 
 public_dns_zones = {
   "pdv.pagopa.it" = {
-    comment = "Personal data vault (Uat)"
+    comment = "Personal data vault (Prod)"
   }
 }
 
-apigw_custom_domain_create = false
+apigw_custom_domain_create = true
 apigw_api_person_enable    = true
 apigw_access_logs_enable   = false
 
