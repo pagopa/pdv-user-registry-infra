@@ -72,10 +72,10 @@ resource "aws_iam_policy" "dynamodb_rw" {
       ],
       "Effect": "Allow",
       "Resource": [
-        "${module.dynamodb_table_token.dynamodb_table_arn}",
-        "${module.dynamodb_table_token.dynamodb_table_arn}/index/${local.dynamo_gsi_token_name}",
-        "${module.dynamodb_table_person.dynamodb_table_arn}",
-        "${module.dynamodb_table_person.dynamodb_table_arn}/index/${local.dynamodb_gsi_person_name}"
+        "${module.dynamodb_table_token_eu_south_1.dynamodb_table_arn}",
+        "${module.dynamodb_table_token_eu_south_1.dynamodb_table_arn}/index/${local.dynamo_gsi_token_name}",
+        "${module.dynamodb_table_person_eu_south_1.dynamodb_table_arn}",
+        "${module.dynamodb_table_person_eu_south_1.dynamodb_table_arn}/index/${local.dynamodb_gsi_person_name}"
       ]
     }
   ]

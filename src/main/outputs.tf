@@ -25,18 +25,35 @@ output "ecs_task_definition_person_revision" {
 
 ## dynamodb
 
-output "dynamodb_table_token_arn" {
-  value = module.dynamodb_table_token.dynamodb_table_arn
+output "dynamodb_table_token_eu_south_1_arn" {
+  value = module.dynamodb_table_token_eu_south_1.dynamodb_table_arn
 }
-output "dynamodb_table_token_id" {
-  value = module.dynamodb_table_token.dynamodb_table_id
+output "dynamodb_table_token_eu_south_1_id" {
+  value = module.dynamodb_table_token_eu_south_1.dynamodb_table_id
 }
 
-output "dynamodb_table_person_arn" {
-  value = module.dynamodb_table_person.dynamodb_table_arn
+## replica 
+output "dynamodb_table_token_eu_central_1_arn" {
+  value = try(module.dynamodb_table_token_eu_central_1[0].dynamodb_table_arn, null)
 }
-output "dynamodb_table_person_id" {
-  value = module.dynamodb_table_person.dynamodb_table_id
+output "dynamodb_table_token_eu_central_1_id" {
+  value = try(module.dynamodb_table_token_eu_central_1[0].dynamodb_table_id, null)
+}
+
+## Table person
+output "dynamodb_table_person_eu_south_1_arn" {
+  value = module.dynamodb_table_person_eu_south_1.dynamodb_table_arn
+}
+output "dynamodb_table_person_eu_south_1_id" {
+  value = module.dynamodb_table_person_eu_south_1.dynamodb_table_id
+}
+
+# replica 
+output "dynamodb_table_person_eu_central_1_arn" {
+  value = try(module.dynamodb_table_person_eu_central_1[0].dynamodb_table_arn, null)
+}
+output "dynamodb_table_person_eu_central_1_id" {
+  value = try(module.dynamodb_table_person_eu_central_1[0].dynamodb_table_id, null)
 }
 
 # Dns

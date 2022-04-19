@@ -5,8 +5,9 @@ terraform {
 
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
-      version = "> 3.63.0"
+      source                = "hashicorp/aws"
+      version               = "> 3.63.0, < 4.0.0"
+      configuration_aliases = [aws.alternate]
     }
   }
 }

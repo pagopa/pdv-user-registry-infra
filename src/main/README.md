@@ -3,14 +3,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | > 3.63.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | > 3.63.0, < 4.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | > 3.63.0 |
-| <a name="provider_aws.eu-central-1"></a> [aws.eu-central-1](#provider\_aws.eu-central-1) | > 3.63.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | > 3.63.0, < 4.0.0 |
+| <a name="provider_aws.eu-central-1"></a> [aws.eu-central-1](#provider\_aws.eu-central-1) | > 3.63.0, < 4.0.0 |
 
 ## Modules
 
@@ -18,8 +18,10 @@
 |------|--------|---------|
 | <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | terraform-aws-modules/route53/aws//modules/zones | ~> 2.0 |
 | <a name="module_dynamo_successful_request_latency"></a> [dynamo\_successful\_request\_latency](#module\_dynamo\_successful\_request\_latency) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
-| <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | terraform-aws-modules/dynamodb-table/aws |  |
-| <a name="module_dynamodb_table_token"></a> [dynamodb\_table\_token](#module\_dynamodb\_table\_token) | terraform-aws-modules/dynamodb-table/aws |  |
+| <a name="module_dynamodb_table_person_eu_central_1"></a> [dynamodb\_table\_person\_eu\_central\_1](#module\_dynamodb\_table\_person\_eu\_central\_1) | terraform-aws-modules/dynamodb-table/aws |  |
+| <a name="module_dynamodb_table_person_eu_south_1"></a> [dynamodb\_table\_person\_eu\_south\_1](#module\_dynamodb\_table\_person\_eu\_south\_1) | terraform-aws-modules/dynamodb-table/aws |  |
+| <a name="module_dynamodb_table_token_eu_central_1"></a> [dynamodb\_table\_token\_eu\_central\_1](#module\_dynamodb\_table\_token\_eu\_central\_1) | terraform-aws-modules/dynamodb-table/aws |  |
+| <a name="module_dynamodb_table_token_eu_south_1"></a> [dynamodb\_table\_token\_eu\_south\_1](#module\_dynamodb\_table\_token\_eu\_south\_1) | terraform-aws-modules/dynamodb-table/aws |  |
 | <a name="module_metric_alarms"></a> [metric\_alarms](#module\_metric\_alarms) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
 | <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws |  |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 3.14.0 |
@@ -68,6 +70,7 @@
 | [aws_cloudwatch_log_group.person](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_cloudwatch_log_group.tokenizer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_cloudwatch_log_group.user_registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_dynamodb_global_table.token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_global_table) | resource |
 | [aws_ecr_lifecycle_policy.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_lifecycle_policy) | resource |
 | [aws_ecr_repository.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository) | resource |
 | [aws_ecs_cluster.ecs_cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster) | resource |
@@ -178,10 +181,14 @@
 | <a name="output_api_gateway_endpoint"></a> [api\_gateway\_endpoint](#output\_api\_gateway\_endpoint) | n/a |
 | <a name="output_deploy_access_key"></a> [deploy\_access\_key](#output\_deploy\_access\_key) | n/a |
 | <a name="output_deploy_access_key_secret"></a> [deploy\_access\_key\_secret](#output\_deploy\_access\_key\_secret) | n/a |
-| <a name="output_dynamodb_table_person_arn"></a> [dynamodb\_table\_person\_arn](#output\_dynamodb\_table\_person\_arn) | n/a |
-| <a name="output_dynamodb_table_person_id"></a> [dynamodb\_table\_person\_id](#output\_dynamodb\_table\_person\_id) | n/a |
-| <a name="output_dynamodb_table_token_arn"></a> [dynamodb\_table\_token\_arn](#output\_dynamodb\_table\_token\_arn) | n/a |
-| <a name="output_dynamodb_table_token_id"></a> [dynamodb\_table\_token\_id](#output\_dynamodb\_table\_token\_id) | n/a |
+| <a name="output_dynamodb_table_person_eu_central_1_arn"></a> [dynamodb\_table\_person\_eu\_central\_1\_arn](#output\_dynamodb\_table\_person\_eu\_central\_1\_arn) | replica |
+| <a name="output_dynamodb_table_person_eu_central_1_id"></a> [dynamodb\_table\_person\_eu\_central\_1\_id](#output\_dynamodb\_table\_person\_eu\_central\_1\_id) | n/a |
+| <a name="output_dynamodb_table_person_eu_south_1_arn"></a> [dynamodb\_table\_person\_eu\_south\_1\_arn](#output\_dynamodb\_table\_person\_eu\_south\_1\_arn) | # Table person |
+| <a name="output_dynamodb_table_person_eu_south_1_id"></a> [dynamodb\_table\_person\_eu\_south\_1\_id](#output\_dynamodb\_table\_person\_eu\_south\_1\_id) | n/a |
+| <a name="output_dynamodb_table_token_eu_central_1_arn"></a> [dynamodb\_table\_token\_eu\_central\_1\_arn](#output\_dynamodb\_table\_token\_eu\_central\_1\_arn) | # replica |
+| <a name="output_dynamodb_table_token_eu_central_1_id"></a> [dynamodb\_table\_token\_eu\_central\_1\_id](#output\_dynamodb\_table\_token\_eu\_central\_1\_id) | n/a |
+| <a name="output_dynamodb_table_token_eu_south_1_arn"></a> [dynamodb\_table\_token\_eu\_south\_1\_arn](#output\_dynamodb\_table\_token\_eu\_south\_1\_arn) | n/a |
+| <a name="output_dynamodb_table_token_eu_south_1_id"></a> [dynamodb\_table\_token\_eu\_south\_1\_id](#output\_dynamodb\_table\_token\_eu\_south\_1\_id) | n/a |
 | <a name="output_ecs_definition_task_arn"></a> [ecs\_definition\_task\_arn](#output\_ecs\_definition\_task\_arn) | # ecs |
 | <a name="output_ecs_definition_task_revision"></a> [ecs\_definition\_task\_revision](#output\_ecs\_definition\_task\_revision) | n/a |
 | <a name="output_ecs_task_definition_person_arn"></a> [ecs\_task\_definition\_person\_arn](#output\_ecs\_task\_definition\_person\_arn) | n/a |
