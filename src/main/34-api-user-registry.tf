@@ -1,6 +1,7 @@
 locals {
-  user_registry_api_name   = format("%s-user-registry-api", local.project)
-  user_registry_stage_name = "v1"
+  user_registry_api_name         = format("%s-user-registry-api", local.project)
+  user_registry_stage_name       = "v1"
+  list_user_registry_key_to_name = [for n in var.api_keys_user_registry : "'${aws_api_gateway_api_key.user_registry[n].id}':'${aws_api_gateway_api_key.user_registry[n].name}'"]
 }
 
 resource "aws_api_gateway_rest_api" "user_registry" {
@@ -13,7 +14,7 @@ resource "aws_api_gateway_rest_api" "user_registry" {
       connection_id = aws_api_gateway_vpc_link.apigw.id
       write_request_template = chomp(templatefile("./api/velocity_request_template_write.tpl",
         {
-          list_key_to_name = "'${aws_api_gateway_api_key.user_registry.id}':'${aws_api_gateway_api_key.user_registry.name}'"
+          list_key_to_name = join(",", local.list_user_registry_key_to_name)
       }))
     }
   )
@@ -99,12 +100,9 @@ resource "aws_api_gateway_usage_plan" "user_registry" {
   }
 }
 
-resource "aws_api_gateway_api_key" "user_registry" {
-  name = "user-registry"
-}
-
 resource "aws_api_gateway_usage_plan_key" "user_registry" {
-  key_id        = aws_api_gateway_api_key.user_registry.id
+  for_each      = toset(var.api_keys_user_registry)
+  key_id        = aws_api_gateway_api_key.user_registry[each.value].id
   key_type      = "API_KEY"
   usage_plan_id = aws_api_gateway_usage_plan.user_registry.id
 }
@@ -123,8 +121,13 @@ resource "aws_wafv2_web_acl_association" "user_registry" {
   resource_arn = "arn:aws:apigateway:${var.aws_region}::/restapis/${aws_api_gateway_rest_api.user_registry.id}/stages/${aws_api_gateway_stage.user_registry.stage_name}"
 }
 
-output "user_registry_api_key" {
-  value     = try(aws_api_gateway_usage_plan_key.user_registry.value, null)
+output "user_registry_api_keys" {
+  value     = { for k in var.api_keys_user_registry : k => aws_api_gateway_usage_plan_key.user_registry[k].value }
+  sensitive = true
+}
+
+output "user_registry_api_ids" {
+  value     = { for k in var.api_keys_user_registry : k => aws_api_gateway_usage_plan_key.user_registry[k].id }
   sensitive = true
 }
 

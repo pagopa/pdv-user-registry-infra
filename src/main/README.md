@@ -146,6 +146,8 @@
 | <a name="input_table_token_autoscling_indexes"></a> [table\_token\_autoscling\_indexes](#input\_table\_token\_autoscling\_indexes) | Autoscaling gsi configurations | `any` | n/a | yes |
 | <a name="input_table_token_read_capacity"></a> [table\_token\_read\_capacity](#input\_table\_token\_read\_capacity) | Table token read capacity. | `number` | n/a | yes |
 | <a name="input_table_token_write_capacity"></a> [table\_token\_write\_capacity](#input\_table\_token\_write\_capacity) | Table token read capacity. | `number` | n/a | yes |
+| <a name="input_api_keys_tokenizer"></a> [api\_keys\_tokenizer](#input\_api\_keys\_tokenizer) | Api keys allowed to call the tokenizer ms. | `list(string)` | <pre>[<br>  "SELFCARE",<br>  "USERREGISTRY"<br>]</pre> | no |
+| <a name="input_api_keys_user_registry"></a> [api\_keys\_user\_registry](#input\_api\_keys\_user\_registry) | Api keys allowed to call the tokenizer ms. | `list(string)` | <pre>[<br>  "SELFCARE"<br>]</pre> | no |
 | <a name="input_apigw_access_logs_enable"></a> [apigw\_access\_logs\_enable](#input\_apigw\_access\_logs\_enable) | Enable api gateway access logs | `bool` | `false` | no |
 | <a name="input_apigw_api_person_enable"></a> [apigw\_api\_person\_enable](#input\_apigw\_api\_person\_enable) | Create api person. This is supposed to be internal and should not be shown. | `bool` | `false` | no |
 | <a name="input_apigw_custom_domain_create"></a> [apigw\_custom\_domain\_create](#input\_apigw\_custom\_domain\_create) | Create apigw Custom Domain with its tls certificate | `bool` | `false` | no |
@@ -193,7 +195,9 @@
 | <a name="output_personinvoke_url"></a> [personinvoke\_url](#output\_personinvoke\_url) | n/a |
 | <a name="output_public_dns_servers"></a> [public\_dns\_servers](#output\_public\_dns\_servers) | n/a |
 | <a name="output_public_dns_zone_name"></a> [public\_dns\_zone\_name](#output\_public\_dns\_zone\_name) | Dns |
-| <a name="output_tokenizer_api_key"></a> [tokenizer\_api\_key](#output\_tokenizer\_api\_key) | n/a |
+| <a name="output_tokenizer_api_ids"></a> [tokenizer\_api\_ids](#output\_tokenizer\_api\_ids) | n/a |
+| <a name="output_tokenizer_api_keys"></a> [tokenizer\_api\_keys](#output\_tokenizer\_api\_keys) | n/a |
 | <a name="output_tokenizerinvoke_url"></a> [tokenizerinvoke\_url](#output\_tokenizerinvoke\_url) | n/a |
-| <a name="output_user_registry_api_key"></a> [user\_registry\_api\_key](#output\_user\_registry\_api\_key) | n/a |
+| <a name="output_user_registry_api_ids"></a> [user\_registry\_api\_ids](#output\_user\_registry\_api\_ids) | n/a |
+| <a name="output_user_registry_api_keys"></a> [user\_registry\_api\_keys](#output\_user\_registry\_api\_keys) | n/a |
 | <a name="output_user_registryinvoke_url"></a> [user\_registryinvoke\_url](#output\_user\_registryinvoke\_url) | n/a |
