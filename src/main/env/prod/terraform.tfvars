@@ -19,7 +19,7 @@ apigw_access_logs_enable   = false
 
 # dynamodb
 dynamodb_point_in_time_recovery_enabled = true
-dynamodb_region_replication_enable      = false
+dynamodb_region_replication_enable      = true
 
 
 ## table Token 
