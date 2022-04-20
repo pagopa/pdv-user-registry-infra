@@ -14,6 +14,11 @@ enable_nat_gateway = false
 ecs_enable_execute_command = true
 replica_count              = 2
 
+ecs_autoscaling = {
+  max_capacity = 5
+  min_capacity = 1
+}
+
 # Api Gateway
 
 apigw_custom_domain_create = true

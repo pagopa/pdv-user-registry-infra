@@ -148,6 +148,19 @@ variable "replica_count" {
   default     = 1
 }
 
+variable "ecs_autoscaling" {
+  type = object({
+    max_capacity = number
+    min_capacity = number
+  })
+  default = {
+    max_capacity = 3
+    min_capacity = 1
+  }
+
+  description = "ECS Service autoscaling."
+}
+
 # Dynamodb 
 variable "dynamodb_region_replication_enable" {
   type        = bool
