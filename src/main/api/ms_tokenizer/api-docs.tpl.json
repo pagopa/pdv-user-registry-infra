@@ -37,17 +37,6 @@
         "summary": "Upsert token",
         "description": "Create a new token given a PII and Namespace, if already exists do nothing",
         "operationId": "saveUsingPUT",
-        "parameters": [
-          {
-            "name": "x-pagopa-namespace",
-            "in": "header",
-            "description": "Caller visibility context",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -103,17 +92,6 @@
         "summary": "Search token",
         "description": "Search a token given a PII and Namespace",
         "operationId": "searchUsingPOST",
-        "parameters": [
-          {
-            "name": "x-pagopa-namespace",
-            "in": "header",
-            "description": "Caller visibility context",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {

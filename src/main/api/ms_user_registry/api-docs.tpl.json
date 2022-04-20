@@ -29,10 +29,7 @@
           "httpMethod": "PATCH",
           "uri": "${uri}/users",
           "connectionType": "VPC_LINK",
-          "connectionId": "${connection_id}",
-          "requestParameters": {
-            "integration.request.header.x-pagopa-namespace": "method.request.header.x-pagopa-namespace"
-          }
+          "connectionId": "${connection_id}"
         },
         "tags": [
           "user"
@@ -40,17 +37,6 @@
         "summary": "Upsert user",
         "description": "Update the given subset fields of an existing user by external id, if not present create a new one",
         "operationId": "saveUsingPATCH",
-        "parameters": [
-          {
-            "name": "x-pagopa-namespace",
-            "in": "header",
-            "description": "Caller visibility context",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -97,7 +83,6 @@
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
-            "integration.request.header.x-pagopa-namespace": "method.request.header.x-pagopa-namespace",
             "integration.request.querystring.fl": "method.request.querystring.fl"
           }
         },
@@ -109,15 +94,6 @@
         "operationId": "searchUsingPOST",
         "parameters": [
           {
-            "name": "x-pagopa-namespace",
-            "in": "header",
-            "description": "Caller visibility context",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "fl",
             "in": "query",
             "description": "Field list. Subset of fields to be retrieved for the requested resource",
@@ -125,15 +101,18 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "type": "string",
-              "enum": [
-                "birthDate",
-                "email",
-                "familyName",
-                "fiscalCode",
-                "name",
-                "workContacts"
-              ]
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "birthDate",
+                  "email",
+                  "familyName",
+                  "fiscalCode",
+                  "name",
+                  "workContacts"
+                ]
+              }
             }
           }
         ],
@@ -216,15 +195,18 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "type": "string",
-              "enum": [
-                "birthDate",
-                "email",
-                "familyName",
-                "fiscalCode",
-                "name",
-                "workContacts"
-              ]
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "birthDate",
+                  "email",
+                  "familyName",
+                  "fiscalCode",
+                  "name",
+                  "workContacts"
+                ]
+              }
             }
           }
         ],
