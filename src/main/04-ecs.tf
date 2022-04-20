@@ -9,15 +9,14 @@ locals {
     join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.tokenizer.name, ]),
     join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.person.name, ]),
     join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.user_registry.name, ]),
-    join("/", ["service", aws_ecs_cluster.ecs_cluster.name, aws_ecs_service.poc.name, ]),
   ]
 }
 
 ## Autoscaling
 resource "aws_appautoscaling_target" "ecs_target" {
   count              = length(local.service_ids)
-  max_capacity       = 3
-  min_capacity       = 1
+  max_capacity       = var.ecs_autoscaling.max_capacity
+  min_capacity       = var.ecs_autoscaling.min_capacity
   resource_id        = local.service_ids[count.index]
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
