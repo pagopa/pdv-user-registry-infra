@@ -1,17 +1,25 @@
 env_short   = "p"
 environment = "prod"
 
-# Network
-enable_nat_gateway = false
-
-# Ecs
-ecs_enable_execute_command = true
-
 public_dns_zones = {
   "pdv.pagopa.it" = {
     comment = "Personal data vault (Prod)"
   }
 }
+
+# Network
+enable_nat_gateway = false
+
+# Ecs
+ecs_enable_execute_command = true
+replica_count              = 2
+
+ecs_autoscaling = {
+  max_capacity = 5
+  min_capacity = 1
+}
+
+# Api Gateway
 
 apigw_custom_domain_create = true
 apigw_api_person_enable    = true

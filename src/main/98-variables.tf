@@ -148,6 +148,31 @@ variable "replica_count" {
   default     = 1
 }
 
+variable "ecs_autoscaling" {
+  type = object({
+    max_capacity = number
+    min_capacity = number
+  })
+  default = {
+    max_capacity = 3
+    min_capacity = 1
+  }
+
+  description = "ECS Service autoscaling."
+}
+
+variable "ecs_as_cpu_low_threshold" {
+  type        = number
+  default     = 20
+  description = "ECS Scale in CPU % threshord"
+}
+
+variable "ecs_as_cpu_high_threshold" {
+  type        = number
+  default     = 80
+  description = "ECS Scale out CPU % threshord"
+}
+
 # Dynamodb 
 variable "dynamodb_region_replication_enable" {
   type        = bool
