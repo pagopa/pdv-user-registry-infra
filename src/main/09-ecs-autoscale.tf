@@ -21,7 +21,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_high" {
 resource "aws_cloudwatch_metric_alarm" "cpu_utilization_low" {
   count = length(local.service_ids)
   alarm_name = format("%s-CPU-Utilization-Low-%s", split("/", local.service_ids[count.index])[2],
-  var.ecs_as_cpu_high_threshold)
+  var.ecs_as_cpu_low_threshold)
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
   metric_name         = "CPUUtilization"
