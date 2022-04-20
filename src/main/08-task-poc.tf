@@ -1,62 +1,46 @@
 locals {
-  task_person_name    = format("%s-task-person", local.project)
-  service_person_name = format("%s-service-person", local.project)
+  task_poc_name    = format("%s-task-poc", local.project)
+  service_poc_name = format("%s-service-poc", local.project)
 }
 
-resource "aws_cloudwatch_log_group" "ecs_person" {
-  name = format("ecs/%s", local.task_person_name)
+resource "aws_cloudwatch_log_group" "ecs_poc" {
+  name = format("ecs/%s", local.task_poc_name)
 
   retention_in_days = var.ecs_logs_retention_days
 
   tags = {
-    Name = local.task_person_name
+    Name = local.task_poc_name
   }
 }
 
-resource "aws_ecs_task_definition" "person" {
-  family = local.task_person_name
+resource "aws_ecs_task_definition" "poc" {
+  family = local.task_poc_name
 
   container_definitions = <<DEFINITION
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.main[1].repository_url}:latest",
+    "image": "${aws_ecr_repository.main[3].repository_url}:latest",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "${aws_cloudwatch_log_group.ecs_person.id}",
+        "awslogs-group": "${aws_cloudwatch_log_group.ecs_poc.id}",
         "awslogs-region": "${var.aws_region}",
         "awslogs-stream-prefix": "${local.project}"
       }
     },
     "portMappings": [
       {
-        "containerPort": ${var.container_port_person},
-        "hostPort": ${var.container_port_person}
+        "containerPort": ${var.container_port_poc},
+        "hostPort": ${var.container_port_poc}
       }
     ],
     "environment": [
       {
         "name": "AWS_REGION",
         "value": "${var.aws_region}"
-      },
-      {
-        "name": "APP_SERVER_PORT",
-        "value": "${var.container_port_person}"
-      },
-      {
-        "name": "APP_LOG_LEVEL",
-        "value": "DEBUG"
-      },
-      {
-        "name": "REST_CLIENT_LOGGER_LEVEL",
-        "value": "FULL"
-      },
-      {
-        "name": "LOG_DATEFORMAT_PATTERN",
-        "value": "yyyy-MM-dd HH:mm:ss.SSSZZ"
       }
     ],
     "cpu": 256,
@@ -76,17 +60,17 @@ resource "aws_ecs_task_definition" "person" {
   tags = { Name = format("%s-ecs-td", local.project) }
 }
 
-data "aws_ecs_task_definition" "person" {
-  task_definition = aws_ecs_task_definition.person.family
+data "aws_ecs_task_definition" "poc" {
+  task_definition = aws_ecs_task_definition.poc.family
 }
 
 # Service
-resource "aws_ecs_service" "person" {
-  name    = local.service_person_name
+resource "aws_ecs_service" "poc" {
+  name    = local.service_poc_name
   cluster = aws_ecs_cluster.ecs_cluster.id
   task_definition = format("%s:%s",
-    aws_ecs_task_definition.person.family,
-    max(aws_ecs_task_definition.person.revision, data.aws_ecs_task_definition.person.revision)
+    aws_ecs_task_definition.poc.family,
+    max(aws_ecs_task_definition.poc.revision, data.aws_ecs_task_definition.poc.revision)
   )
   launch_type            = "FARGATE"
   scheduling_strategy    = "REPLICA"
@@ -108,12 +92,12 @@ resource "aws_ecs_service" "person" {
   }
 
   load_balancer {
-    target_group_arn = module.nlb.target_group_arns[1]
+    target_group_arn = module.nlb.target_group_arns[3]
     container_name   = format("%s-container", local.project)
-    container_port   = var.container_port_person
+    container_port   = var.container_port_poc
   }
 
   depends_on = [module.nlb]
 
-  tags = { Name : local.service_person_name }
+  tags = { Name : local.service_poc_name }
 }

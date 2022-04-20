@@ -1,4 +1,5 @@
 resource "aws_cloudwatch_dashboard" "fargate" {
+  count          = var.env_short == "p" ? 0 : 1
   dashboard_name = format("%s-fargate", local.project)
 
   dashboard_body = templatefile("./dashboards/${var.environment}/fargate.tpl.json",

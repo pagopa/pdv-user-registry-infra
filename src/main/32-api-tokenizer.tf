@@ -1,6 +1,7 @@
 locals {
-  tokenizer_api_name   = format("%s-tokenizer-api", local.project)
-  tokenizer_stage_name = "v1"
+  tokenizer_api_name         = format("%s-tokenizer-api", local.project)
+  tokenizer_stage_name       = "v1"
+  list_tokenizer_key_to_name = [for n in var.api_keys_tokenizer : "'${aws_api_gateway_api_key.main[n].id}':'${aws_api_gateway_api_key.main[n].name}'"]
 }
 
 resource "aws_api_gateway_rest_api" "tokenizer" {
@@ -11,6 +12,10 @@ resource "aws_api_gateway_rest_api" "tokenizer" {
     {
       uri           = format("http://%s", module.nlb.lb_dns_name),
       connection_id = aws_api_gateway_vpc_link.apigw.id
+      write_request_template = chomp(templatefile("./api/velocity_request_template_write.tpl",
+        {
+          list_key_to_name = join(",", local.list_tokenizer_key_to_name)
+      }))
     }
   )
 
@@ -95,12 +100,9 @@ resource "aws_api_gateway_usage_plan" "tokenizer" {
   }
 }
 
-resource "aws_api_gateway_api_key" "tokenizer" {
-  name = "tokenizer"
-}
-
 resource "aws_api_gateway_usage_plan_key" "tokenizer" {
-  key_id        = aws_api_gateway_api_key.tokenizer.id
+  for_each      = toset(var.api_keys_tokenizer)
+  key_id        = aws_api_gateway_api_key.main[each.value].id
   key_type      = "API_KEY"
   usage_plan_id = aws_api_gateway_usage_plan.tokenizer.id
 }
@@ -121,9 +123,14 @@ resource "aws_wafv2_web_acl_association" "tokenizer" {
   resource_arn = "arn:aws:apigateway:${var.aws_region}::/restapis/${aws_api_gateway_rest_api.tokenizer.id}/stages/${aws_api_gateway_stage.tokenizer.stage_name}"
 }
 
-output "tokenizer_api_key" {
-  value     = aws_api_gateway_usage_plan_key.tokenizer.value
+
+output "tokenizer_api_keys" {
+  value     = { for k in var.api_keys_tokenizer : k => aws_api_gateway_usage_plan_key.tokenizer[k].value }
   sensitive = true
+}
+
+output "tokenizer_api_ids" {
+  value = { for k in var.api_keys_tokenizer : k => aws_api_gateway_usage_plan_key.tokenizer[k].id }
 }
 
 /*
