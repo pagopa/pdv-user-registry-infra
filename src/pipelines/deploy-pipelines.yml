@@ -1,15 +1,12 @@
-# only manual
-trigger: none
-pr: none
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - 'src/main'
 
 parameters:
-  - name: 'DEV'
-    displayName: 'Run on DEV environment'
-    type: boolean
-    default: True
-    values:
-      - False
-      - True
   - name: 'UAT'
     displayName: 'Run on UAT environment'
     type: boolean
