@@ -16,7 +16,7 @@ replica_count              = 2
 
 ecs_autoscaling = {
   max_capacity = 5
-  min_capacity = 1
+  min_capacity = 2
 }
 
 # Api Gateway
