@@ -428,11 +428,11 @@
         "type": "object",
         "properties": {
           "birthDate": {
-            "description": "${swagger.model.user.birthDate}",
+            "description": "$${swagger.model.user.birthDate}",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
           "email": {
-            "description": "${swagger.model.user.email}",
+            "description": "$${swagger.model.user.email}",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "familyName": {
@@ -460,11 +460,11 @@
         "type": "object",
         "properties": {
           "birthDate": {
-            "description": "${swagger.model.user.birthDate}",
+            "description": "$${swagger.model.user.birthDate}",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
           "email": {
-            "description": "${swagger.model.user.email}",
+            "description": "$${swagger.model.user.email}",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "familyName": {
@@ -510,11 +510,11 @@
         "type": "object",
         "properties": {
           "birthDate": {
-            "description": "${swagger.model.user.birthDate}",
+            "description": "$${swagger.model.user.birthDate}",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
           "email": {
-            "description": "${swagger.model.user.email}",
+            "description": "$${swagger.model.user.email}",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "familyName": {
