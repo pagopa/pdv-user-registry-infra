@@ -1,6 +1,10 @@
-# only manual
-trigger: none
-pr: none
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - 'src/main'
 
 parameters:
   - name: 'UAT'
