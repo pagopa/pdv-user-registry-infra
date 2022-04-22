@@ -95,8 +95,8 @@ resource "aws_api_gateway_usage_plan" "user_registry" {
 
   #TODO: tune this settings
   throttle_settings {
-    burst_limit = 5
-    rate_limit  = 10
+    burst_limit = var.api_user_registry_throttling.burst_limit
+    rate_limit  = var.api_user_registry_throttling.rate_limit
   }
 }
 

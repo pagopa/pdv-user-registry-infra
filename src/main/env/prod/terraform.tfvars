@@ -25,7 +25,17 @@ apigw_custom_domain_create = true
 apigw_api_person_enable    = true
 apigw_access_logs_enable   = false
 
-# dynamodb
+api_tokenizer_throttling = {
+  burst_limit = 10
+  rate_limit  = 100
+}
+
+api_user_registry_throttling = {
+  burst_limit = 10
+  rate_limit  = 100
+}
+
+# DynamoDB
 dynamodb_point_in_time_recovery_enabled = true
 dynamodb_region_replication_enable      = true
 
