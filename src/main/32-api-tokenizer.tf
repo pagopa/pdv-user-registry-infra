@@ -83,6 +83,15 @@ resource "aws_api_gateway_usage_plan" "tokenizer" {
   api_stages {
     api_id = aws_api_gateway_rest_api.tokenizer.id
     stage  = aws_api_gateway_stage.tokenizer.stage_name
+
+    dynamic "throttle" {
+      for_each = var.api_tokenizer_throttling.method_throttle
+      content {
+        path        = throttle.value.path
+        burst_limit = throttle.value.burst_limit
+        rate_limit  = throttle.value.rate_limit
+      }
+    }
   }
 
   /*

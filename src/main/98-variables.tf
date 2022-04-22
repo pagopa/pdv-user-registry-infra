@@ -101,10 +101,16 @@ variable "api_tokenizer_throttling" {
   type = object({
     burst_limit = number
     rate_limit  = number
+    method_throttle = list(object({
+      path        = string
+      burst_limit = number
+      rate_limit  = number
+    }))
   })
   default = {
-    burst_limit = 5
-    rate_limit  = 10
+    burst_limit     = 5
+    rate_limit      = 10
+    method_throttle = []
   }
   description = "Api tokenizer plan rate limits."
 }
@@ -113,13 +119,19 @@ variable "api_user_registry_throttling" {
   type = object({
     burst_limit = number
     rate_limit  = number
+    method_throttle = list(object({
+      path        = string
+      burst_limit = number
+      rate_limit  = number
+    }))
   })
   default = {
-    burst_limit = 5
-    rate_limit  = 10
+    burst_limit     = 5
+    rate_limit      = 10
+    method_throttle = []
   }
+  description = "Api user registry plan rate limits."
 }
-
 
 ## ECR
 variable "ecr_keep_nr_images" {

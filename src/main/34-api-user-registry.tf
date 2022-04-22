@@ -83,6 +83,16 @@ resource "aws_api_gateway_usage_plan" "user_registry" {
   api_stages {
     api_id = aws_api_gateway_rest_api.user_registry.id
     stage  = aws_api_gateway_stage.user_registry.stage_name
+
+    dynamic "throttle" {
+      for_each = var.api_user_registry_throttling.method_throttle
+      content {
+        path        = throttle.value.path
+        burst_limit = throttle.value.burst_limit
+        rate_limit  = throttle.value.rate_limit
+      }
+    }
+
   }
 
   /*
