@@ -208,6 +208,24 @@ variable "ecs_as_cpu_high_threshold" {
   description = "ECS Scale out CPU % threshord"
 }
 
+variable "ms_tokenizer_log_level" {
+  type        = string
+  default     = "DEBUG"
+  description = "Log lever micro service tokenizer"
+}
+
+variable "ms_person_log_level" {
+  type        = string
+  default     = "DEBUG"
+  description = "Log lever micro service person"
+}
+
+variable "ms_user_registry_log_level" {
+  type        = string
+  default     = "DEBUG"
+  description = "Log lever micro service user registry"
+}
+
 # Dynamodb 
 variable "dynamodb_region_replication_enable" {
   type        = bool

@@ -48,7 +48,7 @@ resource "aws_ecs_task_definition" "tokenizer" {
       },
       {
         "name": "APP_LOG_LEVEL",
-        "value": "DEBUG"
+        "value": "${var.ms_tokenizer_log_level}"
       },
       {
         "name": "REST_CLIENT_LOGGER_LEVEL",

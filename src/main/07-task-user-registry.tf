@@ -56,7 +56,7 @@ resource "aws_ecs_task_definition" "user_registry" {
       },
       {
         "name": "APP_LOG_LEVEL",
-        "value": "DEBUG"
+        "value": "${var.ms_user_registry_log_level}"
       },
       {
         "name": "REST_CLIENT_LOGGER_LEVEL",

@@ -48,7 +48,7 @@ resource "aws_ecs_task_definition" "person" {
       },
       {
         "name": "APP_LOG_LEVEL",
-        "value": "DEBUG"
+        "value": "${var.ms_person_log_level}"
       },
       {
         "name": "REST_CLIENT_LOGGER_LEVEL",
