@@ -25,7 +25,59 @@ apigw_custom_domain_create = true
 apigw_api_person_enable    = true
 apigw_access_logs_enable   = false
 
-# dynamodb
+api_tokenizer_throttling = {
+  burst_limit = 10
+  rate_limit  = 100
+  method_throttle = [
+    {
+      path        = "/tokens/{token}/pii/GET"
+      burst_limit = 10
+      rate_limit  = 100
+    },
+    {
+      path        = "/tokens/search/POST"
+      burst_limit = 5
+      rate_limit  = 60
+    },
+
+  ]
+
+}
+
+api_user_registry_throttling = {
+  burst_limit = 10
+  rate_limit  = 100
+
+  method_throttle = [
+    {
+      burst_limit = 10
+      path        = "/users/{id}/GET"
+      rate_limit  = 100
+    },
+    {
+      burst_limit = 5
+      path        = "/users/PATCH"
+      rate_limit  = 60
+    },
+    {
+      burst_limit = 5
+      path        = "/users/search/POST"
+      rate_limit  = 60
+    },
+    {
+      burst_limit = 5
+      path        = "/users/{id}/DELETE"
+      rate_limit  = 10
+    },
+    {
+      burst_limit = 5
+      path        = "/users/{id}/PATCH"
+      rate_limit  = 60
+    }
+  ]
+}
+
+# DynamoDB
 dynamodb_point_in_time_recovery_enabled = true
 dynamodb_region_replication_enable      = true
 
