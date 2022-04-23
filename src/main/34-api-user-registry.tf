@@ -42,6 +42,9 @@ resource "aws_api_gateway_deployment" "user_registry" {
 resource "aws_cloudwatch_log_group" "user_registry" {
   name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.user_registry.id}/${local.user_registry_stage_name}"
   retention_in_days = 7
+
+  tags = { Name = local.user_registry_api_name }
+
 }
 resource "aws_api_gateway_stage" "user_registry" {
   deployment_id      = aws_api_gateway_deployment.user_registry.id
