@@ -2,6 +2,7 @@ locals {
   tokenizer_api_name         = format("%s-tokenizer-api", local.project)
   tokenizer_stage_name       = "v1"
   list_tokenizer_key_to_name = [for n in var.api_keys_tokenizer : "'${aws_api_gateway_api_key.main[n].id}':'${aws_api_gateway_api_key.main[n].name}'"]
+  tokenizer_log_group_name   = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.tokenizer.id}/${local.tokenizer_stage_name}"
 }
 
 resource "aws_api_gateway_rest_api" "tokenizer" {
@@ -40,7 +41,7 @@ resource "aws_api_gateway_deployment" "tokenizer" {
 }
 
 resource "aws_cloudwatch_log_group" "tokenizer" {
-  name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.tokenizer.id}/${local.tokenizer_stage_name}"
+  name              = local.tokenizer_log_group_name
   retention_in_days = 7
 
   tags = { Name = local.tokenizer_api_name }
@@ -152,4 +153,110 @@ output "api_gateway_endpoint" {
 */
 output "tokenizerinvoke_url" {
   value = aws_api_gateway_deployment.tokenizer.invoke_url
+}
+
+
+## Alarms tokenizer
+### 5xx
+module "api_tokenizer_5xx_error_alarm" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
+  version = "~> 3.0"
+
+  actions_enabled     = var.env_short == "p" ? true : false
+  alarm_name          = "high-5xx-rate-"
+  alarm_description   = "Api tokenizer error rate has exceeded 5%"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  threshold           = 5
+  period              = 60
+  unit                = "Count"
+  datapoints_to_alarm = 2
+
+  namespace   = "AWS/ApiGateway"
+  metric_name = "5XXError"
+  statistic   = "Average"
+
+  dimensions = {
+    "${local.tokenizer_api_name}" = {
+      ApiName = local.tokenizer_api_name
+      Stage   = local.tokenizer_stage_name
+    },
+  }
+
+  alarm_actions = [aws_sns_topic.alarms.arn]
+}
+
+# Alarms
+### 4xx
+module "api_tokenizer_4xx_error_alarm" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
+  version = "~> 3.0"
+
+  actions_enabled     = var.env_short == "p" ? true : false
+  alarm_name          = "high-4xx-rate-"
+  alarm_description   = "Api tokenizer error rate has exceeded 5%"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  threshold           = 5
+  period              = 60
+  unit                = "Count"
+  datapoints_to_alarm = 1
+
+  namespace   = "AWS/ApiGateway"
+  metric_name = "4XXError"
+  statistic   = "Average"
+
+  dimensions = {
+    "${local.tokenizer_api_name}" = {
+      ApiName = local.tokenizer_api_name
+      Stage   = local.tokenizer_stage_name
+    },
+  }
+
+  alarm_actions = [aws_sns_topic.alarms.arn]
+}
+
+# Alarms
+### throttling (exceeded throttle limit)
+module "log_filter_throttle_limit_tokenizer" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter"
+  version = "~> 3.0"
+
+  name = format("%s-metric-throttle-rate-limit", local.tokenizer_api_name)
+
+  log_group_name = local.tokenizer_log_group_name
+
+  pattern = "exceeded throttle limit"
+
+  metric_transformation_namespace = "ErrorCount"
+  metric_transformation_name      = format("%s-namespace", local.tokenizer_api_name)
+
+  depends_on = [
+    aws_cloudwatch_log_group.tokenizer
+  ]
+
+}
+
+module "api_tokenizer_throttle_limit_alarm" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarm"
+  version = "~> 3.0"
+
+  actions_enabled     = var.env_short == "p" ? true : false
+  alarm_name          = format("high-rate-limit-throttle-%s", local.tokenizer_api_name)
+  alarm_description   = "Throttle rate limit too high."
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  threshold           = 10
+  period              = 60
+  unit                = "Count"
+
+  namespace   = "ErrorCount"
+  metric_name = format("%s-namespace", local.tokenizer_api_name)
+  statistic   = "Sum"
+
+  alarm_actions = [aws_sns_topic.alarms.arn]
+
+  depends_on = [
+    module.log_filter_throttle_limit_tokenizer
+  ]
 }
