@@ -19,9 +19,15 @@ ecs_autoscaling = {
   min_capacity = 2
 }
 
-ms_tokenizer_log_level     = "ERROR"
-ms_person_log_level        = "ERROR"
-ms_user_registry_log_level = "ERROR"
+ms_tokenizer_log_level                      = "INFO"
+ms_tokenizer_rest_client_log_level          = "BASIC"
+ms_tokenizer_enable_confidential_filter     = true
+ms_person_log_level                         = "INFO"
+ms_person_rest_client_log_level             = "BASIC"
+ms_person_enable_confidential_filter        = true
+ms_user_registry_log_level                  = "INFO"
+ms_user_registry_rest_client_log_level      = "BASIC"
+ms_user_registry_enable_confidential_filter = true
 
 # Api Gateway
 

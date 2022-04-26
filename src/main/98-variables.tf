@@ -211,7 +211,19 @@ variable "ecs_as_cpu_high_threshold" {
 variable "ms_tokenizer_log_level" {
   type        = string
   default     = "DEBUG"
-  description = "Log lever micro service tokenizer"
+  description = "Log level micro service tokenizer"
+}
+
+variable "ms_tokenizer_rest_client_log_level" {
+  type        = string
+  default     = "FULL"
+  description = "Rest client log level micro service tokenizer"
+}
+
+variable "ms_tokenizer_enable_confidential_filter" {
+  type        = bool
+  default     = false
+  description = "Enable a filter to avoid logging confidential data"
 }
 
 variable "ms_person_log_level" {
@@ -220,10 +232,34 @@ variable "ms_person_log_level" {
   description = "Log lever micro service person"
 }
 
+variable "ms_person_rest_client_log_level" {
+  type        = string
+  default     = "FULL"
+  description = "Rest client log level micro service person"
+}
+
+variable "ms_person_enable_confidential_filter" {
+  type        = bool
+  default     = false
+  description = "Enable a filter to avoid logging confidential data"
+}
+
 variable "ms_user_registry_log_level" {
   type        = string
   default     = "DEBUG"
-  description = "Log lever micro service user registry"
+  description = "Log level micro service user registry"
+}
+
+variable "ms_user_registry_rest_client_log_level" {
+  type        = string
+  default     = "FULL"
+  description = "Rest client log level micro service user registry"
+}
+
+variable "ms_user_registry_enable_confidential_filter" {
+  type        = bool
+  default     = false
+  description = "Enable a filter to avoid logging confidential data"
 }
 
 # Dynamodb 
