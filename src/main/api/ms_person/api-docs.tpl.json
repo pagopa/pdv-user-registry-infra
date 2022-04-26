@@ -31,7 +31,7 @@
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
-            "integration.request.querystring.namespacedId": "method.request.querystring.namespacedId"
+            "integration.request.querystring.namespacedId": "method.request.multivaluequerystring.namespacedId"
           }
         },
         "tags": [
@@ -91,7 +91,7 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id",
-            "integration.request.querystring.isNamespaced": "method.request.querystring.isNamespaced"
+            "integration.request.querystring.isNamespaced": "method.request.multivaluequerystring.isNamespaced"
           }
         },
         "tags": [
