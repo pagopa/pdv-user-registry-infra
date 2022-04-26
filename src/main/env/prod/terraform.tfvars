@@ -19,6 +19,10 @@ ecs_autoscaling = {
   min_capacity = 2
 }
 
+ms_tokenizer_log_level     = "ERROR"
+ms_person_log_level        = "ERROR"
+ms_user_registry_log_level = "ERROR"
+
 # Api Gateway
 
 apigw_custom_domain_create = true
