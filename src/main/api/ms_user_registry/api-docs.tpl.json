@@ -184,8 +184,7 @@
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
-            "integration.request.path.id": "method.request.path.id",
-            "integration.request.querystring.fl": "method.request.multivaluequerystring.fl"
+            "integration.request.path.id": "method.request.path.id"
           },
           "responses": {
             "default" : {
