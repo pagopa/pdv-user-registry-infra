@@ -52,7 +52,11 @@ resource "aws_ecs_task_definition" "person" {
       },
       {
         "name": "REST_CLIENT_LOGGER_LEVEL",
-        "value": "FULL"
+        "value": "${var.ms_person_rest_client_log_level}"
+      },
+      {
+        "name": "ENABLE_CONFIDENTIAL_FILTER",
+        "value": "${var.ms_person_enable_confidential_filter}"
       },
       {
         "name": "LOG_DATEFORMAT_PATTERN",

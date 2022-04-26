@@ -60,7 +60,11 @@ resource "aws_ecs_task_definition" "user_registry" {
       },
       {
         "name": "REST_CLIENT_LOGGER_LEVEL",
-        "value": "FULL"
+        "value": "${var.ms_user_registry_rest_client_log_level}"
+      },
+      {
+        "name": "ENABLE_CONFIDENTIAL_FILTER",
+        "value": "${var.ms_user_registry_enable_confidential_filter}"
       },
       {
         "name": "LOG_DATEFORMAT_PATTERN",
