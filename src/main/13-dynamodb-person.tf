@@ -57,7 +57,7 @@ module "dynamodb_table_person" {
     {
       name            = local.dynamodb_gsi_person_name
       hash_key        = "namespacedId"
-      projection_type = "ALL"
+      projection_type = "KEYS_ONLY"
       write_capacity  = var.table_person_autoscling_indexes[local.dynamodb_gsi_person_name]["write_min_capacity"]
       read_capacity   = var.table_person_autoscling_indexes[local.dynamodb_gsi_person_name]["read_min_capacity"]
     }
