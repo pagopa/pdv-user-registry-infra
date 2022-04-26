@@ -58,3 +58,22 @@ output "nlb_hostname" {
 output "api_gateway_endpoint" {
   value = var.apigw_custom_domain_create ? format("https://%s", aws_api_gateway_domain_name.main[0].domain_name) : ""
 }
+
+
+# cloud hsm
+output "cloudhsm_cluster_id" {
+  value = try(aws_cloudhsm_v2_cluster.main[0].id, null)
+}
+
+output "cloudhsm_cluster_certificates" {
+  value     = try(aws_cloudhsm_v2_cluster.main[0].cluster_certificates, null)
+  sensitive = true
+}
+
+output "cloudhsm_hsm_id" {
+  value = try(aws_cloudhsm_v2_hsm.hsm1[0].hsm_id, null)
+}
+
+output "clouthsm_hsm_eni_ip" {
+  value = try(data.aws_network_interface.hsm[0].private_ip, null)
+}

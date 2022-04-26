@@ -106,6 +106,24 @@ resource "aws_iam_role_policy_attachment" "ecs_allow_kms" {
   policy_arn = aws_iam_policy.ecs_allow_kms.arn
 }
 
+## Allow fargate task to query cloud hsm
+## This action does not support resource-level permissions. Policies granting access must specify "*" ## in the resource element.
+resource "aws_iam_policy" "ecs_allow_hsm" {
+  count       = var.create_cloudhsm ? 1 : 0
+  name        = "PagoPaAllowECSHSM"
+  description = "Policy to allow ECS tasks query cloud hsm."
+
+  policy = templatefile(
+    "./iam_policies/allow-hsm.tpl.json", {}
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_allow_hsm" {
+  count      = var.create_cloudhsm ? 1 : 0
+  role       = aws_iam_role.ecs_execution_task.name
+  policy_arn = aws_iam_policy.ecs_allow_hsm[0].arn
+}
+
 ## IAM Group Developer
 resource "aws_iam_group" "developers" {
   name = "Developers"

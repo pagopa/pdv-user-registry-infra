@@ -347,6 +347,12 @@ variable "table_token_autoscling_indexes" {
   description = "Autoscaling gsi configurations"
 }
 
+variable "create_cloudhsm" {
+  type        = bool
+  description = "Create cloudhsm cluster to enctypt dynamodb tables"
+  default     = false
+}
+
 
 ## Alarms
 variable "dynamodb_alarms" {
