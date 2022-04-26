@@ -42,6 +42,8 @@ resource "aws_api_gateway_deployment" "tokenizer" {
 resource "aws_cloudwatch_log_group" "tokenizer" {
   name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.tokenizer.id}/${local.tokenizer_stage_name}"
   retention_in_days = 7
+
+  tags = { Name = local.tokenizer_api_name }
 }
 resource "aws_api_gateway_stage" "tokenizer" {
   deployment_id      = aws_api_gateway_deployment.tokenizer.id

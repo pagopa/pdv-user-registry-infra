@@ -40,6 +40,8 @@ resource "aws_cloudwatch_log_group" "person" {
   count             = var.apigw_api_person_enable ? 1 : 0
   name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.person[0].id}/${local.person_stage_name}"
   retention_in_days = 7
+
+  tags = { Name = local.person_api_name }
 }
 resource "aws_api_gateway_stage" "person" {
   count              = var.apigw_api_person_enable ? 1 : 0
