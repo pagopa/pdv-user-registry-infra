@@ -1,4 +1,4 @@
-bucket         = "terraform-backend-4337"
-key            = "uat/pdv/tfstate"
+bucket         = "terraform-backend-5480"
+key            = "uat/tokenizer/tfstate"
 region         = "eu-south-1"
 dynamodb_table = "terraform-lock"

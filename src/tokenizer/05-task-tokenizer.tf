@@ -121,4 +121,3 @@ resource "aws_ecs_service" "tokenizer" {
 
   tags = { Name : local.service_tokenizer_name }
 }
-

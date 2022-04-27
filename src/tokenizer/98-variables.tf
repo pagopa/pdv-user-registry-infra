@@ -6,8 +6,8 @@ variable "aws_region" {
 
 variable "app_name" {
   type        = string
-  default     = "pdv"
-  description = "App name. Personal Data Vault"
+  default     = "tokenizer"
+  description = "App name. Tokenizer"
 
 }
 
@@ -25,7 +25,7 @@ variable "env_short" {
 
 variable "vpc_cidr" {
   type        = string
-  default     = "10.0.0.0/16"
+  default     = "10.1.0.0/16"
   description = "VPC cidr."
 }
 
@@ -38,19 +38,19 @@ variable "azs" {
 variable "vpc_private_subnets_cidr" {
   type        = list(string)
   description = "Private subnets list of cidr."
-  default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  default     = ["10.1.1.0/24", "10.1.2.0/24", "10.1.3.0/24"]
 }
 
 variable "vpc_public_subnets_cidr" {
   type        = list(string)
   description = "Private subnets list of cidr."
-  default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+  default     = ["10.1.101.0/24", "10.1.102.0/24", "10.1.103.0/24"]
 }
 
 variable "vpc_internal_subnets_cidr" {
   type        = list(string)
   description = "Internal subnets list of cidr. Mainly for private endpoints"
-  default     = ["10.0.201.0/24", "10.0.202.0/24", "10.0.203.0/24"]
+  default     = ["10.1.201.0/24", "10.1.202.0/24", "10.1.203.0/24"]
 }
 
 variable "enable_nat_gateway" {
@@ -79,22 +79,10 @@ variable "apigw_access_logs_enable" {
 
 }
 
-variable "apigw_api_person_enable" {
-  type        = bool
-  description = "Create api person. This is supposed to be internal and should not be shown."
-  default     = false
-}
-
 variable "api_keys_tokenizer" {
   type        = list(string)
   description = "Api keys allowed to call the tokenizer ms."
   default     = ["SELFCARE", "USERREGISTRY", ]
-}
-
-variable "api_keys_user_registry" {
-  type        = list(string)
-  description = "Api keys allowed to call the tokenizer ms."
-  default     = ["SELFCARE", ]
 }
 
 variable "api_tokenizer_throttling" {
@@ -115,23 +103,6 @@ variable "api_tokenizer_throttling" {
   description = "Api tokenizer plan rate limits."
 }
 
-variable "api_user_registry_throttling" {
-  type = object({
-    burst_limit = number
-    rate_limit  = number
-    method_throttle = list(object({
-      path        = string
-      burst_limit = number
-      rate_limit  = number
-    }))
-  })
-  default = {
-    burst_limit     = 5
-    rate_limit      = 10
-    method_throttle = []
-  }
-  description = "Api user registry plan rate limits."
-}
 
 ## ECR
 variable "ecr_keep_nr_images" {
@@ -157,24 +128,6 @@ variable "container_port_tokenizer" {
   type        = number
   description = "Container port tokenizer"
   default     = 8080
-}
-
-variable "container_port_person" {
-  type        = number
-  description = "Container port person"
-  default     = 8000
-}
-
-variable "container_port_user_registry" {
-  type        = number
-  description = "Container port service user registry."
-  default     = 8090
-}
-
-variable "container_port_poc" {
-  type    = number
-  default = 8060
-
 }
 
 variable "replica_count" {
@@ -226,41 +179,13 @@ variable "ms_tokenizer_enable_confidential_filter" {
   description = "Enable a filter to avoid logging confidential data"
 }
 
-variable "ms_person_log_level" {
-  type        = string
-  default     = "DEBUG"
-  description = "Log lever micro service person"
-}
-
-variable "ms_person_rest_client_log_level" {
-  type        = string
-  default     = "FULL"
-  description = "Rest client log level micro service person"
-}
-
-variable "ms_person_enable_confidential_filter" {
-  type        = bool
-  default     = false
-  description = "Enable a filter to avoid logging confidential data"
-}
-
 variable "ms_user_registry_log_level" {
   type        = string
   default     = "DEBUG"
   description = "Log level micro service user registry"
 }
 
-variable "ms_user_registry_rest_client_log_level" {
-  type        = string
-  default     = "FULL"
-  description = "Rest client log level micro service user registry"
-}
 
-variable "ms_user_registry_enable_confidential_filter" {
-  type        = bool
-  default     = false
-  description = "Enable a filter to avoid logging confidential data"
-}
 
 # Dynamodb 
 variable "dynamodb_region_replication_enable" {
@@ -273,42 +198,6 @@ variable "dynamodb_point_in_time_recovery_enabled" {
   type        = bool
   description = "Enable dynamodb point in time recovery"
   default     = false
-}
-
-## Table Person
-variable "table_person_read_capacity" {
-  type        = number
-  description = "Table person read capacity."
-}
-
-variable "table_person_write_capacity" {
-  type        = number
-  description = "Table person read capacity."
-}
-
-variable "table_person_autoscaling_read" {
-  type = object({
-    scale_in_cooldown  = number
-    scale_out_cooldown = number
-    target_value       = number
-    max_capacity       = number
-  })
-  description = "Read autoscaling settings table person."
-}
-
-variable "table_person_autoscaling_write" {
-  type = object({
-    scale_in_cooldown  = number
-    scale_out_cooldown = number
-    target_value       = number
-    max_capacity       = number
-  })
-  description = "Write autoscaling settings table person."
-}
-
-variable "table_person_autoscling_indexes" {
-  type        = any
-  description = "Autoscaling gsi configurations"
 }
 
 ## Table Token
@@ -371,7 +260,6 @@ variable "dynamodb_alarms" {
       metric_name         = string
       statistic           = string
   }))
-
 
 }
 

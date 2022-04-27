@@ -8,14 +8,12 @@ enable_nat_gateway = false
 ecs_enable_execute_command = true
 
 public_dns_zones = {
-  "uat.pdv.pagopa.it" = {
+  "uat.tokenizer.pagopa.it" = {
     comment = "Personal data vault (Uat)"
-
   }
 }
 
-apigw_custom_domain_create = true
-apigw_api_person_enable    = true
+apigw_custom_domain_create = false
 apigw_access_logs_enable   = false
 
 # dynamodb
@@ -42,33 +40,6 @@ table_token_autoscaling_write = {
 
 table_token_autoscling_indexes = {
   gsi_token = {
-    read_max_capacity  = 30
-    read_min_capacity  = 10
-    write_max_capacity = 30
-    write_min_capacity = 10
-  }
-}
-
-## table Person
-table_person_read_capacity  = 5
-table_person_write_capacity = 5
-
-table_person_autoscaling_read = {
-  scale_in_cooldown  = 50
-  scale_out_cooldown = 40
-  target_value       = 45
-  max_capacity       = 10
-}
-
-table_person_autoscaling_write = {
-  scale_in_cooldown  = 50
-  scale_out_cooldown = 40
-  target_value       = 45
-  max_capacity       = 10
-}
-
-table_person_autoscling_indexes = {
-  gsi_namespaced_id = {
     read_max_capacity  = 30
     read_min_capacity  = 10
     write_max_capacity = 30
