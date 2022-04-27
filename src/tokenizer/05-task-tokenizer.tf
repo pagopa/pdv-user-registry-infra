@@ -1,46 +1,66 @@
 locals {
-  task_poc_name    = format("%s-task-poc", local.project)
-  service_poc_name = format("%s-service-poc", local.project)
+  task_tokenizer_name    = format("%s-task-tokenizer", local.project)
+  service_tokenizer_name = format("%s-service-tokenizer", local.project)
 }
 
-resource "aws_cloudwatch_log_group" "ecs_poc" {
-  name = format("ecs/%s", local.task_poc_name)
+resource "aws_cloudwatch_log_group" "ecs_tokenizer" {
+  name = format("ecs/%s", local.task_tokenizer_name)
 
   retention_in_days = var.ecs_logs_retention_days
 
   tags = {
-    Name = local.task_poc_name
+    Name = local.task_tokenizer_name
   }
 }
 
-resource "aws_ecs_task_definition" "poc" {
-  family = local.task_poc_name
+resource "aws_ecs_task_definition" "tokenizer" {
+  family = local.task_tokenizer_name
 
   container_definitions = <<DEFINITION
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.main[3].repository_url}:latest",
+    "image": "${aws_ecr_repository.main[0].repository_url}:latest",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "${aws_cloudwatch_log_group.ecs_poc.id}",
+        "awslogs-group": "${aws_cloudwatch_log_group.ecs_tokenizer.id}",
         "awslogs-region": "${var.aws_region}",
         "awslogs-stream-prefix": "${local.project}"
       }
     },
     "portMappings": [
       {
-        "containerPort": ${var.container_port_poc},
-        "hostPort": ${var.container_port_poc}
+        "containerPort": ${var.container_port_tokenizer},
+        "hostPort": ${var.container_port_tokenizer}
       }
     ],
     "environment": [
       {
         "name": "AWS_REGION",
         "value": "${var.aws_region}"
+      },
+      {
+        "name": "APP_SERVER_PORT",
+        "value": "${var.container_port_tokenizer}"
+      },
+      {
+        "name": "APP_LOG_LEVEL",
+        "value": "${var.ms_tokenizer_log_level}"
+      },
+      {
+        "name": "REST_CLIENT_LOGGER_LEVEL",
+        "value": "${var.ms_tokenizer_rest_client_log_level}"
+      },
+      {
+        "name": "ENABLE_CONFIDENTIAL_FILTER",
+        "value": "${var.ms_tokenizer_enable_confidential_filter}"
+      },
+      {
+        "name": "LOG_DATEFORMAT_PATTERN",
+        "value": "yyyy-MM-dd HH:mm:ss.SSSZZ"
       }
     ],
     "cpu": 256,
@@ -60,17 +80,17 @@ resource "aws_ecs_task_definition" "poc" {
   tags = { Name = format("%s-ecs-td", local.project) }
 }
 
-data "aws_ecs_task_definition" "poc" {
-  task_definition = aws_ecs_task_definition.poc.family
+data "aws_ecs_task_definition" "tokenizer" {
+  task_definition = aws_ecs_task_definition.tokenizer.family
 }
 
 # Service
-resource "aws_ecs_service" "poc" {
-  name    = local.service_poc_name
+resource "aws_ecs_service" "tokenizer" {
+  name    = local.service_tokenizer_name
   cluster = aws_ecs_cluster.ecs_cluster.id
   task_definition = format("%s:%s",
-    aws_ecs_task_definition.poc.family,
-    max(aws_ecs_task_definition.poc.revision, data.aws_ecs_task_definition.poc.revision)
+    aws_ecs_task_definition.tokenizer.family,
+    max(aws_ecs_task_definition.tokenizer.revision, data.aws_ecs_task_definition.tokenizer.revision)
   )
   launch_type            = "FARGATE"
   scheduling_strategy    = "REPLICA"
@@ -92,12 +112,13 @@ resource "aws_ecs_service" "poc" {
   }
 
   load_balancer {
-    target_group_arn = module.nlb.target_group_arns[3]
+    target_group_arn = module.nlb.target_group_arns[0]
     container_name   = format("%s-container", local.project)
-    container_port   = var.container_port_poc
+    container_port   = var.container_port_tokenizer
   }
 
   depends_on = [module.nlb]
 
-  tags = { Name : local.service_poc_name }
+  tags = { Name : local.service_tokenizer_name }
 }
+
