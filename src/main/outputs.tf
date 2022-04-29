@@ -1,3 +1,7 @@
+output "vpc_cidr" {
+  value = module.vpc.vpc_cidr_block
+}
+
 ## ecs
 output "ecs_definition_task_arn" {
   value = data.aws_ecs_task_definition.tokenizer.arn
