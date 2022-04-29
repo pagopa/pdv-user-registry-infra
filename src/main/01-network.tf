@@ -175,6 +175,10 @@ resource "null_resource" "vpc_peering" {
   }
 }
 
+
+output "vpc_peering_id" {
+  value = try(aws_vpc_peering_connection.owner[0].id, null)
+}
 output "vpc_peering_status" {
   value = try(aws_vpc_peering_connection.owner[0].accept_status, null)
 }
