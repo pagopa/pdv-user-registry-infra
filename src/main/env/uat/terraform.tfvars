@@ -4,6 +4,14 @@ environment = "uat"
 # Network
 enable_nat_gateway = false
 
+## Vpc peering
+vpc_peering = {
+  peer_vpc_id         = "vpc-06fce5f8ff25299ea"
+  peer_owner_id       = "377122414966"
+  peer_profile        = "ppa-tokenizer-data-vault-uat"
+  accepter_cidr_block = "10.1.0.0/16"
+}
+
 # Ecs
 ecs_enable_execute_command = true
 
