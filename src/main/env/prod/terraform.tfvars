@@ -271,7 +271,7 @@ dynamodb_alarms = [{
   },
 ]
 
-create_cloudhsm = true
+create_cloudhsm = false
 
 tags = {
   CreatedBy   = "Terraform"

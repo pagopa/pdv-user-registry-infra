@@ -71,7 +71,7 @@ output "cloudhsm_cluster_certificates" {
 }
 
 output "cloudhsm_hsm_id" {
-  value = try(aws_cloudhsm_v2_hsm.hsm1[0].hsm_id, null)
+  value = try(aws_cloudhsm_v2_hsm.hsm.*.hsm_id, null)
 }
 
 output "clouthsm_hsm_eni_ip" {
