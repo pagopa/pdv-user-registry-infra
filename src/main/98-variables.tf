@@ -165,6 +165,11 @@ variable "ecs_enable_execute_command" {
   default     = false
 }
 
+variable "ms_tokenizer_host_name" {
+  type        = string
+  description = "Toknizer host name. It should be the internal network load balancer."
+}
+
 variable "container_port_tokenizer" {
   type        = number
   description = "Container port tokenizer"
