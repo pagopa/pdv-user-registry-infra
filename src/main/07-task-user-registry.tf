@@ -48,7 +48,7 @@ resource "aws_ecs_task_definition" "user_registry" {
       },
       {
         "name": "MS_TOKENIZER_URL",
-        "value": "http://${module.nlb.lb_dns_name}"
+        "value": "http://${var.ms_tokenizer_host_name}"
       },
       {
         "name": "MS_PERSON_URL",
