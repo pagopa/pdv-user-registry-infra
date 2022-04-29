@@ -10,7 +10,7 @@ resource "aws_cloudhsm_v2_cluster" "main" {
 ## a key store. 
 resource "aws_cloudhsm_v2_hsm" "hsm" {
   count      = var.create_cloudhsm ? 2 : 0
-  subnet_id  = module.vpc.private_subnets[0]
+  subnet_id  = module.vpc.private_subnets[count.index]
   cluster_id = aws_cloudhsm_v2_cluster.main[0].id
 }
 
