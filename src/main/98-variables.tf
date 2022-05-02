@@ -96,35 +96,10 @@ variable "apigw_api_person_enable" {
   description = "Create api person. This is supposed to be internal and should not be shown."
   default     = false
 }
-
-variable "api_keys_tokenizer" {
-  type        = list(string)
-  description = "Api keys allowed to call the tokenizer ms."
-  default     = ["SELFCARE", "USERREGISTRY", ]
-}
-
 variable "api_keys_user_registry" {
   type        = list(string)
-  description = "Api keys allowed to call the tokenizer ms."
+  description = "Api keys allowed to call the user registry ms."
   default     = ["SELFCARE", ]
-}
-
-variable "api_tokenizer_throttling" {
-  type = object({
-    burst_limit = number
-    rate_limit  = number
-    method_throttle = list(object({
-      path        = string
-      burst_limit = number
-      rate_limit  = number
-    }))
-  })
-  default = {
-    burst_limit     = 5
-    rate_limit      = 10
-    method_throttle = []
-  }
-  description = "Api tokenizer plan rate limits."
 }
 
 variable "api_user_registry_throttling" {
@@ -168,12 +143,6 @@ variable "ecs_enable_execute_command" {
 variable "ms_tokenizer_host_name" {
   type        = string
   description = "Toknizer host name. It should be the internal network load balancer."
-}
-
-variable "container_port_tokenizer" {
-  type        = number
-  description = "Container port tokenizer"
-  default     = 8080
 }
 
 variable "container_port_person" {
@@ -225,22 +194,10 @@ variable "ecs_as_cpu_high_threshold" {
   description = "ECS Scale out CPU % threshord"
 }
 
-variable "ms_tokenizer_log_level" {
-  type        = string
-  default     = "DEBUG"
-  description = "Log level micro service tokenizer"
-}
-
 variable "ms_tokenizer_rest_client_log_level" {
   type        = string
   default     = "FULL"
   description = "Rest client log level micro service tokenizer"
-}
-
-variable "ms_tokenizer_enable_confidential_filter" {
-  type        = bool
-  default     = false
-  description = "Enable a filter to avoid logging confidential data"
 }
 
 variable "ms_person_log_level" {
@@ -324,42 +281,6 @@ variable "table_person_autoscaling_write" {
 }
 
 variable "table_person_autoscling_indexes" {
-  type        = any
-  description = "Autoscaling gsi configurations"
-}
-
-## Table Token
-variable "table_token_read_capacity" {
-  type        = number
-  description = "Table token read capacity."
-}
-
-variable "table_token_write_capacity" {
-  type        = number
-  description = "Table token read capacity."
-}
-
-variable "table_token_autoscaling_read" {
-  type = object({
-    scale_in_cooldown  = number
-    scale_out_cooldown = number
-    target_value       = number
-    max_capacity       = number
-  })
-  description = "Read autoscaling settings table token."
-}
-
-variable "table_token_autoscaling_write" {
-  type = object({
-    scale_in_cooldown  = number
-    scale_out_cooldown = number
-    target_value       = number
-    max_capacity       = number
-  })
-  description = "Write autoscaling settings table token."
-}
-
-variable "table_token_autoscling_indexes" {
   type        = any
   description = "Autoscaling gsi configurations"
 }

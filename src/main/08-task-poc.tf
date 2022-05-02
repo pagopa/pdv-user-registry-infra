@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "poc" {
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.main[3].repository_url}:latest",
+    "image": "${aws_ecr_repository.main[2].repository_url}:latest",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
@@ -92,7 +92,7 @@ resource "aws_ecs_service" "poc" {
   }
 
   load_balancer {
-    target_group_arn = module.nlb.target_group_arns[3]
+    target_group_arn = module.nlb.target_group_arns[2]
     container_name   = format("%s-container", local.project)
     container_port   = var.container_port_poc
   }

@@ -3,22 +3,6 @@ output "vpc_cidr" {
 }
 
 ## ecs
-output "ecs_definition_task_arn" {
-  value = data.aws_ecs_task_definition.tokenizer.arn
-}
-
-output "ecs_definition_task_revision" {
-  value = data.aws_ecs_task_definition.tokenizer.revision
-}
-
-output "ecs_task_definition_tokenizer_arn" {
-  value = data.aws_ecs_task_definition.tokenizer.arn
-}
-
-output "ecs_task_definition_tokenizer_revision" {
-  value = data.aws_ecs_task_definition.tokenizer.revision
-}
-
 output "ecs_task_definition_person_arn" {
   value = data.aws_ecs_task_definition.person.arn
 }
@@ -28,14 +12,6 @@ output "ecs_task_definition_person_revision" {
 }
 
 ## dynamodb
-
-output "dynamodb_table_token_arn" {
-  value = module.dynamodb_table_token.dynamodb_table_arn
-}
-output "dynamodb_table_token_id" {
-  value = module.dynamodb_table_token.dynamodb_table_id
-}
-
 output "dynamodb_table_person_arn" {
   value = module.dynamodb_table_person.dynamodb_table_arn
 }
