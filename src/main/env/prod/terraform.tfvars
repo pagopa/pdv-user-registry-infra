@@ -10,6 +10,13 @@ public_dns_zones = {
 # Network
 enable_nat_gateway = false
 
+vpc_peering = {
+  peer_vpc_id         = "vpc-04e328a57c3f3d784"
+  peer_owner_id       = "449227190332"
+  peer_profile        = "ppa-tokenizer-data-vault-prod"
+  accepter_cidr_block = "10.1.0.0/16"
+}
+
 # Ecs
 ecs_enable_execute_command = true
 replica_count              = 2
@@ -19,9 +26,6 @@ ecs_autoscaling = {
   min_capacity = 2
 }
 
-ms_tokenizer_log_level                      = "INFO"
-ms_tokenizer_rest_client_log_level          = "BASIC"
-ms_tokenizer_enable_confidential_filter     = true
 ms_person_log_level                         = "INFO"
 ms_person_rest_client_log_level             = "BASIC"
 ms_person_enable_confidential_filter        = true
@@ -29,30 +33,13 @@ ms_user_registry_log_level                  = "INFO"
 ms_user_registry_rest_client_log_level      = "BASIC"
 ms_user_registry_enable_confidential_filter = true
 
+ms_tokenizer_host_name = "tokenizer-p-nlb-094463a88e36e754.elb.eu-south-1.amazonaws.com"
+
 # Api Gateway
 
 apigw_custom_domain_create = true
 apigw_api_person_enable    = true
 apigw_access_logs_enable   = false
-
-api_tokenizer_throttling = {
-  burst_limit = 10
-  rate_limit  = 100
-  method_throttle = [
-    {
-      path        = "/tokens/{token}/pii/GET"
-      burst_limit = 10
-      rate_limit  = 100
-    },
-    {
-      path        = "/tokens/search/POST"
-      burst_limit = 5
-      rate_limit  = 60
-    },
-
-  ]
-
-}
 
 api_user_registry_throttling = {
   burst_limit = 10
@@ -90,35 +77,6 @@ api_user_registry_throttling = {
 # DynamoDB
 dynamodb_point_in_time_recovery_enabled = true
 dynamodb_region_replication_enable      = true
-
-
-## table Token 
-## TODO tune capacity for production.
-table_token_read_capacity  = 5
-table_token_write_capacity = 5
-
-table_token_autoscaling_read = {
-  scale_in_cooldown  = 50
-  scale_out_cooldown = 40
-  target_value       = 45
-  max_capacity       = 10
-}
-
-table_token_autoscaling_write = {
-  scale_in_cooldown  = 50
-  scale_out_cooldown = 40
-  target_value       = 45
-  max_capacity       = 10
-}
-
-table_token_autoscling_indexes = {
-  gsi_token = {
-    read_max_capacity  = 30
-    read_min_capacity  = 10
-    write_max_capacity = 30
-    write_min_capacity = 10
-  }
-}
 
 ## table Person
 table_person_read_capacity  = 5

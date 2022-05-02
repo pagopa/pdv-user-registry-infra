@@ -55,7 +55,6 @@
 | [aws_appautoscaling_policy.ecs_policy_memory](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy) | resource |
 | [aws_appautoscaling_target.ecs_target](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target) | resource |
 | [aws_cloudhsm_v2_cluster.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudhsm_v2_cluster) | resource |
-| [aws_cloudhsm_v2_hsm.hsm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudhsm_v2_hsm) | resource |
 | [aws_cloudwatch_log_group.ecs_person](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_cloudwatch_log_group.ecs_poc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_cloudwatch_log_group.ecs_user_registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
@@ -121,7 +120,6 @@
 | [aws_iam_policy_document.dynamodb_endpoint_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.ecs_tasks_assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.generic_endpoint_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_network_interface.hsm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/network_interface) | data source |
 | [aws_network_interface.nlb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/network_interface) | data source |
 | [aws_route_tables.owner](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route_tables) | data source |
 | [aws_secretsmanager_secret.devops](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret) | data source |
@@ -186,8 +184,6 @@
 | <a name="output_api_gateway_endpoint"></a> [api\_gateway\_endpoint](#output\_api\_gateway\_endpoint) | n/a |
 | <a name="output_cloudhsm_cluster_certificates"></a> [cloudhsm\_cluster\_certificates](#output\_cloudhsm\_cluster\_certificates) | n/a |
 | <a name="output_cloudhsm_cluster_id"></a> [cloudhsm\_cluster\_id](#output\_cloudhsm\_cluster\_id) | cloud hsm |
-| <a name="output_cloudhsm_hsm_id"></a> [cloudhsm\_hsm\_id](#output\_cloudhsm\_hsm\_id) | n/a |
-| <a name="output_clouthsm_hsm_eni_ip"></a> [clouthsm\_hsm\_eni\_ip](#output\_clouthsm\_hsm\_eni\_ip) | n/a |
 | <a name="output_deploy_access_key"></a> [deploy\_access\_key](#output\_deploy\_access\_key) | n/a |
 | <a name="output_deploy_access_key_secret"></a> [deploy\_access\_key\_secret](#output\_deploy\_access\_key\_secret) | n/a |
 | <a name="output_dynamodb_table_person_arn"></a> [dynamodb\_table\_person\_arn](#output\_dynamodb\_table\_person\_arn) | # dynamodb |

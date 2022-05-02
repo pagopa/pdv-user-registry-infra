@@ -50,6 +50,7 @@ output "cloudhsm_cluster_certificates" {
   sensitive = true
 }
 
+/*  # todo ... wait for confirmation we need cloudhsm.
 output "cloudhsm_hsm_id" {
   value = try(aws_cloudhsm_v2_hsm.hsm.*.hsm_id, null)
 }
@@ -57,3 +58,5 @@ output "cloudhsm_hsm_id" {
 output "clouthsm_hsm_eni_ip" {
   value = try(data.aws_network_interface.hsm[0].private_ip, null)
 }
+
+*/
