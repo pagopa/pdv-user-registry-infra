@@ -65,10 +65,7 @@
                 }
               }
             }
-          },
-          "201" : {
-            "description" : "Created"
-          },
+          }
           "401" : {
             "description" : "Unauthorized"
           },
@@ -129,10 +126,7 @@
                 }
               }
             }
-          },
-          "201": {
-            "description": "Created"
-          },
+          }
           "401": {
             "description": "Unauthorized"
           },

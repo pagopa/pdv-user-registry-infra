@@ -67,9 +67,6 @@
               }
             }
           },
-          "204": {
-            "description": "No Content"
-          },
           "401": {
             "description": "Unauthorized"
           },
@@ -154,10 +151,7 @@
                 }
               }
             }
-          },
-          "201": {
-            "description": "Created"
-          },
+          }
           "401": {
             "description": "Unauthorized"
           },
@@ -427,11 +421,11 @@
         "type": "object",
         "properties": {
           "birthDate": {
-            "description": "$${swagger.model.user.birthDate}",
+            "description": "User date of birth",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
           "email": {
-            "description": "$${swagger.model.user.email}",
+            "description": "User email",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "familyName": {
@@ -459,11 +453,11 @@
         "type": "object",
         "properties": {
           "birthDate": {
-            "description": "$${swagger.model.user.birthDate}",
+            "description": "User date of birth",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
           "email": {
-            "description": "$${swagger.model.user.email}",
+            "description": "User email",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "familyName": {
@@ -509,11 +503,11 @@
         "type": "object",
         "properties": {
           "birthDate": {
-            "description": "$${swagger.model.user.birthDate}",
+            "description": "User date of birth",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
           },
           "email": {
-            "description": "$${swagger.model.user.email}",
+            "description": "User email",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
           },
           "familyName": {
