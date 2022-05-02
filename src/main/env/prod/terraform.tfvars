@@ -43,33 +43,33 @@ apigw_access_logs_enable   = false
 
 api_user_registry_throttling = {
   burst_limit = 10
-  rate_limit  = 100
+  rate_limit  = 20
 
   method_throttle = [
     {
       burst_limit = 10
       path        = "/users/{id}/GET"
-      rate_limit  = 100
+      rate_limit  = 18
     },
     {
       burst_limit = 5
       path        = "/users/PATCH"
-      rate_limit  = 60
+      rate_limit  = 18
     },
     {
       burst_limit = 5
       path        = "/users/search/POST"
-      rate_limit  = 60
+      rate_limit  = 38
     },
     {
       burst_limit = 5
       path        = "/users/{id}/DELETE"
-      rate_limit  = 10
+      rate_limit  = 2
     },
     {
       burst_limit = 5
       path        = "/users/{id}/PATCH"
-      rate_limit  = 60
+      rate_limit  = 18
     }
   ]
 }
@@ -79,28 +79,28 @@ dynamodb_point_in_time_recovery_enabled = true
 dynamodb_region_replication_enable      = true
 
 ## table Person
-table_person_read_capacity  = 5
-table_person_write_capacity = 5
+table_person_read_capacity  = 50
+table_person_write_capacity = 40
 
 table_person_autoscaling_read = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
-  target_value       = 45
-  max_capacity       = 10
+  target_value       = 40
+  max_capacity       = 60
 }
 
 table_person_autoscaling_write = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
-  target_value       = 45
-  max_capacity       = 10
+  target_value       = 20
+  max_capacity       = 30
 }
 
 table_person_autoscling_indexes = {
   gsi_namespaced_id = {
     read_max_capacity  = 30
     read_min_capacity  = 10
-    write_max_capacity = 30
+    write_max_capacity = 20
     write_min_capacity = 10
   }
 }

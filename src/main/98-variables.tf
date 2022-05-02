@@ -117,7 +117,7 @@ variable "api_user_registry_throttling" {
     rate_limit      = 10
     method_throttle = []
   }
-  description = "Api user registry plan rate limits."
+  description = "Api user registry plan rate limits. Important !!! The precedence is granted to the lower values."
 }
 
 ## ECR
