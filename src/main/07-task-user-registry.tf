@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "user_registry" {
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.main[2].repository_url}:latest",
+    "image": "${aws_ecr_repository.main[1].repository_url}:latest",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
@@ -120,7 +120,7 @@ resource "aws_ecs_service" "user_registry" {
   }
 
   load_balancer {
-    target_group_arn = module.nlb.target_group_arns[2]
+    target_group_arn = module.nlb.target_group_arns[1]
     container_name   = format("%s-container", local.project)
     container_port   = var.container_port_user_registry
   }

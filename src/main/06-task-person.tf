@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "person" {
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.main[1].repository_url}:latest",
+    "image": "${aws_ecr_repository.main[0].repository_url}:latest",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
@@ -112,7 +112,7 @@ resource "aws_ecs_service" "person" {
   }
 
   load_balancer {
-    target_group_arn = module.nlb.target_group_arns[1]
+    target_group_arn = module.nlb.target_group_arns[0]
     container_name   = format("%s-container", local.project)
     container_port   = var.container_port_person
   }

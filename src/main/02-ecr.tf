@@ -1,7 +1,5 @@
 locals {
-  repository_tokenizer = format("%s-tokenizer", local.project, )
   repositories = [
-    format("%s-ecr", local.project, ), # todo rename into tokenizer
     format("%s-person", local.project, ),
     format("%s-user-registry", local.project, ),
     format("%s-poc", local.project, ),

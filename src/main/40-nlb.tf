@@ -10,7 +10,6 @@ resource "aws_security_group" "nsg_task" {
 locals {
   # list of container port in use.
   container_ports = [
-    var.container_port_tokenizer,
     var.container_port_person,
     var.container_port_user_registry,
     var.container_port_poc,
@@ -71,52 +70,28 @@ module "nlb" {
   internal = true
 
   http_tcp_listeners = [
-    {
-      port               = 80
-      protocol           = "TCP"
-      target_group_index = 0
-    },
+    # MS Person
     {
       port               = var.container_port_person
       protocol           = "TCP"
-      target_group_index = 1
+      target_group_index = 0
     },
+    # MS User registry
     {
       port               = var.container_port_user_registry
       protocol           = "TCP"
-      target_group_index = 2
+      target_group_index = 1
     },
+    # MS Poc
     {
       port               = var.container_port_poc
       protocol           = "TCP"
-      target_group_index = 3
+      target_group_index = 2
     },
   ]
 
 
   target_groups = [
-    {
-      # service tokenizer
-      name             = format("%s-tokenizer", local.project)
-      backend_protocol = "TCP"
-      backend_port     = 80
-      #port        = 80
-      target_type = "ip"
-      #preserve_client_ip = true
-      deregistration_delay = 30
-      vpc_id               = module.vpc.vpc_id
-
-      health_check = {
-        enabled = true
-
-        healthy_threshold   = 3
-        interval            = 30
-        timeout             = 6
-        unhealthy_threshold = 3
-        matcher             = "200-399"
-        path                = "/actuator/health"
-      }
-    },
     # service person
     {
       name             = format("%s-person", local.project)
@@ -141,12 +116,10 @@ module "nlb" {
     },
     # Service user registry.
     {
-      name             = format("%s-user-registry", local.project)
-      backend_protocol = "TCP"
-      backend_port     = var.container_port_user_registry
-      #port        = 80
-      target_type = "ip"
-      #preserve_client_ip = true
+      name                 = format("%s-user-registry", local.project)
+      backend_protocol     = "TCP"
+      backend_port         = var.container_port_user_registry
+      target_type          = "ip"
       deregistration_delay = 30
       vpc_id               = module.vpc.vpc_id
 
@@ -164,12 +137,10 @@ module "nlb" {
 
     # Service poc
     {
-      name             = format("%s-poc", local.project)
-      backend_protocol = "TCP"
-      backend_port     = var.container_port_poc
-      #port        = 80
-      target_type = "ip"
-      #preserve_client_ip = true
+      name                 = format("%s-poc", local.project)
+      backend_protocol     = "TCP"
+      backend_port         = var.container_port_poc
+      target_type          = "ip"
       deregistration_delay = 30
       vpc_id               = module.vpc.vpc_id
 
