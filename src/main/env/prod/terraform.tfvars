@@ -93,7 +93,7 @@ table_person_autoscaling_write = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
   target_value       = 20
-  max_capacity       = 30
+  max_capacity       = 50
 }
 
 table_person_autoscling_indexes = {

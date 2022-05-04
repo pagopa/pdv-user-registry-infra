@@ -291,6 +291,12 @@ variable "create_cloudhsm" {
   default     = false
 }
 
+variable "cloudhsm_nodes" {
+  type        = number
+  default     = 1
+  description = "Number of HSMs in the cluset. One and only one is required to initialize the cluster. Two are required to create a key store in KMS."
+}
+
 
 ## Alarms
 variable "dynamodb_alarms" {
