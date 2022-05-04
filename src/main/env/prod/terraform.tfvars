@@ -229,7 +229,8 @@ dynamodb_alarms = [{
   },
 ]
 
-create_cloudhsm = true
+create_cloudhsm = false
+cloudhsm_nodes  = 1  # change to 2 once yuo downloaded the certificate and the cluster is initialized and active.
 
 tags = {
   CreatedBy   = "Terraform"
