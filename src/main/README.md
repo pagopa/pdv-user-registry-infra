@@ -17,9 +17,13 @@
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_api_user_registry_4xx_error_alarm"></a> [api\_user\_registry\_4xx\_error\_alarm](#module\_api\_user\_registry\_4xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
+| <a name="module_api_user_registry_5xx_error_alarm"></a> [api\_user\_registry\_5xx\_error\_alarm](#module\_api\_user\_registry\_5xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
+| <a name="module_api_user_registry_throttle_limit_alarm"></a> [api\_user\_registry\_throttle\_limit\_alarm](#module\_api\_user\_registry\_throttle\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
 | <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | terraform-aws-modules/route53/aws//modules/zones | ~> 2.0 |
 | <a name="module_dynamo_successful_request_latency"></a> [dynamo\_successful\_request\_latency](#module\_dynamo\_successful\_request\_latency) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
 | <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | terraform-aws-modules/dynamodb-table/aws |  |
+| <a name="module_log_filter_throttle_limit_user_registry"></a> [log\_filter\_throttle\_limit\_user\_registry](#module\_log\_filter\_throttle\_limit\_user\_registry) | terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter | ~> 3.0 |
 | <a name="module_metric_alarms"></a> [metric\_alarms](#module\_metric\_alarms) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
 | <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws |  |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 3.14.0 |
