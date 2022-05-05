@@ -120,7 +120,7 @@ resource "aws_api_gateway_usage_plan_key" "user_registry" {
   usage_plan_id = aws_api_gateway_usage_plan.user_registry.id
 }
 
-resource "aws_apigatewayv2_api_mapping" "this" {
+resource "aws_apigatewayv2_api_mapping" "user_registry" {
   count           = var.apigw_custom_domain_create ? 1 : 0
   api_id          = aws_api_gateway_rest_api.user_registry.id
   stage           = local.user_registry_stage_name
