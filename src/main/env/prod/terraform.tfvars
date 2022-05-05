@@ -47,7 +47,7 @@ api_user_registry_throttling = {
 
   method_throttle = [
     {
-      burst_limit = 10
+      burst_limit = 5
       path        = "/users/{id}/GET"
       rate_limit  = 18
     },
