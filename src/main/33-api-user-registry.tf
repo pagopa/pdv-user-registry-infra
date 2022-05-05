@@ -120,12 +120,12 @@ resource "aws_api_gateway_usage_plan_key" "user_registry" {
   usage_plan_id = aws_api_gateway_usage_plan.user_registry.id
 }
 
-resource "aws_api_gateway_base_path_mapping" "user_registry" {
-  count       = var.apigw_custom_domain_create ? 1 : 0
-  api_id      = aws_api_gateway_rest_api.user_registry.id
-  stage_name  = local.user_registry_stage_name
-  domain_name = aws_api_gateway_domain_name.main[0].domain_name
-  base_path   = "user-registry"
+resource "aws_apigatewayv2_api_mapping" "user_registry" {
+  count           = var.apigw_custom_domain_create ? 1 : 0
+  api_id          = aws_api_gateway_rest_api.user_registry.id
+  stage           = local.user_registry_stage_name
+  domain_name     = aws_api_gateway_domain_name.main[0].domain_name
+  api_mapping_key = format("user-registry/%s", aws_api_gateway_stage.user_registry.stage_name)
 }
 
 ## WAF association
