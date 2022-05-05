@@ -105,7 +105,7 @@ table_person_autoscling_indexes = {
   }
 }
 
-## alarms
+## alarms  
 dynamodb_alarms = [{
   actions_enabled     = true
   alarm_name          = "dynamodb-account-provisioned-read-capacity"

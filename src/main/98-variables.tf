@@ -315,10 +315,7 @@ variable "dynamodb_alarms" {
       metric_name         = string
       statistic           = string
   }))
-
-
 }
-
 
 variable "tags" {
   type = map(any)
