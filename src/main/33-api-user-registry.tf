@@ -2,6 +2,7 @@ locals {
   user_registry_api_name         = format("%s-user-registry-api", local.project)
   user_registry_stage_name       = "v1"
   list_user_registry_key_to_name = [for n in var.api_keys_user_registry : "'${aws_api_gateway_api_key.main[n].id}':'${aws_api_gateway_api_key.main[n].name}'"]
+  user_registry_log_group_name   = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.user_registry.id}/${local.user_registry_stage_name}"
 }
 
 resource "aws_api_gateway_rest_api" "user_registry" {
@@ -40,7 +41,7 @@ resource "aws_api_gateway_deployment" "user_registry" {
 }
 
 resource "aws_cloudwatch_log_group" "user_registry" {
-  name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.user_registry.id}/${local.user_registry_stage_name}"
+  name              = local.user_registry_log_group_name
   retention_in_days = 7
 
   tags = { Name = local.user_registry_api_name }
@@ -145,4 +146,108 @@ output "user_registry_api_ids" {
 
 output "user_registryinvoke_url" {
   value = try(aws_api_gateway_deployment.user_registry.invoke_url, null)
+}
+
+## Alarms
+### 4xx
+module "api_user_registry_4xx_error_alarm" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
+  version = "~> 3.0"
+
+  actions_enabled     = var.env_short == "p" ? true : false
+  alarm_name          = "high-4xx-rate-"
+  alarm_description   = "Api User registry error rate has exceeded 5%"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  threshold           = 200
+  period              = 300
+  unit                = "Count"
+  datapoints_to_alarm = 1
+
+  namespace   = "AWS/ApiGateway"
+  metric_name = "4XXError"
+  statistic   = "Sum"
+
+  dimensions = {
+    "${local.user_registry_api_name}" = {
+      ApiName = local.user_registry_api_name
+      Stage   = local.user_registry_stage_name
+    },
+  }
+
+  alarm_actions = [aws_sns_topic.alarms.arn]
+}
+
+### 5xx
+module "api_user_registry_5xx_error_alarm" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
+  version = "~> 3.0"
+
+  actions_enabled     = var.env_short == "p" ? true : false
+  alarm_name          = "high-5xx-rate-"
+  alarm_description   = "Api user registry error rate has exceeded 5%"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 20
+  threshold           = 5
+  period              = 300
+  unit                = "Count"
+  datapoints_to_alarm = 2
+
+  namespace   = "AWS/ApiGateway"
+  metric_name = "5XXError"
+  statistic   = "Sum"
+
+  dimensions = {
+    "${local.user_registry_api_name}" = {
+      ApiName = local.user_registry_api_name
+      Stage   = local.user_registry_stage_name
+    },
+  }
+
+  alarm_actions = [aws_sns_topic.alarms.arn]
+}
+
+### throttling (exceeded throttle limit)
+module "log_filter_throttle_limit_user_registry" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter"
+  version = "~> 3.0"
+
+  name = format("%s-metric-throttle-rate-limit", local.user_registry_api_name)
+
+  log_group_name = local.user_registry_log_group_name
+
+  pattern = "exceeded throttle limit"
+
+  metric_transformation_namespace = "ErrorCount"
+  metric_transformation_name      = format("%s-namespace", local.user_registry_api_name)
+
+  depends_on = [
+    aws_cloudwatch_log_group.user_registry
+  ]
+
+}
+
+module "api_user_registry_throttle_limit_alarm" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarm"
+  version = "~> 3.0"
+
+  actions_enabled     = var.env_short == "p" ? true : false
+  alarm_name          = format("high-rate-limit-throttle-%s", local.user_registry_api_name)
+  alarm_description   = "Throttle rate limit too high."
+  comparison_operator = "GreaterThanThreshold"
+  datapoints_to_alarm = 1
+  evaluation_periods  = 2
+  threshold           = 20
+  period              = 300
+  #unit                = "Count"
+
+  namespace   = "ErrorCount"
+  metric_name = format("%s-namespace", local.user_registry_api_name)
+  statistic   = "Sum"
+
+  alarm_actions = [aws_sns_topic.alarms.arn]
+
+  depends_on = [
+    module.log_filter_throttle_limit_user_registry
+  ]
 }
