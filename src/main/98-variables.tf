@@ -91,6 +91,12 @@ variable "apigw_access_logs_enable" {
 
 }
 
+variable "apigw_data_trace_enabled" {
+  type        = bool
+  description = "Specifies whether data trace logging is enabled. It effects the log entries pushed to Amazon CloudWatch Logs."
+  default     = false
+}
+
 variable "apigw_api_person_enable" {
   type        = bool
   description = "Create api person. This is supposed to be internal and should not be shown."
