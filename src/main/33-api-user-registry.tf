@@ -71,7 +71,7 @@ resource "aws_api_gateway_method_settings" "user_registry" {
   settings {
     # Enable CloudWatch logging and metrics
     metrics_enabled    = true
-    data_trace_enabled = true
+    data_trace_enabled = var.apigw_data_trace_enabled
     logging_level      = "ERROR"
     #todo.
     # Limit the rate of calls to prevent abuse and unwanted charges
