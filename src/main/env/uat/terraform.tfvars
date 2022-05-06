@@ -30,7 +30,7 @@ apigw_custom_domain_create = true
 apigw_api_person_enable    = true
 apigw_access_logs_enable   = false
 
-api_keys_user_registry = ["SELFCARE", "PNPF-DEV", "PNPF-UAT"]
+api_keys_user_registry = ["SANDBOX", "SELFCARE-DEV", "SELFCARE-UAT", "PNPF-DEV", "PNPF-UAT"]
 
 # dynamodb
 dynamodb_point_in_time_recovery_enabled = false
