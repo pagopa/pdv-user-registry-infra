@@ -1,7 +1,7 @@
 locals {
   user_registry_api_name         = format("%s-user-registry-api", local.project)
   user_registry_stage_name       = "v1"
-  list_user_registry_key_to_name = [for n in var.api_keys_user_registry : "'${aws_api_gateway_api_key.main[n].id}':'${aws_api_gateway_api_key.main[n].name}'"]
+  list_user_registry_key_to_name = [for n in var.user_registry_plans : "'${aws_api_gateway_api_key.main[n.key_name].id}':'${n.key_name}'"]
   user_registry_log_group_name   = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.user_registry.id}/${local.user_registry_stage_name}"
 }
 
@@ -81,7 +81,8 @@ resource "aws_api_gateway_method_settings" "user_registry" {
 }
 
 resource "aws_api_gateway_usage_plan" "user_registry" {
-  name        = format("%s-api-user_registry", local.project)
+  for_each    = local.api_key_list
+  name        = format("%s-api-plan-%s", local.project, lower(each.key))
   description = "Usage plan for main user_registry apis"
 
   api_stages {
@@ -89,7 +90,7 @@ resource "aws_api_gateway_usage_plan" "user_registry" {
     stage  = aws_api_gateway_stage.user_registry.stage_name
 
     dynamic "throttle" {
-      for_each = var.api_user_registry_throttling.method_throttle
+      for_each = each.value.method_throttle
       content {
         path        = throttle.value.path
         burst_limit = throttle.value.burst_limit
@@ -106,19 +107,17 @@ resource "aws_api_gateway_usage_plan" "user_registry" {
     period = "WEEK"
   }
   */
-
-  #TODO: tune this settings
   throttle_settings {
-    burst_limit = var.api_user_registry_throttling.burst_limit
-    rate_limit  = var.api_user_registry_throttling.rate_limit
+    burst_limit = each.value.burst_limit
+    rate_limit  = each.value.rate_limit
   }
 }
 
 resource "aws_api_gateway_usage_plan_key" "user_registry" {
-  for_each      = toset(var.api_keys_user_registry)
-  key_id        = aws_api_gateway_api_key.main[each.value].id
+  for_each      = local.api_key_list
+  key_id        = aws_api_gateway_api_key.main[each.key].id
   key_type      = "API_KEY"
-  usage_plan_id = aws_api_gateway_usage_plan.user_registry.id
+  usage_plan_id = aws_api_gateway_usage_plan.user_registry[each.key].id
 }
 
 resource "aws_apigatewayv2_api_mapping" "user_registry" {
@@ -136,12 +135,12 @@ resource "aws_wafv2_web_acl_association" "user_registry" {
 }
 
 output "user_registry_api_keys" {
-  value     = { for k in var.api_keys_user_registry : k => aws_api_gateway_usage_plan_key.user_registry[k].value }
+  value     = { for k in keys(local.api_key_list) : k => aws_api_gateway_usage_plan_key.user_registry[k].value }
   sensitive = true
 }
 
 output "user_registry_api_ids" {
-  value = { for k in var.api_keys_user_registry : k => aws_api_gateway_usage_plan_key.user_registry[k].id }
+  value = { for k in keys(local.api_key_list) : k => aws_api_gateway_usage_plan_key.user_registry[k].id }
 }
 
 output "user_registryinvoke_url" {
