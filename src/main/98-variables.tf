@@ -102,12 +102,23 @@ variable "apigw_api_person_enable" {
   description = "Create api person. This is supposed to be internal and should not be shown."
   default     = false
 }
-variable "api_keys_user_registry" {
-  type        = list(string)
-  description = "Api keys allowed to call the user registry ms."
-  default     = ["SELFCARE", ]
+
+// We assume every plan has its own api key
+variable "user_registry_plans" {
+  type = list(object({
+    key_name    = string
+    burst_limit = number
+    rate_limit  = number
+    method_throttle = list(object({
+      path        = string
+      burst_limit = number
+      rate_limit  = number
+    }))
+  }))
+  description = "Usage plan with its api key and rate limit."
 }
 
+/*
 variable "api_user_registry_throttling" {
   type = object({
     burst_limit = number
@@ -125,6 +136,7 @@ variable "api_user_registry_throttling" {
   }
   description = "Api user registry plan rate limits. Important !!! The precedence is granted to the lower values."
 }
+*/
 
 ## ECR
 variable "ecr_keep_nr_images" {

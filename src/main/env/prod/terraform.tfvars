@@ -41,38 +41,40 @@ apigw_custom_domain_create = true
 apigw_api_person_enable    = true
 apigw_access_logs_enable   = false
 
-api_user_registry_throttling = {
-  burst_limit = 10
-  rate_limit  = 20
+user_registry_plans = [
+  {
+    key_name    = "SELFCARE"
+    burst_limit = 10
+    rate_limit  = 20
 
-  method_throttle = [
-    {
-      burst_limit = 5
-      path        = "/users/{id}/GET"
-      rate_limit  = 18
-    },
-    {
-      burst_limit = 5
-      path        = "/users/PATCH"
-      rate_limit  = 18
-    },
-    {
-      burst_limit = 5
-      path        = "/users/search/POST"
-      rate_limit  = 38
-    },
-    {
-      burst_limit = 5
-      path        = "/users/{id}/DELETE"
-      rate_limit  = 2
-    },
-    {
-      burst_limit = 5
-      path        = "/users/{id}/PATCH"
-      rate_limit  = 18
-    }
-  ]
-}
+    method_throttle = [
+      {
+        burst_limit = 5
+        path        = "/users/{id}/GET"
+        rate_limit  = 18
+      },
+      {
+        burst_limit = 5
+        path        = "/users/PATCH"
+        rate_limit  = 18
+      },
+      {
+        burst_limit = 5
+        path        = "/users/search/POST"
+        rate_limit  = 38
+      },
+      {
+        burst_limit = 5
+        path        = "/users/{id}/DELETE"
+        rate_limit  = 2
+      },
+      {
+        burst_limit = 5
+        path        = "/users/{id}/PATCH"
+        rate_limit  = 18
+      }
+    ]
+}, ]
 
 # DynamoDB
 dynamodb_point_in_time_recovery_enabled = true
