@@ -77,7 +77,7 @@ resource "aws_ecs_task_definition" "user_registry" {
           "echo hello"
         ],
         "interval": 5,
-        "timeout": 2,
+        "timeout": 5,
         "retries": 3
     },
     "cpu": 256,
