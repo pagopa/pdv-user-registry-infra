@@ -91,6 +91,12 @@ variable "apigw_access_logs_enable" {
 
 }
 
+variable "apigw_execution_logs_retention" {
+  type        = number
+  default     = 10
+  description = "Api gateway exection logs retention (days)"
+}
+
 variable "apigw_data_trace_enabled" {
   type        = bool
   description = "Specifies whether data trace logging is enabled. It effects the log entries pushed to Amazon CloudWatch Logs."
@@ -149,7 +155,7 @@ variable "ecr_keep_nr_images" {
 variable "ecs_logs_retention_days" {
   type        = number
   description = "Specifies the number of days you want to retain log events in the specified log group."
-  default     = 90
+  default     = 10
 }
 
 variable "ecs_enable_execute_command" {
