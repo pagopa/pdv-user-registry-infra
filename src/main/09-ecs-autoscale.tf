@@ -15,7 +15,10 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_high" {
     ServiceName = split("/", local.service_ids[count.index])[2]
   }
 
-  alarm_actions = [aws_appautoscaling_policy.app_up[count.index].arn]
+  alarm_actions = [
+    aws_appautoscaling_policy.app_up[count.index].arn,
+    aws_sns_topic.alarms.arn,
+  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpu_utilization_low" {
