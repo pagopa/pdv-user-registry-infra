@@ -68,6 +68,10 @@ resource "aws_ecs_task_definition" "person" {
           "CMD-SHELL",
           "curl -f http://localhost:${var.container_port_person}${var.health_check_path_person} || exit 1"
         ],
+        "interval": 5,
+        "timeout": 2,
+        "retries": 3
+    },   
     "cpu": 256,
     "memory": 512,
     "networkMode": "awsvpc"
