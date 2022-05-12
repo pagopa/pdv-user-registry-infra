@@ -169,22 +169,10 @@ variable "container_port_person" {
   default     = 8000
 }
 
-variable "health_check_path_person" {
-  type        = string
-  description = "Container health check path"
-  default     = "/actuator/health"
-}
-
 variable "container_port_user_registry" {
   type        = number
   description = "Container port service user registry."
   default     = 8090
-}
-
-variable "health_check_path_user_registry" {
-  type        = string
-  description = "Container health check path"
-  default     = "/actuator/health"
 }
 
 variable "container_port_poc" {

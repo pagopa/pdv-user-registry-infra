@@ -111,7 +111,7 @@ module "nlb" {
         timeout             = 6
         unhealthy_threshold = 3
         matcher             = "200-399"
-        path                = var.health_check_path_person
+        path                = "/actuator/health"
       }
     },
     # Service user registry.
@@ -131,7 +131,7 @@ module "nlb" {
         timeout             = 6
         unhealthy_threshold = 3
         matcher             = "200-399"
-        path                = var.health_check_path_user_registry
+        path                = "/actuator/health"
       }
     },
 
