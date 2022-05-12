@@ -32,14 +32,16 @@ ms_person_enable_confidential_filter        = true
 ms_user_registry_log_level                  = "INFO"
 ms_user_registry_rest_client_log_level      = "BASIC"
 ms_user_registry_enable_confidential_filter = true
+ecs_logs_retention_days                     = 90
 
 ms_tokenizer_host_name = "tokenizer-p-nlb-094463a88e36e754.elb.eu-south-1.amazonaws.com"
 
 # Api Gateway
 
-apigw_custom_domain_create = true
-apigw_api_person_enable    = true
-apigw_access_logs_enable   = false
+apigw_custom_domain_create     = true
+apigw_api_person_enable        = true
+apigw_access_logs_enable       = false
+apigw_execution_logs_retention = 90
 
 user_registry_plans = [
   {
