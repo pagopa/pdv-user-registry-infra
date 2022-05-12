@@ -206,16 +206,20 @@ variable "ecs_autoscaling" {
   description = "ECS Service autoscaling."
 }
 
-variable "ecs_as_cpu_low_threshold" {
-  type        = number
-  default     = 20
-  description = "ECS Scale in CPU % threshord"
-}
-
-variable "ecs_as_cpu_high_threshold" {
-  type        = number
-  default     = 80
-  description = "ECS Scale out CPU % threshord"
+variable "ecs_as_threshold" {
+  type = object({
+    cpu_min = number
+    cpu_max = number
+    mem_min = number
+    mem_max = number
+  })
+  default = {
+    cpu_max = 80
+    cpu_min = 20
+    mem_max = 80
+    mem_min = 60
+  }
+  description = "ECS Tasks autoscaling settings."
 }
 
 variable "ms_tokenizer_rest_client_log_level" {
