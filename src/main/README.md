@@ -155,7 +155,7 @@
 | <a name="input_apigw_api_person_enable"></a> [apigw\_api\_person\_enable](#input\_apigw\_api\_person\_enable) | Create api person. This is supposed to be internal and should not be shown. | `bool` | `false` | no |
 | <a name="input_apigw_custom_domain_create"></a> [apigw\_custom\_domain\_create](#input\_apigw\_custom\_domain\_create) | Create apigw Custom Domain with its tls certificate | `bool` | `false` | no |
 | <a name="input_apigw_data_trace_enabled"></a> [apigw\_data\_trace\_enabled](#input\_apigw\_data\_trace\_enabled) | Specifies whether data trace logging is enabled. It effects the log entries pushed to Amazon CloudWatch Logs. | `bool` | `false` | no |
-| <a name="input_apigw_execution_logs_retention"></a> [apigw\_execution\_logs\_retention](#input\_apigw\_execution\_logs\_retention) | Api gateway exection logs retention (days) | `number` | `10` | no |
+| <a name="input_apigw_execution_logs_retention"></a> [apigw\_execution\_logs\_retention](#input\_apigw\_execution\_logs\_retention) | Api gateway exection logs retention (days) | `number` | `7` | no |
 | <a name="input_app_name"></a> [app\_name](#input\_app\_name) | App name. Personal Data Vault | `string` | `"pdv"` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS region to create resources. Default Milan | `string` | `"eu-south-1"` | no |
 | <a name="input_azs"></a> [azs](#input\_azs) | Availability zones | `list(string)` | <pre>[<br>  "eu-south-1a",<br>  "eu-south-1b",<br>  "eu-south-1c"<br>]</pre> | no |
@@ -171,7 +171,7 @@
 | <a name="input_ecs_as_cpu_low_threshold"></a> [ecs\_as\_cpu\_low\_threshold](#input\_ecs\_as\_cpu\_low\_threshold) | ECS Scale in CPU % threshord | `number` | `20` | no |
 | <a name="input_ecs_autoscaling"></a> [ecs\_autoscaling](#input\_ecs\_autoscaling) | ECS Service autoscaling. | <pre>object({<br>    max_capacity = number<br>    min_capacity = number<br>  })</pre> | <pre>{<br>  "max_capacity": 3,<br>  "min_capacity": 1<br>}</pre> | no |
 | <a name="input_ecs_enable_execute_command"></a> [ecs\_enable\_execute\_command](#input\_ecs\_enable\_execute\_command) | Specifies whether to enable Amazon ECS Exec for the tasks within the service. | `bool` | `false` | no |
-| <a name="input_ecs_logs_retention_days"></a> [ecs\_logs\_retention\_days](#input\_ecs\_logs\_retention\_days) | Specifies the number of days you want to retain log events in the specified log group. | `number` | `10` | no |
+| <a name="input_ecs_logs_retention_days"></a> [ecs\_logs\_retention\_days](#input\_ecs\_logs\_retention\_days) | Specifies the number of days you want to retain log events in the specified log group. | `number` | `7` | no |
 | <a name="input_enable_nat_gateway"></a> [enable\_nat\_gateway](#input\_enable\_nat\_gateway) | Enable/Create nat gateway | `bool` | `false` | no |
 | <a name="input_env_short"></a> [env\_short](#input\_env\_short) | Evnironment short. | `string` | `"d"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment | `string` | `"dev"` | no |

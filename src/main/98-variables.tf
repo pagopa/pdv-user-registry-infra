@@ -93,7 +93,7 @@ variable "apigw_access_logs_enable" {
 
 variable "apigw_execution_logs_retention" {
   type        = number
-  default     = 10
+  default     = 7
   description = "Api gateway exection logs retention (days)"
 }
 
@@ -155,7 +155,7 @@ variable "ecr_keep_nr_images" {
 variable "ecs_logs_retention_days" {
   type        = number
   description = "Specifies the number of days you want to retain log events in the specified log group."
-  default     = 10
+  default     = 7
 }
 
 variable "ecs_enable_execute_command" {
