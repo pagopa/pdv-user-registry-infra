@@ -64,11 +64,12 @@ resource "aws_cloudwatch_metric_alarm" "mem_utilization_high" {
   }
 
   alarm_actions = [
-    aws_appautoscaling_policy.app_up[count.index].arn,
+    #aws_appautoscaling_policy.app_up[count.index].arn,
     aws_sns_topic.alarms.arn,
   ]
 }
 
+/*
 resource "aws_cloudwatch_metric_alarm" "mem_utilization_low" {
   count = length(local.service_ids)
   alarm_name = format("%s-Mem-Utilization-Low-%s", split("/", local.service_ids[count.index])[2],
@@ -90,7 +91,7 @@ resource "aws_cloudwatch_metric_alarm" "mem_utilization_low" {
     aws_appautoscaling_policy.app_up[count.index].arn,
   ]
 }
-
+*/
 resource "aws_appautoscaling_policy" "app_up" {
   count              = length(local.service_ids)
   name               = format("%s-scale-up", aws_ecs_cluster.ecs_cluster.name)
