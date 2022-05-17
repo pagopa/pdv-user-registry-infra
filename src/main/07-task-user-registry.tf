@@ -71,15 +71,6 @@ resource "aws_ecs_task_definition" "user_registry" {
         "value": "yyyy-MM-dd HH:mm:ss.SSSZZ"
       }
     ],
-    "healthCheck": {
-        "command": [
-          "CMD-SHELL",
-          "echo hello"
-        ],
-        "interval": 5,
-        "timeout": 5,
-        "retries": 3
-    },
     "cpu": 256,
     "memory": 512,
     "networkMode": "awsvpc"
