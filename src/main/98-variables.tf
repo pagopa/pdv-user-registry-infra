@@ -77,6 +77,12 @@ variable "public_dns_zones" {
   description = "Route53 Hosted Zone"
 }
 
+variable "dns_record_ttl" {
+  type        = number
+  description = "Dns record ttl (in sec)"
+  default     = 86400 # 24 hours
+}
+
 ## Api Gateway
 variable "apigw_custom_domain_create" {
   type        = bool

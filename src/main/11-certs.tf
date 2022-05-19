@@ -24,7 +24,7 @@ resource "aws_route53_record" "cert_validation" {
   allow_overwrite = true
   name            = each.value.name
   records         = [each.value.record]
-  ttl             = 60
+  ttl             = 3600 # 1 hour
   type            = each.value.type
   zone_id         = module.dn_zone.route53_zone_zone_id[keys(var.public_dns_zones)[0]]
 }
