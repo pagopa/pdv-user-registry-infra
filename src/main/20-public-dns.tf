@@ -9,7 +9,7 @@ resource "aws_route53_record" "uat" {
   count           = var.env_short == "p" ? 1 : 0
   allow_overwrite = true
   name            = format("uat.%s", keys(var.public_dns_zones)[0])
-  ttl             = 60
+  ttl             = var.dns_record_ttl
   type            = "NS"
   zone_id         = module.dn_zone.route53_zone_zone_id[keys(var.public_dns_zones)[0]]
 
@@ -37,5 +37,5 @@ resource "aws_route53_record" "main" {
   name    = aws_api_gateway_domain_name.main[0].domain_name
   type    = "CNAME"
   records = [aws_api_gateway_domain_name.main[0].regional_domain_name]
-  ttl     = "60"
+  ttl     = var.dns_record_ttl
 }
