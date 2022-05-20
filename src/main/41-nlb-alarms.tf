@@ -19,8 +19,8 @@ module "nlb_unhealthy_unhealthy_targets_alarm" {
 
   dimensions = {
     "target" = {
-      TargetGroup = module.nlb[count.index].target_group_names
-      LoadBalacer = module.nlb[count.index].arn_suffix
+      TargetGroup = module.nlb[0].target_group_names[count.index]
+      LoadBalacer = module.nlb[0].arn_suffix
     },
   }
 
