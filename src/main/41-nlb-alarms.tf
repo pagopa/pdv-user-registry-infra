@@ -7,7 +7,7 @@ module "nlb_unhealthy_unhealthy_targets_alarm" {
   alarm_name          = "nlb-unhealthy-unhealthy-target-"
   actions_enabled     = var.env_short == "p" ? true : false
   alarm_description   = "Alarm when an unhealthy count is greater than one in the target"
-  comparison_operator = "GreaterThanThreshold"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
   threshold           = 1
   period              = 60
