@@ -250,3 +250,31 @@ module "api_user_registry_throttle_limit_alarm" {
     module.log_filter_throttle_limit_user_registry
   ]
 }
+
+module "api_user_registry_low_latency_alarm" {
+  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
+  version = "~> 3.0"
+
+  actions_enabled     = var.env_short == "p" ? true : false
+  alarm_name          = "low-latency-"
+  alarm_description   = "Api respondd in more than 2 secs"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 20
+  threshold           = 2000
+  period              = 300
+  unit                = "Count"
+  datapoints_to_alarm = 2
+
+  namespace   = "AWS/ApiGateway"
+  metric_name = "Latency"
+  statistic   = "Maximum"
+
+  dimensions = {
+    "${local.user_registry_api_name}" = {
+      ApiName = local.user_registry_api_name
+      Stage   = local.user_registry_stage_name
+    },
+  }
+
+  alarm_actions = [aws_sns_topic.alarms.arn]
+}
