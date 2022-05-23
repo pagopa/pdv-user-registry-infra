@@ -263,7 +263,7 @@ module "api_user_registry_low_latency_alarm" {
   alarm_name          = "low-latency-"
   alarm_description   = format("The Api responds in more than %s ms.", local.latency_threshold)
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  #evaluation_periods  = 1
+  evaluation_periods  = 1
   threshold           = local.latency_threshold
   period              = 300
   unit                = "Count"
