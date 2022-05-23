@@ -265,7 +265,7 @@ module "api_user_registry_low_latency_alarm" {
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
   threshold           = local.latency_threshold
-  period              = 300
+  period              = 60
   unit                = "Count"
   datapoints_to_alarm = 2
 
