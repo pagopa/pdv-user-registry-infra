@@ -263,11 +263,11 @@ module "api_user_registry_low_latency_alarm" {
   alarm_name          = "low-latency-"
   alarm_description   = format("The Api responds in more than %s ms.", local.latency_threshold)
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 1
+  #evaluation_periods  = 1
   threshold           = local.latency_threshold
-  period              = 60
+  period              = 300
   unit                = "Count"
-  datapoints_to_alarm = 2
+  datapoints_to_alarm = 1
 
   namespace   = "AWS/ApiGateway"
   metric_name = "Latency"
