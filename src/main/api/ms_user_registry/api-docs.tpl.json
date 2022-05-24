@@ -72,6 +72,9 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "409": {
+            "description": "Conflict"
           }
         },
         "security": [
@@ -359,6 +362,9 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "409": {
+            "description": "Conflict"
           }
         },
         "security": [
