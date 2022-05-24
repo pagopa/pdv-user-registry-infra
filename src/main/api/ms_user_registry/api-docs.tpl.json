@@ -96,7 +96,14 @@
           "requestTemplates" : {
             "application/json" : "${write_request_template}"
           },
-          "responses": {}
+          "responses": {
+            "2\\d{2}" : {
+              "statusCode" : "200"
+          },
+          "404" : {
+              "statusCode" : "404"
+            }
+          }
         },
         "tags": [
           "user"
