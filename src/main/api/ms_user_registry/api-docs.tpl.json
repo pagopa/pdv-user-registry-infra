@@ -34,6 +34,11 @@
           "passthroughBehavior": "WHEN_NO_TEMPLATES",
           "requestTemplates" : {
             "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -52,9 +57,6 @@
           }
         },
         "responses": {
-          "default" : {
-            "statusCode" : "200"
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -93,7 +95,8 @@
           },
           "requestTemplates" : {
             "application/json" : "${write_request_template}"
-          }
+          },
+          "responses": {}
         },
         "tags": [
           "user"
@@ -135,9 +138,6 @@
           }
         },
         "responses": {
-          "default" : {
-            "statusCode" : "200"
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -175,6 +175,11 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -219,9 +224,6 @@
           }
         ],
         "responses": {
-          "default" : {
-            "statusCode" : "200"
-          },
           "200": {
             "description": "OK",
             "content": {
@@ -257,6 +259,11 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -279,9 +286,6 @@
           }
         ],
         "responses": {
-          "default" : {
-            "statusCode" : "200"
-          },
           "204": {
             "description": "No Content"
           },
@@ -307,6 +311,11 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "responses": {
+            "default" : {
+              "statusCode" : "200"
+            }
           }
         },
         "tags": [
@@ -338,9 +347,6 @@
           }
         },
         "responses": {
-          "default" : {
-            "statusCode" : "200"
-          },
           "204": {
             "description": "No Content"
           },
