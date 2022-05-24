@@ -97,14 +97,17 @@
             "application/json" : "${write_request_template}"
           },
           "responses": {
-            "2\\d{2}" : {
+            "200" : {
               "statusCode" : "200"
             },
-            "4\\d{2}" : {
-              "statusCode" : "404",
-              "responseTemplates": {
-                "application/json" : "#set($inputRoot = $input.path('$')) #set($context.responseOverride.status = $context.integrationStatus)"
-              }
+            "404" : {
+              "statusCode" : "404"
+            },
+            "401" : {
+              "statusCode" : "401"
+            },
+            "403" : {
+              "statusCode" : "403"
             }
           }
         },
