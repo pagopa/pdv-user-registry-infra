@@ -52,6 +52,9 @@
           }
         },
         "responses": {
+          "default" : {
+            "statusCode" : "200"
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -132,6 +135,9 @@
           }
         },
         "responses": {
+          "default" : {
+            "statusCode" : "200"
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -213,6 +219,9 @@
           }
         ],
         "responses": {
+          "default" : {
+            "statusCode" : "200"
+          },
           "200": {
             "description": "OK",
             "content": {
@@ -270,6 +279,9 @@
           }
         ],
         "responses": {
+          "default" : {
+            "statusCode" : "200"
+          },
           "204": {
             "description": "No Content"
           },
@@ -326,6 +338,9 @@
           }
         },
         "responses": {
+          "default" : {
+            "statusCode" : "200"
+          },
           "204": {
             "description": "No Content"
           },
