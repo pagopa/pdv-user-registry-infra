@@ -95,11 +95,6 @@
           },
           "requestTemplates" : {
             "application/json" : "${write_request_template}"
-          },
-          "responses": {
-            "default" : {
-              "statusCode" : "200"
-            }
           }
         },
         "tags": [
