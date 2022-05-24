@@ -97,18 +97,7 @@
             "application/json" : "${write_request_template}"
           },
           "responses": {
-            "200" : {
-              "statusCode" : "200"
-            },
-            "404" : {
-              "statusCode" : "404"
-            },
-            "401" : {
-              "statusCode" : "401"
-            },
-            "403" : {
-              "statusCode" : "403"
-            }
+            ${responses}
           }
         },
         "tags": [
