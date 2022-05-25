@@ -1,5 +1,6 @@
 locals {
-  apigw_name = format("%s-apigw-vpc-lik", local.project)
+  apigw_name  = format("%s-apigw-vpc-lik", local.project)
+  webacl_name = format("%s-webacl", local.project)
 }
 
 resource "aws_api_gateway_vpc_link" "apigw" {
@@ -19,7 +20,7 @@ resource "aws_wafv2_web_acl" "main" {
 
   visibility_config {
     cloudwatch_metrics_enabled = true
-    metric_name                = local.apigw_name
+    metric_name                = local.webacl_name
     sampled_requests_enabled   = true
   }
   default_action {
@@ -39,7 +40,7 @@ resource "aws_wafv2_web_acl" "main" {
 
     visibility_config {
       cloudwatch_metrics_enabled = false
-      metric_name                = local.apigw_name
+      metric_name                = local.webacl_name
       sampled_requests_enabled   = false
     }
   }
@@ -57,7 +58,7 @@ resource "aws_wafv2_web_acl" "main" {
 
     visibility_config {
       cloudwatch_metrics_enabled = false
-      metric_name                = local.apigw_name
+      metric_name                = local.webacl_name
       sampled_requests_enabled   = false
     }
   }
@@ -75,7 +76,7 @@ resource "aws_wafv2_web_acl" "main" {
 
     visibility_config {
       cloudwatch_metrics_enabled = false
-      metric_name                = local.apigw_name
+      metric_name                = local.webacl_name
       sampled_requests_enabled   = false
     }
   }
