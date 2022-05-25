@@ -109,12 +109,6 @@ variable "apigw_data_trace_enabled" {
   default     = false
 }
 
-variable "apigw_api_person_enable" {
-  type        = bool
-  description = "Create api person. This is supposed to be internal and should not be shown."
-  default     = false
-}
-
 // We assume every plan has its own api key
 variable "user_registry_plans" {
   type = list(object({
