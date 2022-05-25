@@ -39,7 +39,6 @@ ms_tokenizer_host_name = "tokenizer-p-nlb-094463a88e36e754.elb.eu-south-1.amazon
 # Api Gateway
 
 apigw_custom_domain_create     = true
-apigw_api_person_enable        = true
 apigw_access_logs_enable       = false
 apigw_execution_logs_retention = 90
 
