@@ -296,6 +296,9 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests"
           }
         },
         "security": [
@@ -355,6 +358,9 @@
           },
           "409": {
             "description": "Conflict"
+          },
+          "429": {
+            "description": "Too Many Requests"
           }
         },
         "security": [
