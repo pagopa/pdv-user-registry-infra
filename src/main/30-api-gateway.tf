@@ -1,5 +1,6 @@
 locals {
-  apigw_name = format("%s-apigw-vpc-lik", local.project)
+  apigw_name  = format("%s-apigw-vpc-lik", local.project)
+  webacl_name = format("%s-webacl", local.project)
 }
 
 resource "aws_api_gateway_vpc_link" "apigw" {
@@ -19,11 +20,78 @@ resource "aws_wafv2_web_acl" "main" {
 
   visibility_config {
     cloudwatch_metrics_enabled = true
-    metric_name                = "apiWebACL"
+    metric_name                = local.webacl_name
     sampled_requests_enabled   = true
   }
   default_action {
     allow {}
+  }
+
+  rule {
+    name     = "IpReputationList"
+    priority = 1
+
+    override_action {
+      count {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesAmazonIpReputationList"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = false
+      metric_name                = local.webacl_name
+      sampled_requests_enabled   = false
+    }
+  }
+
+
+  rule {
+    name     = "CommonRuleSet"
+    priority = 2
+
+    override_action {
+      count {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesCommonRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = false
+      metric_name                = local.webacl_name
+      sampled_requests_enabled   = false
+    }
+  }
+
+  rule {
+    name     = "KnownBadInputsRuleSet"
+    priority = 3
+
+    override_action {
+      count {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = false
+      metric_name                = local.webacl_name
+      sampled_requests_enabled   = false
+    }
   }
 
   tags = { Name = format("%s-webacl", local.project) }
