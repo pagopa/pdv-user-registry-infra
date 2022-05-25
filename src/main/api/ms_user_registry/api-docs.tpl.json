@@ -73,6 +73,9 @@
           },
           "409": {
             "description": "Conflict"
+          },
+          "429": {
+            "description": "Too Many Requests"
           }
         },
         "security": [
@@ -159,6 +162,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
           }
         },
         "security": [
@@ -178,11 +184,6 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
-          },
-          "responses": {
-            "default" : {
-              "statusCode" : "200"
-            }
           }
         },
         "tags": [
@@ -245,6 +246,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
           }
         },
         "security": [
@@ -262,11 +266,6 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
-          },
-          "responses": {
-            "default" : {
-              "statusCode" : "200"
-            }
           }
         },
         "tags": [
@@ -314,11 +313,6 @@
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
-          },
-          "responses": {
-            "default" : {
-              "statusCode" : "200"
-            }
           }
         },
         "tags": [
