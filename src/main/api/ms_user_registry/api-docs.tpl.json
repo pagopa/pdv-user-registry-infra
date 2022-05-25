@@ -65,8 +65,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request"
           },
           "403": {
             "description": "Forbidden"
@@ -154,8 +154,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request"
           },
           "403": {
             "description": "Forbidden"
@@ -238,8 +238,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request"
           },
           "403": {
             "description": "Forbidden"
@@ -291,11 +291,14 @@
           "204": {
             "description": "No Content"
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request"
           },
           "403": {
             "description": "Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests"
           }
         },
         "security": [
@@ -347,14 +350,17 @@
           "204": {
             "description": "No Content"
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request"
           },
           "403": {
             "description": "Forbidden"
           },
           "409": {
             "description": "Conflict"
+          },
+          "429": {
+            "description": "Too Many Requests"
           }
         },
         "security": [
