@@ -29,7 +29,11 @@ resource "aws_wafv2_web_acl" "main" {
 
   rule {
     name     = "IpReputationList"
-    priority = "1"
+    priority = 1
+
+    override_action {
+      count {}
+    }
 
     statement {
       managed_rule_group_statement {
@@ -45,9 +49,14 @@ resource "aws_wafv2_web_acl" "main" {
     }
   }
 
+
   rule {
     name     = "CommonRuleSet"
-    priority = "2"
+    priority = 2
+
+    override_action {
+      count {}
+    }
 
     statement {
       managed_rule_group_statement {
@@ -65,7 +74,11 @@ resource "aws_wafv2_web_acl" "main" {
 
   rule {
     name     = "KnownBadInputsRuleSet"
-    priority = "3"
+    priority = 3
+
+    override_action {
+      count {}
+    }
 
     statement {
       managed_rule_group_statement {
