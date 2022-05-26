@@ -77,6 +77,14 @@ user_registry_plans = [
     ]
 }, ]
 
+
+## Web ACL
+
+web_acl_visibility_config = {
+  cloudwatch_metrics_enabled = true
+  sampled_requests_enabled   = true
+}
+
 # DynamoDB
 dynamodb_point_in_time_recovery_enabled = true
 dynamodb_region_replication_enable      = true

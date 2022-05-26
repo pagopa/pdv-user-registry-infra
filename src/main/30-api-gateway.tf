@@ -19,9 +19,9 @@ resource "aws_wafv2_web_acl" "main" {
   scope       = "REGIONAL"
 
   visibility_config {
-    cloudwatch_metrics_enabled = true
+    cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
     metric_name                = local.webacl_name
-    sampled_requests_enabled   = true
+    sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
   }
   default_action {
     allow {}
@@ -43,9 +43,9 @@ resource "aws_wafv2_web_acl" "main" {
     }
 
     visibility_config {
-      cloudwatch_metrics_enabled = false
+      cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
       metric_name                = local.webacl_name
-      sampled_requests_enabled   = false
+      sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
     }
   }
 
@@ -66,9 +66,9 @@ resource "aws_wafv2_web_acl" "main" {
     }
 
     visibility_config {
-      cloudwatch_metrics_enabled = false
+      cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
       metric_name                = local.webacl_name
-      sampled_requests_enabled   = false
+      sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
     }
   }
 
@@ -88,9 +88,9 @@ resource "aws_wafv2_web_acl" "main" {
     }
 
     visibility_config {
-      cloudwatch_metrics_enabled = false
+      cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
       metric_name                = local.webacl_name
-      sampled_requests_enabled   = false
+      sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
     }
   }
 
@@ -110,9 +110,9 @@ resource "aws_wafv2_web_acl" "main" {
     }
 
     visibility_config {
-      cloudwatch_metrics_enabled = false
+      cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
       metric_name                = local.webacl_name
-      sampled_requests_enabled   = false
+      sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
     }
   }
 
