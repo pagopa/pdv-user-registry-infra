@@ -194,12 +194,6 @@ variable "container_port_user_registry" {
   default     = 8090
 }
 
-variable "container_port_poc" {
-  type    = number
-  default = 8060
-
-}
-
 variable "replica_count" {
   type        = number
   description = "Number of task replica"

@@ -9,11 +9,10 @@ resource "aws_security_group" "nsg_task" {
 # Rules for the TASK (Targets the LB's IPs)
 locals {
   # list of container port in use.
-  container_ports = [
+  container_ports = coalescelist([
     var.container_port_person,
     var.container_port_user_registry,
-    var.container_port_poc,
-  ]
+  ])
 }
 resource "aws_security_group_rule" "nsg_task_ingress_rule" {
   count       = length(local.container_ports)
@@ -82,12 +81,6 @@ module "nlb" {
       protocol           = "TCP"
       target_group_index = 1
     },
-    # MS Poc
-    {
-      port               = var.container_port_poc
-      protocol           = "TCP"
-      target_group_index = 2
-    },
   ]
 
 
@@ -132,27 +125,6 @@ module "nlb" {
         unhealthy_threshold = 3
         matcher             = "200-399"
         path                = "/actuator/health"
-      }
-    },
-
-    # Service poc
-    {
-      name                 = format("%s-poc", local.project)
-      backend_protocol     = "TCP"
-      backend_port         = var.container_port_poc
-      target_type          = "ip"
-      deregistration_delay = 30
-      vpc_id               = module.vpc.vpc_id
-
-      health_check = {
-        enabled = true
-
-        healthy_threshold   = 3
-        interval            = 30
-        timeout             = 6
-        unhealthy_threshold = 3
-        matcher             = "200-399"
-        path                = "/"
       }
     },
   ]

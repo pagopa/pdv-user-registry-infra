@@ -2,7 +2,6 @@ locals {
   repositories = [
     format("%s-person", local.project, ),
     format("%s-user-registry", local.project, ),
-    format("%s-poc", local.project, ),
   ]
 }
 
