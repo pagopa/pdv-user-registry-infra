@@ -113,7 +113,7 @@ module "webacl_count_alarm" {
 
   count = var.web_acl_visibility_config.cloudwatch_metrics_enabled ? 1 : 0
 
-  alarm_name          = "webacl-"
+  alarm_name          = "waf-"
   actions_enabled     = var.env_short == "p" ? true : false
   alarm_description   = "Alarm when webacl count greater than 10"
   comparison_operator = "GreaterThanOrEqualToThreshold"
@@ -127,7 +127,7 @@ module "webacl_count_alarm" {
   statistic   = "Sum"
 
   dimensions = {
-    "rule" = {
+    "webacl" = {
       WebACL = aws_wafv2_web_acl.main.name
       Ragion = var.aws_region
       Rule   = aws_wafv2_web_acl.main.name
