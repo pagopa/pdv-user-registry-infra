@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_query_definition" "apigw_429" {
-  name = "custom_query"
+  name = "apigw_429"
 
   log_group_names = [
     local.user_registry_log_group_name
