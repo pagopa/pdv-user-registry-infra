@@ -16,3 +16,13 @@ resource "aws_cloudwatch_query_definition" "ecs_log_level_error" {
   ]
   query_string = file("./cloudwatch-query/log-level-error.sql")
 }
+
+resource "aws_cloudwatch_query_definition" "ecs_exception" {
+  name = "ECS/Exceptions"
+
+  log_group_names = [
+    aws_cloudwatch_log_group.ecs_person.name,
+    aws_cloudwatch_log_group.ecs_user_registry.name,
+  ]
+  query_string = file("./cloudwatch-query/log-with-exception.sql")
+}
