@@ -1,3 +1,4 @@
+# ApiGw throttling
 resource "aws_cloudwatch_query_definition" "apigw_429" {
   name = "ApiGateway/429"
 
@@ -5,6 +6,15 @@ resource "aws_cloudwatch_query_definition" "apigw_429" {
     local.user_registry_log_group_name
   ]
   query_string = file("./cloudwatch-query/apigw-429.sql")
+}
+
+resource "aws_cloudwatch_query_definition" "apigw_count_rate_limitß" {
+  name = "ApiGateway/Count Rate Limit"
+
+  log_group_names = [
+    local.user_registry_log_group_name
+  ]
+  query_string = file("./cloudwatch-query/count-api-rate-limit.sql")
 }
 
 resource "aws_cloudwatch_query_definition" "ecs_log_level_error" {
