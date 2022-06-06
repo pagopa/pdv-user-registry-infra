@@ -8,7 +8,7 @@ resource "aws_cloudwatch_query_definition" "apigw_429" {
   query_string = file("./cloudwatch-query/apigw-429.sql")
 }
 
-resource "aws_cloudwatch_query_definition" "apigw_count_rate_limitß" {
+resource "aws_cloudwatch_query_definition" "apigw_count_rate_limit" {
   name = "ApiGateway/Count Rate Limit"
 
   log_group_names = [
