@@ -4,6 +4,7 @@ import botocore
 
 TABLE = "Person"
 ID    = "PK"
+RK    = "RK"
 
 table = boto3.resource('dynamodb').Table(TABLE)
 stop = False
@@ -19,7 +20,7 @@ while not stop:
                 if count % 500 == 0:
                     print(count)
                 # print("Item ", item)
-                key = {ID: item[ID], "SK": item["SK"]}
+                key = {ID: item[ID], RK: item[RK]}
                 
                 batch.delete_item(Key = key)
                 
