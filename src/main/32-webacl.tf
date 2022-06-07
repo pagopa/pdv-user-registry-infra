@@ -30,7 +30,7 @@ resource "aws_wafv2_web_acl" "main" {
 
     visibility_config {
       cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
-      metric_name                = local.webacl_name
+      metric_name                = "IpReputationList"
       sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
     }
   }
@@ -53,7 +53,7 @@ resource "aws_wafv2_web_acl" "main" {
 
     visibility_config {
       cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
-      metric_name                = local.webacl_name
+      metric_name                = "CommonRuleSet"
       sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
     }
   }
@@ -75,7 +75,7 @@ resource "aws_wafv2_web_acl" "main" {
 
     visibility_config {
       cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
-      metric_name                = local.webacl_name
+      metric_name                = "KnownBadInputsRuleSet"
       sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
     }
   }
@@ -97,7 +97,7 @@ resource "aws_wafv2_web_acl" "main" {
 
     visibility_config {
       cloudwatch_metrics_enabled = var.web_acl_visibility_config.cloudwatch_metrics_enabled
-      metric_name                = local.webacl_name
+      metric_name                = "SQLiRuleSet"
       sampled_requests_enabled   = var.web_acl_visibility_config.sampled_requests_enabled
     }
   }
