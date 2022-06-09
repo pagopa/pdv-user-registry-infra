@@ -46,7 +46,7 @@ resource "aws_s3_bucket_versioning" "terraform_states" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "example" {
+resource "aws_s3_bucket_public_access_block" "terraform_states" {
   bucket                  = aws_s3_bucket.terraform_states.id
   block_public_acls       = true
   block_public_policy     = true
