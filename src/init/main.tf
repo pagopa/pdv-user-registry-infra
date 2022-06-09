@@ -46,6 +46,14 @@ resource "aws_s3_bucket_versioning" "terraform_states" {
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "example" {
+  bucket                  = aws_s3_bucket.terraform_states.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 # create a DynamoDB table for locking the state file
 resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
   name           = "terraform-lock"
