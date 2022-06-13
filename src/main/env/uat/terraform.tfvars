@@ -80,21 +80,21 @@ user_registry_plans = [
 dynamodb_point_in_time_recovery_enabled = false
 
 ## table Person
-table_person_read_capacity  = 5
-table_person_write_capacity = 5
+table_person_read_capacity  = 10
+table_person_write_capacity = 10
 
 table_person_autoscaling_read = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
-  target_value       = 45
-  max_capacity       = 10
+  target_value       = 15
+  max_capacity       = 20
 }
 
 table_person_autoscaling_write = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
   target_value       = 45
-  max_capacity       = 10
+  max_capacity       = 50
 }
 
 table_person_autoscling_indexes = {
