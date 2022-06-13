@@ -86,14 +86,14 @@ table_person_write_capacity = 10
 table_person_autoscaling_read = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
-  target_value       = 15
+  target_value       = 70
   max_capacity       = 20
 }
 
 table_person_autoscaling_write = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
-  target_value       = 45
+  target_value       = 70
   max_capacity       = 50
 }
 
