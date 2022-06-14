@@ -36,3 +36,13 @@ resource "aws_cloudwatch_query_definition" "ecs_exception" {
   ]
   query_string = file("./cloudwatch-query/log-with-exception.sql")
 }
+
+resource "aws_cloudwatch_query_definition" "ecs_provisioned_throughput_exception" {
+  name = "ECS/Count Provisioned Throughput"
+
+  log_group_names = [
+    aws_cloudwatch_log_group.ecs_person.name,
+    aws_cloudwatch_log_group.ecs_user_registry.name,
+  ]
+  query_string = file("./cloudwatch-query/count-provisioned-throughput-exceeded.sql")
+}
