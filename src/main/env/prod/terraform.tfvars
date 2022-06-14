@@ -77,6 +77,39 @@ user_registry_plans = [
     ]
   },
   {
+    key_name    = "INTEROP"
+    burst_limit = 10
+    rate_limit  = 20
+
+    method_throttle = [
+      {
+        burst_limit = 5
+        path        = "/users/{id}/GET"
+        rate_limit  = 18
+      },
+      {
+        burst_limit = 5
+        path        = "/users/PATCH"
+        rate_limit  = 18
+      },
+      {
+        burst_limit = 5
+        path        = "/users/search/POST"
+        rate_limit  = 38
+      },
+      {
+        burst_limit = 5
+        path        = "/users/{id}/DELETE"
+        rate_limit  = 2
+      },
+      {
+        burst_limit = 5
+        path        = "/users/{id}/PATCH"
+        rate_limit  = 18
+      }
+    ]
+  },
+  {
     key_name    = "TEST"
     burst_limit = 10
     rate_limit  = 20
