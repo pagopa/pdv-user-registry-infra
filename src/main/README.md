@@ -170,10 +170,12 @@
 | <a name="input_ms_person_enable_confidential_filter"></a> [ms\_person\_enable\_confidential\_filter](#input\_ms\_person\_enable\_confidential\_filter) | Enable a filter to avoid logging confidential data | `bool` | `false` | no |
 | <a name="input_ms_person_log_level"></a> [ms\_person\_log\_level](#input\_ms\_person\_log\_level) | Log lever micro service person | `string` | `"DEBUG"` | no |
 | <a name="input_ms_person_rest_client_log_level"></a> [ms\_person\_rest\_client\_log\_level](#input\_ms\_person\_rest\_client\_log\_level) | Rest client log level micro service person | `string` | `"FULL"` | no |
+| <a name="input_ms_person_enable_single_line_stack_trace_logging"></a> [ms\_person\_ms\_person\_enable\_single\_line\_stack\_trace\_logging](#input\_ms\_person\_enable\_single\_line\_stack\_trace\_logging) | Enable logging stack trace in a single line | `bool` | `false` | no |
 | <a name="input_ms_tokenizer_rest_client_log_level"></a> [ms\_tokenizer\_rest\_client\_log\_level](#input\_ms\_tokenizer\_rest\_client\_log\_level) | Rest client log level micro service tokenizer | `string` | `"FULL"` | no |
 | <a name="input_ms_user_registry_enable_confidential_filter"></a> [ms\_user\_registry\_enable\_confidential\_filter](#input\_ms\_user\_registry\_enable\_confidential\_filter) | Enable a filter to avoid logging confidential data | `bool` | `false` | no |
 | <a name="input_ms_user_registry_log_level"></a> [ms\_user\_registry\_log\_level](#input\_ms\_user\_registry\_log\_level) | Log level micro service user registry | `string` | `"DEBUG"` | no |
 | <a name="input_ms_user_registry_rest_client_log_level"></a> [ms\_user\_registry\_rest\_client\_log\_level](#input\_ms\_user\_registry\_rest\_client\_log\_level) | Rest client log level micro service user registry | `string` | `"FULL"` | no |
+| <a name="input_ms_user_registry_enable_single_line_stack_trace_logging"></a> [ms\_user\_registry\_enable\_single\_line\_stack\_trace\_logging](#input\_ms\_user\_registry\_enable\_single\_line\_stack\_trace\_logging) | Enable logging stack trace in a single line | `bool` | `false` | no |
 | <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | Number of task replica | `number` | `1` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | <pre>{<br>  "CreatedBy": "Terraform"<br>}</pre> | no |
 | <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | VPC cidr. | `string` | `"10.0.0.0/16"` | no |

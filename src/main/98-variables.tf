@@ -253,6 +253,12 @@ variable "ms_person_enable_confidential_filter" {
   description = "Enable a filter to avoid logging confidential data"
 }
 
+variable "ms_person_enable_single_line_stack_trace_logging" {
+  type        = bool
+  default     = false
+  description = "Enable logging stack trace in a single line"
+}
+
 variable "ms_user_registry_log_level" {
   type        = string
   default     = "DEBUG"
@@ -269,6 +275,12 @@ variable "ms_user_registry_enable_confidential_filter" {
   type        = bool
   default     = false
   description = "Enable a filter to avoid logging confidential data"
+}
+
+variable "ms_user_registry_enable_single_line_stack_trace_logging" {
+  type        = bool
+  default     = false
+  description = "Enable logging stack trace in a single line"
 }
 
 # Dynamodb 
