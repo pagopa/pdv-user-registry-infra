@@ -25,5 +25,6 @@ resource "aws_iam_role" "sentinel" {
 
 # SQS queue
 resource "aws_sqs_queue" "terraform_queue" {
+  count = var.sentinel_servcie_account_id != null ? 1 : 0
   name = format("%s-sentinel-queue", local.project)
 }
