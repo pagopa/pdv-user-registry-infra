@@ -1,6 +1,6 @@
 # this module set up all resources needed to create resources to send logs to azure sentinel
 resource "aws_iam_role" "sentinel" {
-  count = var.sentinel_servcie_account_id != null ? 1 : 0
+  count = var.enable_sentinel_logs ? 1 : 0
   name  = "MicrosoftSentinelRole"
 
   assume_role_policy = jsonencode({
@@ -25,27 +25,29 @@ resource "aws_iam_role" "sentinel" {
 
 # SQS queue
 resource "aws_sqs_queue" "terraform_queue" {
-  count = var.sentinel_servcie_account_id != null ? 1 : 0
+  count = var.enable_sentinel_logs ? 1 : 0
   name  = format("%s-sentinel-queue", local.project)
 }
 
 
 # S3 bucket
 resource "aws_s3_bucket" "sentinel_logs" {
+  count  = var.enable_sentinel_logs ? 1 : 0
   bucket = format("%ssentinellogs", replace(local.project, "-", ""))
-
   lifecycle {
     # prevent_destroy = true
   }
 }
 
 resource "aws_s3_bucket_acl" "sentinel_logs" {
-  bucket = aws_s3_bucket.sentinel_logs.id
+  count  = var.enable_sentinel_logs ? 1 : 0
+  bucket = aws_s3_bucket.sentinel_logs[0].id
   acl    = "private"
 }
 
 resource "aws_s3_bucket_public_access_block" "sentinel_logs" {
-  bucket                  = aws_s3_bucket.sentinel_logs.id
+  count                   = var.enable_sentinel_logs ? 1 : 0
+  bucket                  = aws_s3_bucket.sentinel_logs[0].id
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true

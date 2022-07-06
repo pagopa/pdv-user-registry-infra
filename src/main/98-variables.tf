@@ -353,10 +353,16 @@ variable "dynamodb_alarms" {
 }
 
 # Sentinel integration
+variable "enable_sentinel_logs" {
+  type        = bool
+  default     = false
+  description = "Create all resources required to sento logs to azure sentinel."
+}
+
 variable "sentinel_servcie_account_id" {
   type        = string
   description = "Microsoft Sentinel's service account ID for AWS."
-  default     = null
+  default     = "197857026523"
 }
 
 variable "sentinel_workspace_id" {

@@ -310,8 +310,8 @@ dynamodb_alarms = [{
 create_cloudhsm = false
 cloudhsm_nodes  = 1 # change to 2 once you downloaded the certificates and the cluster is initialized and active.
 
-sentinel_servcie_account_id = "197857026523"
-sentinel_workspace_id       = "123456789" #todo: change with the real workspace id.
+enable_sentinel_logs  = true
+sentinel_workspace_id = "123456789" #todo: change with the real workspace id.
 
 tags = {
   CreatedBy   = "Terraform"
