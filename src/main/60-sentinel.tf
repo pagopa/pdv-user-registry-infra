@@ -57,7 +57,7 @@ resource "aws_s3_bucket_public_access_block" "sentinel_logs" {
 resource "aws_s3_bucket_policy" "sentinel_logs" {
   count  = var.enable_sentinel_logs ? 1 : 0
   bucket = aws_s3_bucket.sentinel_logs
-  policy = tempatefile("./iam_policies/allow-s3-cloudtrail.tpl.json", {
+  policy = templatefile("./iam_policies/allow-s3-cloudtrail.tpl.json", {
     account_id  = data.aws_caller_identity.current.account_id
     bucket_name = aws_s3_bucket.sentinel_logs[0].id
     trail_arn   = aws_cloudtrail.sentinel[0].arn
