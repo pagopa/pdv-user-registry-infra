@@ -72,19 +72,21 @@ resource "aws_kms_key" "sentinel_logs" {
   tags = { Name = format("%s-sentinel-logs-key", local.project) }
 }
 
+/*
 resource "aws_kms_alias" "sentinel_logs" {
   count         = var.enable_sentinel_logs ? 1 : 0
   name          = format("alias/%s-sentinel-logs", local.project)
   target_key_id = aws_kms_key.dynamo_db.id
 }
+*/
 
 resource "aws_cloudtrail" "sentinel" {
   count          = var.enable_sentinel_logs ? 1 : 0
   name           = "%s-sentinel-trail"
-  s3_bucket_name = aws_s3_bucket.sentinel_logs.id
+  s3_bucket_name = aws_s3_bucket.sentinel_logs[0].id
   # s3_key_prefix                 = "sentinel"
   include_global_service_events = true
-  kms_key_id                    = aws_kms_key.sentinel_logs.id
+  kms_key_id                    = aws_kms_key.sentinel_logs[0].id
 
   event_selector {
     read_write_type           = "All"
