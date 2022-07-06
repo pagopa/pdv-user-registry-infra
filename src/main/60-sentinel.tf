@@ -21,3 +21,9 @@ resource "aws_iam_role" "sentinel" {
     ]
   })
 }
+
+
+# SQS queue
+resource "aws_sqs_queue" "terraform_queue" {
+  name = format("%s-sentinel-queue", local.project)
+}
