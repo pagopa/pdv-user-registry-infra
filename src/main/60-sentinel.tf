@@ -53,3 +53,48 @@ resource "aws_s3_bucket_public_access_block" "sentinel_logs" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+resource "aws_s3_bucket_policy" "sentinel_logs" {
+  count  = var.enable_sentinel_logs ? 1 : 0
+  bucket = aws_s3_bucket.sentinel_logs
+  policy = tempatefile("./iam_policies/allow-s3-cloudtrail.tpl.json", {
+    account_id  = data.aws_caller_identity.current.account_id
+    bucket_name = aws_s3_bucket.sentinel_logs.name
+    trail_arn   = aws_cloudtrail.sentinel.arn
+  })
+}
+
+resource "aws_kms_key" "sentinel_logs" {
+  count                    = var.enable_sentinel_logs ? 1 : 0
+  description              = "Kms key to entrypt cloudtrail logs."
+  customer_master_key_spec = "SYMMETRIC_DEFAULT"
+
+  tags = { Name = format("%s-sentinel-logs-key", local.project) }
+}
+
+resource "aws_kms_alias" "sentinel_logs" {
+  count         = var.enable_sentinel_logs ? 1 : 0
+  name          = format("alias/%s-sentinel-logs", local.project)
+  target_key_id = aws_kms_key.dynamo_db.id
+}
+
+resource "aws_cloudtrail" "sentinel" {
+  count          = var.enable_sentinel_logs ? 1 : 0
+  name           = "%s-sentinel-trail"
+  s3_bucket_name = aws_s3_bucket.sentinel_logs.name
+  # s3_key_prefix                 = "sentinel"
+  include_global_service_events = true
+  kms_key_id                    = aws_kms_key.sentinel_logs.id
+
+  event_selector {
+    read_write_type           = "All"
+    include_management_events = true
+
+    /*
+    data_resource {
+      type   = "AWS::Lambda::Function"
+      values = ["arn:aws:lambda"]
+    }
+    */
+  }
+}
