@@ -76,7 +76,7 @@ resource "aws_kms_key" "sentinel_logs" {
 resource "aws_kms_alias" "sentinel_logs" {
   count         = var.enable_sentinel_logs ? 1 : 0
   name          = format("alias/%s-sentinel-logs", local.project)
-  target_key_id = aws_kms_key.dynamo_db.id
+  target_key_id = aws_kms_key.sentinel_logs[0].id
 }
 
 resource "aws_cloudtrail" "sentinel" {
