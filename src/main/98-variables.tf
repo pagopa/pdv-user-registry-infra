@@ -352,6 +352,20 @@ variable "dynamodb_alarms" {
   }))
 }
 
+# Sentinel integration
+variable "sentinel_servcie_account_id" {
+  type        = string
+  description = "Microsoft Sentinel's service account ID for AWS."
+  default     = null
+}
+
+variable "sentinel_workspace_id" {
+  type        = string
+  description = "Sentinel workspece id"
+  default     = null
+
+}
+
 variable "tags" {
   type = map(any)
   default = {
