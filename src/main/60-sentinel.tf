@@ -59,8 +59,8 @@ resource "aws_s3_bucket_policy" "sentinel_logs" {
   bucket = aws_s3_bucket.sentinel_logs
   policy = tempatefile("./iam_policies/allow-s3-cloudtrail.tpl.json", {
     account_id  = data.aws_caller_identity.current.account_id
-    bucket_name = aws_s3_bucket.sentinel_logs.id
-    trail_arn   = aws_cloudtrail.sentinel.arn
+    bucket_name = aws_s3_bucket.sentinel_logs[0].id
+    trail_arn   = aws_cloudtrail.sentinel[0].arn
   })
 }
 
