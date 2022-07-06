@@ -59,7 +59,7 @@ resource "aws_s3_bucket_policy" "sentinel_logs" {
   bucket = aws_s3_bucket.sentinel_logs
   policy = tempatefile("./iam_policies/allow-s3-cloudtrail.tpl.json", {
     account_id  = data.aws_caller_identity.current.account_id
-    bucket_name = aws_s3_bucket.sentinel_logs.name
+    bucket_name = aws_s3_bucket.sentinel_logs.id
     trail_arn   = aws_cloudtrail.sentinel.arn
   })
 }
@@ -81,7 +81,7 @@ resource "aws_kms_alias" "sentinel_logs" {
 resource "aws_cloudtrail" "sentinel" {
   count          = var.enable_sentinel_logs ? 1 : 0
   name           = "%s-sentinel-trail"
-  s3_bucket_name = aws_s3_bucket.sentinel_logs.name
+  s3_bucket_name = aws_s3_bucket.sentinel_logs.id
   # s3_key_prefix                 = "sentinel"
   include_global_service_events = true
   kms_key_id                    = aws_kms_key.sentinel_logs.id
