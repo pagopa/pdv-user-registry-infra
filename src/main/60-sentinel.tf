@@ -1,4 +1,11 @@
 # this module set up all resources needed to create resources to send logs to azure sentinel
+
+locals {
+  trail_name        = format("%s-sentinel-trail", local.project)
+  sentinel_policies = ["AmazonSQSReadOnlyAccess", "AmazonS3ReadOnlyAccess", "PagoPaAllowECSKMS"]
+  queue_name        = format("%s-sentinel-queue", local.project)
+}
+
 resource "aws_iam_role" "sentinel" {
   count = var.enable_sentinel_logs ? 1 : 0
   name  = "MicrosoftSentinelRole"
@@ -22,11 +29,28 @@ resource "aws_iam_role" "sentinel" {
   })
 }
 
+data "aws_iam_policy" "sentinel" {
+  count = var.enable_sentinel_logs ? length(local.sentinel_policies) : 0
+  name  = local.sentinel_policies[count.index]
+}
+
+resource "aws_iam_role_policy_attachment" "sentinel" {
+  count      = var.enable_sentinel_logs ? length(local.sentinel_policies) : 0
+  role       = aws_iam_role.sentinel[0].name
+  policy_arn = data.aws_iam_policy.sentinel[count.index].arn
+}
+
 
 # SQS queue
-resource "aws_sqs_queue" "terraform_queue" {
+resource "aws_sqs_queue" "sentinel" {
   count = var.enable_sentinel_logs ? 1 : 0
-  name  = format("%s-sentinel-queue", local.project)
+  name  = local.queue_name
+
+  policy = templatefile("./iam_policies/allow-sqs-s3.tpl.json",
+    {
+      queue_name = local.queue_name
+      bucket_arn = aws_s3_bucket.sentinel_logs[0].arn
+  })
 }
 
 
@@ -39,12 +63,14 @@ resource "aws_s3_bucket" "sentinel_logs" {
   }
 }
 
+## Set the bucket ACL private.
 resource "aws_s3_bucket_acl" "sentinel_logs" {
   count  = var.enable_sentinel_logs ? 1 : 0
   bucket = aws_s3_bucket.sentinel_logs[0].id
   acl    = "private"
 }
 
+## Block public access.
 resource "aws_s3_bucket_public_access_block" "sentinel_logs" {
   count                   = var.enable_sentinel_logs ? 1 : 0
   bucket                  = aws_s3_bucket.sentinel_logs[0].id
@@ -54,20 +80,54 @@ resource "aws_s3_bucket_public_access_block" "sentinel_logs" {
   restrict_public_buckets = true
 }
 
+## S3 policy which allow cloud trail to write logs.
+
 resource "aws_s3_bucket_policy" "sentinel_logs" {
   count  = var.enable_sentinel_logs ? 1 : 0
   bucket = aws_s3_bucket.sentinel_logs[0].id
+
   policy = templatefile("./iam_policies/allow-s3-cloudtrail.tpl.json", {
     account_id  = data.aws_caller_identity.current.account_id
     bucket_name = aws_s3_bucket.sentinel_logs[0].id
-    trail_arn   = aws_cloudtrail.sentinel[0].arn
   })
 }
+
+## s3 lifecycle rule to delete old files.
+resource "aws_s3control_bucket_lifecycle_configuration" "sentinel" {
+  bucket = aws_s3_bucket.sentinel_logs[0].arn
+
+  rule {
+    expiration {
+      days = 7
+    }
+    id = "logs"
+  }
+
+}
+
+## s3 notification to SQS to notify new logs have been stored.
+resource "aws_s3_bucket_notification" "sentinel" {
+  count  = var.enable_sentinel_logs ? 1 : 0
+  bucket = aws_s3_bucket.sentinel_logs[0].id
+
+  queue {
+    queue_arn = aws_sqs_queue.sentinel[0].arn
+    events    = ["s3:ObjectCreated:*"]
+  }
+}
+
+# KMS key cloudtrail ueses to encrypt logs.
 
 resource "aws_kms_key" "sentinel_logs" {
   count                    = var.enable_sentinel_logs ? 1 : 0
   description              = "Kms key to entrypt cloudtrail logs."
   customer_master_key_spec = "SYMMETRIC_DEFAULT"
+
+  policy = templatefile("./iam_policies/allow-kms-cloudtrail.tpl.json", {
+    account_id = data.aws_caller_identity.current.account_id
+    trail_name = local.trail_name
+    aws_region = var.aws_region
+  })
 
   tags = { Name = format("%s-sentinel-logs-key", local.project) }
 }
@@ -79,23 +139,21 @@ resource "aws_kms_alias" "sentinel_logs" {
   target_key_id = aws_kms_key.sentinel_logs[0].id
 }
 
+# Trail to collect all managements events.
 resource "aws_cloudtrail" "sentinel" {
-  count          = var.enable_sentinel_logs ? 1 : 0
-  name           = "%s-sentinel-trail"
-  s3_bucket_name = aws_s3_bucket.sentinel_logs[0].id
-  # s3_key_prefix                 = "sentinel"
+  count                         = var.enable_sentinel_logs ? 1 : 0
+  name                          = local.trail_name
+  s3_bucket_name                = aws_s3_bucket.sentinel_logs[0].id
   include_global_service_events = true
-  kms_key_id                    = aws_kms_alias.sentinel_logs[0].id
+  kms_key_id                    = aws_kms_alias.sentinel_logs[0].arn
 
   event_selector {
     read_write_type           = "All"
     include_management_events = true
-
-    /*
-    data_resource {
-      type   = "AWS::Lambda::Function"
-      values = ["arn:aws:lambda"]
-    }
-    */
   }
+
+  depends_on = [
+    aws_s3_bucket_policy.sentinel_logs,
+    aws_kms_key.sentinel_logs
+  ]
 }
