@@ -93,14 +93,22 @@ resource "aws_s3_bucket_policy" "sentinel_logs" {
 }
 
 ## s3 lifecycle rule to delete old files.
-resource "aws_s3control_bucket_lifecycle_configuration" "sentinel" {
-  bucket = aws_s3_bucket.sentinel_logs[0].arn
+resource "aws_s3_bucket_lifecycle_configuration" "sentinel" {
+  count  = var.enable_sentinel_logs ? 1 : 0
+  bucket = aws_s3_bucket.sentinel_logs[0].bucket
 
   rule {
     expiration {
       days = 7
     }
-    id = "logs"
+    id = "clean"
+
+    noncurrent_version_expiration {
+      newer_noncurrent_versions = 1
+      noncurrent_days           = 1
+    }
+
+    status = "Enabled"
   }
 
 }
