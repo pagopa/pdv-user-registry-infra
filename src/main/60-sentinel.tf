@@ -2,8 +2,21 @@
 
 locals {
   trail_name        = format("%s-sentinel-trail", local.project)
-  sentinel_policies = ["AmazonSQSReadOnlyAccess", "AmazonS3ReadOnlyAccess", "PagoPaAllowECSKMS"]
+  sentinel_policies = ["AmazonSQSReadOnlyAccess", "AmazonS3ReadOnlyAccess", aws_iam_policy.sentinel_allow_kms[0].name]
   queue_name        = format("%s-sentinel-queue", local.project)
+}
+
+resource "aws_iam_policy" "sentinel_allow_kms" {
+  count       = var.enable_sentinel_logs ? 1 : 0
+  name        = "AllowSentinelKMS"
+  description = "Policy to allow sentinel to encrypt and decrypt data with kms key"
+
+  policy = templatefile(
+    "./iam_policies/allow-sentinel-kms.json.tpl",
+    {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  )
 }
 
 resource "aws_iam_role" "sentinel" {
@@ -32,6 +45,10 @@ resource "aws_iam_role" "sentinel" {
 data "aws_iam_policy" "sentinel" {
   count = var.enable_sentinel_logs ? length(local.sentinel_policies) : 0
   name  = local.sentinel_policies[count.index]
+
+  depends_on = [
+    aws_iam_policy.sentinel_allow_kms
+  ]
 }
 
 resource "aws_iam_role_policy_attachment" "sentinel" {
