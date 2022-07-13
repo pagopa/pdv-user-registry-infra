@@ -58,5 +58,13 @@ output "cloudhsm_hsm_id" {
 output "clouthsm_hsm_eni_ip" {
   value = try(data.aws_network_interface.hsm[0].private_ip, null)
 }
-
 */
+
+# sentinel
+output "sentinel_role_arn" {
+  value = try(module.sentinel[0].sentinel_role_arn, null)
+}
+
+output "sentinel_queue_url" {
+  value = try(module.sentinel[0].sentinel_queue_url, null)
+}
