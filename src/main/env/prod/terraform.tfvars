@@ -26,15 +26,21 @@ ecs_autoscaling = {
   min_capacity = 2
 }
 
-ms_person_log_level                         = "INFO"
-ms_person_rest_client_log_level             = "BASIC"
-ms_person_enable_confidential_filter        = true
-ms_user_registry_log_level                  = "INFO"
-ms_user_registry_rest_client_log_level      = "BASIC"
-ms_user_registry_enable_confidential_filter = true
 ecs_logs_retention_days                     = 90
 
 ms_tokenizer_host_name = "tokenizer-p-nlb-094463a88e36e754.elb.eu-south-1.amazonaws.com"
+
+
+# App
+ms_person_log_level                                     = "INFO"
+ms_person_rest_client_log_level                         = "BASIC"
+ms_person_enable_confidential_filter                    = true
+ms_person_enable_single_line_stack_trace_logging        = true
+ms_user_registry_log_level                              = "INFO"
+ms_user_registry_rest_client_log_level                  = "BASIC"
+ms_user_registry_enable_confidential_filter             = true
+ms_user_registry_enable_single_line_stack_trace_logging = true
+
 
 # Api Gateway
 

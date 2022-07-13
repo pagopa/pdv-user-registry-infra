@@ -67,8 +67,8 @@ resource "aws_ecs_task_definition" "user_registry" {
         "value": "${var.ms_user_registry_enable_confidential_filter}"
       },
       {
-        "name": "LOG_DATEFORMAT_PATTERN",
-        "value": "yyyy-MM-dd HH:mm:ss.SSSZZ"
+        "name": "ENABLE_SINGLE_LINE_STACK_TRACE_LOGGING",
+        "value": "${var.ms_user_registry_enable_single_line_stack_trace_logging}"
       }
     ],
     "cpu": 256,
