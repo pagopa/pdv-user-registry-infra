@@ -311,7 +311,7 @@ create_cloudhsm = false
 cloudhsm_nodes  = 1 # change to 2 once you downloaded the certificates and the cluster is initialized and active.
 
 enable_sentinel_logs  = true
-sentinel_workspace_id = "123456789" #todo: change with the real workspace id.
+sentinel_workspace_id = "a6cbd2fb-37c2-4f23-bc46-311585b62a52"
 
 tags = {
   CreatedBy   = "Terraform"
