@@ -1,6 +1,6 @@
 module "sentinel" {
   count  = var.enable_sentinel_logs ? 1 : 0
-  source = "git::https://github.com/pagopa/terraform-aws-sentinel.git?ref=refactoring-missed-config"
+  source = "git::https://github.com/pagopa/terraform-aws-sentinel.git?ref=v1.0.1"
 
   account_id            = data.aws_caller_identity.current.account_id
   queue_name            = format("%s-sentinel-queue", local.project)
