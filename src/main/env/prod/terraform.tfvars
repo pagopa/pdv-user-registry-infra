@@ -26,7 +26,7 @@ ecs_autoscaling = {
   min_capacity = 2
 }
 
-ecs_logs_retention_days                     = 90
+ecs_logs_retention_days = 90
 
 ms_tokenizer_host_name = "tokenizer-p-nlb-094463a88e36e754.elb.eu-south-1.amazonaws.com"
 
