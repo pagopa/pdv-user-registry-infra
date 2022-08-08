@@ -64,7 +64,7 @@ resource "aws_api_gateway_integration" "openapi_user_resitry_integration" {
   }
 }
 
-resource "aws_api_gateway_method_response" "openapi_user_resistry_response_200" {
+resource "aws_api_gateway_method_response" "openapi_user_registry_response_200" {
   rest_api_id = aws_api_gateway_rest_api.openapi_user_registry.id
   resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.get_item.http_method
@@ -75,31 +75,31 @@ resource "aws_api_gateway_method_response" "openapi_user_resistry_response_200" 
   }
 }
 
-resource "aws_api_gateway_integration_response" "openapi_user_resistry_integration_200" {
+resource "aws_api_gateway_integration_response" "openapi_user_registry_integration_200" {
   depends_on = [aws_api_gateway_integration.openapi_user_registry_integration]
 
-  rest_api_id = aws_api_gateway_rest_api.openapi_user_resistry.id
+  rest_api_id = aws_api_gateway_rest_api.openapi_user_registry.id
   resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.get_item.http_method
-  status_code = aws_api_gateway_method_response.openapi_user_resistry_response_200.status_code
+  status_code = aws_api_gateway_method_response.openapi_user_registry_response_200.status_code
 }
 
 
-resource "aws_api_gateway_deployment" "openapi_user_resistry" {
+resource "aws_api_gateway_deployment" "openapi_user_registry" {
   depends_on  = [aws_api_gateway_integration.openapi_user_registry_integration]
   rest_api_id = aws_api_gateway_rest_api.openapi_user_registry.id
 }
 
-resource "aws_api_gateway_stage" "openapi_user_resistry" {
-  deployment_id      = aws_api_gateway_deployment.openapi_user_resistry.id
-  rest_api_id        = aws_api_gateway_rest_api.openapi_user_resistry.id
+resource "aws_api_gateway_stage" "openapi_user_registry" {
+  deployment_id      = aws_api_gateway_deployment.openapi_user_registry.id
+  rest_api_id        = aws_api_gateway_rest_api.openapi_user_registry.id
   stage_name         = "v1"
   cache_cluster_size = 0.5
 }
 
-resource "aws_api_gateway_method_settings" "openapi_user_resistry" {
-  rest_api_id = aws_api_gateway_rest_api.openapi_user_resistry.id
-  stage_name  = aws_api_gateway_stage.openapi_user_resistry.stage_name
+resource "aws_api_gateway_method_settings" "openapi_user_registry" {
+  rest_api_id = aws_api_gateway_rest_api.openapi_user_registry.id
+  stage_name  = aws_api_gateway_stage.openapi_user_registry.stage_name
   method_path = "*/*"
 
   settings {
@@ -112,8 +112,8 @@ resource "aws_api_gateway_method_settings" "openapi_user_resistry" {
 ## Mapping openapi with custom domain .
 resource "aws_apigatewayv2_api_mapping" "openapi_tokrnizer" {
   count           = var.apigw_custom_domain_create ? 1 : 0
-  api_id          = aws_api_gateway_rest_api.openapi_user_resistry.id
-  stage           = aws_api_gateway_stage.openapi_user_resistry.stage_name
+  api_id          = aws_api_gateway_rest_api.openapi_user_registry.id
+  stage           = aws_api_gateway_stage.openapi_user_registry.stage_name
   domain_name     = aws_api_gateway_domain_name.main[0].domain_name
   api_mapping_key = "docs"
 }
