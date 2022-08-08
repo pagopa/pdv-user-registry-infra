@@ -56,7 +56,7 @@ resource "aws_api_gateway_integration" "openapi_user_resitry_integration" {
   type = "AWS"
 
   uri         = format("arn:aws:apigateway:%s:s3:path/{bucket}/{object}", var.aws_region)
-  credentials = aws_iam_role.s3_api_gateyway_role.arn
+  credentials = aws_iam_role.apigw.arn
 
   request_parameters = {
     "integration.request.path.bucket" = "method.request.path.folder"
@@ -65,7 +65,7 @@ resource "aws_api_gateway_integration" "openapi_user_resitry_integration" {
 }
 
 resource "aws_api_gateway_method_response" "openapi_user_resistry_response_200" {
-  rest_api_id = aws_api_gateway_rest_api.openapi_user_resistry.id
+  rest_api_id = aws_api_gateway_rest_api.openapi_user_registry.id
   resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.get_item.http_method
   status_code = "200"
@@ -76,7 +76,7 @@ resource "aws_api_gateway_method_response" "openapi_user_resistry_response_200" 
 }
 
 resource "aws_api_gateway_integration_response" "openapi_user_resistry_integration_200" {
-  depends_on = [aws_api_gateway_integration.openapi_user_resistry_integration]
+  depends_on = [aws_api_gateway_integration.openapi_user_registry_integration]
 
   rest_api_id = aws_api_gateway_rest_api.openapi_user_resistry.id
   resource_id = aws_api_gateway_resource.item.id
@@ -86,9 +86,8 @@ resource "aws_api_gateway_integration_response" "openapi_user_resistry_integrati
 
 
 resource "aws_api_gateway_deployment" "openapi_user_resistry" {
-  depends_on  = [aws_api_gateway_integration.openapi_user_resistry_integration]
-  rest_api_id = aws_api_gateway_rest_api.openapi_user_resistry.id
-
+  depends_on  = [aws_api_gateway_integration.openapi_user_registry_integration]
+  rest_api_id = aws_api_gateway_rest_api.openapi_user_registry.id
 }
 
 resource "aws_api_gateway_stage" "openapi_user_resistry" {
