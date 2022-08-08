@@ -62,3 +62,12 @@ resource "aws_iam_role_policy" "cloudwatch" {
 }
 EOF
 }
+
+data "aws_iam_policy" "s3_readonly_access" {
+  name = "AmazonS3ReadOnlyAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "s3_policy_attach" {
+  role       = aws_iam_role.apigw.name
+  policy_arn = data.aws_iam_policy.s3_full_access.arn
+}
