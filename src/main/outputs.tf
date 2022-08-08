@@ -39,6 +39,14 @@ output "api_gateway_endpoint" {
   value = var.apigw_custom_domain_create ? format("https://%s", aws_api_gateway_domain_name.main[0].domain_name) : ""
 }
 
+output "openapi_endpoint" {
+  value = var.apigw_custom_domain_create ? format("https://%s/docs/%s/%s",
+    aws_api_gateway_domain_name.main[0].domain_name,
+    aws_s3_bucket.openapidocs.id,
+  aws_s3_object.openapi_user_registry.key, ) : ""
+}
+
+
 
 # cloud hsm
 output "cloudhsm_cluster_id" {
