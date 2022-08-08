@@ -45,7 +45,7 @@ resource "aws_api_gateway_method" "get_item" {
   }
 }
 
-resource "aws_api_gateway_integration" "openapi_user_resitry_integration" {
+resource "aws_api_gateway_integration" "openapi_user_registry_integration" {
   rest_api_id = aws_api_gateway_rest_api.openapi_user_registry.id
   resource_id = aws_api_gateway_resource.item.id
 
