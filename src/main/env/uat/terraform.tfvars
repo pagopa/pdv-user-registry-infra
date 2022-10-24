@@ -79,6 +79,18 @@ user_registry_plans = [
     rate_limit      = 10
     method_throttle = []
   },
+  {
+    key_name        = "IDPAY-DEV"
+    burst_limit     = 50
+    rate_limit      = 100
+    method_throttle = []
+  },
+  {
+    key_name        = "IDPAY-UAT"
+    burst_limit     = 50
+    rate_limit      = 100
+    method_throttle = []
+  },
 ]
 
 
