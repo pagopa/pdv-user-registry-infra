@@ -1,0 +1,78 @@
+name: "Terraform-Apply"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/main/**'
+      - '.github/workflows/*.yml'
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      environment:
+        description: 'Which environment to update.'
+        type: choice
+        default: 'uat'
+        required: true 
+        options:
+        - uat
+        - prod
+
+env:
+ ENVIRONMENT:  github.event.inputs.environment || 'uat'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: src/main
+
+jobs:
+  terraform:
+    name: "terraform-apply"
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write   # This is required for requesting the JWT
+      contents: read    # This is required for actions/checkout
+    environment:
+      name: ${{ env.ENVIRONMENT }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+         
+      - name: Configure AWS Credentials
+        env:
+          AWS_REGION: eu-south-1
+          
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secret.IAM_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Read terraform version 
+        id: read-version
+        run: |
+          echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: Terraform Init
+        id: init
+        run: |
+          ./terraform.sh init ${{ env.ENVIRONMENT }}
+
+      - name: Terraform Apply
+        id: apply
+        run: |
+          ./terraform.sh apply ${{ env.ENVIRONMENT }} -auto-approve
