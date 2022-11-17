@@ -37,6 +37,8 @@ jobs:
     name: "get-environment"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Get Environment
         id: get-env
         run: | 
