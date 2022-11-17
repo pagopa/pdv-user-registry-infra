@@ -27,26 +27,32 @@ on:
         - uat
         - prod
 
-env:
-  env_this: ${{ github.event.inputs.environment}} || uat     
-
 defaults:
   run:
     shell: bash
     working-directory: src/main
 
 jobs:
+  get-env:
+    name: "get-environment"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Environment
+        id: get-env
+        run: | 
+          USER_INPUT=${{ github.event.inputs.name }}
+          echo "::set-output name=ret::${USER_INPUT:-"uat"}"
+    outputs:
+     ret: ${{ steps.get-env.outputs.ret }}
   terraform:
+    needs: [get-env]
     name: "terraform-apply"
     runs-on: ubuntu-latest
     permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
-    strategy:
-      matrix:
-        environment: ['${{ env.env_this  }}']
     environment:
-      name: ${{ matrix.environment }}
+      name: ${{ needs.get-env.outputs.ret }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
