@@ -81,9 +81,9 @@ jobs:
       - name: Terraform Init
         id: init
         run: |
-          ./terraform.sh init ${{ github.event.inputs.environment }}
+          ./terraform.sh init ${{ needs.get-env.outputs.ret }}
 
       - name: Terraform Apply
         id: apply
         run: |
-          ./terraform.sh apply ${{ github.event.inputs.environment }} -auto-approve
+          ./terraform.sh apply ${{ needs.get-env.outputs.ret }} -auto-approve
