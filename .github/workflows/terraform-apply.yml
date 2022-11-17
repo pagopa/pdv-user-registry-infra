@@ -40,8 +40,9 @@ jobs:
       - name: Get Environment
         id: get-env
         run: | 
-          USER_INPUT=${{ github.event.inputs.environment }} || uat
-          echo "::set-output name=ret::${USER_INPUT:-"uat"}"
+          # USER_INPUT=${{ github.event.inputs.environment }} || uat
+          # echo "::set-output name=ret::${USER_INPUT:-"uat"}"
+          echo "Test"
     outputs:
      ret: ${{ steps.get-env.outputs.ret }}
   terraform:
