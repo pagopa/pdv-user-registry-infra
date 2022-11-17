@@ -54,7 +54,7 @@ jobs:
           
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ secret.IAM_ROLE }}
+          role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Read terraform version 
