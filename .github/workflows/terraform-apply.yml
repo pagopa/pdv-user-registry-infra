@@ -27,6 +27,9 @@ on:
         - uat
         - prod
 
+env:
+  env_this: ${{ github.event.inputs.environment}} || uat     
+
 defaults:
   run:
     shell: bash
@@ -41,7 +44,7 @@ jobs:
       contents: read    # This is required for actions/checkout
     strategy:
       matrix:
-        environment: ['${{ github.event.inputs.environment}}']
+        environment: ['${{ env.env_this  }}']
     environment:
       name: ${{ matrix.environment }}
     steps:
