@@ -21,7 +21,7 @@ on:
       environment:
         description: 'Which environment to update.'
         type: choice
-        default: 'uat'
+        default: uat
         required: true 
         options:
         - uat
