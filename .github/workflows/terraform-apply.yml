@@ -27,9 +27,6 @@ on:
         - uat
         - prod
 
-env:
- ENVIRONMENT:  github.event.inputs.environment || 'uat'
-
 defaults:
   run:
     shell: bash
@@ -43,7 +40,7 @@ jobs:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
     environment:
-      name: ${{ env.ENVIRONMENT }}
+      name: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
