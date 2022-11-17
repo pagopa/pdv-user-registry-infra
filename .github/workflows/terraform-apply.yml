@@ -41,7 +41,7 @@ jobs:
       contents: read    # This is required for actions/checkout
     strategy:
       matrix:
-        environment: ['${{ github.event.inputs.environment || uat}}']
+        environment: ['${{ github.event.inputs.environment}}']
     environment:
       name: ${{ matrix.environment }}
     steps:
