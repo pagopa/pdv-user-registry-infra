@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.1.0"
+  required_version = "~> 1.2.0"
 
   backend "s3" {}
 
@@ -72,11 +72,6 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
 
 }
 
-## IAM user who can manage the infrastructure definition
-data "aws_iam_policy" "admin_access" {
-  name = "AdministratorAccess"
-}
-
 resource "aws_iam_group" "admins" {
   name = "Admins"
 }
@@ -86,21 +81,54 @@ resource "aws_iam_group_policy_attachment" "admins" {
   policy_arn = data.aws_iam_policy.admin_access.arn
 }
 
-resource "aws_iam_user" "iac" {
-  name = "iac"
-
-  tags = var.tags
+data "aws_iam_policy" "admin_access" {
+  name = "AdministratorAccess"
 }
 
-resource "aws_iam_access_key" "iac" {
-  user = aws_iam_user.iac.name
-}
+data "aws_caller_identity" "current" {}
 
-## TODO: check whether it's possibile to assign less power
-resource "aws_iam_user_group_membership" "iac" {
-  user = aws_iam_user.iac.name
+# github openid identity provider.
+resource "aws_iam_openid_connect_provider" "github" {
+  url = "https://token.actions.githubusercontent.com"
 
-  groups = [
-    aws_iam_group.admins.name,
+  client_id_list = [
+    "sts.amazonaws.com",
   ]
+
+  thumbprint_list = [
+    "6938fd4d98bab03faadb97b34396831e3780aea1"
+  ]
+}
+
+resource "aws_iam_role" "githubiac" {
+  name        = "GitHubActionIACRole"
+  description = "Role to assume to create the infrastructure."
+
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow",
+        Principal = {
+          "Federated" : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/token.actions.githubusercontent.com"
+        },
+        Action = "sts:AssumeRoleWithWebIdentity",
+        Condition = {
+          StringLike = {
+            "token.actions.githubusercontent.com:sub" : "repo:${var.github_repository}:*"
+          },
+          "ForAllValues:StringEquals" = {
+            "token.actions.githubusercontent.com:iss" : "https://token.actions.githubusercontent.com",
+            "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
+          }
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "githubiac" {
+  role       = aws_iam_role.githubiac.name
+  policy_arn = data.aws_iam_policy.admin_access.arn
 }
