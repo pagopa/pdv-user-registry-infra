@@ -27,9 +27,6 @@ on:
         - uat
         - prod
 
-env:
- ENVIRONMENT:  github.event.inputs.environment || 'uat'
-
 defaults:
   run:
     shell: bash
@@ -43,7 +40,7 @@ jobs:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
     environment:
-      name: ${{ env.ENVIRONMENT }}
+      name: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -70,9 +67,9 @@ jobs:
       - name: Terraform Init
         id: init
         run: |
-          ./terraform.sh init ${{ env.ENVIRONMENT }}
+          ./terraform.sh init ${{ github.event.inputs.environment }}
 
       - name: Terraform Apply
         id: apply
         run: |
-          ./terraform.sh apply ${{ env.ENVIRONMENT }} -auto-approve
+          ./terraform.sh apply ${{ github.event.inputs.environment }} -auto-approve
