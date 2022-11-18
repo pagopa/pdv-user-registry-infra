@@ -16,11 +16,15 @@ Scale fast to support high number of requests with burst estimated till 1250 req
 Secure due to the fact it’s managing confidential information.
 
 The main resources hosting the solution in the diagram below are:
-Api Gateway with regional endpoint, WAF and no caching by requirements.
-Network Load Balancer (NLB) deployed in 3 private subnets
-VPC Link to allow the communication between the Api Gateway and the NLB
-ECS Fargate Cluster with tasks running in 2 / 3 private subnets and autoscaling based on CPU metrics
-DynamoDB table with autoscaling
-[Descoped]Cloud HSM to provide a customer managed key to encrypt / decrypt data in DynamoDB 
+* Api Gateway with regional endpoint, WAF and no caching by requirements.
+* Network Load Balancer (NLB) deployed in 3 private subnets
+* VPC Link to allow the communication between the Api Gateway and the NLB
+* ECS Fargate Cluster with tasks running in 2 / 3 private subnets and autoscaling based on CPU metrics
+* DynamoDB table with autoscaling
+* ~~Cloud HSM to provide a customer managed key to encrypt / decrypt data in DynamoDB~~
 
 Note: Rest Api(s) which are publicly available require the standard Api Gateway x-api-key http header to authenticate and each key is associated to a dedicated plan with Rate Limits per method.
+
+
+
+[![img](./doc/img/cloud-private-data-vault.svg)]()
