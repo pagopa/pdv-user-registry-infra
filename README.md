@@ -50,7 +50,7 @@ You need the following tools to work on your laptop
 
 Create:
 
-* The s3 bucket to store terraform code
+* The s3 bucket to store terraform state
 * The Dynamodb table to manage terraform locks
 * The Github OpenId connection
 
