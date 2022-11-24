@@ -56,4 +56,4 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Apply
-        uses: ./.github/workflows/terraform-apply-tpl.yml
+        uses: ./.github/workflows/terraform-apply-wf.yml
