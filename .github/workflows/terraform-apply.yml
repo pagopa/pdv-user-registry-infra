@@ -42,7 +42,7 @@ jobs:
         id: get-env
         run: | 
           USER_INPUT=${{ github.event.inputs.environment }}
-          echo "ret=${USER_INPUT:-"uat, prod"}" >> $GITHUB_OUTPUT
+          echo "ret=[${USER_INPUT:-"uat, prod"}]" >> $GITHUB_OUTPUT
     outputs:
      ret: ${{ steps.get-env.outputs.ret }}
   terraform:
@@ -53,7 +53,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        environment: [${{ needs.get-env.outputs.ret }}]
+        environment: ${{ fromJson(needs.get-env.outputs.ret) }}
     permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
