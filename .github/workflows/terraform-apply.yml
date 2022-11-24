@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - reusable-wf
     paths:
       - 'src/main/**'
       - '.github/workflows/*.yml'
@@ -59,7 +58,7 @@ jobs:
           working-directory: src/main
 
   merge-trigger:
-      if: "${{ github.event.inputs.environment == '' }} && github.ref == 'refs/heads/reusable-wf'"
+      if: "${{ github.event.inputs.environment == '' }} && github.ref == 'refs/heads/main'"
       name: "terraform-apply"
       strategy:
         max-parallel: 1
