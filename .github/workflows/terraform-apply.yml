@@ -35,14 +35,11 @@ defaults:
 jobs:
   terraform:
     # if: ${{ inputs.environment }} != null
-    name: "terraform-apply"
-    runs-on: ubuntu-latest
-    continue-on-error: false
     permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
     environment: uat
-          
+    
     uses: pagopa/personal-data-vault-infra/.github/workflows/terraform-apply-wf.yml@main
     with:
       environment: uat
