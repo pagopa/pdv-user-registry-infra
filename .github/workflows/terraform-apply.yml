@@ -62,9 +62,9 @@ jobs:
       if: "${{ github.event.inputs.environment == '' }} && github.ref == 'refs/heads/reusable-wf'"
       name: "terraform-apply"
       strategy:
-      max-parallel: 1
-      matrix:
-        environment: [uat, prod]
+        max-parallel: 1
+        matrix:
+          environment: [uat, prod]
       runs-on: ubuntu-latest
       continue-on-error: false
       environment: ${{ matrix.environment }}
