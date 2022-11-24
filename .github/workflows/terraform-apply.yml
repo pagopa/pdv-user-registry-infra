@@ -55,7 +55,7 @@ jobs:
       - name: Apply
         uses: ./.github/workflows/apply
         with:
-          env: uat
+          env: ${{ inputs.environment }}
           working-directory: src/main
 
   merge-trigger:
@@ -87,5 +87,5 @@ jobs:
         - name: Apply
           uses: ./.github/workflows/apply
           with:
-            env: uat
+            env: ${{ matrix.environment }}
             working-directory: src/main
