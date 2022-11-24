@@ -58,4 +58,4 @@ jobs:
       - id: apply
         uses: ./.github/workflows/terraform-apply-wf.yml
         with:
-          environment:uat
+          env: uat

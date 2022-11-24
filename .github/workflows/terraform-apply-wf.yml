@@ -2,7 +2,7 @@ name: apply
 description: "Run terraform apply"
 
 inputs:
-  environment:
+  env:
     required: true
     type: string
 
@@ -21,9 +21,9 @@ runs:
     - name: Terraform Init
       id: init
       run: |
-        ./terraform.sh init ${{ inputs.environment }}
+        ./terraform.sh init ${{ inputs.env }}
 
     - name: Terraform Apply
       id: apply
       run: |
-        ./terraform.sh apply ${{ inputs.environment }} -auto-approve
+        ./terraform.sh apply ${{ inputs.env }} -auto-approve
