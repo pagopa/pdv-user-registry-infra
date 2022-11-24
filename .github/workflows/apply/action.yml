@@ -1,0 +1,39 @@
+name: apply
+description: "Run terraform apply"
+
+inputs:
+  env:
+    required: true
+    type: string
+  working-directory:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: Read terraform version 
+      id: read-version
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+    - name: Terraform Init
+      id: init
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        ./terraform.sh init ${{ inputs.env }}
+
+    - name: Terraform Apply
+      id: apply
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        ./terraform.sh apply ${{ inputs.env }} -auto-approve

@@ -21,30 +21,70 @@ on:
       environment:
         description: 'Which environment to update.'
         type: choice
+        required: true
         default: uat
-        required: true 
         options:
         - dev
         - uat
 
-defaults:
-  run:
-    shell: bash
-    working-directory: src/main
 
 jobs:
-  terraform:
-    # if: ${{ inputs.environment }} != null
+  manual-trigger:
+    if: "${{ github.event.inputs.environment != '' }}"
     name: "terraform-apply"
     runs-on: ubuntu-latest
     continue-on-error: false
     permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
-    environment: uat
-          
-    uses: pagopa/personal-data-vault-infra/.github/workflows/terraform-apply-wf.yml@main
-    with:
-      environment: uat
-      AWS_REGION: eu-south-1
-    secrets: inherit
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        env:
+          AWS_REGION: eu-south-1
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.IAM_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Apply
+        uses: ./.github/workflows/apply
+        with:
+          env: ${{ inputs.environment }}
+          working-directory: src/main
+
+  merge-trigger:
+      if: "${{ github.event.inputs.environment == '' }} && github.ref == 'refs/heads/main'"
+      name: "terraform-apply"
+      strategy:
+        max-parallel: 1
+        matrix:
+          environment: [uat, prod]
+      runs-on: ubuntu-latest
+      continue-on-error: false
+      environment: ${{ matrix.environment }}
+      permissions:
+        id-token: write   # This is required for requesting the JWT
+        contents: read    # This is required for actions/checkout
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Configure AWS Credentials
+          env:
+            AWS_REGION: eu-south-1
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            role-to-assume: ${{ secrets.IAM_ROLE }}
+            aws-region: ${{ env.AWS_REGION }}
+        
+        - name: Apply
+          uses: ./.github/workflows/apply
+          with:
+            env: ${{ matrix.environment }}
+            working-directory: src/main
