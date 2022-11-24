@@ -57,3 +57,5 @@ jobs:
 
       - name: Apply
         uses: ./.github/workflows/terraform-apply-wf.yml
+        with:
+          environment: ${{ inputs.environment }}
