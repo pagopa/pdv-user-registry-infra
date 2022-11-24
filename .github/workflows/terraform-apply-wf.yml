@@ -1,0 +1,48 @@
+name: apply
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      IAM_ROLE:
+        required: true
+        type: string
+      AWS_REGION:
+        required: true
+        type: 
+        
+jobs: 
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+         
+      - name: Configure AWS Credentials
+          
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ inputs.IAM_ROLE }}
+          aws-region: ${{ inputs.AWS_REGION }}
+
+      - name: Read terraform version 
+        id: read-version
+        run: |
+          echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: Terraform Init
+        id: init
+        run: |
+          ./terraform.sh init ${{ inputs.environment }}
+
+      - name: Terraform Apply
+        id: apply
+        run: |
+          ./terraform.sh apply ${{ inputs.environment }} -auto-approve

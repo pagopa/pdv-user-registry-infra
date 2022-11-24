@@ -24,8 +24,8 @@ on:
         default: uat
         required: true 
         options:
+        - dev
         - uat
-        - prod
 
 defaults:
   run:
@@ -33,57 +33,20 @@ defaults:
     working-directory: src/main
 
 jobs:
-  get-env:
-    name: "get-environment"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Get Environment
-        id: get-env
-        run: | 
-          USER_INPUT=${{ github.event.inputs.environment }}
-          echo "ret=${USER_INPUT:-"uat"}" >> $GITHUB_OUTPUT
-    outputs:
-     ret: ${{ steps.get-env.outputs.ret }}
   terraform:
-    needs: [get-env]
+    if: ${{ inputs.environment }} != null
     name: "terraform-apply"
     runs-on: ubuntu-latest
+    continue-on-error: false
     permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
-    environment:
-      name: ${{ needs.get-env.outputs.ret }}
+    environment: ${{ inputs.environment }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-         
-      - name: Configure AWS Credentials
-        env:
+      - name: Apply
+        
+        uses: ./.github/workflows/terraform-apply-wf.yml
+        with:
+          environment: ${{ inputs.environment }}
           AWS_REGION: eu-south-1
-          
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.IAM_ROLE }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Read terraform version 
-        id: read-version
-        run: |
-          echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: ${{ env.TERRAFORM_VERSION }}
-
-      - name: Terraform Init
-        id: init
-        run: |
-          ./terraform.sh init ${{ needs.get-env.outputs.ret }}
-
-      - name: Terraform Apply
-        id: apply
-        run: |
-          ./terraform.sh apply ${{ needs.get-env.outputs.ret }} -auto-approve
+          IAM_ROLE: ${{ secrets.IAM_ROLE}}
