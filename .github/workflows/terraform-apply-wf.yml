@@ -9,10 +9,6 @@ on:
       AWS_REGION:
         required: true
         type: string
-    secrets:
-      IAM_ROLE:
-        required: true
-
         
 jobs: 
   terraform:
