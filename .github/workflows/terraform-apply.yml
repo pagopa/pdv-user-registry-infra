@@ -34,22 +34,22 @@ defaults:
 
 jobs:
   terraform:
-    if: ${{ inputs.environment }} != null
+    # if: ${{ inputs.environment }} != null
     name: "terraform-apply"
     runs-on: ubuntu-latest
     continue-on-error: false
     permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
-    environment: ${{ inputs.environment }}
+    environment: uat
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Apply
         
         uses: ./.github/workflows/terraform-apply-wf.yml
         with:
-          environment: ${{ inputs.environment }}
+          environment: uat
           AWS_REGION: eu-south-1
           IAM_ROLE: ${{ secrets.IAM_ROLE}}
