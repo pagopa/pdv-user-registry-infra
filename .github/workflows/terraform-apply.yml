@@ -42,14 +42,9 @@ jobs:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
     environment: uat
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Apply
-        
-        uses: pagopa/personal-data-vault-infra/.github/workflows/terraform-apply-wf.yml@main
-        with:
-          environment: uat
-          AWS_REGION: eu-south-1
-        secrets: inherit
+          
+    uses: pagopa/personal-data-vault-infra/.github/workflows/terraform-apply-wf.yml@main
+    with:
+      environment: uat
+      AWS_REGION: eu-south-1
+    secrets: inherit
