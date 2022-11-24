@@ -30,7 +30,7 @@ on:
 
 jobs:
   terraform:
-    if: ${{ inputs.environment }} != ""
+    if: "${{ github.event.inputs.environment != '' }}"
     name: "terraform-apply"
     runs-on: ubuntu-latest
     continue-on-error: false
