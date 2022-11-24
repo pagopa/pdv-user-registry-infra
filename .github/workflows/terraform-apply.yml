@@ -42,7 +42,7 @@ jobs:
         id: get-env
         run: | 
           USER_INPUT=${{ github.event.inputs.environment }}
-          echo "ret=[${USER_INPUT:-"uat, prod"}]" >> $GITHUB_OUTPUT
+          echo "ret=${USER_INPUT:-"uat, prod"}" >> $GITHUB_OUTPUT
     outputs:
      ret: ${{ steps.get-env.outputs.ret }}
   terraform:
