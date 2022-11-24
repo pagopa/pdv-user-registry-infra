@@ -35,7 +35,7 @@ defaults:
 jobs:
   terraform:
     # if: ${{ inputs.environment }} != null
-    uses: pagopa/personal-data-vault-infra/.github/workflows/terraform-apply-wf.yml@main
+    uses: pagopa/personal-data-vault-infra/.github/workflows/terraform-apply-wf.yml@reusable-wf
     with:
       environment: uat
       AWS_REGION: eu-south-1

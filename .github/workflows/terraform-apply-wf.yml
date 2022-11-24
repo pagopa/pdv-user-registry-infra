@@ -8,7 +8,7 @@ on:
         type: string
       AWS_REGION:
         required: true
-        type: 
+        type: string
     secrets:
       IAM_ROLE:
         required: true
