@@ -5,7 +5,7 @@ inputs:
   env:
     required: true
     type: string
-  working-directory: ${{ inputs.working-directory }}
+  working-directory:
     required: true
     type: string
 
