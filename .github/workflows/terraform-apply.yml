@@ -55,7 +55,7 @@ jobs:
       - name: showoutput
         id: showoutput
         run: |
-          echo $ {{ needs.get-env.outputs.ret }}
+          echo ${{ needs.get-env.outputs.ret }}
   terraform:
     needs: [get-env]
     name: "terraform-apply"
