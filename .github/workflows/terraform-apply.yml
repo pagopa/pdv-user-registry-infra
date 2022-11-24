@@ -51,7 +51,7 @@ jobs:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
       
-      - id: apply
+      - name: Apply
         uses: ./.github/workflows/apply
         with:
           env: uat
