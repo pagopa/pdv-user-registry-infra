@@ -56,6 +56,6 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       
       - id: apply
-        uses: .github/workflows/terraform-apply-wf.yml
+        uses: ./.github/workflows/terraform-apply-wf.yml
         with:
           environment:uat
