@@ -45,6 +45,15 @@ jobs:
           echo "ret=[${USER_INPUT:-"uat, prod"}]" >> $GITHUB_OUTPUT
     outputs:
      ret: ${{ steps.get-env.outputs.ret }}
+  showoutput:
+    needs: [get-env]
+    name: "showoutput"
+    runs-on: ubuntu-latest
+    steps:
+      - name: showoutput
+        id: showoutput
+        run: |
+          echo $ {{ needs.get-env.outputs.ret }}
   terraform:
     needs: [get-env]
     name: "terraform-apply"
