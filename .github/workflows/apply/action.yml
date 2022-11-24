@@ -5,6 +5,9 @@ inputs:
   env:
     required: true
     type: string
+  working-directory: ${{ inputs.working-directory }}
+    required: true
+    type: string
 
 runs:
   using: "composite"
@@ -12,6 +15,7 @@ runs:
     - name: Read terraform version 
       id: read-version
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: |
         echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
 
@@ -23,11 +27,13 @@ runs:
     - name: Terraform Init
       id: init
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: |
         ./terraform.sh init ${{ inputs.env }}
 
     - name: Terraform Apply
       id: apply
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: |
         ./terraform.sh apply ${{ inputs.env }} -auto-approve

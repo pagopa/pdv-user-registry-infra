@@ -27,10 +27,6 @@ on:
         - dev
         - uat
 
-defaults:
-  run:
-    shell: bash
-    working-directory: src/main
 
 jobs:
   terraform:
@@ -59,3 +55,4 @@ jobs:
         uses: ./.github/workflows/apply
         with:
           env: uat
+          working-directory: src/main
