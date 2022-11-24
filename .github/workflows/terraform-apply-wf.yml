@@ -9,16 +9,18 @@ on:
       AWS_REGION:
         required: true
         type: string
-        
+
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+
+
+
 jobs: 
   terraform:
     runs-on: ubuntu-latest
 
     environment: ${{ inputs.environment }}
-
-    permissions:
-      id-token: write   # This is required for requesting the JWT
-      contents: read    # This is required for actions/checkout
 
     steps:
       - name: Checkout
