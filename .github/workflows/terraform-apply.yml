@@ -30,14 +30,14 @@ on:
 
 jobs:
   terraform:
-    if: ${{ inputs.environment }} != null
+    if: ${{ inputs.environment }} != ""
     name: "terraform-apply"
     runs-on: ubuntu-latest
     continue-on-error: false
     permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
-    environment: uat
+    environment: ${{ inputs.environment }}
 
     steps:
       - name: Checkout
