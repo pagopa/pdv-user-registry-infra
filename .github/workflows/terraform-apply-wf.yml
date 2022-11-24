@@ -1,54 +1,29 @@
 name: apply
+description: "Run terraform apply"
 
-on:
-  workflow_call:
-    inputs:
-      environment:
-        required: true
-        type: string
-      AWS_REGION:
-        required: true
-        type: string
+inputs:
+  environment:
+    required: true
+    type: string
 
-permissions:
-  id-token: write   # This is required for requesting the JWT
-  contents: read    # This is required for actions/checkout
+runs:
+  steps:
+    - name: Read terraform version 
+      id: read-version
+      run: |
+        echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: ${{ env.TERRAFORM_VERSION }}
 
+    - name: Terraform Init
+      id: init
+      run: |
+        ./terraform.sh init ${{ inputs.environment }}
 
-jobs: 
-  terraform:
-    runs-on: ubuntu-latest
-
-    environment: ${{ inputs.environment }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-         
-      - name: Configure AWS Credentials
-          
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.IAM_ROLE }}
-          aws-region: ${{ inputs.AWS_REGION }}
-
-      - name: Read terraform version 
-        id: read-version
-        run: |
-          echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: ${{ env.TERRAFORM_VERSION }}
-
-      - name: Terraform Init
-        id: init
-        run: |
-          ./terraform.sh init ${{ inputs.environment }}
-
-      - name: Terraform Apply
-        id: apply
-        run: |
-          ./terraform.sh apply ${{ inputs.environment }} -auto-approve
+    - name: Terraform Apply
+      id: apply
+      run: |
+        ./terraform.sh apply ${{ inputs.environment }} -auto-approve
