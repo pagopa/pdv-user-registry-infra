@@ -6,15 +6,12 @@ inputs:
     required: true
     type: string
 
-defaults:
-  run:
-    shell: bash
-
 runs:
   using: "composite"
   steps:
     - name: Read terraform version 
       id: read-version
+      shell: bash
       run: |
         echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
 
@@ -25,10 +22,12 @@ runs:
 
     - name: Terraform Init
       id: init
+      shell: bash
       run: |
         ./terraform.sh init ${{ inputs.env }}
 
     - name: Terraform Apply
       id: apply
+      shell: bash
       run: |
         ./terraform.sh apply ${{ inputs.env }} -auto-approve
