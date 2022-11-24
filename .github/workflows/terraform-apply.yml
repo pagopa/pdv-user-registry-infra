@@ -40,3 +40,4 @@ jobs:
       environment: uat
       AWS_REGION: eu-south-1
     secrets: inherit
+    environment: uat
