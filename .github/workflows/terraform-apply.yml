@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - reusable-wf
     paths:
       - 'src/main/**'
       - '.github/workflows/*.yml'
@@ -21,7 +22,6 @@ on:
       environment:
         description: 'Which environment to update.'
         type: choice
-        default: uat
         required: true 
         options:
         - dev
@@ -30,7 +30,7 @@ on:
 
 jobs:
   terraform:
-    # if: ${{ inputs.environment }} != null
+    if: ${{ inputs.environment }} != null
     name: "terraform-apply"
     runs-on: ubuntu-latest
     continue-on-error: false
