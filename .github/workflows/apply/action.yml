@@ -7,6 +7,7 @@ inputs:
     type: string
 
 runs:
+  using: "composite"
   steps:
     - name: Read terraform version 
       id: read-version
