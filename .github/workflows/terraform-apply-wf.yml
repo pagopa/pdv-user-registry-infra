@@ -6,12 +6,13 @@ on:
       environment:
         required: true
         type: string
-      IAM_ROLE:
-        required: true
-        type: string
       AWS_REGION:
         required: true
         type: 
+    secrets:
+      IAM_ROLE:
+        required: true
+
         
 jobs: 
   terraform:
@@ -24,7 +25,7 @@ jobs:
           
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ inputs.IAM_ROLE }}
+          role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ inputs.AWS_REGION }}
 
       - name: Read terraform version 

@@ -48,8 +48,8 @@ jobs:
 
       - name: Apply
         
-        uses: ./.github/workflows/terraform-apply-wf.yml
+        uses: pagopa/personal-data-vault-infra/.github/workflows/terraform-apply-wf.yml@main
         with:
           environment: uat
           AWS_REGION: eu-south-1
-          IAM_ROLE: ${{ secrets.IAM_ROLE}}
+        secrets: inherit
