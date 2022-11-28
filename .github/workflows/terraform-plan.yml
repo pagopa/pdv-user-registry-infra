@@ -57,9 +57,11 @@ jobs:
       - name: Terraform Init
         id: init
         run: |
-          ./terraform.sh init ${${{ matrix.environment }}%"_ro"}
+          e=${{ matrix.environment }}
+          ./terraform.sh init ${e%"_ro"}
 
       - name: Terraform Plan
         id: plan
         run: |
-          ./terraform.sh plan ${${{ matrix.environment }}%"_ro"}
+          e=${{ matrix.environment }}
+          ./terraform.sh plan ${e%"_ro"}
