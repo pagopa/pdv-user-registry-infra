@@ -23,7 +23,7 @@ jobs:
   terraform:
     strategy:
       matrix:
-        environment: [uat, prod_ro]
+        environment: [uat, prod]
     name: "terraform-plan"
     runs-on: ubuntu-latest
     environment: ${{ matrix.environment }}
@@ -57,11 +57,9 @@ jobs:
       - name: Terraform Init
         id: init
         run: |
-          e=${{ matrix.environment }}
-          ./terraform.sh init ${e%"_ro"}
+          ./terraform.sh init ${{ matrix.environment }}
 
       - name: Terraform Plan
         id: plan
         run: |
-          e=${{ matrix.environment }}
-          ./terraform.sh plan ${e%"_ro"}
+          ./terraform.sh plan ${{ matrix.environment }}
