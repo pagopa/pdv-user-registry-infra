@@ -1,7 +1,11 @@
 name: "Terraform-Plan"
 
 on:
-  pull_request:
+  push:
+    branches:
+      - '**'        # matches every branch
+      - '!main'     # excludes main
+      - '!master'     # excludes master
     paths:
       - 'src/main/**'
       - '.github/workflows/*.yml'
