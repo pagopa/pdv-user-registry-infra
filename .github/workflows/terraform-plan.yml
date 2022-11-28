@@ -35,7 +35,7 @@ jobs:
       - name: Configure AWS Credentials
         env:
           AWS_REGION: eu-south-1
-        uses: aws-actions/configure-aws-credentials@v1.7.0
+        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
         with:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
@@ -46,7 +46,7 @@ jobs:
           echo "TERRAFORM_VERSION=`cat ../.terraform-version`" >> $GITHUB_ENV
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.3
+        uses: hashicorp/setup-terraform@633666f66e0061ca3b725c73b2ec20cd13a8fdd1
         with:
           terraform_version: ${{ env.TERRAFORM_VERSION }}
 
