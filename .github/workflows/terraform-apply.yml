@@ -46,7 +46,7 @@ jobs:
       - name: Configure AWS Credentials
         env:
           AWS_REGION: eu-south-1
-        uses: aws-actions/configure-aws-credentials@@v1.7.0
+        uses: aws-actions/configure-aws-credentials@v1.7.0
         with:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
