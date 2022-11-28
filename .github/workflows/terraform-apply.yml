@@ -63,7 +63,7 @@ jobs:
       strategy:
         max-parallel: 1
         matrix:
-          environment: [uat, prod]
+          environment: [uat, prod_w]
       runs-on: ubuntu-latest
       continue-on-error: false
       environment: ${{ matrix.environment }}
@@ -86,5 +86,6 @@ jobs:
         - name: Apply
           uses: ./.github/workflows/apply
           with:
-            env: ${{ matrix.environment }}
+            e=${{ matrix.environment }}
+            env: ${e%"_w"}
             working-directory: src/main
