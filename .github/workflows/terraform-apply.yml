@@ -86,6 +86,5 @@ jobs:
         - name: Apply
           uses: ./.github/workflows/apply
           with:
-            e=${{ matrix.environment }}
-            env: ${e%"_w"}
+            env: ${{ matrix.environment }}
             working-directory: src/main
