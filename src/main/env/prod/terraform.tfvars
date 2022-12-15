@@ -52,13 +52,13 @@ user_registry_plans = [
   {
     key_name    = "SELFCARE"
     burst_limit = 10
-    rate_limit  = 20
+    rate_limit  = 50
 
     method_throttle = [
       {
-        burst_limit = 5
+        burst_limit = 10
         path        = "/users/{id}/GET"
-        rate_limit  = 18
+        rate_limit  = 50
       },
       {
         burst_limit = 5
