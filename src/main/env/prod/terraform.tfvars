@@ -206,24 +206,24 @@ table_person_read_capacity  = 50
 table_person_write_capacity = 40
 
 table_person_autoscaling_read = {
-  scale_in_cooldown  = 50
+  scale_in_cooldown  = 300
   scale_out_cooldown = 40
-  target_value       = 40
-  max_capacity       = 60
+  target_value       = 70 # target utilisation %
+  max_capacity       = 250
 }
 
 table_person_autoscaling_write = {
-  scale_in_cooldown  = 50
+  scale_in_cooldown  = 300
   scale_out_cooldown = 40
-  target_value       = 20
-  max_capacity       = 50
+  target_value       = 70 # target utilisation %
+  max_capacity       = 250
 }
 
 table_person_autoscling_indexes = {
   gsi_namespaced_id = {
-    read_max_capacity  = 30
+    read_max_capacity  = 230
     read_min_capacity  = 10
-    write_max_capacity = 20
+    write_max_capacity = 50
     write_min_capacity = 10
   }
 }
