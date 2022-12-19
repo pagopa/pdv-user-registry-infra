@@ -110,9 +110,6 @@ resource "aws_ecs_service" "user_registry" {
     subnets          = module.vpc.private_subnets
     assign_public_ip = false
     security_groups = [
-      # ALB
-      #aws_security_group.service_security_group.id,
-      #aws_security_group.alb.id,
       # NLB
       aws_security_group.nsg_task.id
 

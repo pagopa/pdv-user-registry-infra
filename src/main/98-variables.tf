@@ -202,12 +202,16 @@ variable "replica_count" {
 
 variable "ecs_autoscaling" {
   type = object({
-    max_capacity = number
-    min_capacity = number
+    max_capacity       = number
+    min_capacity       = number
+    scale_in_cooldown  = number
+    scale_out_cooldown = number
   })
   default = {
-    max_capacity = 3
-    min_capacity = 1
+    max_capacity       = 3
+    min_capacity       = 1
+    scale_in_cooldown  = 180
+    scale_out_cooldown = 40
   }
 
   description = "ECS Service autoscaling."
