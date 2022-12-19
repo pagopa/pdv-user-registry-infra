@@ -73,7 +73,7 @@ module "dynamodb_read_capacity_units_limit_alarm" {
 
   namespace   = "AWS/DynamoDB"
   metric_name = "ConsumedReadCapacityUnits"
-  statistic   = "Sum"
+  statistic   = "Average"
 
   dimensions = {
     "person" = {
@@ -99,7 +99,7 @@ module "dynamodb_write_capacity_units_limit_alarm" {
 
   namespace   = "AWS/DynamoDB"
   metric_name = "ConsumedWriteCapacityUnits"
-  statistic   = "Sum"
+  statistic   = "Average"
 
   dimensions = {
     "person" = {
@@ -125,7 +125,7 @@ module "gsi_index_read_capacity_units_limit_alarm" {
 
   namespace   = "AWS/DynamoDB"
   metric_name = "ConsumedReadCapacityUnits"
-  statistic   = "Sum"
+  statistic   = "Average"
 
   dimensions = {
     "gsi_index" = {
@@ -151,7 +151,7 @@ module "gsi_index_write_capacity_units_limit_alarm" {
 
   namespace   = "AWS/DynamoDB"
   metric_name = "ConsumedWriteCapacityUnits"
-  statistic   = "Sum"
+  statistic   = "Average"
 
   dimensions = {
     "gsi_index" = {
