@@ -184,6 +184,39 @@ user_registry_plans = [
     ]
   },
   {
+    key_name    = "PNPG"
+    burst_limit = 10
+    rate_limit  = 100
+
+    method_throttle = [
+      {
+        burst_limit = 5
+        path        = "/users/{id}/GET"
+        rate_limit  = 100
+      },
+      {
+        burst_limit = 5
+        path        = "/users/PATCH"
+        rate_limit  = 18
+      },
+      {
+        burst_limit = 5
+        path        = "/users/search/POST"
+        rate_limit  = 38
+      },
+      {
+        burst_limit = 5
+        path        = "/users/{id}/DELETE"
+        rate_limit  = 2
+      },
+      {
+        burst_limit = 5
+        path        = "/users/{id}/PATCH"
+        rate_limit  = 18
+      }
+    ]
+  },
+  {
     key_name        = "IDPAY"
     burst_limit     = 50
     rate_limit      = 150
