@@ -177,13 +177,20 @@
     "/users/{id}": {
       "get": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "GET",
           "uri": "${uri}/users/{id}",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            ${responses}
           }
         },
         "tags": [
@@ -259,13 +266,20 @@
       },
       "delete": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "DELETE",
           "uri": "${uri}/users/{id}",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            ${responses}
           }
         },
         "tags": [
@@ -309,13 +323,20 @@
       },
       "patch": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "PATCH",
           "uri": "${uri}/users/{id}",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            ${responses}
           }
         },
         "tags": [
