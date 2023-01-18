@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_dashboard" "main" {
-  dashboard_name = "MS-User-Registry-Test"
+  dashboard_name = "MS-User-Registry"
 
   dashboard_body = templatefile("${path.module}/dashboards/main.tpl.json",
     {
