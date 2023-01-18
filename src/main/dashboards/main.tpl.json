@@ -1,0 +1,482 @@
+{
+    "widgets": [
+        {
+            "height": 6,
+            "width": 6,
+            "y": 1,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApiGateway", "Latency", "ApiName", "${apigateway_api_name}", { "id": "m2" } ],
+                    [ { "expression": "ANOMALY_DETECTION_BAND(m2)", "label": "Anomaly detection", "id": "e1", "region": "eu-south-1" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "period": 300,
+                "stat": "Average",
+                "title": "Latency (ms)"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 1,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApiGateway", "4XXError", "ApiName", "${apigateway_api_name}", { "id": "m3" } ],
+                    [ ".", "5XXError", ".", ".", { "id": "m4" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "period": 300,
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 1,
+            "x": 18,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/NetworkELB", "HealthyHostCount", "TargetGroup", "${nlb_target_arn_suffix_ur}", "LoadBalancer", "${nlb_arn_suffix}" ],
+                    [ ".", "UnHealthyHostCount", ".", ".", ".", "." ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "title": "Backend Health status",
+                "period": 300,
+                "stat": "Maximum"
+            }
+        },
+        {
+            "height": 1,
+            "width": 24,
+            "y": 12,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "## Backend (ECS Fargate)\n"
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 13,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ { "expression": "ANOMALY_DETECTION_BAND(m1, 2)", "label": "Anomaly Detection", "id": "e1" } ],
+                    [ "AWS/ECS", "CPUUtilization", "ServiceName", "${ecs_user_registry_service}", "ClusterName", "${ecs_cluster_name}", { "stat": "Minimum", "id": "m1" } ],
+                    [ "...", { "stat": "Maximum", "id": "m2" } ],
+                    [ "...", { "id": "m3" } ]
+                ],
+                "period": 300,
+                "region": "eu-south-1",
+                "stacked": false,
+                "title": "CPU utilisation (Ms User-registry)",
+                "view": "timeSeries",
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 13,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ { "expression": "ANOMALY_DETECTION_BAND(m1, 2)", "label": "Anomaly Detection", "id": "e1" } ],
+                    [ "AWS/ECS", "MemoryUtilization", "ServiceName", "${ecs_user_registry_service}", "ClusterName", "${ecs_cluster_name}", { "stat": "Minimum", "id": "m1" } ],
+                    [ "...", { "stat": "Maximum", "id": "m2" } ],
+                    [ "...", { "id": "m3" } ]
+                ],
+                "period": 300,
+                "region": "eu-south-1",
+                "stacked": false,
+                "title": "Memory utilisation (Ms User-registry)",
+                "view": "timeSeries",
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 19,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ { "expression": "ANOMALY_DETECTION_BAND(m1, 2)", "label": "Anomaly Detection", "id": "e1" } ],
+                    [ "AWS/ECS", "CPUUtilization", "ServiceName", "${ecs_person_service}", "ClusterName", "${ecs_cluster_name}", { "stat": "Minimum", "id": "m1" } ],
+                    [ "...", { "stat": "Maximum", "id": "m2" } ],
+                    [ "...", { "id": "m3" } ]
+                ],
+                "period": 300,
+                "region": "eu-south-1",
+                "stacked": false,
+                "title": "CPU utilisation (MS Person)",
+                "view": "timeSeries",
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 12,
+            "y": 19,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ { "expression": "ANOMALY_DETECTION_BAND(m1, 2)", "label": "Anomaly Detection", "id": "e1" } ],
+                    [ "AWS/ECS", "MemoryUtilization", "ServiceName", "${ecs_person_service}", "ClusterName", "${ecs_cluster_name}", { "stat": "Minimum", "id": "m1" } ],
+                    [ "...", { "stat": "Maximum", "id": "m2" } ],
+                    [ "...", { "id": "m3" } ]
+                ],
+                "period": 300,
+                "region": "eu-south-1",
+                "stacked": false,
+                "title": "Memory utilisation (MS Person)",
+                "view": "timeSeries",
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 1,
+            "width": 24,
+            "y": 25,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "## Database (Dynamodb)\n"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 26,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "title": "Read usage (average units/second)",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "stat": "Average",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    }
+                },
+                "metrics": [
+                    [ "AWS/DynamoDB", "ProvisionedReadCapacityUnits", "TableName", "Person", { "label": "Provisioned", "color": "#E02020" } ],
+                    [ ".", "ConsumedReadCapacityUnits", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
+                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "color": "#0073BB", "region": "eu-south-1" } ]
+                ],
+                "start": "-PT3H",
+                "end": "P0D"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 26,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/DynamoDB", "ThrottledRequests", "TableName", "Person", "Operation", "GetItem", { "color": "#0073BB" } ],
+                    [ "...", "Scan", { "color": "#FF7F0F", "visible": false } ],
+                    [ "...", "Query", { "color": "#2DA02D" } ],
+                    [ "...", "BatchGetItem", { "color": "#9468BD", "visible": false } ]
+                ],
+                "title": "Read throttled requests (count)",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "stat": "Sum",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    }
+                },
+                "start": "-PT3H",
+                "end": "P0D"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 26,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "title": "Write usage (average units/second)",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "stat": "Average",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    }
+                },
+                "metrics": [
+                    [ "AWS/DynamoDB", "ProvisionedWriteCapacityUnits", "TableName", "Person", { "label": "Provisioned", "color": "#E02020" } ],
+                    [ ".", "ConsumedWriteCapacityUnits", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
+                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "color": "#0073BB", "region": "eu-south-1" } ]
+                ],
+                "start": "-PT3H",
+                "end": "P0D"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 26,
+            "x": 18,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/DynamoDB", "ThrottledRequests", "TableName", "Person", "Operation", "PutItem", { "color": "#0073BB" } ],
+                    [ "...", "UpdateItem", { "color": "#FF7F0F" } ],
+                    [ "...", "DeleteItem", { "color": "#2DA02D" } ],
+                    [ "...", "BatchWriteItem", { "color": "#9468BD", "visible": false } ]
+                ],
+                "title": "Write throttled requests (count)",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "stat": "Sum",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    }
+                },
+                "start": "-PT3H",
+                "end": "P0D"
+            }
+        },
+        {
+            "height": 1,
+            "width": 24,
+            "y": 32,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "### Index gsi_namespaced_id\n"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 33,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "title": "Read usage (average units/second)",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "stat": "Average",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    }
+                },
+                "metrics": [
+                    [ "AWS/DynamoDB", "ProvisionedReadCapacityUnits", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id", { "label": "Provisioned", "color": "#E02020" } ],
+                    [ ".", "ConsumedReadCapacityUnits", ".", ".", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
+                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "region": "eu-south-1", "color": "#0073BB" } ]
+                ],
+                "start": "-PT3H",
+                "end": "P0D"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 33,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "title": "Read throttled events (count)",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "stat": "Sum",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    }
+                },
+                "metrics": [
+                    [ "AWS/DynamoDB", "ReadThrottleEvents", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id" ]
+                ],
+                "start": "-PT3H",
+                "end": "P0D"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 33,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "title": "Write usage (average units/second)",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "stat": "Average",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    }
+                },
+                "metrics": [
+                    [ "AWS/DynamoDB", "ProvisionedWriteCapacityUnits", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id", { "label": "Provisioned", "color": "#E02020" } ],
+                    [ ".", "ConsumedWriteCapacityUnits", ".", ".", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
+                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "region": "eu-south-1", "color": "#0073BB" } ]
+                ],
+                "start": "-PT3H",
+                "end": "P0D"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 33,
+            "x": 18,
+            "type": "metric",
+            "properties": {
+                "title": "Write throttled events (count)",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "stat": "Sum",
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    }
+                },
+                "metrics": [
+                    [ "AWS/DynamoDB", "WriteThrottleEvents", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id" ]
+                ],
+                "start": "-PT3H",
+                "end": "P0D"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 1,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApiGateway", "Count", "ApiName", "${apigateway_api_name}", "Stage", "v1" ]
+                ],
+                "period": 300,
+                "stat": "Sum",
+                "region": "eu-south-1",
+                "view": "timeSeries",
+                "stacked": false,
+                "title": "Count (# of requests)",
+                "setPeriodToTimeRange": true
+            }
+        },
+        {
+            "height": 1,
+            "width": 24,
+            "y": 0,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "## API User Registry\n"
+            }
+        },
+        {
+            "height": 5,
+            "width": 6,
+            "y": 7,
+            "x": 0,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE 'API-Gateway-Execution-Logs_caua6hkaob/v1' | fields @timestamp, @message\n| parse @message \"Plan ID *,\" as plan\n| filter @message like 'exceeded throttle limit'\n| stats count(*) as Tot by plan",
+                "region": "eu-south-1",
+                "stacked": false,
+                "title": "Rate limit exceed by plan",
+                "view": "table"
+            }
+        },
+        {
+            "height": 5,
+            "width": 18,
+            "y": 7,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/WAFV2", "CountedRequests", "Region", "eu-south-1", "Rule", "IpReputationList", "WebACL", "${waf_web_acl}" ],
+                    [ "...", "CommonRuleSet", ".", "." ],
+                    [ "...", "KnownBadInputsRuleSet", ".", "." ],
+                    [ "...", "SQLiRuleSet", ".", "." ],
+                    [ "...", "ALL", ".", ".", { "visible": false } ],
+                    [ ".", "AllowedRequests", ".", ".", ".", "${waf_web_acl}", ".", ".", { "visible": false } ]
+                ],
+                "stat": "Sum",
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-south-1",
+                "title": "Firewall rules violation count",
+                "yAxis": {
+                    "left": {
+                        "showUnits": false
+                    },
+                    "right": {
+                        "showUnits": false
+                    }
+                },
+                "period": 300
+            }
+        },
+        {
+            "height": 3,
+            "width": 11,
+            "y": 39,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# Useful links\n \n*  [AWS Status Page](https://health.aws.amazon.com/health/status).\n* [Confluence HOWTO Page](https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/509511125/HOWTO)"
+            }
+        },
+        {
+            "type": "text",
+            "x": 11,
+            "y": 39,
+            "width": 7,
+            "height": 7,
+            "properties": {
+                "markdown": "## Plans & IDs List of plans with ids\n \n%{ for k in keys(user_registry_api_ids) ~}* **${k}**: ${user_registry_api_ids[k]} \n%{ endfor ~}"
+            }
+        }
+    ]
+}
