@@ -465,7 +465,17 @@
             "x": 0,
             "type": "text",
             "properties": {
-                "markdown": "# Useful links\n \n*  [AWS Status Paga](https://health.aws.amazon.com/health/status).\n* [Confluence HOWTO Page](https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/509511125/HOWTO)"
+                "markdown": "# Useful links\n \n*  [AWS Status Page](https://health.aws.amazon.com/health/status).\n* [Confluence HOWTO Page](https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/509511125/HOWTO)"
+            }
+        },
+        {
+            "type": "text",
+            "x": 11,
+            "y": 39,
+            "width": 7,
+            "height": 7,
+            "properties": {
+                "markdown": "## Plans & IDs List of plans with ids\n \n%{ for k in keys(user_registry_api_ids) ~}* **${k}**: ${user_registry_api_ids[k]} \n%{ endfor ~}"
             }
         }
     ]
