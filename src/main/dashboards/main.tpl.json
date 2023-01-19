@@ -420,7 +420,7 @@
             "x": 0,
             "type": "log",
             "properties": {
-                "query": "SOURCE 'API-Gateway-Execution-Logs_caua6hkaob/v1' | fields @timestamp, @message\n| parse @message \"Plan ID *,\" as plan\n| filter @message like 'exceeded throttle limit'\n| stats count(*) as Tot by plan",
+                "query": "SOURCE 'API-Gateway-Execution-Logs_${user_reg_api_id}/${user_reg_api_state_name}' | fields @timestamp, @message\n| parse @message \"Plan ID *,\" as plan\n| filter @message like 'exceeded throttle limit'\n| stats count(*) as Tot by plan",
                 "region": "eu-south-1",
                 "stacked": false,
                 "title": "Rate limit exceed by plan",

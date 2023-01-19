@@ -12,7 +12,8 @@ resource "aws_cloudwatch_dashboard" "main" {
       ecs_person_service        = aws_ecs_service.person.name
       waf_web_acl               = aws_wafv2_web_acl.main.name
       user_registry_api_ids     = local.user_registry_api_ids
-
+      user_reg_api_id           = aws_api_gateway_rest_api.user_registry.id
+      user_reg_api_state_name   = aws_api_gateway_stage.user_registry.stage_name
     }
   )
 }
