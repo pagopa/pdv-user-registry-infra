@@ -141,7 +141,7 @@ output "user_registry_api_keys" {
 }
 
 locals {
-  user_registry_api_ids = { for k in keys(local.api_key_list) : k => aws_api_gateway_usage_plan_key.user_registry[k].id }
+  user_registry_api_ids = { for k in keys(local.api_key_list) : k => aws_api_gateway_usage_plan.user_registry[k].id }
 }
 
 output "user_registryinvoke_url" {
