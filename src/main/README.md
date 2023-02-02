@@ -105,7 +105,10 @@
 | [aws_iam_policy.execute_command_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.apigw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.ecs_execution_task](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.githubecsdepoy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy_attachment.deploy_ec2_ecr_full_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecsTaskExecutionRole_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_allow_hsm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_allow_kms](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
@@ -193,6 +196,7 @@
 | <a name="input_enable_sentinel_logs"></a> [enable\_sentinel\_logs](#input\_enable\_sentinel\_logs) | Create all resources required to sento logs to azure sentinel. | `bool` | `false` | no |
 | <a name="input_env_short"></a> [env\_short](#input\_env\_short) | Evnironment short. | `string` | `"d"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment | `string` | `"dev"` | no |
+| <a name="input_github_person_repo"></a> [github\_person\_repo](#input\_github\_person\_repo) | Github repository ms Person code. | `string` | `"pagopa/pdv-ms-person"` | no |
 | <a name="input_ms_person_enable_confidential_filter"></a> [ms\_person\_enable\_confidential\_filter](#input\_ms\_person\_enable\_confidential\_filter) | Enable a filter to avoid logging confidential data | `bool` | `false` | no |
 | <a name="input_ms_person_enable_single_line_stack_trace_logging"></a> [ms\_person\_enable\_single\_line\_stack\_trace\_logging](#input\_ms\_person\_enable\_single\_line\_stack\_trace\_logging) | Enable logging stack trace in a single line | `bool` | `false` | no |
 | <a name="input_ms_person_log_level"></a> [ms\_person\_log\_level](#input\_ms\_person\_log\_level) | Log lever micro service person | `string` | `"DEBUG"` | no |
@@ -226,6 +230,7 @@
 | <a name="output_dynamodb_table_person_id"></a> [dynamodb\_table\_person\_id](#output\_dynamodb\_table\_person\_id) | n/a |
 | <a name="output_ecs_task_definition_person_arn"></a> [ecs\_task\_definition\_person\_arn](#output\_ecs\_task\_definition\_person\_arn) | # ecs |
 | <a name="output_ecs_task_definition_person_revision"></a> [ecs\_task\_definition\_person\_revision](#output\_ecs\_task\_definition\_person\_revision) | n/a |
+| <a name="output_github_ecs_deploy_role_arn"></a> [github\_ecs\_deploy\_role\_arn](#output\_github\_ecs\_deploy\_role\_arn) | n/a |
 | <a name="output_nlb_hostname"></a> [nlb\_hostname](#output\_nlb\_hostname) | NLB |
 | <a name="output_openapi_endpoint"></a> [openapi\_endpoint](#output\_openapi\_endpoint) | n/a |
 | <a name="output_public_dns_servers"></a> [public\_dns\_servers](#output\_public\_dns\_servers) | n/a |

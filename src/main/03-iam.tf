@@ -204,3 +204,43 @@ output "deploy_access_key_secret" {
   value     = aws_iam_access_key.deploy_ecs.secret
   sensitive = true
 }
+
+
+## Deploy with github action
+resource "aws_iam_role" "githubecsdepoy" {
+  name        = "GitHubDeployECS"
+  description = "Role to assume to create the infrastructure."
+
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow",
+        Principal = {
+          "Federated" : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/token.actions.githubusercontent.com"
+        },
+        Action = "sts:AssumeRoleWithWebIdentity",
+        Condition = {
+          StringLike = {
+            "token.actions.githubusercontent.com:sub" : "repo:${var.github_person_repo}:*"
+          },
+          "ForAllValues:StringEquals" = {
+            "token.actions.githubusercontent.com:iss" : "https://token.actions.githubusercontent.com",
+            "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
+          }
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "deploy_ecs" {
+  role       = aws_iam_role.githubecsdepoy.name
+  policy_arn = aws_iam_policy.deploy_ecs.arn
+}
+
+resource "aws_iam_role_policy_attachment" "deploy_ec2_ecr_full_access" {
+  role       = aws_iam_role.githubecsdepoy.name
+  policy_arn = data.aws_iam_policy.ec2_ecr_full_access.arn
+}

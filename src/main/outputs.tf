@@ -78,3 +78,7 @@ output "sentinel_queue_url" {
 output "user_registry_api_ids" {
   value = local.user_registry_api_ids
 }
+
+output "github_ecs_deploy_role_arn" {
+  value = aws_iam_role.githubecsdepoy.arn
+}
