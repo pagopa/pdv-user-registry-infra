@@ -207,7 +207,7 @@ output "deploy_access_key_secret" {
 
 
 ## Deploy with github action
-resource "aws_iam_role" "githubecsdepoy" {
+resource "aws_iam_role" "githubecsdeploy" {
   name        = "GitHubDeployECS"
   description = "Role to assume to create the infrastructure."
 
@@ -236,11 +236,11 @@ resource "aws_iam_role" "githubecsdepoy" {
 }
 
 resource "aws_iam_role_policy_attachment" "deploy_ecs" {
-  role       = aws_iam_role.githubecsdepoy.name
+  role       = aws_iam_role.githubecsdeploy.name
   policy_arn = aws_iam_policy.deploy_ecs.arn
 }
 
 resource "aws_iam_role_policy_attachment" "deploy_ec2_ecr_full_access" {
-  role       = aws_iam_role.githubecsdepoy.name
+  role       = aws_iam_role.githubecsdeploy.name
   policy_arn = data.aws_iam_policy.ec2_ecr_full_access.arn
 }

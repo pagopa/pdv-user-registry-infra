@@ -80,5 +80,5 @@ output "user_registry_api_ids" {
 }
 
 output "github_ecs_deploy_role_arn" {
-  value = aws_iam_role.githubecsdepoy.arn
+  value = aws_iam_role.githubecsdeploy.arn
 }
