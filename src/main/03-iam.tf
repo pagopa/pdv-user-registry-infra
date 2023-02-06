@@ -177,7 +177,8 @@ resource "aws_iam_policy" "deploy_ecs" {
   policy = templatefile(
     "./iam_policies/deploy-ecs.json.tpl",
     {
-      account_id = data.aws_caller_identity.current.account_id
+      account_id            = data.aws_caller_identity.current.account_id
+      execute_task_role_arn = aws_iam_role.ecs_execution_task.arn
     }
   )
 }
