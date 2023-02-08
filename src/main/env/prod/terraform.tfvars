@@ -371,6 +371,6 @@ tags = {
   CreatedBy   = "Terraform"
   Environment = "Prod"
   Owner       = "Personal Data Vault"
-  Source      = "https://github.com/pagopa/personal-data-vault-infra.git"
+  Source      = "https://github.com/pagopa/pdv-user-registry-infra.git"
   CostCenter  = "TS310 - PAGAMENTI e SERVIZI"
 }
