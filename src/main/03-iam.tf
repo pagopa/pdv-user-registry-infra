@@ -224,7 +224,10 @@ resource "aws_iam_role" "githubecsdeploy" {
         Action = "sts:AssumeRoleWithWebIdentity",
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" : "repo:${var.github_person_repo}:*"
+            "token.actions.githubusercontent.com:sub" : [
+              "repo:${var.github_person_repo}:*",
+              "repo:${var.github_user_registry_repo}:*",
+            ]
           },
           "ForAllValues:StringEquals" = {
             "token.actions.githubusercontent.com:iss" : "https://token.actions.githubusercontent.com",

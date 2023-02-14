@@ -293,6 +293,12 @@ variable "github_person_repo" {
   default     = "pagopa/pdv-ms-person"
 }
 
+variable "github_user_registry_repo" {
+  type        = string
+  description = "Github repository ms User registry."
+  default     = "pagopa/pdv-ms-user-registry"
+}
+
 # Dynamodb 
 variable "dynamodb_region_replication_enable" {
   type        = bool
