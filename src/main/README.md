@@ -197,6 +197,7 @@
 | <a name="input_env_short"></a> [env\_short](#input\_env\_short) | Evnironment short. | `string` | `"d"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment | `string` | `"dev"` | no |
 | <a name="input_github_person_repo"></a> [github\_person\_repo](#input\_github\_person\_repo) | Github repository ms Person code. | `string` | `"pagopa/pdv-ms-person"` | no |
+| <a name="input_github_user_registry_repo"></a> [github\_user\_registry\_repo](#input\_github\_user\_registry\_repo) | Github repository ms User registry. | `string` | `"pagopa/pdv-ms-user-registry"` | no |
 | <a name="input_ms_person_enable_confidential_filter"></a> [ms\_person\_enable\_confidential\_filter](#input\_ms\_person\_enable\_confidential\_filter) | Enable a filter to avoid logging confidential data | `bool` | `false` | no |
 | <a name="input_ms_person_enable_single_line_stack_trace_logging"></a> [ms\_person\_enable\_single\_line\_stack\_trace\_logging](#input\_ms\_person\_enable\_single\_line\_stack\_trace\_logging) | Enable logging stack trace in a single line | `bool` | `false` | no |
 | <a name="input_ms_person_log_level"></a> [ms\_person\_log\_level](#input\_ms\_person\_log\_level) | Log lever micro service person | `string` | `"DEBUG"` | no |
