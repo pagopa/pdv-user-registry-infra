@@ -13,7 +13,7 @@ variable "environment" {
 variable "github_repository" {
   type        = string
   description = "This github repository"
-  default     = "pagopa/personal-data-vault-infra"
+  default     = "pagopa/pdv-user-registry-infra"
 }
 
 

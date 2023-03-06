@@ -46,8 +46,6 @@ output "openapi_endpoint" {
   aws_s3_object.openapi_user_registry.key, ) : ""
 }
 
-
-
 # cloud hsm
 output "cloudhsm_cluster_id" {
   value = try(aws_cloudhsm_v2_cluster.main[0].id, null)
@@ -75,4 +73,12 @@ output "sentinel_role_arn" {
 
 output "sentinel_queue_url" {
   value = try(module.sentinel[0].sentinel_queue_url, null)
+}
+
+output "user_registry_api_ids" {
+  value = local.user_registry_api_ids
+}
+
+output "github_ecs_deploy_role_arn" {
+  value = aws_iam_role.githubecsdeploy.arn
 }

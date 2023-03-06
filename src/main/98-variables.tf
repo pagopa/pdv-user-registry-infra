@@ -287,6 +287,18 @@ variable "ms_user_registry_enable_single_line_stack_trace_logging" {
   description = "Enable logging stack trace in a single line"
 }
 
+variable "github_person_repo" {
+  type        = string
+  description = "Github repository ms Person code."
+  default     = "pagopa/pdv-ms-person"
+}
+
+variable "github_user_registry_repo" {
+  type        = string
+  description = "Github repository ms User registry."
+  default     = "pagopa/pdv-ms-user-registry"
+}
+
 # Dynamodb 
 variable "dynamodb_region_replication_enable" {
   type        = bool
