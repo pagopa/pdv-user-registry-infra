@@ -183,7 +183,8 @@
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
-            "integration.request.path.id": "method.request.path.id"
+            "integration.request.path.id": "method.request.path.id",
+            "integration.request.querystring.fl": "method.request.multivaluequerystring.fl"          
           },
           "passthroughBehavior": "WHEN_NO_TEMPLATES",
           "requestTemplates" : {
