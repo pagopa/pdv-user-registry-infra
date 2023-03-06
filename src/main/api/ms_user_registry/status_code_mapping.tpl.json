@@ -1,6 +1,9 @@
 "200" : {
   "statusCode" : "200"
 },
+"204" : {
+  "statusCode" : "204"
+},
 "404" : {
   "statusCode" : "404"
 },
