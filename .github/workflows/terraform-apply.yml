@@ -58,7 +58,7 @@ jobs:
           working-directory: src/main
 
   merge-trigger:
-      if: "${{ inputs.environment == '' && github.ref == 'refs/heads/main' }}
+      if: "${{ inputs.environment == '' && github.ref == 'refs/heads/main' }}"
       name: "terraform-apply"
       strategy:
         max-parallel: 1
