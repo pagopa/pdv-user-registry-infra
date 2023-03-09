@@ -61,7 +61,7 @@ user_registry_plans = [
   {
     key_name    = "INTEROP"
     burst_limit = 10
-    rate_limit  = 50
+    rate_limit  = 100
 
     method_throttle = []
   },
