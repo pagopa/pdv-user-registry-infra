@@ -49,10 +49,11 @@ resource "aws_cloudwatch_log_group" "user_registry" {
 
 }
 resource "aws_api_gateway_stage" "user_registry" {
-  deployment_id      = aws_api_gateway_deployment.user_registry.id
-  rest_api_id        = aws_api_gateway_rest_api.user_registry.id
-  stage_name         = local.user_registry_stage_name
-  cache_cluster_size = 0.5 #why is this needed ?
+  deployment_id         = aws_api_gateway_deployment.user_registry.id
+  rest_api_id           = aws_api_gateway_rest_api.user_registry.id
+  stage_name            = local.user_registry_stage_name
+  cache_cluster_size    = 0.5 #why is this needed ?
+  documentation_version = aws_api_gateway_documentation_version.main.version
 
   dynamic "access_log_settings" {
     for_each = var.apigw_access_logs_enable ? ["dymmy"] : []
