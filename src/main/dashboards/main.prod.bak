@@ -420,7 +420,7 @@
             "x": 0,
             "type": "log",
             "properties": {
-                "query": "SOURCE 'API-Gateway-Execution-Logs_caua6hkaob/v1' | fields @timestamp, @message\n| parse @message \"Plan ID *,\" as plan\n| filter @message like 'exceeded throttle limit'\n| stats count(*) as Tot by plan",
+                "query": "SOURCE 'API-Gateway-Execution-Logs_caua6hkaob/v1' | fields @timestamp, @message\n| parse @message /Plan ID (?<plan>[^,\\.]+)[,\\.]/\n| filter @message like 'exceeded throttle limit'\n| stats count(*) as Tot by plan",
                 "region": "eu-south-1",
                 "stacked": false,
                 "title": "Rate limit exceed by plan",
@@ -465,7 +465,17 @@
             "x": 0,
             "type": "text",
             "properties": {
-                "markdown": "# Useful links\n \n*  [AWS Status Paga](https://health.aws.amazon.com/health/status).\n* [Confluence HOWTO Page](https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/509511125/HOWTO)"
+                "markdown": "# Useful links\n \n*  [AWS Status Page](https://health.aws.amazon.com/health/status).\n* [Confluence HOWTO Page](https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/509511125/HOWTO)"
+            }
+        },
+        {
+            "height": 7,
+            "width": 7,
+            "y": 39,
+            "x": 11,
+            "type": "text",
+            "properties": {
+                "markdown": "## Plans & IDs List of plans with ids\n \n* **IDPAY**: mgr4ae \n* **INTEROP**: fmnxiy \n* **PNPF**: z4gxid \n* **PNPG**: zt0y86 \n* **SELFCARE**: wjntj1 \n* **TEST**: af4361 \n"
             }
         }
     ]
