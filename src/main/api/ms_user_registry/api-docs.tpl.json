@@ -119,18 +119,7 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "birthDate",
-                  "email",
-                  "familyName",
-                  "fiscalCode",
-                  "name",
-                  "workContacts"
-                ]
-              }
+              "$ref": "#/components/schemas/Fields"
             }
           }
         ],
@@ -212,18 +201,7 @@
             "style": "form",
             "explode": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "birthDate",
-                  "email",
-                  "familyName",
-                  "fiscalCode",
-                  "name",
-                  "workContacts"
-                ]
-              }
+              "$ref": "#/components/schemas/Fields"
             }
           }
         ],
@@ -373,6 +351,20 @@
   },
   "components": {
     "schemas": {
+      "Fields": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "birthDate",
+            "email",
+            "familyName",
+            "fiscalCode",
+            "name",
+            "workContacts"
+          ]
+        }
+      },
       "CertifiableFieldResourceOfLocalDate": {
         "title": "CertifiableFieldResourceOfLocalDate",
         "required": [
