@@ -121,6 +121,17 @@ resource "aws_api_gateway_usage_plan_key" "user_registry" {
   usage_plan_id = aws_api_gateway_usage_plan.user_registry[each.key].id
 }
 
+resource "aws_api_gateway_usage_plan_key" "user_registry_additional" {
+  for_each      = { for k in local.additional_keys : k.key => k }
+  key_id        = aws_api_gateway_api_key.additional[each.key].id
+  key_type      = "API_KEY"
+  usage_plan_id = aws_api_gateway_usage_plan.user_registry[each.value.plan].id
+
+  depends_on = [
+    aws_api_gateway_api_key.additional
+  ]
+}
+
 resource "aws_apigatewayv2_api_mapping" "user_registry" {
   count           = var.apigw_custom_domain_create ? 1 : 0
   api_id          = aws_api_gateway_rest_api.user_registry.id
@@ -138,10 +149,6 @@ resource "aws_wafv2_web_acl_association" "user_registry" {
 output "user_registry_api_keys" {
   value     = { for k in keys(local.api_key_list) : k => aws_api_gateway_usage_plan_key.user_registry[k].value }
   sensitive = true
-}
-
-locals {
-  user_registry_api_ids = { for k in keys(local.api_key_list) : k => aws_api_gateway_usage_plan.user_registry[k].id }
 }
 
 output "user_registryinvoke_url" {

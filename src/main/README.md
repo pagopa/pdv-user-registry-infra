@@ -65,6 +65,7 @@
 | [aws_api_gateway_stage.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_stage) | resource |
 | [aws_api_gateway_usage_plan.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_usage_plan) | resource |
 | [aws_api_gateway_usage_plan_key.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_usage_plan_key) | resource |
+| [aws_api_gateway_usage_plan_key.user_registry_additional](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_usage_plan_key) | resource |
 | [aws_api_gateway_vpc_link.apigw](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_vpc_link) | resource |
 | [aws_apigatewayv2_api_mapping.openapi_tokrnizer](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/apigatewayv2_api_mapping) | resource |
 | [aws_apigatewayv2_api_mapping.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/apigatewayv2_api_mapping) | resource |
