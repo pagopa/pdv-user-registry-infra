@@ -23,6 +23,9 @@ locals {
     [for n in local.additional_keys : "'${aws_api_gateway_api_key.additional[n.key].id}':'${n.plan}'"]
   )
 
-  user_registry_api_ids = { for k in keys(local.api_key_list) : k => aws_api_gateway_usage_plan.user_registry[k].id }
+  user_registry_api_ids = merge(
+    { for k in keys(local.api_key_list) : k => aws_api_gateway_usage_plan.user_registry[k].id },
+    { for k in local.additional_keys : k.key => aws_api_gateway_usage_plan.user_registry[k.plan].id },
+  )
 
 }
