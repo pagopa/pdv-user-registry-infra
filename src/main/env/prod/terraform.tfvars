@@ -54,7 +54,7 @@ user_registry_plans = [
   {
     key_name        = "SELFCARE"
     burst_limit     = 10
-    rate_limit      = 100
+    rate_limit      = 300
     additional_keys = ["INTEROP"]
     method_throttle = []
   },
