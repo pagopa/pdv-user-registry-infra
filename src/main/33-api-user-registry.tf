@@ -1,8 +1,7 @@
 locals {
-  user_registry_api_name         = format("%s-user-registry-api", local.project)
-  user_registry_stage_name       = "v1"
-  list_user_registry_key_to_name = [for n in var.user_registry_plans : "'${aws_api_gateway_api_key.main[n.key_name].id}':'${n.key_name}'"]
-  user_registry_log_group_name   = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.user_registry.id}/${local.user_registry_stage_name}"
+  user_registry_api_name       = format("%s-user-registry-api", local.project)
+  user_registry_stage_name     = "v1"
+  user_registry_log_group_name = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.user_registry.id}/${local.user_registry_stage_name}"
 }
 
 resource "aws_api_gateway_rest_api" "user_registry" {
