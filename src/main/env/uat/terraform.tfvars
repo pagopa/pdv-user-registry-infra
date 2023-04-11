@@ -34,8 +34,6 @@ ms_user_registry_enable_single_line_stack_trace_logging = true
 apigw_custom_domain_create = true
 apigw_access_logs_enable   = false
 
-// api_keys_user_registry = ["SANDBOX", "SELFCARE-DEV", "SELFCARE-UAT", "PNPF-DEV", "PNPF-UAT"]
-
 user_registry_plans = [
   {
     key_name        = "SANDBOX"
@@ -71,6 +69,12 @@ user_registry_plans = [
     burst_limit     = 5
     rate_limit      = 10
     additional_keys = []
+    method_throttle = []
+  },
+  {
+    key_name        = "PNPF-CERT"
+    burst_limit     = 5
+    rate_limit      = 10
     method_throttle = []
   },
   {
