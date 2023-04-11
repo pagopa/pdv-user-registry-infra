@@ -75,6 +75,7 @@ user_registry_plans = [
     key_name        = "PNPF-CERT"
     burst_limit     = 5
     rate_limit      = 10
+    additional_keys = []
     method_throttle = []
   },
   {
