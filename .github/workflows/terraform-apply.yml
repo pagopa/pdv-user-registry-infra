@@ -24,7 +24,7 @@ on:
         required: true
         default: uat
         options:
-        - dev
+        - prod
         - uat
 
 
@@ -58,7 +58,7 @@ jobs:
           working-directory: src/main
 
   merge-trigger:
-      if: "${{ github.event.inputs.environment == '' }} && github.ref == 'refs/heads/main'"
+      if: "${{ inputs.environment == '' && github.ref == 'refs/heads/main' }}"
       name: "terraform-apply"
       strategy:
         max-parallel: 1

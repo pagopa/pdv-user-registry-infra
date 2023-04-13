@@ -3,6 +3,10 @@ resource "aws_api_gateway_documentation_version" "main" {
   version     = formatdate("YYYYMMDDHHmmss", aws_api_gateway_deployment.user_registry.created_date)
   rest_api_id = aws_api_gateway_rest_api.user_registry.id
   description = format("Documentation api %s", aws_api_gateway_rest_api.user_registry.id)
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # export api 

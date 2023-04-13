@@ -45,6 +45,7 @@
 |------|------|
 | [aws_acm_certificate.main](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/acm_certificate) | resource |
 | [aws_api_gateway_account.main](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_account) | resource |
+| [aws_api_gateway_api_key.additional](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_api_key) | resource |
 | [aws_api_gateway_api_key.main](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_api_key) | resource |
 | [aws_api_gateway_deployment.openapi_user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_deployment) | resource |
 | [aws_api_gateway_deployment.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_deployment) | resource |
@@ -64,6 +65,7 @@
 | [aws_api_gateway_stage.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_stage) | resource |
 | [aws_api_gateway_usage_plan.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_usage_plan) | resource |
 | [aws_api_gateway_usage_plan_key.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_usage_plan_key) | resource |
+| [aws_api_gateway_usage_plan_key.user_registry_additional](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_usage_plan_key) | resource |
 | [aws_api_gateway_vpc_link.apigw](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/api_gateway_vpc_link) | resource |
 | [aws_apigatewayv2_api_mapping.openapi_tokrnizer](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/apigatewayv2_api_mapping) | resource |
 | [aws_apigatewayv2_api_mapping.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/apigatewayv2_api_mapping) | resource |
@@ -173,7 +175,7 @@
 | <a name="input_table_person_autoscling_indexes"></a> [table\_person\_autoscling\_indexes](#input\_table\_person\_autoscling\_indexes) | Autoscaling gsi configurations | `any` | n/a | yes |
 | <a name="input_table_person_read_capacity"></a> [table\_person\_read\_capacity](#input\_table\_person\_read\_capacity) | Table person read capacity. | `number` | n/a | yes |
 | <a name="input_table_person_write_capacity"></a> [table\_person\_write\_capacity](#input\_table\_person\_write\_capacity) | Table person read capacity. | `number` | n/a | yes |
-| <a name="input_user_registry_plans"></a> [user\_registry\_plans](#input\_user\_registry\_plans) | Usage plan with its api key and rate limit. | <pre>list(object({<br>    key_name    = string<br>    burst_limit = number<br>    rate_limit  = number<br>    method_throttle = list(object({<br>      path        = string<br>      burst_limit = number<br>      rate_limit  = number<br>    }))<br>  }))</pre> | n/a | yes |
+| <a name="input_user_registry_plans"></a> [user\_registry\_plans](#input\_user\_registry\_plans) | Usage plan with its api key and rate limit. | <pre>list(object({<br>    key_name        = string<br>    burst_limit     = number<br>    rate_limit      = number<br>    additional_keys = list(string)<br>    method_throttle = list(object({<br>      path        = string<br>      burst_limit = number<br>      rate_limit  = number<br>    }))<br>  }))</pre> | n/a | yes |
 | <a name="input_apigw_access_logs_enable"></a> [apigw\_access\_logs\_enable](#input\_apigw\_access\_logs\_enable) | Enable api gateway access logs | `bool` | `false` | no |
 | <a name="input_apigw_custom_domain_create"></a> [apigw\_custom\_domain\_create](#input\_apigw\_custom\_domain\_create) | Create apigw Custom Domain with its tls certificate | `bool` | `false` | no |
 | <a name="input_apigw_data_trace_enabled"></a> [apigw\_data\_trace\_enabled](#input\_apigw\_data\_trace\_enabled) | Specifies whether data trace logging is enabled. It effects the log entries pushed to Amazon CloudWatch Logs. | `bool` | `false` | no |

@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "${uri}/{basePath}",
+      "url": "${uri}{basePath}",
       "variables": {
         "basePath": {
           "default": "/v1"
@@ -65,17 +65,41 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request"
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
           },
-          "409": {
-            "description": "Conflict"
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "429": {
             "description": "Too Many Requests"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -154,17 +178,41 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request"
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
           },
-          "404": {
-            "description": "Not Found"
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "429": {
             "description": "Too Many Requests"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -177,13 +225,21 @@
     "/users/{id}": {
       "get": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "GET",
           "uri": "${uri}/users/{id}",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
-            "integration.request.path.id": "method.request.path.id"
+            "integration.request.path.id": "method.request.path.id",
+            "integration.request.querystring.fl": "method.request.multivaluequerystring.fl"          
+          },
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            ${responses}
           }
         },
         "tags": [
@@ -238,17 +294,41 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request"
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
           },
-          "404": {
-            "description": "Not Found"
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "429": {
             "description": "Too Many Requests"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -259,13 +339,20 @@
       },
       "delete": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "DELETE",
           "uri": "${uri}/users/{id}",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            ${responses}
           }
         },
         "tags": [
@@ -291,14 +378,31 @@
           "204": {
             "description": "No Content"
           },
-          "400": {
-            "description": "Bad Request"
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
           },
           "429": {
             "description": "Too Many Requests"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -309,13 +413,20 @@
       },
       "patch": {
         "x-amazon-apigateway-integration": {
-          "type": "HTTP_PROXY",
+          "type": "HTTP",
           "httpMethod": "PATCH",
           "uri": "${uri}/users/{id}",
           "connectionType": "VPC_LINK",
           "connectionId": "${connection_id}",
           "requestParameters": {
             "integration.request.path.id": "method.request.path.id"
+          },
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            ${responses}
           }
         },
         "tags": [
@@ -350,17 +461,44 @@
           "204": {
             "description": "No Content"
           },
-          "400": {
-            "description": "Bad Request"
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "403": {
             "description": "Forbidden"
           },
-          "409": {
-            "description": "Conflict"
+          "404": {
+            "description": "Not Found"
+          },
+          "409" : {
+            "description" : "Conflict",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           },
           "429": {
             "description": "Too Many Requests"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -558,6 +696,58 @@
           "email": {
             "description": "User work email",
             "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+          }
+        }
+      },
+      "Problem" : {
+        "title" : "Problem",
+        "required" : [ "status", "title" ],
+        "type" : "object",
+        "properties" : {
+          "detail" : {
+            "type" : "string",
+            "description" : "Human-readable description of this specific problem."
+          },
+          "instance" : {
+            "type" : "string",
+            "description" : "A URI that describes where the problem occurred."
+          },
+          "invalidParams" : {
+            "type" : "array",
+            "description" : "A list of invalid parameters details.",
+            "items" : {
+              "$ref" : "#/components/schemas/InvalidParam"
+            }
+          },
+          "status" : {
+            "type" : "integer",
+            "description" : "The HTTP status code.",
+            "format" : "int32",
+            "example" : 500
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "Short human-readable summary of the problem."
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "A URL to a page with more details regarding the problem."
+          }
+        },
+        "description" : "A \"problem detail\" as a way to carry machine-readable details of errors (https://datatracker.ietf.org/doc/html/rfc7807)"
+      },
+      "InvalidParam" : {
+        "title" : "InvalidParam",
+        "required" : [ "name", "reason" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Invalid parameter name."
+          },
+          "reason" : {
+            "type" : "string",
+            "description" : "Invalid parameter reason."
           }
         }
       }

@@ -1,8 +1,3 @@
-locals {
-  task_person_name    = format("%s-task-person", local.project)
-  service_person_name = format("%s-service-person", local.project)
-}
-
 resource "aws_cloudwatch_log_group" "ecs_person" {
   name = format("ecs/%s", local.task_person_name)
 
