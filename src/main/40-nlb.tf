@@ -101,7 +101,7 @@ module "nlb" {
         enabled = true
 
         healthy_threshold   = 3
-        interval            = 30
+        interval            = 10
         timeout             = 6
         unhealthy_threshold = 3
         matcher             = "200-399"
