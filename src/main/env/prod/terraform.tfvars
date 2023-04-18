@@ -19,7 +19,7 @@ vpc_peering = {
 
 # Ecs
 ecs_enable_execute_command = true
-replica_count              = 2
+replica_count              = 3
 
 ecs_autoscaling = {
   max_capacity       = 10
