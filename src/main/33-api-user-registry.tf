@@ -17,7 +17,7 @@ resource "aws_api_gateway_rest_api" "user_registry" {
           list_key_to_name = join(",", local.list_user_registry_key_to_name)
       }))
       responses = file("./api/ms_user_registry/status_code_mapping.tpl.json")
-      export    = "false"
+      export    = false
     }
   )
 
