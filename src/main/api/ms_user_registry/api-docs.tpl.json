@@ -24,6 +24,7 @@
   "paths": {
     "/users": {
       "patch": {
+        %{ if export == "false" ~}
         "x-amazon-apigateway-integration": {
           "type": "HTTP",
           "httpMethod": "PATCH",
@@ -39,6 +40,7 @@
             ${responses}
           }
         },
+        %{ endif ~}
         "tags": [
           "user"
         ],
