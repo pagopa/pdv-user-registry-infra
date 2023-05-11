@@ -34,7 +34,7 @@
                 "stacked": false,
                 "region": "eu-south-1",
                 "period": 300,
-                "stat": "Average"
+                "stat": "Sum"
             }
         },
         {

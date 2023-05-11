@@ -8,7 +8,7 @@
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ "AWS/ApiGateway", "Latency", "ApiName", "pdv-p-user-registry-api", { "id": "m2" } ],
+                    [ "AWS/ApiGateway", "Latency", "ApiName", "pdv-u-user-registry-api", { "id": "m2" } ],
                     [ { "expression": "ANOMALY_DETECTION_BAND(m2)", "label": "Anomaly detection", "id": "e1", "region": "eu-south-1" } ]
                 ],
                 "view": "timeSeries",
@@ -27,14 +27,14 @@
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ "AWS/ApiGateway", "4XXError", "ApiName", "pdv-p-user-registry-api", { "id": "m3" } ],
-                    [ ".", "5XXError", ".", ".", { "id": "m4" } ]
+                    [ "AWS/ApiGateway", "4XXError", "ApiName", "pdv-u-user-registry-api", { "id": "m3", "region": "eu-south-1" } ],
+                    [ ".", "5XXError", ".", ".", { "id": "m4", "region": "eu-south-1" } ]
                 ],
                 "view": "timeSeries",
                 "stacked": false,
                 "region": "eu-south-1",
                 "period": 300,
-                "stat": "Average"
+                "stat": "Sum"
             }
         },
         {
@@ -45,7 +45,7 @@
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ "AWS/NetworkELB", "HealthyHostCount", "TargetGroup", "targetgroup/pdv-p-user-registry/8802c3cb27061894", "LoadBalancer", "net/pdv-p-nlb/11e53071aad08fa6" ],
+                    [ "AWS/NetworkELB", "HealthyHostCount", "TargetGroup", "targetgroup/pdv-u-user-registry/541d5029b4e5e685", "LoadBalancer", "net/pdv-u-nlb/06289c81cba7914f" ],
                     [ ".", "UnHealthyHostCount", ".", ".", ".", "." ]
                 ],
                 "view": "timeSeries",
@@ -75,7 +75,7 @@
             "properties": {
                 "metrics": [
                     [ { "expression": "ANOMALY_DETECTION_BAND(m1, 2)", "label": "Anomaly Detection", "id": "e1" } ],
-                    [ "AWS/ECS", "CPUUtilization", "ServiceName", "pdv-p-service-user-registry", "ClusterName", "pdv-p-ecs-cluster", { "stat": "Minimum", "id": "m1" } ],
+                    [ "AWS/ECS", "CPUUtilization", "ServiceName", "pdv-u-service-user-registry", "ClusterName", "pdv-u-ecs-cluster", { "stat": "Minimum", "id": "m1" } ],
                     [ "...", { "stat": "Maximum", "id": "m2" } ],
                     [ "...", { "id": "m3" } ]
                 ],
@@ -96,7 +96,7 @@
             "properties": {
                 "metrics": [
                     [ { "expression": "ANOMALY_DETECTION_BAND(m1, 2)", "label": "Anomaly Detection", "id": "e1" } ],
-                    [ "AWS/ECS", "MemoryUtilization", "ServiceName", "pdv-p-service-user-registry", "ClusterName", "pdv-p-ecs-cluster", { "stat": "Minimum", "id": "m1" } ],
+                    [ "AWS/ECS", "MemoryUtilization", "ServiceName", "pdv-u-service-user-registry", "ClusterName", "pdv-u-ecs-cluster", { "stat": "Minimum", "id": "m1" } ],
                     [ "...", { "stat": "Maximum", "id": "m2" } ],
                     [ "...", { "id": "m3" } ]
                 ],
@@ -117,7 +117,7 @@
             "properties": {
                 "metrics": [
                     [ { "expression": "ANOMALY_DETECTION_BAND(m1, 2)", "label": "Anomaly Detection", "id": "e1" } ],
-                    [ "AWS/ECS", "CPUUtilization", "ServiceName", "pdv-p-service-person", "ClusterName", "pdv-p-ecs-cluster", { "stat": "Minimum", "id": "m1" } ],
+                    [ "AWS/ECS", "CPUUtilization", "ServiceName", "pdv-u-service-person", "ClusterName", "pdv-u-ecs-cluster", { "stat": "Minimum", "id": "m1" } ],
                     [ "...", { "stat": "Maximum", "id": "m2" } ],
                     [ "...", { "id": "m3" } ]
                 ],
@@ -138,7 +138,7 @@
             "properties": {
                 "metrics": [
                     [ { "expression": "ANOMALY_DETECTION_BAND(m1, 2)", "label": "Anomaly Detection", "id": "e1" } ],
-                    [ "AWS/ECS", "MemoryUtilization", "ServiceName", "pdv-p-service-person", "ClusterName", "pdv-p-ecs-cluster", { "stat": "Minimum", "id": "m1" } ],
+                    [ "AWS/ECS", "MemoryUtilization", "ServiceName", "pdv-u-service-person", "ClusterName", "pdv-u-ecs-cluster", { "stat": "Minimum", "id": "m1" } ],
                     [ "...", { "stat": "Maximum", "id": "m2" } ],
                     [ "...", { "id": "m3" } ]
                 ],
@@ -392,7 +392,7 @@
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ "AWS/ApiGateway", "Count", "ApiName", "pdv-p-user-registry-api", "Stage", "v1" ]
+                    [ "AWS/ApiGateway", "Count", "ApiName", "pdv-u-user-registry-api", "Stage", "v1" ]
                 ],
                 "period": 300,
                 "stat": "Sum",
@@ -420,7 +420,7 @@
             "x": 0,
             "type": "log",
             "properties": {
-                "query": "SOURCE 'API-Gateway-Execution-Logs_caua6hkaob/v1' | fields @timestamp, @message\n| parse @message /Plan ID (?<plan>[^,\\.]+)[,\\.]/\n| filter @message like 'exceeded throttle limit'\n| stats count(*) as Tot by plan",
+                "query": "SOURCE 'API-Gateway-Execution-Logs_t777r342wa/v1' | fields @timestamp, @message\n| parse @message /Plan ID (?<plan>[^,\\.]+)[,\\.]/\n| filter @message like 'exceeded throttle limit'\n| stats count(*) as Tot by plan",
                 "region": "eu-south-1",
                 "stacked": false,
                 "title": "Rate limit exceed by plan",
@@ -435,12 +435,12 @@
             "type": "metric",
             "properties": {
                 "metrics": [
-                    [ "AWS/WAFV2", "CountedRequests", "Region", "eu-south-1", "Rule", "IpReputationList", "WebACL", "pdv-p-webacl" ],
+                    [ "AWS/WAFV2", "CountedRequests", "Region", "eu-south-1", "Rule", "IpReputationList", "WebACL", "pdv-u-webacl" ],
                     [ "...", "CommonRuleSet", ".", "." ],
                     [ "...", "KnownBadInputsRuleSet", ".", "." ],
                     [ "...", "SQLiRuleSet", ".", "." ],
                     [ "...", "ALL", ".", ".", { "visible": false } ],
-                    [ ".", "AllowedRequests", ".", ".", ".", "pdv-p-webacl", ".", ".", { "visible": false } ]
+                    [ ".", "AllowedRequests", ".", ".", ".", "pdv-u-webacl", ".", ".", { "visible": false } ]
                 ],
                 "stat": "Sum",
                 "view": "timeSeries",
@@ -475,7 +475,7 @@
             "x": 11,
             "type": "text",
             "properties": {
-                "markdown": "## Plans & IDs List of plans with ids\n \n* **IDPAY**: mgr4ae \n* **INTEROP**: fmnxiy \n* **PNPF**: z4gxid \n* **PNPG**: zt0y86 \n* **SELFCARE**: wjntj1 \n* **TEST**: af4361 \n"
+                "markdown": "## Plans & IDs List of plans with ids\n \n* **IDPAY-DEV**: g3s6ll \n* **IDPAY-UAT**: igltor \n* **INTEROP-DEV**: u8ish3 \n* **INTEROP-UAT**: pbd23l \n* **PNPF-CERT**: dyus3b \n* **PNPF-DEV**: 0m0wqn \n* **PNPF-UAT**: 4pap8u \n* **PNPG**: wfh4ah \n* **SANDBOX**: xuvhcs \n* **SELFCARE-DEV**: u8ish3 \n* **SELFCARE-UAT**: pbd23l \n"
             }
         }
     ]
