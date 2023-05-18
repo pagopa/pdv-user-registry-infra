@@ -201,6 +201,40 @@ variable "replica_count" {
   default     = 1
 }
 
+variable "person_task" {
+  type = object({
+    image_version = string
+    cpu           = number
+    mem           = number,
+    container_cpu = number
+    container_mem = number
+  })
+  default = {
+    image_version = "latest"
+    cpu           = 256
+    mem           = 512
+    container_cpu = 256
+    container_mem = 512
+  }
+}
+
+variable "user_registry_task" {
+  type = object({
+    image_version = string
+    cpu           = number
+    mem           = number,
+    container_cpu = number
+    container_mem = number
+  })
+  default = {
+    image_version = "latest"
+    cpu           = 256
+    mem           = 512
+    container_cpu = 256
+    container_mem = 512
+  }
+}
+
 variable "ecs_autoscaling" {
   type = object({
     max_capacity       = number

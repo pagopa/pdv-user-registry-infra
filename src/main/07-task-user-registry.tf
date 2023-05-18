@@ -15,7 +15,9 @@ resource "aws_ecs_task_definition" "user_registry" {
 [
   {
     "name": "${local.project}-container",
-    "image": "${aws_ecr_repository.main[1].repository_url}:latest",
+    "image": "${aws_ecr_repository.main[1].repository_url}:${var.user_registry_task.image_version}",
+    "cpu": "${var.user_registry_task.container_cpu}",
+    "memory": "${var.user_registry_task.container_mem}",
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
@@ -66,8 +68,6 @@ resource "aws_ecs_task_definition" "user_registry" {
         "value": "${var.ms_user_registry_enable_single_line_stack_trace_logging}"
       }
     ],
-    "cpu": 256,
-    "memory": 512,
     "networkMode": "awsvpc"
   }
 ]
@@ -75,8 +75,8 @@ resource "aws_ecs_task_definition" "user_registry" {
 
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  memory                   = "512"
-  cpu                      = "256"
+  memory                   = var.user_registry_task.container_mem
+  cpu                      = var.user_registry_task.container_cpu
   execution_role_arn       = aws_iam_role.ecs_execution_task.arn
   task_role_arn            = aws_iam_role.ecs_execution_task.arn
 
