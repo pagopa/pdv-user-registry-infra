@@ -16,8 +16,8 @@ resource "aws_ecs_task_definition" "user_registry" {
   {
     "name": "${local.project}-container",
     "image": "${aws_ecr_repository.main[1].repository_url}:${var.user_registry_task.image_version}",
-    "cpu": "${var.user_registry_task.container_cpu}",
-    "memory": "${var.user_registry_task.container_mem}",
+    "cpu": ${var.user_registry_task.container_cpu},
+    "memory": ${var.user_registry_task.container_mem},
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
