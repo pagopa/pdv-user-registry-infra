@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "person" {
   container_definitions = <<DEFINITION
 [
   {
-    "name": "${local.project}-container}",
+    "name": "${local.project}-container",
     "image": "${aws_ecr_repository.main[0].repository_url}:${var.person_task.image_version}",
     "cpu": ${var.person_task.container_cpu},
     "memory": ${var.person_task.container_mem},

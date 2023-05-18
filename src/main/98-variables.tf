@@ -205,7 +205,7 @@ variable "person_task" {
   type = object({
     image_version = string
     cpu           = number
-    mem           = number,
+    mem           = number
     container_cpu = number
     container_mem = number
   })
@@ -222,7 +222,7 @@ variable "user_registry_task" {
   type = object({
     image_version = string
     cpu           = number
-    mem           = number,
+    mem           = number
     container_cpu = number
     container_mem = number
   })
