@@ -159,7 +159,7 @@ output "user_registryinvoke_url" {
 ### 4xx
 module "api_user_registry_4xx_error_alarm" {
   source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "~> 3.0"
+  version = "4.3.0"
 
   actions_enabled     = var.env_short == "p" ? true : false
   alarm_name          = "high-4xx-rate-"
@@ -188,7 +188,7 @@ module "api_user_registry_4xx_error_alarm" {
 ### 5xx
 module "api_user_registry_5xx_error_alarm" {
   source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "~> 3.0"
+  version = "4.3.0"
 
   actions_enabled     = var.env_short == "p" ? true : false
   alarm_name          = "high-5xx-rate-"
@@ -217,7 +217,7 @@ module "api_user_registry_5xx_error_alarm" {
 ### throttling (exceeded throttle limit)
 module "log_filter_throttle_limit_user_registry" {
   source  = "terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter"
-  version = "~> 3.0"
+  version = "4.3.0"
 
   name = format("%s-metric-throttle-rate-limit", local.user_registry_api_name)
 
@@ -236,7 +236,7 @@ module "log_filter_throttle_limit_user_registry" {
 
 module "api_user_registry_throttle_limit_alarm" {
   source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarm"
-  version = "~> 3.0"
+  version = "4.3.0"
 
   actions_enabled     = var.env_short == "p" ? true : false
   alarm_name          = format("high-rate-limit-throttle-%s", local.user_registry_api_name)
@@ -265,7 +265,7 @@ locals {
 
 module "api_user_registry_low_latency_alarm" {
   source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "~> 3.0"
+  version = "4.3.0"
 
   actions_enabled     = var.env_short == "p" ? true : false
   alarm_name          = "low-latency-"

@@ -18,26 +18,26 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_api_user_registry_4xx_error_alarm"></a> [api\_user\_registry\_4xx\_error\_alarm](#module\_api\_user\_registry\_4xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_api_user_registry_5xx_error_alarm"></a> [api\_user\_registry\_5xx\_error\_alarm](#module\_api\_user\_registry\_5xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_api_user_registry_low_latency_alarm"></a> [api\_user\_registry\_low\_latency\_alarm](#module\_api\_user\_registry\_low\_latency\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_api_user_registry_throttle_limit_alarm"></a> [api\_user\_registry\_throttle\_limit\_alarm](#module\_api\_user\_registry\_throttle\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
-| <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | terraform-aws-modules/route53/aws//modules/zones | ~> 2.0 |
-| <a name="module_dynamo_successful_request_latency"></a> [dynamo\_successful\_request\_latency](#module\_dynamo\_successful\_request\_latency) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
-| <a name="module_dynamodb_metric_alarms"></a> [dynamodb\_metric\_alarms](#module\_dynamodb\_metric\_alarms) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
-| <a name="module_dynamodb_read_capacity_units_limit_alarm"></a> [dynamodb\_read\_capacity\_units\_limit\_alarm](#module\_dynamodb\_read\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_dynamodb_request_exceeding_throughput_alarm"></a> [dynamodb\_request\_exceeding\_throughput\_alarm](#module\_dynamodb\_request\_exceeding\_throughput\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | terraform-aws-modules/dynamodb-table/aws |  |
-| <a name="module_dynamodb_write_capacity_units_limit_alarm"></a> [dynamodb\_write\_capacity\_units\_limit\_alarm](#module\_dynamodb\_write\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_gsi_index_read_capacity_units_limit_alarm"></a> [gsi\_index\_read\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_read\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_gsi_index_write_capacity_units_limit_alarm"></a> [gsi\_index\_write\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_write\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_log_filter_throttle_limit_user_registry"></a> [log\_filter\_throttle\_limit\_user\_registry](#module\_log\_filter\_throttle\_limit\_user\_registry) | terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter | ~> 3.0 |
-| <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws | v8.2.0 |
-| <a name="module_nlb_unhealthy_unhealthy_targets_alarm"></a> [nlb\_unhealthy\_unhealthy\_targets\_alarm](#module\_nlb\_unhealthy\_unhealthy\_targets\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
+| <a name="module_api_user_registry_4xx_error_alarm"></a> [api\_user\_registry\_4xx\_error\_alarm](#module\_api\_user\_registry\_4xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_api_user_registry_5xx_error_alarm"></a> [api\_user\_registry\_5xx\_error\_alarm](#module\_api\_user\_registry\_5xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_api_user_registry_low_latency_alarm"></a> [api\_user\_registry\_low\_latency\_alarm](#module\_api\_user\_registry\_low\_latency\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_api_user_registry_throttle_limit_alarm"></a> [api\_user\_registry\_throttle\_limit\_alarm](#module\_api\_user\_registry\_throttle\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | 4.3.0 |
+| <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | terraform-aws-modules/route53/aws//modules/zones | 2.0 |
+| <a name="module_dynamo_successful_request_latency"></a> [dynamo\_successful\_request\_latency](#module\_dynamo\_successful\_request\_latency) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | 4.3.0 |
+| <a name="module_dynamodb_metric_alarms"></a> [dynamodb\_metric\_alarms](#module\_dynamodb\_metric\_alarms) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | 4.3.0 |
+| <a name="module_dynamodb_read_capacity_units_limit_alarm"></a> [dynamodb\_read\_capacity\_units\_limit\_alarm](#module\_dynamodb\_read\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_dynamodb_request_exceeding_throughput_alarm"></a> [dynamodb\_request\_exceeding\_throughput\_alarm](#module\_dynamodb\_request\_exceeding\_throughput\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | terraform-aws-modules/dynamodb-table/aws | 3.3.0 |
+| <a name="module_dynamodb_write_capacity_units_limit_alarm"></a> [dynamodb\_write\_capacity\_units\_limit\_alarm](#module\_dynamodb\_write\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_gsi_index_read_capacity_units_limit_alarm"></a> [gsi\_index\_read\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_read\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_gsi_index_write_capacity_units_limit_alarm"></a> [gsi\_index\_write\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_write\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_log_filter_throttle_limit_user_registry"></a> [log\_filter\_throttle\_limit\_user\_registry](#module\_log\_filter\_throttle\_limit\_user\_registry) | terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter | 4.3.0 |
+| <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws | 8.2.0 |
+| <a name="module_nlb_unhealthy_unhealthy_targets_alarm"></a> [nlb\_unhealthy\_unhealthy\_targets\_alarm](#module\_nlb\_unhealthy\_unhealthy\_targets\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
 | <a name="module_sentinel"></a> [sentinel](#module\_sentinel) | git::https://github.com/pagopa/terraform-aws-sentinel.git?ref=v1.0.1 |  |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 3.14.0 |
-| <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints |  |
-| <a name="module_webacl_count_alarm"></a> [webacl\_count\_alarm](#module\_webacl\_count\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
+| <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints | 3.14.0 |
+| <a name="module_webacl_count_alarm"></a> [webacl\_count\_alarm](#module\_webacl\_count\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
 
 ## Resources
 
