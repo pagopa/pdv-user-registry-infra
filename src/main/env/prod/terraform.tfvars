@@ -28,6 +28,22 @@ ecs_autoscaling = {
   scale_out_cooldown = 60  # 1 min
 }
 
+person_task = {
+  image_version = "3f196e176cacda6b095584a78cdc400d848c25ba"
+  cpu           = 1024
+  mem           = 2048
+  container_cpu = 1024
+  container_mem = 2048
+}
+
+user_registry_task = {
+  image_version = "763b4ec281b067cfd23672f8c66603359782ea63"
+  cpu           = 1024
+  mem           = 2048
+  container_cpu = 1024
+  container_mem = 2048
+}
+
 ecs_logs_retention_days = 90
 
 ms_tokenizer_host_name = "tokenizer-p-nlb-094463a88e36e754.elb.eu-south-1.amazonaws.com"

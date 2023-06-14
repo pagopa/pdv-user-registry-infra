@@ -18,26 +18,26 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_api_user_registry_4xx_error_alarm"></a> [api\_user\_registry\_4xx\_error\_alarm](#module\_api\_user\_registry\_4xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_api_user_registry_5xx_error_alarm"></a> [api\_user\_registry\_5xx\_error\_alarm](#module\_api\_user\_registry\_5xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_api_user_registry_low_latency_alarm"></a> [api\_user\_registry\_low\_latency\_alarm](#module\_api\_user\_registry\_low\_latency\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_api_user_registry_throttle_limit_alarm"></a> [api\_user\_registry\_throttle\_limit\_alarm](#module\_api\_user\_registry\_throttle\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
-| <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | terraform-aws-modules/route53/aws//modules/zones | ~> 2.0 |
-| <a name="module_dynamo_successful_request_latency"></a> [dynamo\_successful\_request\_latency](#module\_dynamo\_successful\_request\_latency) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
-| <a name="module_dynamodb_metric_alarms"></a> [dynamodb\_metric\_alarms](#module\_dynamodb\_metric\_alarms) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | ~> 3.0 |
-| <a name="module_dynamodb_read_capacity_units_limit_alarm"></a> [dynamodb\_read\_capacity\_units\_limit\_alarm](#module\_dynamodb\_read\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_dynamodb_request_exceeding_throughput_alarm"></a> [dynamodb\_request\_exceeding\_throughput\_alarm](#module\_dynamodb\_request\_exceeding\_throughput\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | terraform-aws-modules/dynamodb-table/aws |  |
-| <a name="module_dynamodb_write_capacity_units_limit_alarm"></a> [dynamodb\_write\_capacity\_units\_limit\_alarm](#module\_dynamodb\_write\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_gsi_index_read_capacity_units_limit_alarm"></a> [gsi\_index\_read\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_read\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_gsi_index_write_capacity_units_limit_alarm"></a> [gsi\_index\_write\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_write\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
-| <a name="module_log_filter_throttle_limit_user_registry"></a> [log\_filter\_throttle\_limit\_user\_registry](#module\_log\_filter\_throttle\_limit\_user\_registry) | terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter | ~> 3.0 |
-| <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws | v8.2.0 |
-| <a name="module_nlb_unhealthy_unhealthy_targets_alarm"></a> [nlb\_unhealthy\_unhealthy\_targets\_alarm](#module\_nlb\_unhealthy\_unhealthy\_targets\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
+| <a name="module_api_user_registry_4xx_error_alarm"></a> [api\_user\_registry\_4xx\_error\_alarm](#module\_api\_user\_registry\_4xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_api_user_registry_5xx_error_alarm"></a> [api\_user\_registry\_5xx\_error\_alarm](#module\_api\_user\_registry\_5xx\_error\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_api_user_registry_low_latency_alarm"></a> [api\_user\_registry\_low\_latency\_alarm](#module\_api\_user\_registry\_low\_latency\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_api_user_registry_throttle_limit_alarm"></a> [api\_user\_registry\_throttle\_limit\_alarm](#module\_api\_user\_registry\_throttle\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | 4.3.0 |
+| <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | terraform-aws-modules/route53/aws//modules/zones | 2.0 |
+| <a name="module_dynamo_successful_request_latency"></a> [dynamo\_successful\_request\_latency](#module\_dynamo\_successful\_request\_latency) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | 4.3.0 |
+| <a name="module_dynamodb_metric_alarms"></a> [dynamodb\_metric\_alarms](#module\_dynamodb\_metric\_alarms) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarm | 4.3.0 |
+| <a name="module_dynamodb_read_capacity_units_limit_alarm"></a> [dynamodb\_read\_capacity\_units\_limit\_alarm](#module\_dynamodb\_read\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_dynamodb_request_exceeding_throughput_alarm"></a> [dynamodb\_request\_exceeding\_throughput\_alarm](#module\_dynamodb\_request\_exceeding\_throughput\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | terraform-aws-modules/dynamodb-table/aws | 3.3.0 |
+| <a name="module_dynamodb_write_capacity_units_limit_alarm"></a> [dynamodb\_write\_capacity\_units\_limit\_alarm](#module\_dynamodb\_write\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_gsi_index_read_capacity_units_limit_alarm"></a> [gsi\_index\_read\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_read\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_gsi_index_write_capacity_units_limit_alarm"></a> [gsi\_index\_write\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_write\_capacity\_units\_limit\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
+| <a name="module_log_filter_throttle_limit_user_registry"></a> [log\_filter\_throttle\_limit\_user\_registry](#module\_log\_filter\_throttle\_limit\_user\_registry) | terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter | 4.3.0 |
+| <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws | 8.2.0 |
+| <a name="module_nlb_unhealthy_unhealthy_targets_alarm"></a> [nlb\_unhealthy\_unhealthy\_targets\_alarm](#module\_nlb\_unhealthy\_unhealthy\_targets\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
 | <a name="module_sentinel"></a> [sentinel](#module\_sentinel) | git::https://github.com/pagopa/terraform-aws-sentinel.git?ref=v1.0.1 |  |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 3.14.0 |
-| <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints |  |
-| <a name="module_webacl_count_alarm"></a> [webacl\_count\_alarm](#module\_webacl\_count\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | ~> 3.0 |
+| <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints | 3.14.0 |
+| <a name="module_webacl_count_alarm"></a> [webacl\_count\_alarm](#module\_webacl\_count\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
 
 ## Resources
 
@@ -96,12 +96,10 @@
 | [aws_ecs_service.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/ecs_service) | resource |
 | [aws_ecs_task_definition.person](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/ecs_task_definition) | resource |
 | [aws_ecs_task_definition.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/ecs_task_definition) | resource |
-| [aws_iam_access_key.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_access_key) | resource |
 | [aws_iam_group.developers](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_group) | resource |
 | [aws_iam_group_policy_attachment.deny_secrets_devops](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_group_policy_attachment) | resource |
 | [aws_iam_group_policy_attachment.power_user](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_group_policy_attachment) | resource |
 | [aws_iam_policy.deny_secrets_devops](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
-| [aws_iam_policy.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.dynamodb_rw](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.ecs_allow_hsm](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.ecs_allow_kms](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
@@ -111,16 +109,12 @@
 | [aws_iam_role.githubecsdeploy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy_attachment.deploy_ec2_ecr_full_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecsTaskExecutionRole_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_allow_hsm](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_allow_kms](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_dynamodb_rw](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_execute_command_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.s3_policy_attach](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_user.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_user) | resource |
-| [aws_iam_user_policy_attachment.deploy_ec2_ecr_full_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_user_policy_attachment) | resource |
-| [aws_iam_user_policy_attachment.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_user_policy_attachment) | resource |
 | [aws_kms_alias.dynamo_db](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_alias) | resource |
 | [aws_kms_alias.dynamo_db_replica](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_alias) | resource |
 | [aws_kms_key.dynamo_db](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_key) | resource |
@@ -210,10 +204,12 @@
 | <a name="input_ms_user_registry_enable_single_line_stack_trace_logging"></a> [ms\_user\_registry\_enable\_single\_line\_stack\_trace\_logging](#input\_ms\_user\_registry\_enable\_single\_line\_stack\_trace\_logging) | Enable logging stack trace in a single line | `bool` | `false` | no |
 | <a name="input_ms_user_registry_log_level"></a> [ms\_user\_registry\_log\_level](#input\_ms\_user\_registry\_log\_level) | Log level micro service user registry | `string` | `"DEBUG"` | no |
 | <a name="input_ms_user_registry_rest_client_log_level"></a> [ms\_user\_registry\_rest\_client\_log\_level](#input\_ms\_user\_registry\_rest\_client\_log\_level) | Rest client log level micro service user registry | `string` | `"FULL"` | no |
+| <a name="input_person_task"></a> [person\_task](#input\_person\_task) | n/a | <pre>object({<br>    image_version = string<br>    cpu           = number<br>    mem           = number<br>    container_cpu = number<br>    container_mem = number<br>  })</pre> | <pre>{<br>  "container_cpu": 256,<br>  "container_mem": 512,<br>  "cpu": 256,<br>  "image_version": "latest",<br>  "mem": 512<br>}</pre> | no |
 | <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | Number of task replica | `number` | `1` | no |
 | <a name="input_sentinel_servcie_account_id"></a> [sentinel\_servcie\_account\_id](#input\_sentinel\_servcie\_account\_id) | Microsoft Sentinel's service account ID for AWS. | `string` | `"197857026523"` | no |
 | <a name="input_sentinel_workspace_id"></a> [sentinel\_workspace\_id](#input\_sentinel\_workspace\_id) | Sentinel workspece id | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | <pre>{<br>  "CreatedBy": "Terraform"<br>}</pre> | no |
+| <a name="input_user_registry_task"></a> [user\_registry\_task](#input\_user\_registry\_task) | n/a | <pre>object({<br>    image_version = string<br>    cpu           = number<br>    mem           = number<br>    container_cpu = number<br>    container_mem = number<br>  })</pre> | <pre>{<br>  "container_cpu": 256,<br>  "container_mem": 512,<br>  "cpu": 256,<br>  "image_version": "latest",<br>  "mem": 512<br>}</pre> | no |
 | <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | VPC cidr. | `string` | `"10.0.0.0/16"` | no |
 | <a name="input_vpc_internal_subnets_cidr"></a> [vpc\_internal\_subnets\_cidr](#input\_vpc\_internal\_subnets\_cidr) | Internal subnets list of cidr. Mainly for private endpoints | `list(string)` | <pre>[<br>  "10.0.201.0/24",<br>  "10.0.202.0/24",<br>  "10.0.203.0/24"<br>]</pre> | no |
 | <a name="input_vpc_peering"></a> [vpc\_peering](#input\_vpc\_peering) | Vpc peering configuration | <pre>object({<br>    peer_vpc_id         = string<br>    peer_owner_id       = string<br>    peer_profile        = string<br>    accepter_cidr_block = string<br>  })</pre> | `null` | no |
@@ -228,8 +224,6 @@
 | <a name="output_api_gateway_endpoint"></a> [api\_gateway\_endpoint](#output\_api\_gateway\_endpoint) | n/a |
 | <a name="output_cloudhsm_cluster_certificates"></a> [cloudhsm\_cluster\_certificates](#output\_cloudhsm\_cluster\_certificates) | n/a |
 | <a name="output_cloudhsm_cluster_id"></a> [cloudhsm\_cluster\_id](#output\_cloudhsm\_cluster\_id) | cloud hsm |
-| <a name="output_deploy_access_key"></a> [deploy\_access\_key](#output\_deploy\_access\_key) | n/a |
-| <a name="output_deploy_access_key_secret"></a> [deploy\_access\_key\_secret](#output\_deploy\_access\_key\_secret) | n/a |
 | <a name="output_dynamodb_table_person_arn"></a> [dynamodb\_table\_person\_arn](#output\_dynamodb\_table\_person\_arn) | # dynamodb |
 | <a name="output_dynamodb_table_person_id"></a> [dynamodb\_table\_person\_id](#output\_dynamodb\_table\_person\_id) | n/a |
 | <a name="output_ecs_task_definition_person_arn"></a> [ecs\_task\_definition\_person\_arn](#output\_ecs\_task\_definition\_person\_arn) | # ecs |
