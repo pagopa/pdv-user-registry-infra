@@ -96,12 +96,10 @@
 | [aws_ecs_service.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/ecs_service) | resource |
 | [aws_ecs_task_definition.person](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/ecs_task_definition) | resource |
 | [aws_ecs_task_definition.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/ecs_task_definition) | resource |
-| [aws_iam_access_key.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_access_key) | resource |
 | [aws_iam_group.developers](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_group) | resource |
 | [aws_iam_group_policy_attachment.deny_secrets_devops](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_group_policy_attachment) | resource |
 | [aws_iam_group_policy_attachment.power_user](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_group_policy_attachment) | resource |
 | [aws_iam_policy.deny_secrets_devops](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
-| [aws_iam_policy.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.dynamodb_rw](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.ecs_allow_hsm](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.ecs_allow_kms](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
@@ -111,16 +109,12 @@
 | [aws_iam_role.githubecsdeploy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy_attachment.deploy_ec2_ecr_full_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_role_policy_attachment.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecsTaskExecutionRole_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_allow_hsm](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_allow_kms](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_dynamodb_rw](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_execute_command_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.s3_policy_attach](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_iam_user.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_user) | resource |
-| [aws_iam_user_policy_attachment.deploy_ec2_ecr_full_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_user_policy_attachment) | resource |
-| [aws_iam_user_policy_attachment.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_user_policy_attachment) | resource |
 | [aws_kms_alias.dynamo_db](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_alias) | resource |
 | [aws_kms_alias.dynamo_db_replica](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_alias) | resource |
 | [aws_kms_key.dynamo_db](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_key) | resource |
@@ -230,8 +224,6 @@
 | <a name="output_api_gateway_endpoint"></a> [api\_gateway\_endpoint](#output\_api\_gateway\_endpoint) | n/a |
 | <a name="output_cloudhsm_cluster_certificates"></a> [cloudhsm\_cluster\_certificates](#output\_cloudhsm\_cluster\_certificates) | n/a |
 | <a name="output_cloudhsm_cluster_id"></a> [cloudhsm\_cluster\_id](#output\_cloudhsm\_cluster\_id) | cloud hsm |
-| <a name="output_deploy_access_key"></a> [deploy\_access\_key](#output\_deploy\_access\_key) | n/a |
-| <a name="output_deploy_access_key_secret"></a> [deploy\_access\_key\_secret](#output\_deploy\_access\_key\_secret) | n/a |
 | <a name="output_dynamodb_table_person_arn"></a> [dynamodb\_table\_person\_arn](#output\_dynamodb\_table\_person\_arn) | # dynamodb |
 | <a name="output_dynamodb_table_person_id"></a> [dynamodb\_table\_person\_id](#output\_dynamodb\_table\_person\_id) | n/a |
 | <a name="output_ecs_task_definition_person_arn"></a> [ecs\_task\_definition\_person\_arn](#output\_ecs\_task\_definition\_person\_arn) | # ecs |
