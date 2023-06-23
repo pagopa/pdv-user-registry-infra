@@ -37,21 +37,21 @@ apigw_access_logs_enable   = false
 user_registry_plans = [
   {
     key_name        = "SANDBOX"
-    burst_limit     = 5
+    burst_limit     = 20
     rate_limit      = 10
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "SELFCARE-DEV"
-    burst_limit     = 5
+    burst_limit     = 20
     rate_limit      = 10
     additional_keys = ["INTEROP-DEV"]
     method_throttle = []
   },
   {
     key_name        = "SELFCARE-UAT"
-    burst_limit     = 5
+    burst_limit     = 20
     rate_limit      = 10
     additional_keys = ["INTEROP-UAT"]
     method_throttle = []
@@ -59,21 +59,21 @@ user_registry_plans = [
   {
     # Piattaforma Notifiche Persone Fisiche
     key_name        = "PNPF-DEV"
-    burst_limit     = 10
+    burst_limit     = 600
     rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "PNPF-UAT"
-    burst_limit     = 5
+    burst_limit     = 600
     rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "PNPF-CERT"
-    burst_limit     = 5
+    burst_limit     = 600
     rate_limit      = 300
     additional_keys = []
     method_throttle = []
@@ -81,21 +81,21 @@ user_registry_plans = [
   {
     # Piattaforma Notifiche Persone Giuridiche
     key_name        = "PNPG"
-    burst_limit     = 5
+    burst_limit     = 600
     rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "IDPAY-DEV"
-    burst_limit     = 50
+    burst_limit     = 200
     rate_limit      = 100
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "IDPAY-UAT"
-    burst_limit     = 50
+    burst_limit     = 200
     rate_limit      = 100
     additional_keys = []
     method_throttle = []
