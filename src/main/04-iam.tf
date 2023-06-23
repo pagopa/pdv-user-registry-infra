@@ -203,3 +203,26 @@ resource "aws_iam_role_policy_attachment" "deploy_ec2_ecr_full_access" {
   role       = aws_iam_role.githubecsdeploy.name
   policy_arn = data.aws_iam_policy.ec2_ecr_full_access.arn
 }
+
+resource "aws_iam_policy" "deploy_ecs" {
+  name        = "PagoPaECSDeploy"
+  description = "Policy to allow deploy on ECS."
+
+  policy = templatefile(
+    "./iam_policies/deploy-ecs.json.tpl",
+    {
+      account_id            = data.aws_caller_identity.current.account_id
+      execute_task_role_arn = aws_iam_role.ecs_execution_task.arn
+    }
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "deploy_ecs" {
+  role       = aws_iam_role.githubecsdeploy.name
+  policy_arn = aws_iam_policy.deploy_ecs.arn
+}
+
+resource "aws_iam_role_policy_attachment" "deploy_ec2_ecr_full_access" {
+  role       = aws_iam_role.githubecsdeploy.name
+  policy_arn = data.aws_iam_policy.ec2_ecr_full_access.arn
+}
