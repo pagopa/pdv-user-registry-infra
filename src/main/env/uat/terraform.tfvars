@@ -59,22 +59,22 @@ user_registry_plans = [
   {
     # Piattaforma Notifiche Persone Fisiche
     key_name        = "PNPF-DEV"
-    burst_limit     = 5
-    rate_limit      = 10
+    burst_limit     = 10
+    rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "PNPF-UAT"
     burst_limit     = 5
-    rate_limit      = 10
+    rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "PNPF-CERT"
     burst_limit     = 5
-    rate_limit      = 10
+    rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
@@ -82,7 +82,7 @@ user_registry_plans = [
     # Piattaforma Notifiche Persone Giuridiche
     key_name        = "PNPG"
     burst_limit     = 5
-    rate_limit      = 10
+    rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
