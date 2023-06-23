@@ -100,6 +100,7 @@
 | [aws_iam_group_policy_attachment.deny_secrets_devops](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_group_policy_attachment) | resource |
 | [aws_iam_group_policy_attachment.power_user](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_group_policy_attachment) | resource |
 | [aws_iam_policy.deny_secrets_devops](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
+| [aws_iam_policy.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.dynamodb_rw](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.ecs_allow_hsm](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.ecs_allow_kms](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_policy) | resource |
@@ -109,6 +110,7 @@
 | [aws_iam_role.githubecsdeploy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy_attachment.deploy_ec2_ecr_full_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.deploy_ecs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecsTaskExecutionRole_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_allow_hsm](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_allow_kms](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |

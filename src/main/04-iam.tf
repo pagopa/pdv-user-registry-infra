@@ -218,5 +218,5 @@ resource "aws_iam_policy" "deploy_ecs" {
 resource "aws_iam_role_policy_attachment" "deploy_ecs" {
   role       = aws_iam_role.githubecsdeploy.name
   policy_arn = aws_iam_policy.deploy_ecs.arn
-}
 
+}
