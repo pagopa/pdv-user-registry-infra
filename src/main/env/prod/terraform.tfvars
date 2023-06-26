@@ -69,61 +69,36 @@ apigw_execution_logs_retention = 90
 user_registry_plans = [
   {
     key_name        = "SELFCARE"
-    burst_limit     = 10
+    burst_limit     = 600
     rate_limit      = 300
     additional_keys = ["INTEROP"]
     method_throttle = []
   },
   {
     key_name        = "TEST"
-    burst_limit     = 10
+    burst_limit     = 40
     rate_limit      = 20
     additional_keys = []
     method_throttle = [
-      {
-        burst_limit = 5
-        path        = "/users/{id}/GET"
-        rate_limit  = 18
-      },
-      {
-        burst_limit = 5
-        path        = "/users/PATCH"
-        rate_limit  = 18
-      },
-      {
-        burst_limit = 5
-        path        = "/users/search/POST"
-        rate_limit  = 38
-      },
-      {
-        burst_limit = 5
-        path        = "/users/{id}/DELETE"
-        rate_limit  = 2
-      },
-      {
-        burst_limit = 5
-        path        = "/users/{id}/PATCH"
-        rate_limit  = 18
-      }
     ]
   },
   {
     key_name        = "PNPF"
-    burst_limit     = 10
+    burst_limit     = 600
     rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "PNPG"
-    burst_limit     = 10
+    burst_limit     = 600
     rate_limit      = 300
     additional_keys = []
     method_throttle = []
   },
   {
     key_name        = "IDPAY"
-    burst_limit     = 50
+    burst_limit     = 300
     rate_limit      = 150
     additional_keys = []
     method_throttle = []
