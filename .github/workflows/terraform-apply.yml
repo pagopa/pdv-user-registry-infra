@@ -32,7 +32,7 @@ jobs:
   manual-trigger:
     if: "${{ github.event.inputs.environment != '' }}"
     name: "terraform-apply"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     continue-on-error: false
     permissions:
       id-token: write   # This is required for requesting the JWT
@@ -64,7 +64,7 @@ jobs:
         max-parallel: 1
         matrix:
           environment: [uat, prod_w]
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-22.04
       continue-on-error: false
       environment: ${{ matrix.environment }}
       permissions:
