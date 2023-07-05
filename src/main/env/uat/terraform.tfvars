@@ -14,6 +14,31 @@ vpc_peering = {
 
 # Ecs
 ecs_enable_execute_command = true
+# Ecs
+replica_count = 3
+
+ecs_autoscaling = {
+  max_capacity       = 10
+  min_capacity       = 3
+  scale_in_cooldown  = 900 # 15mins
+  scale_out_cooldown = 60  # 1 min
+}
+
+person_task = {
+  image_version = "d6e62bc714386aae099d3a338d8545fb496688b3"
+  cpu           = 1024
+  mem           = 2048
+  container_cpu = 1024
+  container_mem = 2048
+}
+
+user_registry_task = {
+  image_version = "f4795647eaf0fd636e5fdc5ac9e453407ddcd49f"
+  cpu           = 1024
+  mem           = 2048
+  container_cpu = 1024
+  container_mem = 2048
+}
 
 ms_tokenizer_host_name = "tokenizer-u-nlb-63e5a0a1a5a8c188.elb.eu-south-1.amazonaws.com"
 
@@ -107,29 +132,29 @@ user_registry_plans = [
 dynamodb_point_in_time_recovery_enabled = false
 
 ## table Person
-table_person_read_capacity  = 10
-table_person_write_capacity = 10
+table_person_read_capacity  = 300
+table_person_write_capacity = 300
 
 table_person_autoscaling_read = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
   target_value       = 70
-  max_capacity       = 20
+  max_capacity       = 600
 }
 
 table_person_autoscaling_write = {
   scale_in_cooldown  = 50
   scale_out_cooldown = 40
-  target_value       = 70
-  max_capacity       = 50
+  target_value       = 50
+  max_capacity       = 600
 }
 
 table_person_autoscling_indexes = {
   gsi_namespaced_id = {
-    read_max_capacity  = 30
-    read_min_capacity  = 10
-    write_max_capacity = 30
-    write_min_capacity = 10
+    read_max_capacity  = 600
+    read_min_capacity  = 300
+    write_max_capacity = 600
+    write_min_capacity = 300
   }
 }
 
