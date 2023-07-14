@@ -15,6 +15,22 @@ vpc_peering = {
 # Ecs
 ecs_enable_execute_command = true
 
+person_task = {
+  image_version = "d6e62bc714386aae099d3a338d8545fb496688b3"
+  cpu           = 256
+  mem           = 512
+  container_cpu = 256
+  container_mem = 512
+}
+
+user_registry_task = {
+  image_version = "23d22469de8b465a2c75fcc84034232bb7798f19"
+  cpu           = 256
+  mem           = 512
+  container_cpu = 256
+  container_mem = 512
+}
+
 ms_tokenizer_host_name = "tokenizer-u-nlb-63e5a0a1a5a8c188.elb.eu-south-1.amazonaws.com"
 
 public_dns_zones = {
