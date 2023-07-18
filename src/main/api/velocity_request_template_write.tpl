@@ -1,1 +1,1 @@
-$input.json('$') #set($idToKey = {${list_key_to_name}}) #set($context.requestOverride.header.x-pagopa-namespace = $idToKey.get($context.identity.apiKeyId))
+$input.json('$') #set($idToKey = {${list_key_to_name}}) #set($context.requestOverride.header.x-pagopa-namespace = $idToKey.get($context.identity.apiKeyId)) #set($context.requestOverride.header.x-amzn-trace-id = '')
