@@ -130,6 +130,7 @@
 | [aws_route53_record.uat](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/route53_record) | resource |
 | [aws_s3_bucket.openapidocs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_acl.openapidocs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/s3_bucket_acl) | resource |
+| [aws_s3_bucket_ownership_controls.openapidocs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/s3_bucket_ownership_controls) | resource |
 | [aws_s3_bucket_policy.openapidocs](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/s3_bucket_policy) | resource |
 | [aws_s3_object.openapi_user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/s3_object) | resource |
 | [aws_security_group.nsg_task](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/security_group) | resource |
