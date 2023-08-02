@@ -9,10 +9,10 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | = 4.59.0 |
-| <a name="provider_aws.eu-central-1"></a> [aws.eu-central-1](#provider\_aws.eu-central-1) | = 4.59.0 |
-| <a name="provider_null"></a> [null](#provider\_null) | n/a |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.59.0 |
+| <a name="provider_aws.eu-central-1"></a> [aws.eu-central-1](#provider\_aws.eu-central-1) | 4.59.0 |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.2.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
 
 ## Modules
 
@@ -34,7 +34,7 @@
 | <a name="module_log_filter_throttle_limit_user_registry"></a> [log\_filter\_throttle\_limit\_user\_registry](#module\_log\_filter\_throttle\_limit\_user\_registry) | terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter | 4.3.0 |
 | <a name="module_nlb"></a> [nlb](#module\_nlb) | terraform-aws-modules/alb/aws | 8.2.0 |
 | <a name="module_nlb_unhealthy_unhealthy_targets_alarm"></a> [nlb\_unhealthy\_unhealthy\_targets\_alarm](#module\_nlb\_unhealthy\_unhealthy\_targets\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
-| <a name="module_sentinel"></a> [sentinel](#module\_sentinel) | git::https://github.com/pagopa/terraform-aws-sentinel.git?ref=v1.0.1 |  |
+| <a name="module_sentinel"></a> [sentinel](#module\_sentinel) | git::https://github.com/pagopa/terraform-aws-sentinel.git | v1.0.1 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 3.14.0 |
 | <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints | 3.14.0 |
 | <a name="module_webacl_count_alarm"></a> [webacl\_count\_alarm](#module\_webacl\_count\_alarm) | terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions | 4.3.0 |
@@ -124,6 +124,7 @@
 | [aws_kms_key.dynamo_db_replica](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_key) | resource |
 | [aws_route.owner](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/route) | resource |
 | [aws_route53_record.cert_validation](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/route53_record) | resource |
+| [aws_route53_record.dev](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/route53_record) | resource |
 | [aws_route53_record.main](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/route53_record) | resource |
 | [aws_route53_record.tokenizer](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/route53_record) | resource |
 | [aws_route53_record.uat](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/route53_record) | resource |
