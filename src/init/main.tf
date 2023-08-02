@@ -1,7 +1,7 @@
 terraform {
   required_version = "~> 1.2.0"
 
-  backend "s3" {}
+  # backend "s3" {}
 
   required_providers {
     aws = {
@@ -18,15 +18,11 @@ provider "aws" {
 # terraform state file setup
 # create an S3 bucket to store the state file in
 
-resource "random_integer" "bucket_suffix" {
-  min = 1
-  max = 9999
-}
 resource "aws_s3_bucket" "terraform_states" {
-  bucket = format("terraform-backend-%04s", random_integer.bucket_suffix.result)
+  bucket_prefix = "terraform-backend-"
 
   lifecycle {
-    # prevent_destroy = true
+    #prevent_destroy = true
   }
 
   tags = merge(var.tags, {
@@ -34,16 +30,17 @@ resource "aws_s3_bucket" "terraform_states" {
   })
 }
 
-resource "aws_s3_bucket_acl" "terraform_states" {
+resource "aws_s3_bucket_ownership_controls" "terraform_states" {
   bucket = aws_s3_bucket.terraform_states.id
-  acl    = "private"
+  rule {
+    object_ownership = "ObjectWriter"
+  }
 }
 
-resource "aws_s3_bucket_versioning" "terraform_states" {
-  bucket = aws_s3_bucket.terraform_states.id
-  versioning_configuration {
-    status = "Enabled"
-  }
+resource "aws_s3_bucket_acl" "terraform_states" {
+  bucket     = aws_s3_bucket.terraform_states.id
+  acl        = "private"
+  depends_on = [aws_s3_bucket_ownership_controls.terraform_states]
 }
 
 resource "aws_s3_bucket_public_access_block" "terraform_states" {
@@ -53,6 +50,14 @@ resource "aws_s3_bucket_public_access_block" "terraform_states" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+resource "aws_s3_bucket_versioning" "terraform_states" {
+  bucket = aws_s3_bucket.terraform_states.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 
 # create a DynamoDB table for locking the state file
 resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
