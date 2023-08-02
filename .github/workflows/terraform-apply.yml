@@ -22,10 +22,11 @@ on:
         description: 'Which environment to update.'
         type: choice
         required: true
-        default: uat
+        default: dev
         options:
-        - prod
+        - dev
         - uat
+        - prod
 
 
 jobs:
@@ -63,7 +64,7 @@ jobs:
       strategy:
         max-parallel: 1
         matrix:
-          environment: [uat, prod_w]
+          environment: [dev, uat, prod_w]
       runs-on: ubuntu-22.04
       continue-on-error: false
       environment: ${{ matrix.environment }}
