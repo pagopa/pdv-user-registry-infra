@@ -1,7 +1,7 @@
 terraform {
-  required_version = "~> 1.2.0"
+  required_version = "~> 1.2.4"
 
-  # backend "s3" {}
+  backend "s3" {}
 
   required_providers {
     aws = {
@@ -18,11 +18,15 @@ provider "aws" {
 # terraform state file setup
 # create an S3 bucket to store the state file in
 
+resource "random_integer" "bucket_suffix" {
+  min = 1
+  max = 9999
+}
 resource "aws_s3_bucket" "terraform_states" {
-  bucket_prefix = "terraform-backend-"
+  bucket = format("terraform-backend-%04s", random_integer.bucket_suffix.result)
 
   lifecycle {
-    #prevent_destroy = true
+    # prevent_destroy = true
   }
 
   tags = merge(var.tags, {
@@ -33,22 +37,16 @@ resource "aws_s3_bucket" "terraform_states" {
 resource "aws_s3_bucket_ownership_controls" "terraform_states" {
   bucket = aws_s3_bucket.terraform_states.id
   rule {
-    object_ownership = "ObjectWriter"
+    object_ownership = "BucketOwnerPreferred"
   }
+
 }
 
 resource "aws_s3_bucket_acl" "terraform_states" {
-  bucket     = aws_s3_bucket.terraform_states.id
-  acl        = "private"
-  depends_on = [aws_s3_bucket_ownership_controls.terraform_states]
-}
+  bucket = aws_s3_bucket.terraform_states.id
+  acl    = "private"
 
-resource "aws_s3_bucket_public_access_block" "terraform_states" {
-  bucket                  = aws_s3_bucket.terraform_states.id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  depends_on = [aws_s3_bucket_ownership_controls.terraform_states]
 }
 
 resource "aws_s3_bucket_versioning" "terraform_states" {
@@ -58,6 +56,13 @@ resource "aws_s3_bucket_versioning" "terraform_states" {
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "terraform_states" {
+  bucket                  = aws_s3_bucket.terraform_states.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
 
 # create a DynamoDB table for locking the state file
 resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
@@ -77,6 +82,11 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
 
 }
 
+## IAM user who can manage the infrastructure definition
+data "aws_iam_policy" "admin_access" {
+  name = "AdministratorAccess"
+}
+
 resource "aws_iam_group" "admins" {
   name = "Admins"
 }
@@ -86,13 +96,19 @@ resource "aws_iam_group_policy_attachment" "admins" {
   policy_arn = data.aws_iam_policy.admin_access.arn
 }
 
-data "aws_iam_policy" "admin_access" {
-  name = "AdministratorAccess"
+resource "aws_iam_user" "iac" {
+  name = "iac"
+
+  tags = var.tags
 }
+
 
 data "aws_caller_identity" "current" {}
 
-# github openid identity provider.
+# Github actions
+
+
+## github openid identity provider.
 resource "aws_iam_openid_connect_provider" "github" {
   url = "https://token.actions.githubusercontent.com"
 

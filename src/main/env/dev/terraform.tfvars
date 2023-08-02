@@ -58,7 +58,7 @@ ms_user_registry_enable_single_line_stack_trace_logging = true
 
 
 # Api gateway
-apigw_custom_domain_create = false
+apigw_custom_domain_create = true
 apigw_access_logs_enable   = false
 
 user_registry_plans = [
