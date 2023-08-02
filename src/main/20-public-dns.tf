@@ -21,6 +21,22 @@ resource "aws_route53_record" "uat" {
   ]
 }
 
+resource "aws_route53_record" "dev" {
+  count           = var.env_short == "p" ? 1 : 0
+  allow_overwrite = true
+  name            = format("dev.%s", keys(var.public_dns_zones)[0])
+  ttl             = var.dns_record_ttl
+  type            = "NS"
+  zone_id         = module.dn_zone.route53_zone_zone_id[keys(var.public_dns_zones)[0]]
+
+  records = [
+    "ns-1428.awsdns-50.org",
+    "ns-1986.awsdns-56.co.uk",
+    "ns-53.awsdns-06.com",
+    "ns-550.awsdns-04.net",
+  ]
+}
+
 resource "aws_route53_record" "tokenizer" {
   count           = var.env_short == "p" ? 1 : 0
   allow_overwrite = true
