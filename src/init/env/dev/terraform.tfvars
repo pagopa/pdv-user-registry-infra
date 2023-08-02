@@ -1,4 +1,4 @@
-environment = "Uat"
+environment = "Dev"
 tags = {
   "CreatedBy"   = "Terraform"
   "Environment" = "Uat"

@@ -9,7 +9,16 @@ resource "aws_s3_bucket" "openapidocs" {
   force_destroy = true
 }
 
+resource "aws_s3_bucket_ownership_controls" "openapidocs" {
+  bucket = aws_s3_bucket.openapidocs.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 resource "aws_s3_bucket_acl" "openapidocs" {
+  depends_on = [aws_s3_bucket_ownership_controls.openapidocs]
+
   bucket = aws_s3_bucket.openapidocs.id
   acl    = "private"
 }
