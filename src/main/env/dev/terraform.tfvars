@@ -5,15 +5,13 @@ environment = "dev"
 enable_nat_gateway = false
 
 ## Vpc peering
-vpc_peering = null
-/*
 vpc_peering = {
-  peer_vpc_id         = "todo"
-  peer_owner_id       = "todo"
+  peer_vpc_id         = "vpc-04c3316f3b4cc2c65"
+  peer_owner_id       = "209688138459"
   peer_profile        = "ppa-tokenizer-data-vault-dev"
   accepter_cidr_block = "10.1.0.0/16"
 }
-*/
+
 # Ecs
 ecs_enable_execute_command = true
 # Ecs
@@ -27,7 +25,7 @@ ecs_autoscaling = {
 }
 
 person_task = {
-  image_version = "todo"
+  image_version = "05f75a947cfb7130f6dc8dd58add9521a48f858d"
   cpu           = 256
   mem           = 512
   container_cpu = 256
@@ -35,14 +33,14 @@ person_task = {
 }
 
 user_registry_task = {
-  image_version = "todo"
+  image_version = "a9b709ff1a828bec8c6e690293111eee7cfd031d"
   cpu           = 1024
   mem           = 2048
   container_cpu = 1024
   container_mem = 2048
 }
 
-ms_tokenizer_host_name = "dev"
+ms_tokenizer_host_name = "tokenizer-d-nlb-43d3fb6b08d9e0c6.elb.eu-south-1.amazonaws.com"
 
 public_dns_zones = {
   "dev.pdv.pagopa.it" = {
