@@ -18,3 +18,15 @@ resource "aws_sns_topic_subscription" "alarms_email" {
   protocol               = "email"
   topic_arn              = aws_sns_topic.alarms.arn
 }
+
+resource "aws_sns_topic_subscription" "alarms_opsgenie" {
+  count = var.enable_opsgenie ? 1 : 0
+
+  endpoint = jsondecode(
+    data.aws_secretsmanager_secret_version.email_operation_lt.secret_string
+  )["opsgenie_url"]
+
+  endpoint_auto_confirms = true
+  protocol               = "https"
+  topic_arn              = aws_sns_topic.alarms.arn
+}
