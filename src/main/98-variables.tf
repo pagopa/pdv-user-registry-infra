@@ -397,6 +397,14 @@ variable "cloudhsm_nodes" {
 
 
 ## Alarms
+
+variable "enable_opsgenie" {
+  type        = bool
+  default     = false
+  description = "Send alarm via opsgenie."
+}
+
+
 variable "dynamodb_alarms" {
   type = list(
     object({
