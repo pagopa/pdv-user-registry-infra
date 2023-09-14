@@ -161,9 +161,9 @@ module "api_user_registry_4xx_error_alarm" {
   source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
   version = "4.3.0"
 
-  actions_enabled     = var.env_short == "p" ? true : false
+  actions_enabled     = true
   alarm_name          = "high-4xx-rate-"
-  alarm_description   = "Api User registry error rate has exceeded 5%"
+  alarm_description   = "Api User registry error rate has exceeded 5% [opsgenie]"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2
   threshold           = 200
