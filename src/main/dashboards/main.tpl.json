@@ -465,7 +465,7 @@
             "x": 0,
             "type": "text",
             "properties": {
-                "markdown": "# Useful links\n \n*  [AWS Status Page](https://health.aws.amazon.com/health/status).\n* [Confluence HOWTO Page](https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/509511125/HOWTO) \n* [${runbook_title}](${runbook_link})"
+                "markdown": "# Useful links\n \n*  [AWS Status Page](https://health.aws.amazon.com/health/status).\n* [Confluence HOWTO Page](https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/509511125/HOWTO) \n* [${runbook_title}](${runbook_url})"
             }
         },
         {
