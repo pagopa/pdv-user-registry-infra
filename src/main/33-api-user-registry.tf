@@ -163,10 +163,10 @@ module "api_user_registry_4xx_error_alarm" {
 
   actions_enabled     = true
   alarm_name          = "high-4xx-rate-"
-  alarm_description   = "Api User registry error rate has exceeded 5% [opsgenie]"
+  alarm_description   = "Api User registry error rate has exceeded 5% ${local.runbook_link}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2
-  threshold           = 200
+  threshold           = 500
   period              = 300
   unit                = "Count"
   datapoints_to_alarm = 1
@@ -191,7 +191,7 @@ module "api_user_registry_5xx_error_alarm" {
   version = "4.3.0"
 
   alarm_name          = "high-5xx-rate-"
-  alarm_description   = "Api user registry error rate has exceeded 5%"
+  alarm_description   = "Api user registry error rate has exceeded 5% ${local.runbook_link}"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1
   threshold           = 0
