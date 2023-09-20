@@ -166,7 +166,7 @@ module "api_user_registry_4xx_error_alarm" {
   alarm_description   = "Api User registry error rate has exceeded 5% ${local.runbook_link}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2
-  threshold           = 300
+  threshold           = 500
   period              = 300
   unit                = "Count"
   datapoints_to_alarm = 1
