@@ -168,7 +168,7 @@ table_person_autoscling_indexes = {
 
 ## alarms
 
-enable_opsgenie = true
+enable_opsgenie = false
 
 dynamodb_alarms = [{
   actions_enabled     = true
