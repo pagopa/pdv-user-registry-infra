@@ -125,6 +125,14 @@ user_registry_plans = [
     additional_keys = []
     method_throttle = []
   },
+  # Github Action Key for Integration Testing
+  {
+    key_name        = "GITHUB-KEY"
+    burst_limit     = 20
+    rate_limit      = 10
+    additional_keys = []
+    method_throttle = []
+  },
 ]
 
 
