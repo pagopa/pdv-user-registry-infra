@@ -259,7 +259,7 @@ module "api_user_registry_throttle_limit_alarm" {
 }
 
 locals {
-  latency_threshold = 2000
+  latency_threshold = 300
 }
 
 module "api_user_registry_low_latency_alarm" {
@@ -273,12 +273,12 @@ module "api_user_registry_low_latency_alarm" {
   evaluation_periods  = 1
   threshold           = local.latency_threshold
   period              = 300
-  unit                = "Count"
+  # unit                = "Count"
   datapoints_to_alarm = 1
 
   namespace   = "AWS/ApiGateway"
   metric_name = "Latency"
-  statistic   = "Maximum"
+  statistic   = "Average"
 
   dimensions = {
     "${local.user_registry_api_name}" = {
