@@ -30,8 +30,4 @@ locals {
 
   runbook_title = "Runbook"
   runbook_url   = "https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/696615213/Runbook+-+PDV+Troubleshooting"
-  runbook_link = format("<a href='%s'>%s</a>",
-    local.runbook_url, local.runbook_title
-  )
-
 }
