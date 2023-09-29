@@ -191,7 +191,7 @@ module "api_user_registry_5xx_error_alarm" {
   version = "4.3.0"
 
   alarm_name          = "high-5xx-rate-"
-  alarm_description   = "{local.runbook_title} ${local.runbook_url} Api user registry error rate has exceeded the threshold."
+  alarm_description   = "${local.runbook_title} ${local.runbook_url} Api user registry error rate has exceeded the threshold."
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1
   threshold           = 0
