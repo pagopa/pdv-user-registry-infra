@@ -57,6 +57,16 @@ resource "aws_cloudwatch_query_definition" "ecs_log_by_traceid" {
 
   query_string = file("./cloudwatch-query/log-by-traceid.sql")
 }
+resource "aws_cloudwatch_query_definition" "ecs_log_by_xamzntraceid" {
+  name = "ECS/Log by xAmznTraceId"
+
+  log_group_names = [
+    aws_cloudwatch_log_group.ecs_person.name,
+    aws_cloudwatch_log_group.ecs_user_registry.name,
+  ]
+
+  query_string = file("./cloudwatch-query/log-by-x-amzn-trace-id.sql")
+}
 
 resource "aws_cloudwatch_query_definition" "ecs_log_by_404_status_code" {
   name = "ECS/Count 404 by plan"
