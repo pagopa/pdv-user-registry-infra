@@ -44,6 +44,9 @@ user_registry_task = {
   container_mem = 2048
 }
 
+x_ray_daemon_container_cpu    = 32
+x_ray_daemon_container_memory = 256
+
 ecs_logs_retention_days = 90
 
 ms_tokenizer_host_name = "tokenizer-p-nlb-094463a88e36e754.elb.eu-south-1.amazonaws.com"

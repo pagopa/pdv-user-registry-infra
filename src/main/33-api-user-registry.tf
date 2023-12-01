@@ -53,6 +53,7 @@ resource "aws_api_gateway_stage" "user_registry" {
   stage_name            = local.user_registry_stage_name
   cache_cluster_size    = 0.5 #why is this needed ?
   documentation_version = aws_api_gateway_documentation_version.main.version
+  xray_tracing_enabled  = true
 
   dynamic "access_log_settings" {
     for_each = var.apigw_access_logs_enable ? ["dymmy"] : []

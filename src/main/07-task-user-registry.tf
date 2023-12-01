@@ -16,8 +16,8 @@ resource "aws_ecs_task_definition" "user_registry" {
   {
     "name": "${local.project}-container",
     "image": "${aws_ecr_repository.main[1].repository_url}:${var.user_registry_task.image_version}",
-    "cpu": ${var.user_registry_task.container_cpu},
-    "memory": ${var.user_registry_task.container_mem},
+    "cpu": ${var.user_registry_task.container_cpu - var.x_ray_daemon_container_cpu},
+    "memory": ${var.user_registry_task.container_mem - var.x_ray_daemon_container_memory},
     "entryPoint": [],
     "essential": true,
     "logConfiguration": {
@@ -67,8 +67,27 @@ resource "aws_ecs_task_definition" "user_registry" {
         "name": "ENABLE_SINGLE_LINE_STACK_TRACE_LOGGING",
         "value": "${var.ms_user_registry_enable_single_line_stack_trace_logging}"
       }
-    ],
-    "networkMode": "awsvpc"
+    ]
+  },
+  {
+    "name": "${local.project}-xray-daemon-container",
+    "image": "${aws_ecr_repository.main[2].repository_url}:${var.x_ray_daemon_image_version}",
+    "cpu": ${var.x_ray_daemon_container_cpu},
+    "memoryReservation": ${var.x_ray_daemon_container_memory},
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${aws_cloudwatch_log_group.ecs_user_registry.id}",
+        "awslogs-region": "${var.aws_region}",
+        "awslogs-stream-prefix": "${local.project}"
+      }
+    },
+    "portMappings" : [
+        {
+            "containerPort": 2000,
+            "protocol": "udp"
+        }
+    ]
   }
 ]
   DEFINITION

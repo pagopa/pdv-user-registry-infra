@@ -40,6 +40,10 @@ user_registry_task = {
   container_mem = 2048
 }
 
+x_ray_daemon_container_cpu    = 32
+x_ray_daemon_container_memory = 256
+publish_x-ray_image = true
+
 ms_tokenizer_host_name = "tokenizer-d-nlb-43d3fb6b08d9e0c6.elb.eu-south-1.amazonaws.com"
 
 public_dns_zones = {
