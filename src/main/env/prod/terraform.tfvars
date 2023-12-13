@@ -129,21 +129,21 @@ dynamodb_point_in_time_recovery_enabled = true
 dynamodb_region_replication_enable      = true
 
 ## table Person
-table_person_read_capacity  = 50
-table_person_write_capacity = 40
+table_person_read_capacity  = 300
+table_person_write_capacity = 300
 
 table_person_autoscaling_read = {
   scale_in_cooldown  = 300
   scale_out_cooldown = 40
   target_value       = 70 # target utilisation %
-  max_capacity       = 250
+  max_capacity       = 600
 }
 
 table_person_autoscaling_write = {
   scale_in_cooldown  = 300
   scale_out_cooldown = 40
   target_value       = 70 # target utilisation %
-  max_capacity       = 250
+  max_capacity       = 600
 }
 
 table_person_autoscling_indexes = {
