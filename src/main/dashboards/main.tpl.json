@@ -182,9 +182,7 @@
                     [ "AWS/DynamoDB", "ProvisionedReadCapacityUnits", "TableName", "Person", { "label": "Provisioned", "color": "#E02020" } ],
                     [ ".", "ConsumedReadCapacityUnits", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
                     [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "color": "#0073BB", "region": "eu-south-1" } ]
-                ],
-                "start": "-PT3H",
-                "end": "P0D"
+                ]
             }
         },
         {
@@ -210,9 +208,7 @@
                     "left": {
                         "showUnits": false
                     }
-                },
-                "start": "-PT3H",
-                "end": "P0D"
+                }
             }
         },
         {
@@ -237,9 +233,7 @@
                     [ "AWS/DynamoDB", "ProvisionedWriteCapacityUnits", "TableName", "Person", { "label": "Provisioned", "color": "#E02020" } ],
                     [ ".", "ConsumedWriteCapacityUnits", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
                     [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "color": "#0073BB", "region": "eu-south-1" } ]
-                ],
-                "start": "-PT3H",
-                "end": "P0D"
+                ]
             }
         },
         {
@@ -265,9 +259,7 @@
                     "left": {
                         "showUnits": false
                     }
-                },
-                "start": "-PT3H",
-                "end": "P0D"
+                }
             }
         },
         {
@@ -302,9 +294,7 @@
                     [ "AWS/DynamoDB", "ProvisionedReadCapacityUnits", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id", { "label": "Provisioned", "color": "#E02020" } ],
                     [ ".", "ConsumedReadCapacityUnits", ".", ".", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
                     [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "region": "eu-south-1", "color": "#0073BB" } ]
-                ],
-                "start": "-PT3H",
-                "end": "P0D"
+                ]
             }
         },
         {
@@ -327,9 +317,7 @@
                 },
                 "metrics": [
                     [ "AWS/DynamoDB", "ReadThrottleEvents", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id" ]
-                ],
-                "start": "-PT3H",
-                "end": "P0D"
+                ]
             }
         },
         {
@@ -354,9 +342,7 @@
                     [ "AWS/DynamoDB", "ProvisionedWriteCapacityUnits", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id", { "label": "Provisioned", "color": "#E02020" } ],
                     [ ".", "ConsumedWriteCapacityUnits", ".", ".", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
                     [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "region": "eu-south-1", "color": "#0073BB" } ]
-                ],
-                "start": "-PT3H",
-                "end": "P0D"
+                ]
             }
         },
         {
@@ -379,9 +365,7 @@
                 },
                 "metrics": [
                     [ "AWS/DynamoDB", "WriteThrottleEvents", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id" ]
-                ],
-                "start": "-PT3H",
-                "end": "P0D"
+                ]
             }
         },
         {
