@@ -75,15 +75,6 @@ output "clouthsm_hsm_eni_ip" {
 }
 */
 
-# sentinel
-output "sentinel_role_arn" {
-  value = try(module.sentinel[0].sentinel_role_arn, null)
-}
-
-output "sentinel_queue_url" {
-  value = try(module.sentinel[0].sentinel_queue_url, null)
-}
-
 output "user_registry_api_ids" {
   value = local.user_registry_api_ids
 }

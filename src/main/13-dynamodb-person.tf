@@ -6,8 +6,7 @@ locals {
 
 # Table Person
 module "dynamodb_table_person" {
-  source  = "terraform-aws-modules/dynamodb-table/aws"
-  version = "3.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table.git?ref=03b38ee3c52250c7d606f6a21e04624a41be52f7"
 
   name                           = local.dynamodb_table_person
   hash_key                       = "PK"

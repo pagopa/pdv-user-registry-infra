@@ -1,6 +1,5 @@
 module "nlb_unhealthy_unhealthy_targets_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   count = length(module.nlb.target_group_names)
 
