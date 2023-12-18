@@ -53,6 +53,7 @@ resource "aws_api_gateway_stage" "user_registry" {
   stage_name            = local.user_registry_stage_name
   cache_cluster_size    = 0.5 #why is this needed ?
   documentation_version = aws_api_gateway_documentation_version.main.version
+  xray_tracing_enabled  = true
 
   dynamic "access_log_settings" {
     for_each = var.apigw_access_logs_enable ? ["dymmy"] : []
@@ -165,7 +166,7 @@ module "api_user_registry_4xx_error_alarm" {
   alarm_description   = "Api User registry error rate has exceeded the threshold."
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2
-  threshold           = 500
+  threshold           = 5000
   period              = 300
   unit                = "Count"
   datapoints_to_alarm = 1

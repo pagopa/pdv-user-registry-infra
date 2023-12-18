@@ -60,3 +60,19 @@ resource "aws_appautoscaling_policy" "ecs_policy_cpu" {
     target_value = 80
   }
 }
+
+# AWS X-Ray sampling rule
+
+resource "aws_xray_sampling_rule" "xray_sampling_rule_exclude_health_check" {
+  rule_name      = "exclude-health-check-path"
+  fixed_rate     = 0.0
+  host           = "*"
+  http_method    = "*"
+  priority       = 1
+  reservoir_size = 0
+  resource_arn   = "*"
+  service_name   = "*"
+  service_type   = "*"
+  url_path       = "/actuator/health"
+  version        = 1
+}
