@@ -1,9 +1,8 @@
 # https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
 
 module "dynamodb_metric_alarms" {
-  count   = length(var.dynamodb_alarms)
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarm"
-  version = "4.3.0"
+  count  = length(var.dynamodb_alarms)
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   actions_enabled     = var.dynamodb_alarms[count.index].actions_enabled
   alarm_name          = var.dynamodb_alarms[count.index].alarm_name
@@ -23,8 +22,7 @@ module "dynamodb_metric_alarms" {
 }
 
 module "dynamo_successful_request_latency" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarm"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   alarm_name          = "dynamodb-successful-request-latency"
   actions_enabled     = var.env_short == "p" ? true : false
@@ -60,8 +58,8 @@ module "dynamo_successful_request_latency" {
 
 ## Read capacity units
 module "dynamodb_read_capacity_units_limit_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
+
 
   alarm_name          = "dynamodb-read-capacity-units-"
   actions_enabled     = var.env_short == "p" ? true : false
@@ -86,8 +84,7 @@ module "dynamodb_read_capacity_units_limit_alarm" {
 
 ## Write capacity units
 module "dynamodb_write_capacity_units_limit_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   alarm_name          = "dynamodb-write-capacity-units-"
   actions_enabled     = var.env_short == "p" ? true : false
@@ -112,8 +109,7 @@ module "dynamodb_write_capacity_units_limit_alarm" {
 
 ### Global secondary index read capacity.
 module "gsi_index_read_capacity_units_limit_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   alarm_name          = "read-capacity-units-"
   actions_enabled     = var.env_short == "p" ? true : false
@@ -138,8 +134,7 @@ module "gsi_index_read_capacity_units_limit_alarm" {
 
 ### Global secondary write read capacity.
 module "gsi_index_write_capacity_units_limit_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   alarm_name          = "write-capacity-units-"
   actions_enabled     = var.env_short == "p" ? true : false
@@ -164,8 +159,7 @@ module "gsi_index_write_capacity_units_limit_alarm" {
 
 #ExceedingThroughput
 module "dynamodb_request_exceeding_throughput_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   alarm_name          = "dynamodb-exceeding-throughput-"
   actions_enabled     = var.env_short == "p" ? true : false

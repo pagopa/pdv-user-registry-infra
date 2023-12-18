@@ -122,6 +122,16 @@ resource "aws_iam_role_policy_attachment" "ecs_allow_hsm" {
   policy_arn = aws_iam_policy.ecs_allow_hsm[0].arn
 }
 
+# grant ECS permissions to send trace on X-Ray
+data "aws_iam_policy" "x_ray_daemon_write_access" {
+  name = "AWSXRayDaemonWriteAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "x_ray_daemon_write_access" {
+  role       = aws_iam_role.ecs_execution_task.name
+  policy_arn = data.aws_iam_policy.x_ray_daemon_write_access.arn
+}
+
 ## IAM Group Developer
 resource "aws_iam_group" "developers" {
   name = "Developers"

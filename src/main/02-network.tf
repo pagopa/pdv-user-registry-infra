@@ -1,6 +1,5 @@
 module "vpc" {
-  source                = "terraform-aws-modules/vpc/aws"
-  version               = "3.14.0"
+  source                = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=41da6881e295ff5e94bbf97b41018e7c550c7285"
   name                  = format("%s-vpc", local.project)
   cidr                  = var.vpc_cidr
   azs                   = var.azs
@@ -78,8 +77,7 @@ resource "aws_security_group" "vpc_tls" {
 }
 
 module "vpc_endpoints" {
-  source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "3.14.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git//modules/vpc-endpoints?ref=41da6881e295ff5e94bbf97b41018e7c550c7285"
 
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [data.aws_security_group.default.id]
@@ -98,6 +96,14 @@ module "vpc_endpoints" {
       #policy              = data.aws_iam_policy_document.generic_endpoint_policy.json
       security_group_ids = [aws_security_group.vpc_tls.id]
       tags               = { Name = "logs-endpoint" }
+    },
+    xray = {
+      service             = "xray"
+      private_dns_enabled = true
+      subnet_ids          = module.vpc.private_subnets
+      #policy              = data.aws_iam_policy_document.generic_endpoint_policy.json
+      security_group_ids = [aws_security_group.vpc_tls.id]
+      tags               = { Name = "xray-endpoint" }
     },
     ecr_api = {
       service             = "ecr.api"

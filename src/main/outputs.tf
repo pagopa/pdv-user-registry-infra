@@ -11,6 +11,15 @@ output "ecs_task_definition_person_revision" {
   value = data.aws_ecs_task_definition.person.revision
 }
 
+output "publish_dokcer_image_x-ray" {
+  value = <<EOF
+	    aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com
+	    docker pull ${var.x_ray_daemon_image_uri}@${var.x_ray_daemon_image_sha} --platform=linux/amd64
+      docker tag ${var.x_ray_daemon_image_uri}@${var.x_ray_daemon_image_sha} ${aws_ecr_repository.main[2].repository_url}:${var.x_ray_daemon_image_version}
+	    docker push ${aws_ecr_repository.main[2].repository_url}:${var.x_ray_daemon_image_version}
+	    EOF
+}
+
 ## dynamodb
 output "dynamodb_table_person_arn" {
   value = module.dynamodb_table_person.dynamodb_table_arn
@@ -65,15 +74,6 @@ output "clouthsm_hsm_eni_ip" {
   value = try(data.aws_network_interface.hsm[0].private_ip, null)
 }
 */
-
-# sentinel
-output "sentinel_role_arn" {
-  value = try(module.sentinel[0].sentinel_role_arn, null)
-}
-
-output "sentinel_queue_url" {
-  value = try(module.sentinel[0].sentinel_queue_url, null)
-}
 
 output "user_registry_api_ids" {
   value = local.user_registry_api_ids

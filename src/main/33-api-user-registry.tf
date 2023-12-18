@@ -53,6 +53,7 @@ resource "aws_api_gateway_stage" "user_registry" {
   stage_name            = local.user_registry_stage_name
   cache_cluster_size    = 0.5 #why is this needed ?
   documentation_version = aws_api_gateway_documentation_version.main.version
+  xray_tracing_enabled  = true
 
   dynamic "access_log_settings" {
     for_each = var.apigw_access_logs_enable ? ["dymmy"] : []
@@ -158,15 +159,14 @@ output "user_registryinvoke_url" {
 ## Alarms
 ### 4xx
 module "api_user_registry_4xx_error_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   actions_enabled     = true
   alarm_name          = "high-4xx-rate-"
   alarm_description   = "Api User registry error rate has exceeded the threshold."
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2
-  threshold           = 500
+  threshold           = 5000
   period              = 300
   unit                = "Count"
   datapoints_to_alarm = 1
@@ -187,8 +187,7 @@ module "api_user_registry_4xx_error_alarm" {
 
 ### 5xx
 module "api_user_registry_5xx_error_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   alarm_name          = "high-5xx-rate-"
   alarm_description   = "${local.runbook_title} ${local.runbook_url} Api user registry error rate has exceeded the threshold."
@@ -215,10 +214,8 @@ module "api_user_registry_5xx_error_alarm" {
 
 ### throttling (exceeded throttle limit)
 module "log_filter_throttle_limit_user_registry" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/log-metric-filter"
-  version = "4.3.0"
-
-  name = format("%s-metric-throttle-rate-limit", local.user_registry_api_name)
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/log-metric-filter?ref=60cf981e0f1ae033699e5b274440867e48289967"
+  name   = format("%s-metric-throttle-rate-limit", local.user_registry_api_name)
 
   log_group_name = local.user_registry_log_group_name
 
@@ -234,8 +231,7 @@ module "log_filter_throttle_limit_user_registry" {
 }
 
 module "api_user_registry_throttle_limit_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarm"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   actions_enabled     = var.env_short == "p" ? true : false
   alarm_name          = format("high-rate-limit-throttle-%s", local.user_registry_api_name)
@@ -263,8 +259,7 @@ locals {
 }
 
 module "api_user_registry_low_latency_alarm" {
-  source  = "terraform-aws-modules/cloudwatch/aws//modules/metric-alarms-by-multiple-dimensions"
-  version = "4.3.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967"
 
   actions_enabled     = var.env_short == "p" ? true : false
   alarm_name          = "low-latency-"

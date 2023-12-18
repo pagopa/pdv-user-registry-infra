@@ -25,7 +25,7 @@ ecs_autoscaling = {
 }
 
 person_task = {
-  image_version = "d6e62bc714386aae099d3a338d8545fb496688b3"
+  image_version = "e735081d93e3721d3f0e5b474fdd5d2c019b6a0d"
   cpu           = 1024
   mem           = 2048
   container_cpu = 1024
@@ -33,12 +33,15 @@ person_task = {
 }
 
 user_registry_task = {
-  image_version = "23d22469de8b465a2c75fcc84034232bb7798f19"
+  image_version = "5fd91d6dd845ef025461d0a266ec08ffa1cd497b"
   cpu           = 1024
   mem           = 2048
   container_cpu = 1024
   container_mem = 2048
 }
+
+x_ray_daemon_container_cpu    = 32
+x_ray_daemon_container_memory = 256
 
 ms_tokenizer_host_name = "tokenizer-u-nlb-63e5a0a1a5a8c188.elb.eu-south-1.amazonaws.com"
 
