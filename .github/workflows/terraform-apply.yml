@@ -64,7 +64,7 @@ jobs:
       strategy:
         max-parallel: 1
         matrix:
-          environment: [dev, uat, prod_w]
+          environment: [uat, prod_w]
       runs-on: ubuntu-22.04
       continue-on-error: false
       environment: ${{ matrix.environment }}
