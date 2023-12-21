@@ -142,33 +142,6 @@ user_registry_plans = [
 # dynamodb
 dynamodb_point_in_time_recovery_enabled = false
 
-## table Person
-table_person_read_capacity  = 300
-table_person_write_capacity = 300
-
-table_person_autoscaling_read = {
-  scale_in_cooldown  = 50
-  scale_out_cooldown = 40
-  target_value       = 70
-  max_capacity       = 600
-}
-
-table_person_autoscaling_write = {
-  scale_in_cooldown  = 50
-  scale_out_cooldown = 40
-  target_value       = 50
-  max_capacity       = 600
-}
-
-table_person_autoscling_indexes = {
-  gsi_namespaced_id = {
-    read_max_capacity  = 600
-    read_min_capacity  = 300
-    write_max_capacity = 600
-    write_min_capacity = 300
-  }
-}
-
 ## alarms
 
 enable_opsgenie = false
