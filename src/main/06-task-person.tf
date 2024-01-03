@@ -64,6 +64,7 @@ resource "aws_ecs_task_definition" "person" {
   {
     "name": "${local.project}-xray-daemon-container",
     "image": "${aws_ecr_repository.main[2].repository_url}:${var.x_ray_daemon_image_version}",
+    "command": ["--log-level", "error"],
     "cpu": ${var.x_ray_daemon_container_cpu},
     "memoryReservation": ${var.x_ray_daemon_container_memory},
     "logConfiguration": {
