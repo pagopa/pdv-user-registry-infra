@@ -25,7 +25,7 @@ ecs_autoscaling = {
 }
 
 person_task = {
-  image_version = "e735081d93e3721d3f0e5b474fdd5d2c019b6a0d"
+  image_version = "12f9052eebc1277c569dbb9305357a306b0c6fc0"
   cpu           = 1024
   mem           = 2048
   container_cpu = 1024
@@ -33,7 +33,7 @@ person_task = {
 }
 
 user_registry_task = {
-  image_version = "5fd91d6dd845ef025461d0a266ec08ffa1cd497b"
+  image_version = "1e2acef4f85f3ecfaa465ef90f7a3a6b90f192e7"
   cpu           = 1024
   mem           = 2048
   container_cpu = 1024
