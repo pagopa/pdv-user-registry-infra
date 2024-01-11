@@ -42,7 +42,7 @@ user_registry_task = {
 
 x_ray_daemon_container_cpu    = 32
 x_ray_daemon_container_memory = 256
-publish_x-ray_image           = true
+publish_x-ray_image           = false
 
 ms_tokenizer_host_name = "tokenizer-d-nlb-43d3fb6b08d9e0c6.elb.eu-south-1.amazonaws.com"
 
@@ -84,33 +84,6 @@ user_registry_plans = [
 
 # dynamodb
 dynamodb_point_in_time_recovery_enabled = false
-
-## table Person
-table_person_read_capacity  = 10
-table_person_write_capacity = 10
-
-table_person_autoscaling_read = {
-  scale_in_cooldown  = 10
-  scale_out_cooldown = 10
-  target_value       = 70
-  max_capacity       = 100
-}
-
-table_person_autoscaling_write = {
-  scale_in_cooldown  = 10
-  scale_out_cooldown = 10
-  target_value       = 50
-  max_capacity       = 100
-}
-
-table_person_autoscling_indexes = {
-  gsi_namespaced_id = {
-    read_max_capacity  = 50
-    read_min_capacity  = 10
-    write_max_capacity = 50
-    write_min_capacity = 10
-  }
-}
 
 ## alarms
 dynamodb_alarms = [{

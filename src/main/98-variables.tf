@@ -384,42 +384,6 @@ variable "dynamodb_point_in_time_recovery_enabled" {
   default     = false
 }
 
-## Table Person
-variable "table_person_read_capacity" {
-  type        = number
-  description = "Table person read capacity."
-}
-
-variable "table_person_write_capacity" {
-  type        = number
-  description = "Table person read capacity."
-}
-
-variable "table_person_autoscaling_read" {
-  type = object({
-    scale_in_cooldown  = number
-    scale_out_cooldown = number
-    target_value       = number
-    max_capacity       = number
-  })
-  description = "Read autoscaling settings table person."
-}
-
-variable "table_person_autoscaling_write" {
-  type = object({
-    scale_in_cooldown  = number
-    scale_out_cooldown = number
-    target_value       = number
-    max_capacity       = number
-  })
-  description = "Write autoscaling settings table person."
-}
-
-variable "table_person_autoscling_indexes" {
-  type        = any
-  description = "Autoscaling gsi configurations"
-}
-
 variable "create_cloudhsm" {
   type        = bool
   description = "Create cloudhsm cluster to enctypt dynamodb tables"

@@ -128,37 +128,8 @@ web_acl_visibility_config = {
 dynamodb_point_in_time_recovery_enabled = true
 dynamodb_region_replication_enable      = true
 
-## table Person
-table_person_read_capacity  = 300
-table_person_write_capacity = 300
-
-table_person_autoscaling_read = {
-  scale_in_cooldown  = 300
-  scale_out_cooldown = 40
-  target_value       = 70 # target utilisation %
-  max_capacity       = 600
-}
-
-table_person_autoscaling_write = {
-  scale_in_cooldown  = 300
-  scale_out_cooldown = 40
-  target_value       = 70 # target utilisation %
-  max_capacity       = 600
-}
-
-table_person_autoscling_indexes = {
-  gsi_namespaced_id = {
-    read_max_capacity  = 230
-    read_min_capacity  = 10
-    write_max_capacity = 50
-    write_min_capacity = 10
-  }
-}
-
 ## Alarms
-
 enable_opsgenie = true
-
 dynamodb_alarms = [{
   actions_enabled     = true
   alarm_name          = "dynamodb-account-provisioned-read-capacity"
