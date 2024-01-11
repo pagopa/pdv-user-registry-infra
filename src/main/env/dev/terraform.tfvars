@@ -25,7 +25,7 @@ ecs_autoscaling = {
 }
 
 person_task = {
-  image_version = "05f75a947cfb7130f6dc8dd58add9521a48f858d"
+  image_version = "8b37502e8ea0ae41279280e6f41c5a3e67e42010"
   cpu           = 256
   mem           = 512
   container_cpu = 256
@@ -33,7 +33,7 @@ person_task = {
 }
 
 user_registry_task = {
-  image_version = "a9b709ff1a828bec8c6e690293111eee7cfd031d"
+  image_version = "7894e65f783f68d88aa092c648c53aa89e60f8da"
   cpu           = 1024
   mem           = 2048
   container_cpu = 1024
@@ -42,7 +42,7 @@ user_registry_task = {
 
 x_ray_daemon_container_cpu    = 32
 x_ray_daemon_container_memory = 256
-publish_x-ray_image           = true
+publish_x-ray_image           = false
 
 ms_tokenizer_host_name = "tokenizer-d-nlb-43d3fb6b08d9e0c6.elb.eu-south-1.amazonaws.com"
 
@@ -84,33 +84,6 @@ user_registry_plans = [
 
 # dynamodb
 dynamodb_point_in_time_recovery_enabled = false
-
-## table Person
-table_person_read_capacity  = 10
-table_person_write_capacity = 10
-
-table_person_autoscaling_read = {
-  scale_in_cooldown  = 10
-  scale_out_cooldown = 10
-  target_value       = 70
-  max_capacity       = 100
-}
-
-table_person_autoscaling_write = {
-  scale_in_cooldown  = 10
-  scale_out_cooldown = 10
-  target_value       = 50
-  max_capacity       = 100
-}
-
-table_person_autoscling_indexes = {
-  gsi_namespaced_id = {
-    read_max_capacity  = 50
-    read_min_capacity  = 10
-    write_max_capacity = 50
-    write_min_capacity = 10
-  }
-}
 
 ## alarms
 dynamodb_alarms = [{

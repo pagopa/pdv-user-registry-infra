@@ -9,34 +9,30 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | = 4.59.0 |
-| <a name="provider_aws.eu-central-1"></a> [aws.eu-central-1](#provider\_aws.eu-central-1) | = 4.59.0 |
-| <a name="provider_null"></a> [null](#provider\_null) | n/a |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.59.0 |
+| <a name="provider_aws.eu-central-1"></a> [aws.eu-central-1](#provider\_aws.eu-central-1) | 4.59.0 |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.2.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_api_user_registry_4xx_error_alarm"></a> [api\_user\_registry\_4xx\_error\_alarm](#module\_api\_user\_registry\_4xx\_error\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_api_user_registry_5xx_error_alarm"></a> [api\_user\_registry\_5xx\_error\_alarm](#module\_api\_user\_registry\_5xx\_error\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_api_user_registry_low_latency_alarm"></a> [api\_user\_registry\_low\_latency\_alarm](#module\_api\_user\_registry\_low\_latency\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_api_user_registry_throttle_limit_alarm"></a> [api\_user\_registry\_throttle\_limit\_alarm](#module\_api\_user\_registry\_throttle\_limit\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/zones?ref=a12ce343a73ff280528f8d1827305b1e642582c1 |  |
-| <a name="module_dynamo_successful_request_latency"></a> [dynamo\_successful\_request\_latency](#module\_dynamo\_successful\_request\_latency) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_dynamodb_metric_alarms"></a> [dynamodb\_metric\_alarms](#module\_dynamodb\_metric\_alarms) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_dynamodb_read_capacity_units_limit_alarm"></a> [dynamodb\_read\_capacity\_units\_limit\_alarm](#module\_dynamodb\_read\_capacity\_units\_limit\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_dynamodb_request_exceeding_throughput_alarm"></a> [dynamodb\_request\_exceeding\_throughput\_alarm](#module\_dynamodb\_request\_exceeding\_throughput\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table.git?ref=03b38ee3c52250c7d606f6a21e04624a41be52f7 |  |
-| <a name="module_dynamodb_write_capacity_units_limit_alarm"></a> [dynamodb\_write\_capacity\_units\_limit\_alarm](#module\_dynamodb\_write\_capacity\_units\_limit\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_gsi_index_read_capacity_units_limit_alarm"></a> [gsi\_index\_read\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_read\_capacity\_units\_limit\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_gsi_index_write_capacity_units_limit_alarm"></a> [gsi\_index\_write\_capacity\_units\_limit\_alarm](#module\_gsi\_index\_write\_capacity\_units\_limit\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_log_filter_throttle_limit_user_registry"></a> [log\_filter\_throttle\_limit\_user\_registry](#module\_log\_filter\_throttle\_limit\_user\_registry) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/log-metric-filter?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_nlb"></a> [nlb](#module\_nlb) | git::https://github.com/terraform-aws-modules/terraform-aws-alb.git?ref=858ae988b3efe72f7d69335ca065c09cbb4c76d7 |  |
-| <a name="module_nlb_unhealthy_unhealthy_targets_alarm"></a> [nlb\_unhealthy\_unhealthy\_targets\_alarm](#module\_nlb\_unhealthy\_unhealthy\_targets\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=41da6881e295ff5e94bbf97b41018e7c550c7285 |  |
-| <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git//modules/vpc-endpoints?ref=41da6881e295ff5e94bbf97b41018e7c550c7285 |  |
-| <a name="module_webacl_count_alarm"></a> [webacl\_count\_alarm](#module\_webacl\_count\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions?ref=60cf981e0f1ae033699e5b274440867e48289967 |  |
+| <a name="module_api_user_registry_4xx_error_alarm"></a> [api\_user\_registry\_4xx\_error\_alarm](#module\_api\_user\_registry\_4xx\_error\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_api_user_registry_5xx_error_alarm"></a> [api\_user\_registry\_5xx\_error\_alarm](#module\_api\_user\_registry\_5xx\_error\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_api_user_registry_low_latency_alarm"></a> [api\_user\_registry\_low\_latency\_alarm](#module\_api\_user\_registry\_low\_latency\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_api_user_registry_throttle_limit_alarm"></a> [api\_user\_registry\_throttle\_limit\_alarm](#module\_api\_user\_registry\_throttle\_limit\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_dn_zone"></a> [dn\_zone](#module\_dn\_zone) | git::https://github.com/terraform-aws-modules/terraform-aws-route53.git//modules/zones | a12ce343a73ff280528f8d1827305b1e642582c1 |
+| <a name="module_dynamo_successful_request_latency"></a> [dynamo\_successful\_request\_latency](#module\_dynamo\_successful\_request\_latency) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_dynamodb_metric_alarms"></a> [dynamodb\_metric\_alarms](#module\_dynamodb\_metric\_alarms) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarm | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_dynamodb_request_exceeding_throughput_alarm"></a> [dynamodb\_request\_exceeding\_throughput\_alarm](#module\_dynamodb\_request\_exceeding\_throughput\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_dynamodb_table_person"></a> [dynamodb\_table\_person](#module\_dynamodb\_table\_person) | git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table.git | 03b38ee3c52250c7d606f6a21e04624a41be52f7 |
+| <a name="module_log_filter_throttle_limit_user_registry"></a> [log\_filter\_throttle\_limit\_user\_registry](#module\_log\_filter\_throttle\_limit\_user\_registry) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/log-metric-filter | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_nlb"></a> [nlb](#module\_nlb) | git::https://github.com/terraform-aws-modules/terraform-aws-alb.git | 858ae988b3efe72f7d69335ca065c09cbb4c76d7 |
+| <a name="module_nlb_unhealthy_unhealthy_targets_alarm"></a> [nlb\_unhealthy\_unhealthy\_targets\_alarm](#module\_nlb\_unhealthy\_unhealthy\_targets\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions | 60cf981e0f1ae033699e5b274440867e48289967 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git | 41da6881e295ff5e94bbf97b41018e7c550c7285 |
+| <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git//modules/vpc-endpoints | 41da6881e295ff5e94bbf97b41018e7c550c7285 |
+| <a name="module_webacl_count_alarm"></a> [webacl\_count\_alarm](#module\_webacl\_count\_alarm) | git::https://github.com/terraform-aws-modules/terraform-aws-cloudwatch.git//modules/metric-alarms-by-multiple-dimensions | 60cf981e0f1ae033699e5b274440867e48289967 |
 
 ## Resources
 
@@ -118,6 +114,7 @@
 | [aws_iam_role_policy_attachment.ecs_dynamodb_rw](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_execute_command_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.s3_policy_attach](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.x_ray_daemon_write_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_kms_alias.dynamo_db](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_alias) | resource |
 | [aws_kms_alias.dynamo_db_replica](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_alias) | resource |
 | [aws_kms_key.dynamo_db](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/kms_key) | resource |
@@ -143,6 +140,8 @@
 | [aws_vpc_peering_connection.owner](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/vpc_peering_connection) | resource |
 | [aws_wafv2_web_acl.main](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/wafv2_web_acl) | resource |
 | [aws_wafv2_web_acl_association.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/wafv2_web_acl_association) | resource |
+| [aws_xray_sampling_rule.xray_sampling_rule_exclude_health_check](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/resources/xray_sampling_rule) | resource |
+| [null_resource.docker_packaging](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.vpc_peering](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [random_string.test](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [aws_api_gateway_export.user_registry](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/data-sources/api_gateway_export) | data source |
@@ -152,6 +151,7 @@
 | [aws_iam_policy.ec2_ecr_full_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/data-sources/iam_policy) | data source |
 | [aws_iam_policy.power_user](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/data-sources/iam_policy) | data source |
 | [aws_iam_policy.s3_readonly_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/data-sources/iam_policy) | data source |
+| [aws_iam_policy.x_ray_daemon_write_access](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/data-sources/iam_policy) | data source |
 | [aws_iam_policy_document.dynamodb_endpoint_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.ecs_tasks_assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.generic_endpoint_policy](https://registry.terraform.io/providers/hashicorp/aws/4.59.0/docs/data-sources/iam_policy_document) | data source |
@@ -170,11 +170,6 @@
 | <a name="input_dynamodb_alarms"></a> [dynamodb\_alarms](#input\_dynamodb\_alarms) | n/a | <pre>list(<br>    object({<br>      actions_enabled     = bool<br>      alarm_name          = string<br>      alarm_description   = string<br>      comparison_operator = string<br>      evaluation_periods  = number<br>      datapoints_to_alarm = number<br>      threshold           = number<br>      period              = number<br>      unit                = string<br>      namespace           = string<br>      metric_name         = string<br>      statistic           = string<br>  }))</pre> | n/a | yes |
 | <a name="input_ms_tokenizer_host_name"></a> [ms\_tokenizer\_host\_name](#input\_ms\_tokenizer\_host\_name) | Toknizer host name. It should be the internal network load balancer. | `string` | n/a | yes |
 | <a name="input_public_dns_zones"></a> [public\_dns\_zones](#input\_public\_dns\_zones) | Route53 Hosted Zone | `map(any)` | n/a | yes |
-| <a name="input_table_person_autoscaling_read"></a> [table\_person\_autoscaling\_read](#input\_table\_person\_autoscaling\_read) | Read autoscaling settings table person. | <pre>object({<br>    scale_in_cooldown  = number<br>    scale_out_cooldown = number<br>    target_value       = number<br>    max_capacity       = number<br>  })</pre> | n/a | yes |
-| <a name="input_table_person_autoscaling_write"></a> [table\_person\_autoscaling\_write](#input\_table\_person\_autoscaling\_write) | Write autoscaling settings table person. | <pre>object({<br>    scale_in_cooldown  = number<br>    scale_out_cooldown = number<br>    target_value       = number<br>    max_capacity       = number<br>  })</pre> | n/a | yes |
-| <a name="input_table_person_autoscling_indexes"></a> [table\_person\_autoscling\_indexes](#input\_table\_person\_autoscling\_indexes) | Autoscaling gsi configurations | `any` | n/a | yes |
-| <a name="input_table_person_read_capacity"></a> [table\_person\_read\_capacity](#input\_table\_person\_read\_capacity) | Table person read capacity. | `number` | n/a | yes |
-| <a name="input_table_person_write_capacity"></a> [table\_person\_write\_capacity](#input\_table\_person\_write\_capacity) | Table person read capacity. | `number` | n/a | yes |
 | <a name="input_user_registry_plans"></a> [user\_registry\_plans](#input\_user\_registry\_plans) | Usage plan with its api key and rate limit. | <pre>list(object({<br>    key_name        = string<br>    burst_limit     = number<br>    rate_limit      = number<br>    additional_keys = list(string)<br>    method_throttle = list(object({<br>      path        = string<br>      burst_limit = number<br>      rate_limit  = number<br>    }))<br>  }))</pre> | n/a | yes |
 | <a name="input_apigw_access_logs_enable"></a> [apigw\_access\_logs\_enable](#input\_apigw\_access\_logs\_enable) | Enable api gateway access logs | `bool` | `false` | no |
 | <a name="input_apigw_custom_domain_create"></a> [apigw\_custom\_domain\_create](#input\_apigw\_custom\_domain\_create) | Create apigw Custom Domain with its tls certificate | `bool` | `false` | no |
@@ -212,6 +207,7 @@
 | <a name="input_ms_user_registry_log_level"></a> [ms\_user\_registry\_log\_level](#input\_ms\_user\_registry\_log\_level) | Log level micro service user registry | `string` | `"DEBUG"` | no |
 | <a name="input_ms_user_registry_rest_client_log_level"></a> [ms\_user\_registry\_rest\_client\_log\_level](#input\_ms\_user\_registry\_rest\_client\_log\_level) | Rest client log level micro service user registry | `string` | `"FULL"` | no |
 | <a name="input_person_task"></a> [person\_task](#input\_person\_task) | n/a | <pre>object({<br>    image_version = string<br>    cpu           = number<br>    mem           = number<br>    container_cpu = number<br>    container_mem = number<br>  })</pre> | <pre>{<br>  "container_cpu": 256,<br>  "container_mem": 512,<br>  "cpu": 256,<br>  "image_version": "latest",<br>  "mem": 512<br>}</pre> | no |
+| <a name="input_publish_x-ray_image"></a> [publish\_x-ray\_image](#input\_publish\_x-ray\_image) | Run docker command to push x-ray image | `bool` | `false` | no |
 | <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | Number of task replica | `number` | `1` | no |
 | <a name="input_sentinel_servcie_account_id"></a> [sentinel\_servcie\_account\_id](#input\_sentinel\_servcie\_account\_id) | Microsoft Sentinel's service account ID for AWS. | `string` | `"197857026523"` | no |
 | <a name="input_sentinel_workspace_id"></a> [sentinel\_workspace\_id](#input\_sentinel\_workspace\_id) | Sentinel workspece id | `string` | `null` | no |
@@ -223,6 +219,11 @@
 | <a name="input_vpc_private_subnets_cidr"></a> [vpc\_private\_subnets\_cidr](#input\_vpc\_private\_subnets\_cidr) | Private subnets list of cidr. | `list(string)` | <pre>[<br>  "10.0.1.0/24",<br>  "10.0.2.0/24",<br>  "10.0.3.0/24"<br>]</pre> | no |
 | <a name="input_vpc_public_subnets_cidr"></a> [vpc\_public\_subnets\_cidr](#input\_vpc\_public\_subnets\_cidr) | Private subnets list of cidr. | `list(string)` | <pre>[<br>  "10.0.101.0/24",<br>  "10.0.102.0/24",<br>  "10.0.103.0/24"<br>]</pre> | no |
 | <a name="input_web_acl_visibility_config"></a> [web\_acl\_visibility\_config](#input\_web\_acl\_visibility\_config) | Cloudwatch metric eneble for web acl rules. | <pre>object({<br>    cloudwatch_metrics_enabled = bool<br>    sampled_requests_enabled   = bool<br>  })</pre> | <pre>{<br>  "cloudwatch_metrics_enabled": false,<br>  "sampled_requests_enabled": false<br>}</pre> | no |
+| <a name="input_x_ray_daemon_container_cpu"></a> [x\_ray\_daemon\_container\_cpu](#input\_x\_ray\_daemon\_container\_cpu) | Container cpu quota. | `number` | `32` | no |
+| <a name="input_x_ray_daemon_container_memory"></a> [x\_ray\_daemon\_container\_memory](#input\_x\_ray\_daemon\_container\_memory) | Container memory quota. | `number` | `256` | no |
+| <a name="input_x_ray_daemon_image_sha"></a> [x\_ray\_daemon\_image\_sha](#input\_x\_ray\_daemon\_image\_sha) | X-Ray daemon image sha | `string` | `"sha256:9f3e1362e1e986fc5e631389b499068e1db82762e6fdb572ed6b5e54b43f0744"` | no |
+| <a name="input_x_ray_daemon_image_uri"></a> [x\_ray\_daemon\_image\_uri](#input\_x\_ray\_daemon\_image\_uri) | X-Ray daemon image URI | `string` | `"public.ecr.aws/xray/aws-xray-daemon"` | no |
+| <a name="input_x_ray_daemon_image_version"></a> [x\_ray\_daemon\_image\_version](#input\_x\_ray\_daemon\_image\_version) | Image version in task definition | `string` | `"latest"` | no |
 
 ## Outputs
 
@@ -240,8 +241,7 @@
 | <a name="output_openapi_endpoint"></a> [openapi\_endpoint](#output\_openapi\_endpoint) | n/a |
 | <a name="output_public_dns_servers"></a> [public\_dns\_servers](#output\_public\_dns\_servers) | n/a |
 | <a name="output_public_dns_zone_name"></a> [public\_dns\_zone\_name](#output\_public\_dns\_zone\_name) | Dns |
-| <a name="output_sentinel_queue_url"></a> [sentinel\_queue\_url](#output\_sentinel\_queue\_url) | n/a |
-| <a name="output_sentinel_role_arn"></a> [sentinel\_role\_arn](#output\_sentinel\_role\_arn) | sentinel |
+| <a name="output_publish_dokcer_image_x-ray"></a> [publish\_dokcer\_image\_x-ray](#output\_publish\_dokcer\_image\_x-ray) | n/a |
 | <a name="output_user_registry_api_ids"></a> [user\_registry\_api\_ids](#output\_user\_registry\_api\_ids) | n/a |
 | <a name="output_user_registry_api_keys"></a> [user\_registry\_api\_keys](#output\_user\_registry\_api\_keys) | n/a |
 | <a name="output_user_registryinvoke_url"></a> [user\_registryinvoke\_url](#output\_user\_registryinvoke\_url) | n/a |

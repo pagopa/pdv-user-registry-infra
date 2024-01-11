@@ -25,7 +25,7 @@ ecs_autoscaling = {
 }
 
 person_task = {
-  image_version = "e735081d93e3721d3f0e5b474fdd5d2c019b6a0d"
+  image_version = "12f9052eebc1277c569dbb9305357a306b0c6fc0"
   cpu           = 1024
   mem           = 2048
   container_cpu = 1024
@@ -33,7 +33,7 @@ person_task = {
 }
 
 user_registry_task = {
-  image_version = "5fd91d6dd845ef025461d0a266ec08ffa1cd497b"
+  image_version = "1e2acef4f85f3ecfaa465ef90f7a3a6b90f192e7"
   cpu           = 1024
   mem           = 2048
   container_cpu = 1024
@@ -141,33 +141,6 @@ user_registry_plans = [
 
 # dynamodb
 dynamodb_point_in_time_recovery_enabled = false
-
-## table Person
-table_person_read_capacity  = 300
-table_person_write_capacity = 300
-
-table_person_autoscaling_read = {
-  scale_in_cooldown  = 50
-  scale_out_cooldown = 40
-  target_value       = 70
-  max_capacity       = 600
-}
-
-table_person_autoscaling_write = {
-  scale_in_cooldown  = 50
-  scale_out_cooldown = 40
-  target_value       = 50
-  max_capacity       = 600
-}
-
-table_person_autoscling_indexes = {
-  gsi_namespaced_id = {
-    read_max_capacity  = 600
-    read_min_capacity  = 300
-    write_max_capacity = 600
-    write_min_capacity = 300
-  }
-}
 
 ## alarms
 
