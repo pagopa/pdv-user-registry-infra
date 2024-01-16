@@ -167,6 +167,10 @@
             "x": 0,
             "type": "metric",
             "properties": {
+                "metrics": [
+                    [ "AWS/DynamoDB", "ConsumedReadCapacityUnits", "TableName", "Person", { "stat": "Sum", "id": "m1", "visible": false, "region": "eu-south-1" } ],
+                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "color": "#0073BB", "region": "eu-south-1" } ]
+                ],
                 "title": "Read usage (average units/second)",
                 "view": "timeSeries",
                 "stacked": false,
@@ -177,12 +181,7 @@
                     "left": {
                         "showUnits": false
                     }
-                },
-                "metrics": [
-                    [ "AWS/DynamoDB", "ProvisionedReadCapacityUnits", "TableName", "Person", { "label": "Provisioned", "color": "#E02020" } ],
-                    [ ".", "ConsumedReadCapacityUnits", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
-                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "color": "#0073BB", "region": "eu-south-1" } ]
-                ]
+                }
             }
         },
         {
@@ -218,6 +217,10 @@
             "x": 12,
             "type": "metric",
             "properties": {
+                "metrics": [
+                    [ "AWS/DynamoDB", "ConsumedWriteCapacityUnits", "TableName", "Person", { "stat": "Sum", "id": "m1", "visible": false, "region": "eu-south-1" } ],
+                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "color": "#0073BB", "region": "eu-south-1" } ]
+                ],
                 "title": "Write usage (average units/second)",
                 "view": "timeSeries",
                 "stacked": false,
@@ -228,12 +231,7 @@
                     "left": {
                         "showUnits": false
                     }
-                },
-                "metrics": [
-                    [ "AWS/DynamoDB", "ProvisionedWriteCapacityUnits", "TableName", "Person", { "label": "Provisioned", "color": "#E02020" } ],
-                    [ ".", "ConsumedWriteCapacityUnits", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
-                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "color": "#0073BB", "region": "eu-south-1" } ]
-                ]
+                }
             }
         },
         {
@@ -279,6 +277,10 @@
             "x": 0,
             "type": "metric",
             "properties": {
+                "metrics": [
+                    [ "AWS/DynamoDB", "ConsumedReadCapacityUnits", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id", { "stat": "Sum", "id": "m1", "visible": false, "region": "eu-south-1" } ],
+                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "region": "eu-south-1", "color": "#0073BB" } ]
+                ],
                 "title": "Read usage (average units/second)",
                 "view": "timeSeries",
                 "stacked": false,
@@ -289,12 +291,7 @@
                     "left": {
                         "showUnits": false
                     }
-                },
-                "metrics": [
-                    [ "AWS/DynamoDB", "ProvisionedReadCapacityUnits", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id", { "label": "Provisioned", "color": "#E02020" } ],
-                    [ ".", "ConsumedReadCapacityUnits", ".", ".", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
-                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "region": "eu-south-1", "color": "#0073BB" } ]
-                ]
+                }
             }
         },
         {
@@ -327,6 +324,10 @@
             "x": 12,
             "type": "metric",
             "properties": {
+                "metrics": [
+                    [ "AWS/DynamoDB", "ConsumedWriteCapacityUnits", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id", { "stat": "Sum", "id": "m1", "visible": false, "region": "eu-south-1" } ],
+                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "region": "eu-south-1", "color": "#0073BB" } ]
+                ],
                 "title": "Write usage (average units/second)",
                 "view": "timeSeries",
                 "stacked": false,
@@ -337,12 +338,7 @@
                     "left": {
                         "showUnits": false
                     }
-                },
-                "metrics": [
-                    [ "AWS/DynamoDB", "ProvisionedWriteCapacityUnits", "TableName", "Person", "GlobalSecondaryIndexName", "gsi_namespaced_id", { "label": "Provisioned", "color": "#E02020" } ],
-                    [ ".", "ConsumedWriteCapacityUnits", ".", ".", ".", ".", { "stat": "Sum", "id": "m1", "visible": false } ],
-                    [ { "expression": "m1/PERIOD(m1)", "label": "Consumed", "id": "e1", "region": "eu-south-1", "color": "#0073BB" } ]
-                ]
+                }
             }
         },
         {
