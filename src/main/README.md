@@ -190,6 +190,7 @@
 | <a name="input_ecs_autoscaling"></a> [ecs\_autoscaling](#input\_ecs\_autoscaling) | ECS Service autoscaling. | <pre>object({<br>    max_capacity       = number<br>    min_capacity       = number<br>    scale_in_cooldown  = number<br>    scale_out_cooldown = number<br>  })</pre> | <pre>{<br>  "max_capacity": 3,<br>  "min_capacity": 1,<br>  "scale_in_cooldown": 180,<br>  "scale_out_cooldown": 40<br>}</pre> | no |
 | <a name="input_ecs_enable_execute_command"></a> [ecs\_enable\_execute\_command](#input\_ecs\_enable\_execute\_command) | Specifies whether to enable Amazon ECS Exec for the tasks within the service. | `bool` | `false` | no |
 | <a name="input_ecs_logs_retention_days"></a> [ecs\_logs\_retention\_days](#input\_ecs\_logs\_retention\_days) | Specifies the number of days you want to retain log events in the specified log group. | `number` | `7` | no |
+| <a name="input_enable_container_insights"></a> [enable\_container\_insights](#input\_enable\_container\_insights) | Enable ecs container insight. | `bool` | `false` | no |
 | <a name="input_enable_nat_gateway"></a> [enable\_nat\_gateway](#input\_enable\_nat\_gateway) | Enable/Create nat gateway | `bool` | `false` | no |
 | <a name="input_enable_opsgenie"></a> [enable\_opsgenie](#input\_enable\_opsgenie) | Send alarm via opsgenie. | `bool` | `false` | no |
 | <a name="input_enable_sentinel_logs"></a> [enable\_sentinel\_logs](#input\_enable\_sentinel\_logs) | Create all resources required to sento logs to azure sentinel. | `bool` | `false` | no |
