@@ -19,6 +19,7 @@ vpc_peering = {
 
 # Ecs
 ecs_enable_execute_command = true
+enable_container_insights  = true
 replica_count              = 3
 
 ecs_autoscaling = {
