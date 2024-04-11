@@ -56,6 +56,7 @@ module "dynamo_successful_request_latency" {
   alarm_actions = [aws_sns_topic.alarms.arn]
 }
 
+/*
 
 #ExceedingThroughput
 module "dynamodb_request_exceeding_throughput_alarm" {
@@ -91,3 +92,5 @@ module "dynamodb_request_exceeding_throughput_alarm" {
 
   alarm_actions = [aws_sns_topic.alarms.arn]
 }
+
+*/
