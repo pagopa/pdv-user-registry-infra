@@ -24,6 +24,8 @@ resource "aws_api_gateway_rest_api" "user_registry" {
     types = ["REGIONAL"]
   }
 
+  disable_execute_api_endpoint = var.apigw_custom_domain_create
+
   tags = { Name = local.user_registry_api_name }
 }
 
