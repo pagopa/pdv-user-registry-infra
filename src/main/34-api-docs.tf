@@ -29,6 +29,8 @@ resource "aws_s3_object" "openapi_user_registry" {
 resource "aws_api_gateway_rest_api" "openapi_user_registry" {
   name        = format("%s-openapi", local.project)
   description = "Openapi user registry documentation."
+
+  disable_execute_api_endpoint = var.apigw_custom_domain_create
 }
 
 resource "aws_api_gateway_resource" "folder" {
