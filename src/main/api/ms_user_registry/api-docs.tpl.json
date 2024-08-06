@@ -337,6 +337,80 @@
           }
         ]
       },
+      "delete": {
+        "x-amazon-apigateway-integration": {
+          "type": "HTTP",
+          "httpMethod": "DELETE",
+          "uri": "${uri}/users/{id}",
+          "connectionType": "VPC_LINK",
+          "connectionId": "${connection_id}",
+          "requestParameters": {
+            "integration.request.path.id": "method.request.path.id"
+          },
+          "passthroughBehavior": "WHEN_NO_TEMPLATES",
+          "requestTemplates" : {
+            "application/json" : "${write_request_template}"
+          },
+          "responses": {
+            ${responses}
+          }
+        },
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user",
+        "description": "Delete the user by its internal id",
+        "operationId": "deleteByIdUsingDELETE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User internal id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/problem+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
       "patch": {
         "x-amazon-apigateway-integration": {
           "type": "HTTP",
@@ -437,13 +511,9 @@
   },
   "components": {
     "schemas": {
-      "CertifiableFieldResourceOfLocalDate": {
-        "title": "CertifiableFieldResourceOfLocalDate",
-        "required": [
-          "certification",
-          "value"
-        ],
+      "BirthDateCertifiableSchema": {
         "type": "object",
+        "description": "User date of birth",
         "properties": {
           "certification": {
             "type": "string",
@@ -458,15 +528,15 @@
             "description": "Field value",
             "format": "date"
           }
-        }
-      },
-      "CertifiableFieldResourceOfstring": {
-        "title": "CertifiableFieldResourceOfstring",
+        },
         "required": [
           "certification",
           "value"
-        ],
+        ]
+      },
+      "EmailCertifiableSchema": {
         "type": "object",
+        "description": "User email",
         "properties": {
           "certification": {
             "type": "string",
@@ -480,7 +550,99 @@
             "type": "string",
             "description": "Field value"
           }
-        }
+        },
+        "required": [
+          "certification",
+          "value"
+        ]
+      },
+      "FamilyNameCertifiableSchema": {
+        "type": "object",
+        "description": "User family name",
+        "properties": {
+          "certification": {
+            "type": "string",
+            "description": "Certified source of information",
+            "enum": [
+              "NONE",
+              "SPID"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Field value"
+          }
+        },
+        "required": [
+          "certification",
+          "value"
+        ]
+      },
+      "NameCertifiableSchema": {
+        "type": "object",
+        "description": "User name",
+        "properties": {
+          "certification": {
+            "type": "string",
+            "description": "Certified source of information",
+            "enum": [
+              "NONE",
+              "SPID"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Field value"
+          }
+        },
+        "required": [
+          "certification",
+          "value"
+        ]
+      },
+      "MobilePhoneCertifiableSchema": {
+        "type": "object",
+        "description": "User work mobile phone number",
+        "properties": {
+          "certification": {
+            "type": "string",
+            "description": "Certified source of information",
+            "enum": [
+              "NONE",
+              "SPID"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Field value"
+          }
+        },
+        "required": [
+          "certification",
+          "value"
+        ]
+      },
+      "TelephoneCertifiableSchema": {
+        "type": "object",
+        "description": "User work telephone number",
+        "properties": {
+          "certification": {
+            "type": "string",
+            "description": "Certified source of information",
+            "enum": [
+              "NONE",
+              "SPID"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Field value"
+          }
+        },
+        "required": [
+          "certification",
+          "value"
+        ]
       },
       "MutableUserFieldsDto": {
         "title": "MutableUserFieldsDto",
@@ -488,19 +650,19 @@
         "properties": {
           "birthDate": {
             "description": "User date of birth",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
+            "$ref": "#/components/schemas/BirthDateCertifiableSchema"
           },
           "email": {
             "description": "User email",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/EmailCertifiableSchema"
           },
           "familyName": {
             "description": "User family name",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/FamilyNameCertifiableSchema"
           },
           "name": {
             "description": "User name",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/NameCertifiableSchema"
           },
           "workContacts": {
             "type": "object",
@@ -512,31 +674,26 @@
         }
       },
       "SaveUserDto": {
-        "title": "SaveUserDto",
         "required": [
           "fiscalCode"
         ],
         "type": "object",
         "properties": {
           "birthDate": {
-            "description": "User date of birth",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
+            "$ref": "#/components/schemas/BirthDateCertifiableSchema"
           },
           "email": {
-            "description": "User email",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/EmailCertifiableSchema"
           },
           "familyName": {
-            "description": "User family name",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/FamilyNameCertifiableSchema"
           },
           "fiscalCode": {
             "type": "string",
             "description": "User fiscal code"
           },
           "name": {
-            "description": "User name",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/NameCertifiableSchema"
           },
           "workContacts": {
             "type": "object",
@@ -562,23 +719,19 @@
         }
       },
       "UserResource": {
-        "title": "UserResource",
         "required": [
           "id"
         ],
         "type": "object",
         "properties": {
           "birthDate": {
-            "description": "User date of birth",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfLocalDate"
+            "$ref": "#/components/schemas/BirthDateCertifiableSchema"
           },
           "email": {
-            "description": "User email",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/EmailCertifiableSchema"
           },
           "familyName": {
-            "description": "User family name",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/FamilyNameCertifiableSchema"
           },
           "fiscalCode": {
             "type": "string",
@@ -590,8 +743,7 @@
             "format": "uuid"
           },
           "name": {
-            "description": "User name",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
+            "$ref": "#/components/schemas/NameCertifiableSchema"
           },
           "workContacts": {
             "type": "object",
@@ -616,64 +768,75 @@
         }
       },
       "WorkContactResource": {
-        "title": "WorkContactResource",
         "type": "object",
         "properties": {
           "email": {
-            "description": "User work email",
-            "$ref": "#/components/schemas/CertifiableFieldResourceOfstring"
-          }
-        }
-      },
-      "Problem" : {
-        "title" : "Problem",
-        "required" : [ "status", "title" ],
-        "type" : "object",
-        "properties" : {
-          "detail" : {
-            "type" : "string",
-            "description" : "Human-readable description of this specific problem."
+            "$ref": "#/components/schemas/EmailCertifiableSchema"
           },
-          "instance" : {
-            "type" : "string",
-            "description" : "A URI that describes where the problem occurred."
+          "mobilePhone": {
+            "$ref": "#/components/schemas/MobilePhoneCertifiableSchema"
           },
-          "invalidParams" : {
-            "type" : "array",
-            "description" : "A list of invalid parameters details.",
-            "items" : {
-              "$ref" : "#/components/schemas/InvalidParam"
-            }
-          },
-          "status" : {
-            "type" : "integer",
-            "description" : "The HTTP status code.",
-            "format" : "int32",
-            "example" : 500
-          },
-          "title" : {
-            "type" : "string",
-            "description" : "Short human-readable summary of the problem."
-          },
-          "type" : {
-            "type" : "string",
-            "description" : "A URL to a page with more details regarding the problem."
+          "telephone": {
+            "$ref": "#/components/schemas/TelephoneCertifiableSchema"
           }
         },
-        "description" : "A \"problem detail\" as a way to carry machine-readable details of errors (https://datatracker.ietf.org/doc/html/rfc7807)"
+        "description": "User work contacts"
       },
-      "InvalidParam" : {
-        "title" : "InvalidParam",
-        "required" : [ "name", "reason" ],
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string",
-            "description" : "Invalid parameter name."
+      "Problem": {
+        "title": "Problem",
+        "required": [
+          "status",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "description": "Human-readable description of this specific problem."
           },
-          "reason" : {
-            "type" : "string",
-            "description" : "Invalid parameter reason."
+          "instance": {
+            "type": "string",
+            "description": "A URI that describes where the problem occurred."
+          },
+          "invalidParams": {
+            "type": "array",
+            "description": "A list of invalid parameters details.",
+            "items": {
+              "$ref": "#/components/schemas/InvalidParam"
+            }
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code.",
+            "format": "int32",
+            "example": 500
+          },
+          "title": {
+            "type": "string",
+            "description": "Short human-readable summary of the problem."
+          },
+          "type": {
+            "type": "string",
+            "description": "A URL to a page with more details regarding the problem."
+          }
+        },
+        "description": "A \"problem detail\" as a way to carry machine-readable details of errors (https://datatracker.ietf.org/doc/html/rfc7807)"
+      },
+      "InvalidParam": {
+        "title": "InvalidParam",
+        "required": [
+          "name",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Invalid parameter name."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Invalid parameter reason."
           }
         }
       }
