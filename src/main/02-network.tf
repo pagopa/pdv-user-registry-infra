@@ -14,6 +14,10 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
+  manage_default_network_acl    = false
+  manage_default_security_group = false
+  manage_default_route_table    = false
+
 }
 
 data "aws_iam_policy_document" "generic_endpoint_policy" {
