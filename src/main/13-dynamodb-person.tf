@@ -55,7 +55,10 @@ module "dynamodb_table_person" {
   }] : []
 
 
-  tags = { Name = local.dynamodb_table_person }
+  tags = {
+    Name   = local.dynamodb_table_person
+    Backup = var.env_short == "p" ? "True" : "False"
+  }
 }
 
 
