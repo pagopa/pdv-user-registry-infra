@@ -168,7 +168,7 @@ module "api_user_registry_4xx_error_alarm" {
   alarm_description   = "Api User registry error rate has exceeded the threshold."
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2
-  threshold           = 5000
+  threshold           = 8000
   period              = 300
   unit                = "Count"
   datapoints_to_alarm = 1
