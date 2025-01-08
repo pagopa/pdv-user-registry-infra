@@ -1,5 +1,6 @@
 module "vpc" {
-  source                = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=41da6881e295ff5e94bbf97b41018e7c550c7285"
+  source                = "terraform-aws-modules/vpc/aws"
+  version               = "5.17.0"
   name                  = format("%s-vpc", local.project)
   cidr                  = var.vpc_cidr
   azs                   = var.azs
@@ -12,6 +13,12 @@ module "vpc" {
 
   enable_dns_hostnames = true
   enable_dns_support   = true
+
+  manage_default_network_acl    = false
+  manage_default_security_group = false
+  manage_default_route_table    = false
+
+  map_public_ip_on_launch = true
 
 }
 
@@ -77,7 +84,8 @@ resource "aws_security_group" "vpc_tls" {
 }
 
 module "vpc_endpoints" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git//modules/vpc-endpoints?ref=41da6881e295ff5e94bbf97b41018e7c550c7285"
+  source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
+  version = "5.17.0"
 
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [data.aws_security_group.default.id]
