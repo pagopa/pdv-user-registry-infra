@@ -430,6 +430,13 @@ variable "dynamodb_alarms" {
   }))
 }
 
+
+variable "alarm_4xx_threshold" {
+  type        = number
+  description = "4xx alarm threshold"
+  default     = 1000
+}
+
 # Sentinel integration
 variable "enable_sentinel_logs" {
   type        = bool

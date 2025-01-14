@@ -254,6 +254,8 @@ dynamodb_alarms = [{
   },
 ]
 
+alarm_4xx_threshold = 21000
+
 create_cloudhsm = false
 cloudhsm_nodes  = 1 # change to 2 once you downloaded the certificates and the cluster is initialized and active.
 
