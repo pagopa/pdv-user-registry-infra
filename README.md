@@ -1,23 +1,30 @@
-## Requirements
+# Overview Personal Data Vault
 
-No requirements.
+## Summary
 
-## Providers
+PagoPa Spa has to manage user data, potentially from all Italian citizens who interact with digital services in Public Administrations.
+Often this data is highly confidential and has to be compliant with regulations.
 
-No providers.
+Personal Data Vault is a service provided by PagaPa aiming to manage in a compliant manner Person Identifiable Information and tokenize it with pseudo random code.
 
-## Modules
+We classify this service tier zero with the meaning that other services rely on it and it provides a set of Rest Api to interact with it.
+Cloud Infrastructure
 
-No modules.
+The application consists of just a couple of micro services - java spring boot applications - and it’s hosted in AWS with the goal to be:
+Highly available
+Scale fast to support high number of requests with burst estimated till 1250 req / sec
+Secure due to the fact it’s managing confidential information.
 
-## Resources
+The main resources hosting the solution in the diagram below are:
+* Api Gateway with regional endpoint, WAF and no caching by requirements.
+* Network Load Balancer (NLB) deployed in 3 private subnets
+* VPC Link to allow the communication between the Api Gateway and the NLB
+* ECS Fargate Cluster with tasks running in 2 / 3 private subnets and autoscaling based on CPU metrics
+* DynamoDB table with autoscaling
+* ~~Cloud HSM to provide a customer managed key to encrypt / decrypt data in DynamoDB~~
 
-No resources.
+Note: Rest Api(s) which are publicly available require the standard Api Gateway x-api-key http header to authenticate and each key is associated to a dedicated plan with Rate Limits per method.
 
-## Inputs
 
-No inputs.
 
-## Outputs
-
-No outputs.
+[![img](./doc/img/cloud-private-data-vault.svg)]()
