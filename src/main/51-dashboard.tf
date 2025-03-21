@@ -19,3 +19,19 @@ resource "aws_cloudwatch_dashboard" "main" {
     }
   )
 }
+
+
+resource "aws_cloudwatch_dashboard" "usage_plans" {
+  count          = contains(["prod", "uat"], var.environment) ? 1 : 0
+  dashboard_name = "Usage-Plans"
+
+  dashboard_body = templatefile("${path.module}/dashboards/usage_plans.tpl.json",
+    {
+      aws_region            = var.aws_region
+      usage_plans           = aws_api_gateway_usage_plan.user_registry
+      additional_keys       = local.additional_keys
+      plan_colors           = local.plan_colors
+      additional_key_colors = local.additional_key_colors
+    }
+  )
+}
