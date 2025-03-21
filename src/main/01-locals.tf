@@ -28,6 +28,21 @@ locals {
     { for k in local.additional_keys : k.key => aws_api_gateway_usage_plan.user_registry[k.plan].id },
   )
 
+  # Colors for dashboard charts
+  dashboard_colors = ["#fe6e73", "#2ca02c", "#1f77b4", "#ff7f0e", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
+
+  # Generate colors for usage plans
+  plan_colors = {
+    for idx, key_name in keys(local.api_key_list) :
+    key_name => local.dashboard_colors[idx % length(local.dashboard_colors)]
+  }
+
+  # Generate colors for additional keys
+  additional_key_colors = {
+    for idx, k in local.additional_keys :
+    k.key => local.dashboard_colors[(idx + length(local.plan_colors)) % length(local.dashboard_colors)]
+  }
+
   runbook_title = "Runbook"
   runbook_url   = "https://pagopa.atlassian.net/wiki/spaces/usrreg/pages/696615213/Runbook+-+PDV+Troubleshooting"
 }

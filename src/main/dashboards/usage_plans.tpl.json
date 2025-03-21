@@ -1,0 +1,45 @@
+{
+    "widgets": [
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 30,
+            "properties": {
+                "metrics": [
+                    %{ for key_name, usage_plan in usage_plans ~}
+                    [ "'ApiGateway/UsagePlans'", "Usage", "APIKey", "${key_name}", "UsagePlan", "${usage_plan.name}", { "color": "${plan_colors[key_name]}" }  ]%{ if key_name != element(keys(usage_plans), length(keys(usage_plans)) - 1) },%{ endif }
+                    %{ endfor ~}
+                    %{ for k in additional_keys ~}
+                    %{ if k.key != element(additional_keys, length(additional_keys) - 1).key || length(usage_plans) == 0 ~}
+                    , [ "'ApiGateway/UsagePlans'", "Usage", "APIKey", "${k.key}", "UsagePlan", "${usage_plans[k.plan].name}", { "color": "${additional_key_colors[k.key]}" }  ]
+                    %{ else ~}
+                    , [ "'ApiGateway/UsagePlans'", "Usage", "APIKey", "${k.key}", "UsagePlan", "${usage_plans[k.plan].name}", { "color": "${additional_key_colors[k.key]}" }  ]
+                    %{ endif ~}
+                    %{ endfor ~}
+                ],
+                "view": "gauge",
+                "stacked": true,
+                "region": "${aws_region}",
+                "stat": "Maximum",
+                "period": 300,
+                "liveData": true,
+                "legend": {
+                    "position": "bottom"
+                },
+                "yAxis": {
+                    "left": {
+                        "min": 10,
+                        "max": 300
+                    }
+                },
+                "singleValueFullPrecision": false,
+                "setPeriodToTimeRange": true,
+                "sparkline": false,
+                "trend": false,
+                "title": "Usage"
+            }
+        }
+    ]
+}
