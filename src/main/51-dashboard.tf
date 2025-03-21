@@ -28,7 +28,7 @@ resource "aws_cloudwatch_dashboard" "usage_plans" {
   dashboard_body = templatefile("${path.module}/dashboards/usage_plans.tpl.json",
     {
       aws_region            = var.aws_region
-      usage_plans           = aws_api_gateway_usage_plan.tokenizer
+      usage_plans           = aws_api_gateway_usage_plan.user_registry
       additional_keys       = local.additional_keys
       plan_colors           = local.plan_colors
       additional_key_colors = local.additional_key_colors
