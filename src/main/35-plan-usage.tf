@@ -90,11 +90,12 @@ locals {
         Condition = {
           StringLike = {
             "token.actions.githubusercontent.com:sub" : [
-              "repo:pagopa/pdv-lambda-usage-plans:*"
+              "repo:pagopa/pdv-lambda-usage-plans:environment:uat",
+              "repo:pagopa/pdv-lambda-usage-plans:environment:prod",
+              "repo:pagopa/pdv-lambda-usage-plans:ref:refs/heads/main"
             ]
-          },
-          "ForAllValues:StringEquals" = {
-            "token.actions.githubusercontent.com:iss" : "https://token.actions.githubusercontent.com",
+          }
+          StringEquals = {
             "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
           }
         }
@@ -105,7 +106,7 @@ locals {
 
 resource "aws_iam_policy" "deploy_lambda" {
   count       = contains(["prod", "uat"], var.environment) ? 1 : 0
-  name        = format("%s-deploy-lambda", var.app_name)
+  name        = "DeployLambda"
   description = "Policy to deploy Lambda functions"
 
   policy = jsonencode({
@@ -127,7 +128,7 @@ resource "aws_iam_policy" "deploy_lambda" {
 
 resource "aws_iam_role" "github_lambda_deploy" {
   count              = contains(["prod", "uat"], var.environment) ? 1 : 0
-  name               = format("%s-deploy-lambda", var.app_name)
+  name               = "GitHubLambdaDeploy"
   description        = "Role to deploy lambda functions with github actions."
   assume_role_policy = local.assume_role_policy_github
 }

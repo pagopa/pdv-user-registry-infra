@@ -82,3 +82,7 @@ output "user_registry_api_ids" {
 output "github_ecs_deploy_role_arn" {
   value = aws_iam_role.githubecsdeploy.arn
 }
+
+output "github_lambda_deploy_role_arn" {
+  value = aws_iam_role.githublambdadeploy[0].arn
+}

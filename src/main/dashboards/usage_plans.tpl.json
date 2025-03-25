@@ -38,7 +38,7 @@
                 "setPeriodToTimeRange": true,
                 "sparkline": false,
                 "trend": false,
-                "title": "Usage"
+                "title": "Daily Usage"
             }
         }
     ]
