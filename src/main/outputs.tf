@@ -84,5 +84,5 @@ output "github_ecs_deploy_role_arn" {
 }
 
 output "github_lambda_deploy_role_arn" {
-  value = try(aws_iam_role.githublambdadeploy[0].arn, null)
+  value = try(aws_iam_role.github_lambda_deploy[0].arn, null)
 }
