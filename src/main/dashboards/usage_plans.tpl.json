@@ -38,11 +38,7 @@
                 "setPeriodToTimeRange": true,
                 "sparkline": false,
                 "trend": false,
-<<<<<<< HEAD
                 "title": "Daily Usage"
-=======
-                "title": "Usage"
->>>>>>> 46d79c26df0c0c98aa853a45ead8013ffffe64bd
             }
         }
     ]
