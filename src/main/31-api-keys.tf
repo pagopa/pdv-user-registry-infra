@@ -8,3 +8,8 @@ resource "aws_api_gateway_api_key" "additional" {
   for_each = { for k in local.additional_keys : k.key => k }
   name     = each.key
 }
+
+resource "aws_api_gateway_api_key" "plan_details" {
+  for_each = local.plan_details_api_key_list
+  name     = each.key
+}
