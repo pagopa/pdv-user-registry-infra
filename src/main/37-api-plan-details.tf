@@ -164,7 +164,7 @@ resource "aws_apigatewayv2_api_mapping" "plan_details" {
   api_id          = aws_api_gateway_rest_api.plan_details.id
   stage           = local.plan_details_stage_name
   domain_name     = aws_api_gateway_domain_name.main[0].domain_name
-  api_mapping_key = format("plan-details/%s", aws_api_gateway_stage.plan_details.stage_name)
+  api_mapping_key = "plan-details"
 }
 
 ## WAF association

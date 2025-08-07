@@ -39,7 +39,9 @@
           "responses": {
             "200": {
               "statusCode": "200",
-              "responseParameters": {}
+              "responseParameters": {
+                "method.response.header.content-type": "'application/json'"
+              }
             },
             "400": {
               "statusCode": "400",
@@ -115,7 +117,9 @@
           "responses": {
             "200": {
               "statusCode": "200",
-              "responseParameters": {}
+              "responseParameters": {
+                "method.response.header.content-type": "'application/json'"
+              }
             },
             "400": {
               "statusCode": "400",
@@ -206,41 +210,73 @@
     },
     "responses": {
       "ApiKeysListResponse": {
-        "type": "object",
-        "properties": {
-          "apiKeys": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "id",
-                "name"
-              ]
+        "description": "Response containing the list of API keys with id and name (not sensitive data).",
+        "headers": {
+          "content-type": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
             }
           }
         },
-        "required": [
-          "apiKeys"
-        ]
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "apiKeys": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "apiKeys"
+              ]
+            }
+          }
+        }
       },
       "ValidateResponse": {
-        "type": "object",
-        "properties": {
-          "valid": {
-            "type": "boolean"
+        "description": "Response indicating whether the API key is valid or not.",
+        "headers": {
+          "content-type": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
           }
         },
-        "required": [
-          "valid"
-        ]
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "valid": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "valid"
+              ]
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
