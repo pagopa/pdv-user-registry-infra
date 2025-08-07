@@ -37,7 +37,7 @@
           "httpMethod": "POST",
           "uri": "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_usage_plan_details_arn}/invocations",
           "responses": {
-            "201": {
+            "200": {
               "statusCode": "200",
               "responseParameters": {}
             },
