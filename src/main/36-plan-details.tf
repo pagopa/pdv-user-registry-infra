@@ -78,7 +78,7 @@ locals {
 }
 
 resource "aws_iam_policy" "deploy_lambda_usage_plan_details" {
-  name        = "DeployLambda"
+  name        = "DeployLambdaDetailsPolicy"
   description = "Policy to deploy Lambda functions"
 
   policy = jsonencode({
