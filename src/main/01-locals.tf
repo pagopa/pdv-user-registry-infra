@@ -10,6 +10,8 @@ locals {
 
   api_key_list = { for k in var.user_registry_plans : k.key_name => k }
 
+  plan_details_api_key_list = { for k in var.plan_details_plans : k.key_name => k }
+
   additional_keys = flatten([for k in var.user_registry_plans :
     [for a in k.additional_keys :
       {

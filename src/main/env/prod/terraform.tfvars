@@ -117,6 +117,15 @@ user_registry_plans = [
   },
 ]
 
+plan_details_plans = [
+  {
+    key_name        = "PLAN-DETAILS"
+    burst_limit     = 20
+    rate_limit      = 10
+    additional_keys = []
+    method_throttle = []
+  },
+]
 
 ## Web ACL
 

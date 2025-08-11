@@ -125,6 +125,21 @@ variable "user_registry_plans" {
   description = "Usage plan with its api key and rate limit."
 }
 
+variable "plan_details_plans" {
+  type = list(object({
+    key_name        = string
+    burst_limit     = number
+    rate_limit      = number
+    additional_keys = list(string)
+    method_throttle = list(object({
+      path        = string
+      burst_limit = number
+      rate_limit  = number
+    }))
+  }))
+  description = "Usage plan with its api key and rate limit."
+}
+
 /*
 variable "api_user_registry_throttling" {
   type = object({
