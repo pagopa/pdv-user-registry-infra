@@ -4,6 +4,9 @@ environment = "uat"
 # Network
 enable_nat_gateway = false
 
+# One Identity integration
+oi_integration_vpc_endpoint_id = "vpce-0a13cb15566039697"
+
 ## Vpc peering
 vpc_peering = {
   peer_vpc_id         = "vpc-06fce5f8ff25299ea"

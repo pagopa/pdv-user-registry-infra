@@ -59,6 +59,12 @@ variable "enable_nat_gateway" {
   default     = false
 }
 
+# This variable is used to integrate with One Identity
+variable "oi_integration_vpc_endpoint_id" {
+  type        = string
+  description = "VPC endpoint ID for One Identity integration"
+}
+
 ### VPC Peering
 variable "vpc_peering" {
   type = object({
