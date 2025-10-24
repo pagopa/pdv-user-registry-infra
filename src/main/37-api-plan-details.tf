@@ -104,7 +104,7 @@ resource "aws_api_gateway_deployment" "plan_details" {
   # stage_name  = local.plan_details_stage_name
 
   triggers = {
-    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.plan_details.body))
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.plan_details.*))
   }
 
   lifecycle {
