@@ -55,12 +55,48 @@ resource "aws_api_gateway_rest_api" "plan_details" {
   )
 
   endpoint_configuration {
-    types = ["REGIONAL"]
+    types            = ["PRIVATE"]
+    vpc_endpoint_ids = [var.oi_integration_vpc_endpoint_id]
   }
 
-  disable_execute_api_endpoint = var.apigw_custom_domain_create
-
   tags = { Name = local.plan_details_api_name }
+}
+
+data "aws_iam_policy_document" "plan_details_policy" {
+  statement {
+    effect = "Deny"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions   = ["execute-api:Invoke"]
+    resources = ["${aws_api_gateway_rest_api.plan_details.execution_arn}/*"]
+
+    condition {
+      test     = "StringNotEquals"
+      variable = "aws:sourceVpce"
+      values   = [var.oi_integration_vpc_endpoint_id]
+    }
+  }
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions   = ["execute-api:Invoke"]
+    resources = ["${aws_api_gateway_rest_api.plan_details.execution_arn}/*"]
+
+  }
+}
+resource "aws_api_gateway_rest_api_policy" "plan_details_policy" {
+  rest_api_id = aws_api_gateway_rest_api.plan_details.id
+  policy      = data.aws_iam_policy_document.plan_details_policy.json
 }
 
 resource "aws_api_gateway_deployment" "plan_details" {
@@ -74,6 +110,9 @@ resource "aws_api_gateway_deployment" "plan_details" {
   lifecycle {
     create_before_destroy = true
   }
+
+  depends_on = [aws_api_gateway_rest_api_policy.plan_details_policy]
+
 }
 
 resource "aws_cloudwatch_log_group" "plan_details" {
@@ -158,14 +197,6 @@ resource "aws_api_gateway_usage_plan_key" "plan_details" {
   usage_plan_id = aws_api_gateway_usage_plan.plan_details[each.key].id
 }
 
-
-resource "aws_apigatewayv2_api_mapping" "plan_details" {
-  count           = var.apigw_custom_domain_create ? 1 : 0
-  api_id          = aws_api_gateway_rest_api.plan_details.id
-  stage           = local.plan_details_stage_name
-  domain_name     = aws_api_gateway_domain_name.main[0].domain_name
-  api_mapping_key = "plan-details"
-}
 
 ## WAF association
 resource "aws_wafv2_web_acl_association" "plan_details" {
