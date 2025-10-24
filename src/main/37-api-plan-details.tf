@@ -1,6 +1,6 @@
 locals {
   plan_details_api_name       = format("%s-plan-details-api", local.project)
-  plan_details_stage_name     = "v1"
+  plan_details_stage_name     = "private-v1"
   plan_details_log_group_name = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.plan_details.id}/${local.plan_details_stage_name}"
 }
 
@@ -155,6 +155,9 @@ resource "aws_api_gateway_method_settings" "plan_details" {
     #throttling_rate_limit  = 100
     #throttling_burst_limit = 50
   }
+
+  depends_on = [aws_api_gateway_stage.plan_details]
+
 }
 
 resource "aws_api_gateway_usage_plan" "plan_details" {
@@ -188,6 +191,9 @@ resource "aws_api_gateway_usage_plan" "plan_details" {
     burst_limit = each.value.burst_limit
     rate_limit  = each.value.rate_limit
   }
+
+  depends_on = [aws_api_gateway_stage.plan_details]
+
 }
 
 resource "aws_api_gateway_usage_plan_key" "plan_details" {
