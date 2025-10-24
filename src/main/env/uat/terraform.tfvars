@@ -75,15 +75,15 @@ user_registry_plans = [
   },
   {
     key_name        = "SELFCARE-DEV"
-    burst_limit     = 20
-    rate_limit      = 10
+    burst_limit     = 600
+    rate_limit      = 300
     additional_keys = ["INTEROP-DEV"]
     method_throttle = []
   },
   {
     key_name        = "SELFCARE-UAT"
-    burst_limit     = 20
-    rate_limit      = 10
+    burst_limit     = 600
+    rate_limit      = 300
     additional_keys = ["INTEROP-UAT"]
     method_throttle = []
   },
