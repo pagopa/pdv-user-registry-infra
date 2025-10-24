@@ -59,6 +59,8 @@ resource "aws_api_gateway_rest_api" "plan_details" {
     vpc_endpoint_ids = [var.oi_integration_vpc_endpoint_id]
   }
 
+  disable_execute_api_endpoint = false
+
   tags = { Name = local.plan_details_api_name }
 }
 
