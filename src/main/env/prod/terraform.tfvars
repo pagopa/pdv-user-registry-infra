@@ -23,11 +23,11 @@ vpc_peering = {
 # Ecs
 ecs_enable_execute_command = true
 enable_container_insights  = true
-replica_count              = 10
+replica_count              = 3
 
 ecs_autoscaling = {
-  max_capacity       = 100
-  min_capacity       = 10
+  max_capacity       = 10
+  min_capacity       = 3
   scale_in_cooldown  = 900 # 15mins
   scale_out_cooldown = 60  # 1 min
 }
