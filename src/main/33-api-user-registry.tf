@@ -194,11 +194,11 @@ module "api_user_registry_5xx_error_alarm" {
   alarm_name          = "high-5xx-rate-"
   alarm_description   = "${local.runbook_title} ${local.runbook_url} Api user registry error rate has exceeded the threshold."
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = 1
-  threshold           = 0
+  evaluation_periods  = 3
+  threshold           = 1
   period              = 300
   unit                = "Count"
-  datapoints_to_alarm = 1
+  datapoints_to_alarm = 2
 
   namespace   = "AWS/ApiGateway"
   metric_name = "5XXError"
