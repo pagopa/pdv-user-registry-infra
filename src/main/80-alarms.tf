@@ -1,7 +1,7 @@
 data "aws_secretsmanager_secret" "email_operation" {
   name = "operation/alerts"
 }
-
+#get the latest version of the secret
 data "aws_secretsmanager_secret_version" "email_operation_lt" {
   secret_id = data.aws_secretsmanager_secret.email_operation.id
 }
