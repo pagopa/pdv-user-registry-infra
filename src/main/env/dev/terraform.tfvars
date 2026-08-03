@@ -5,7 +5,7 @@ environment = "dev"
 enable_nat_gateway = false
 
 # One Identity integration
-oi_integration_vpc_endpoint_id = "vpce-06b505f7afb12a154"
+oi_integration_vpc_endpoint_id = ["vpce-06b505f7afb12a154"]
 
 ## Vpc peering
 vpc_peering = {
