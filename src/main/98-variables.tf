@@ -61,7 +61,7 @@ variable "enable_nat_gateway" {
 
 # This variable is used to integrate with One Identity
 variable "oi_integration_vpc_endpoint_id" {
-  type        = string
+  type        = list(string)
   description = "VPC endpoint ID for One Identity integration"
 }
 

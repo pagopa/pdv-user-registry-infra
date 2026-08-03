@@ -11,7 +11,7 @@ public_dns_zones = {
 enable_nat_gateway = false
 
 # One Identity integration
-oi_integration_vpc_endpoint_id = "vpce-0d7a8aec58d45084a"
+oi_integration_vpc_endpoint_id = ["vpce-0d7a8aec58d45084a", "vpce-0d9b2529be9baeb49"]
 
 vpc_peering = {
   peer_vpc_id         = "vpc-04e328a57c3f3d784"

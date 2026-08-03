@@ -22,7 +22,7 @@ resource "aws_api_gateway_rest_api" "user_registry_private" {
 
   endpoint_configuration {
     types            = ["PRIVATE"]
-    vpc_endpoint_ids = [var.oi_integration_vpc_endpoint_id]
+    vpc_endpoint_ids = var.oi_integration_vpc_endpoint_id
   }
 
   tags = { Name = local.user_registry_api_private_name }
@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "user_registry_private_policy" {
     condition {
       test     = "StringNotEquals"
       variable = "aws:sourceVpce"
-      values   = [var.oi_integration_vpc_endpoint_id]
+      values   = var.oi_integration_vpc_endpoint_id
     }
   }
 

@@ -56,7 +56,7 @@ resource "aws_api_gateway_rest_api" "plan_details" {
 
   endpoint_configuration {
     types            = ["PRIVATE"]
-    vpc_endpoint_ids = [var.oi_integration_vpc_endpoint_id]
+    vpc_endpoint_ids = var.oi_integration_vpc_endpoint_id
   }
 
   disable_execute_api_endpoint = false
@@ -79,7 +79,7 @@ data "aws_iam_policy_document" "plan_details_policy" {
     condition {
       test     = "StringNotEquals"
       variable = "aws:sourceVpce"
-      values   = [var.oi_integration_vpc_endpoint_id]
+      values   = var.oi_integration_vpc_endpoint_id
     }
   }
 
