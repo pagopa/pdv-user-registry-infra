@@ -140,6 +140,7 @@ web_acl_visibility_config = {
 # DynamoDB
 dynamodb_point_in_time_recovery_enabled = true
 dynamodb_region_replication_enable      = true
+dynamodb_deletion_protection_enabled    = true
 
 ## Alarms
 enable_opsgenie = true

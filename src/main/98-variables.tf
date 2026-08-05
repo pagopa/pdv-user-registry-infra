@@ -411,6 +411,11 @@ variable "dynamodb_point_in_time_recovery_enabled" {
   default     = false
 }
 
+variable "dynamodb_deletion_protection_enabled" {
+  type    = bool
+  default = false
+}
+
 variable "create_cloudhsm" {
   type        = bool
   description = "Create cloudhsm cluster to enctypt dynamodb tables"
