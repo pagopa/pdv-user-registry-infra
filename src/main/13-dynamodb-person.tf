@@ -15,6 +15,7 @@ module "dynamodb_table_person" {
   point_in_time_recovery_enabled = var.dynamodb_point_in_time_recovery_enabled
   billing_mode                   = "PAY_PER_REQUEST"
   stream_view_type               = var.dynamodb_region_replication_enable ? "NEW_AND_OLD_IMAGES" : null
+  deletion_protection_enabled    = var.dynamodb_deletion_protection_enabled
 
 
   attributes = [
