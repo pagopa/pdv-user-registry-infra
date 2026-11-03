@@ -8,7 +8,7 @@ module "lambda_api_usage_metrics" {
   function_name           = "api-usage-metrics"
   description             = "Collects API Gateway usage metrics and publishes to CloudWatch"
   handler                 = "index.lambda_handler"
-  runtime                 = "python3.9"
+  runtime                 = "python3.12"
   ignore_source_code_hash = true
 
   create_package         = false
