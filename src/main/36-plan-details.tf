@@ -7,7 +7,7 @@ module "lambda_usage_plan_details" {
   function_name           = "usage-plan-details"
   description             = "API to retrieve usage plan api keys details"
   handler                 = "index.lambda_handler"
-  runtime                 = "python3.10"
+  runtime                 = "python3.12"
   ignore_source_code_hash = true
 
   create_package         = false
