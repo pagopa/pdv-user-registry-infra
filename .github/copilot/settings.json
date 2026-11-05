@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "bb-tools": {
+      "source": {
+        "source": "github",
+        "repo": "pagopa/bb-gh-utils"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "bb-gh-utils@bb-tools": true
+  }
+}
