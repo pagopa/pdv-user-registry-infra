@@ -36,6 +36,10 @@ resource "aws_ecs_task_definition" "person" {
     ],
     "environment": [
       {
+        "name": "JAVA_TOOL_OPTIONS",
+        "value": "-XX:-UseBASE64Intrinsics"
+      },
+      {
         "name": "AWS_REGION",
         "value": "${var.aws_region}"
       },
